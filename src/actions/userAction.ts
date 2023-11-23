@@ -1,4 +1,4 @@
-// src/actions/userActions.ts
+// User Action
 import { createAction } from '@reduxjs/toolkit';
 
 export const setUser = createAction<string>('user/setUser');

@@ -2,9 +2,7 @@
 // src/containers/AssetContainer/AssetContainer.tsx
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { fetchAssetData } from '../../services/assetService';
 import { RootState } from '../../app/store';
-// import { Asset } from '../../models/Asset'
 import AssetList from '../../components/AssetList/AssetList';
 
 const AssetContainer: React.FC = () => {

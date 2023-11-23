@@ -1,4 +1,4 @@
-// src/actions/assetActions.ts
+//asset Action 
 import { createAction } from '@reduxjs/toolkit';
 
 export const addAsset = createAction<string>('asset/addAsset');
