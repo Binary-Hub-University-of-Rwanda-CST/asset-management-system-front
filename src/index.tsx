@@ -1,15 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import "./index.css";
+// import "animate.css";
+import  App  from "./App";
+import  reducers from "./reducers";
+import { configureStore } from "@reduxjs/toolkit";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
+const store = configureStore({
+  reducer: reducers,
+  devTools: process.env.NODE_ENV !== "production",
+});
+
+ReactDOM.render(
+  <Provider store={store}>
     <App />
-  </React.StrictMode>
+  </Provider>,
+  document.querySelector("#root")
 );
-
-
