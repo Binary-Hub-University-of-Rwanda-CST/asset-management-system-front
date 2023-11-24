@@ -11,7 +11,6 @@ function App() {
         <h1 className='text-center text-2xl'>UNIVERSITY OF RWANDA</h1>
         <h1 className='text-center text-xl border-l '> ASSET MANAGEMENT SYSTEM </h1>
       </div>
-
     </div>
     </>
   );
