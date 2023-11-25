@@ -1,25 +1,17 @@
-import React, { useState } from 'react';
-import Modal from "./components/modal/Modal.tsx";
-import './components/modal/Modal.css';
+import React from 'react';
 
-function App(): JSX.Element {
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  
+function App() {
+
+  // this is sample code for test tailwind css
+  // you can delete it while you start development 
   return (
     <>
-      <h1 className="title-1">Re-usable components - Modal component</h1>
-      <button className="show" onClick={() => setOpenModal(!openModal)}>Show modal</button>
-
-      <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
-        <Modal.Header>Modal Header</Modal.Header>
-        <Modal.Body>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque harum ea facere commodi neque nihil ratione eaque maiores quam odit laboriosam totam placeat veniam at, optio cupiditate autem labore! Reiciendis.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Modal.DismissButton className="btn btn-secondary">Close</Modal.DismissButton>
-          <button className="btn btn-primary">Save Changes</button>
-        </Modal.Footer>
-      </Modal>
+    <div className="flex items-center justify-center h-screen">
+      <div className='font-bold text-[#2d90d2]' >
+        <h1 className='text-center text-2xl'>UNIVERSITY OF RWANDA</h1>
+        <h1 className='text-center text-xl border-l '> ASSET MANAGEMENT SYSTEM </h1>
+      </div>
+    </div>
     </>
   );
 }
