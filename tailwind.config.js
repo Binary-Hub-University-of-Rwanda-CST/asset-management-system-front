@@ -12,11 +12,6 @@ module.exports = {
                 light: '#eaf1ff',
                 'dark-light': 'rgba(67,97,238,.15)',
             },
-            secondary: {
-                DEFAULT: '#805dca',
-                light: '#ebe4f7',
-                'dark-light': 'rgb(128 93 202 / 15%)',
-            },
             success: {
                 DEFAULT: '#00ab55',
                 light: '#ddf5f0',
@@ -37,21 +32,7 @@ module.exports = {
                 light: '#e7f7ff',
                 'dark-light': 'rgba(33,150,243,.15)',
             },
-            dark: {
-                DEFAULT: '#3b3f5c',
-                light: '#eaeaec',
-                'dark-light': 'rgba(59,63,92,.15)',
-            },
-            black: {
-                DEFAULT: '#0e1726',
-                light: '#e3e4eb',
-                'dark-light': 'rgba(14,23,38,.15)',
-            },
-            white: {
-                DEFAULT: '#ffffff',
-                light: '#e0e6ed',
-                dark: '#888ea8',
-            },
+           
         },
         fontFamily: {
             nunito: ['Nunito', 'sans-serif'],
