@@ -1,0 +1,43 @@
+/* styles.css */
+
+.button {
+   padding: 10px 15px;
+   border: none;
+   cursor: pointer;
+   border-radius: 5px;
+   font-size: 16px;
+   margin: 5px;
+ }
+ 
+ /* Button Styles */
+ .button.blue {
+   background-color: blue;
+   color: white;
+ }
+ 
+ .button.clear-white-blue {
+   background-color: #ffffff;
+   color: blue;
+ }
+ 
+ .button.white-with-border-blue {
+   background-color: #ffffff;
+   color: blue;
+   border: 2px solid blue;
+ }
+ 
+ .button.red {
+   background-color: red;
+   color: white;
+ }
+ 
+ .button.green {
+   background-color: green;
+   color: white;
+ }
+ 
+ .button.yellow {
+   background-color: yellow;
+   color: black;
+ }
+ 
