@@ -25,10 +25,11 @@ const PdfPreview: React.FC<PdfPreviewProps> = ({
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
+    setLoadingFile(false); 
   }
 
   return (
-    <div className={class_name} style={style}>
+    <div className={`${class_name} ${full_height ? 'full-height' : ''}`} style={style}>
       <Worker workerUrl={`https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`}>
         <Viewer fileUrl={file_url} />
       </Worker>

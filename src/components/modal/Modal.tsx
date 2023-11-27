@@ -1,99 +1,59 @@
-import React, { useEffect, useContext, createContext } from "react";
-import { useSpring, animated, useTransition } from "@react-spring/web";
-import "./Modal.css";
+// Modal.tsx
+import React, { ReactNode, useEffect, useRef } from "react";
+import { FaArrowLeft } from "react-icons/fa";
 
 interface ModalProps {
-  children: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
+  children: ReactNode;
 }
 
-interface ModalContextProps {
-  onClose: () => void;
-}
-
-const ModalContext = createContext<ModalContextProps | null>(null);
-
-const Modal: React.FC<ModalProps> & {
-  Header: React.FC;
-  Body: React.FC;
-  Footer: React.FC;
-  DismissButton: React.FC<{ className: string }>;
-} = ({ children, isOpen, onClose }: ModalProps) => {
-  const handleEscape = (e: KeyboardEvent) => {
-    if (e.keyCode === 27) {
-      onClose();
-    }
-  };
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    document.addEventListener("keydown", handleEscape);
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
 
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [onClose]);
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("click", handleOutsideClick);
+    } else {
+      document.body.style.overflow = "";
+      window.removeEventListener("click", handleOutsideClick);
+    }
 
-  const modalTransition = useTransition(isOpen, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 1 },
-    config: {
-      duration: 300,
-    },
-  });
+    return () => {
+      window.removeEventListener("click", handleOutsideClick);
+      document.body.style.overflow = "";
+    };
+  }, [isOpen, onClose]);
 
-  const springs = useSpring({
-    opacity: isOpen ? 1 : 0,
-    transform: isOpen ? "translateY(0%)" : "translateY(-100%)",
-    config: {
-      duration: 300,
-    },
-  });
-
-  return modalTransition((styles, isOpen) =>
-    isOpen ? (
-      <animated.div style={styles} className="react-modal-overlay" onClick={onClose}>
-        <animated.div style={springs} className="react-modal-wrapper" onClick={(e) => e.stopPropagation()}>
-          <div className="react-modal-content">
-            <ModalContext.Provider value={{ onClose }}>
-              {children}
-            </ModalContext.Provider>
-          </div>
-        </animated.div>
-      </animated.div>
-    ) : null
-  );
-};
-
-const DismissButton: React.FC<{ className: string }> = ({ children, className }) => {
-  const { onClose } = useContext<ModalContextProps>(ModalContext)!;
+  if (!isOpen) {
+    return null;
+  }
 
   return (
-    <button type="button" className={className} onClick={onClose}>
-      {children}
-    </button>
-  );
-};
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+      <div ref={modalRef} className="bg-white p-4 rounded-lg relative ">
+        <button
+          className="flex gap-1 items-center text-[#2a82d2] bg-[#e1f3ff] rounded-lg p-2 absolute top-2 left-2 hover:text-gray-800"
+          onClick={onClose}
+        >
+          <FaArrowLeft /> 
+          Back
+        </button>
 
-const ModalHeader: React.FC = ({ children }) => {
-  return (
-    <div className="react-modal-header">
-      <div className="react-modal-title">{children}</div>
-      <Modal.DismissButton className="btn-close">&times;</Modal.DismissButton>
+        {children}
+      </div>
     </div>
   );
 };
-
-const ModalBody: React.FC = ({ children }) => {
-  return <div className="react-modal-body">{children}</div>;
-};
-
-const ModalFooter: React.FC = ({ children }) => {
-  return <div className="react-modal-footer">{children}</div>;
-};
-
-Modal.Header = ModalHeader;
-Modal.Body = ModalBody;
-Modal.Footer = ModalFooter;
-Modal.DismissButton = DismissButton;
 
 export default Modal;
