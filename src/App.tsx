@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Checkbox from './components/fragments/Checkbox';
 function App() {
 
   // this is sample code for test tailwind css
@@ -10,8 +10,10 @@ function App() {
       <div className='font-bold text-[#2d90d2]' >
         <h1 className='text-center text-2xl'>UNIVERSITY OF RWANDA</h1>
         <h1 className='text-center text-xl border-l '> ASSET MANAGEMENT SYSTEM </h1>
-      </div>
+      </div> 
+      {/* <Checkbox /> */}
     </div>
+   
     </>
   );
 }
