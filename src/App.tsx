@@ -1,9 +1,9 @@
 // App.tsx
 
 import React from 'react';
-
 function App() {
   return (
+
 
       <div className="flex items-center justify-center mt-8">
         <div className="text-center">
@@ -13,8 +13,6 @@ function App() {
           <h2 className="text-xl border-l pl-2">ASSET MANAGEMENT SYSTEM PDF PREVIEW</h2>
         </div>
       </div>
-
-    </div>
   );
 }
 
