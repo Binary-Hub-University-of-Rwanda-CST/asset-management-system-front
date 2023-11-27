@@ -1,0 +1,68 @@
+[
+    {
+        "access_name": "Valuers",
+        "key": "VALUERS",
+        "permission": {
+            "create": false,
+            "update": false,
+            "delete": false,
+            "view": true,
+            "export": true
+        }
+    },
+    {
+        "access_name": "Recovery officers",
+        "key": "RECOVERY_OFFICERS",
+        "permission": {
+            "create": true,
+            "update": true,
+            "delete": true,
+            "view": true,
+            "export": true
+        }
+    },
+    {
+        "access_name": "Instruction letters",
+        "key": "INSTRUCTION_LETTERS",
+        "permission": {
+            "create": true,
+            "update": true,
+            "delete": true,
+            "view": true,
+            "export": true
+        }
+    },
+    {
+        "access_name": "Assign letter",
+        "key": "ASSIGN_LETTER",
+        "permission": {
+            "create": true,
+            "update": true,
+            "delete": true,
+            "view": true,
+            "export": true
+        }
+    },
+    {
+        "access_name": "To have a branch",
+        "key": "HAVE_A_BRANCH",
+        "permission": {
+            "create": false,
+            "update": false,
+            "delete": false,
+            "view": true,
+            "export": true
+        }
+    },
+    {
+        "access_name": "Register access",
+        "key": "REGISTER_USER",
+        "permission": {
+            "create": true,
+            "update": true,
+            "delete": true,
+            "view": true,
+            "export": true
+        }
+    }
+]

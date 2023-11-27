@@ -1,13 +1,14 @@
+const server = "http://elearning.icte.reb.rw";
+export const API_URL = `${server}/api`;
 
-import axios from 'axios';
+// const server = "http://localhost:8888/projects";
+// export const API_URL = `${server}/rebmis_backend`;
 
-// Example function for making API requests
-export const fetchData = async (url: string) => {
-  try {
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    throw error; // Rethrow the error for handling in components or services
-  }
-};
+export const DISTRICTS_LOCATION = `${server}/locations.json`;
+// export const DISTRICTS_LOCATION = `http://localhost:3001/locations.json`;
+
+// Files location
+export const IMAGES_PATH = {};
+export enum DocFolder {
+  docs = "docs",
+}
