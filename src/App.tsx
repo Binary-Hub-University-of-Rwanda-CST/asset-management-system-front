@@ -1,7 +1,7 @@
 // App.tsx
 
 import React from "react";
-import { NavBar } from "./components/NavBar/NavBar";// Update the path
+import { NavBar } from "./components/TopNavBar/NavBar";// Update the path
 import { Auth } from "./actions"; // Update the path
 
 interface AppProps {}
@@ -14,17 +14,11 @@ const App: React.FC<AppProps> = () => {
     token: "your_token_here",
     user: {
     jwt: 'hhh',
-  role: undefined,
-  country: null,
-  district: null,
-  sector: null,
-  school:  null,
-  stakeholder:  null,
+   role: undefined,
      user_info: {
       full_name: "Edison UWIHANGANYE",
       sex:  null,
       dob:  null,
-      marital_status:  null,
       nid:  null,
       email:  null,
       phone_numbers: '123',
@@ -48,7 +42,7 @@ const App: React.FC<AppProps> = () => {
 
   const FC_Logout = () => {
     // Implement your logout logic here
-    console.log("Logout logic");
+    console.log("Logout you are signed out");
   };
 
   const setOpenVav = (status: boolean) => {
@@ -56,10 +50,6 @@ const App: React.FC<AppProps> = () => {
     console.log(`Set navbar status to ${status ? "open" : "closed"}`);
   };
 
-  const SwitchEmployment = () => {
-    // Implement your logic to switch employment here
-    console.log("Switch employment logic");
-  };
 
   return (
     <div>
@@ -68,8 +58,7 @@ const App: React.FC<AppProps> = () => {
         auth={auth}
         FC_Logout={FC_Logout}
         setOpenVav={setOpenVav}
-        sideNavbarStatus={false} // Replace with actual status
-        SwitchEmployment={SwitchEmployment}
+        sideNavbarStatus={false} 
       />
 
       {/* The rest of your app content */}

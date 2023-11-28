@@ -43,41 +43,6 @@ export interface PermissionInterface {
   export: boolean;
 }
 
-export interface DistrictLocationItem {
-  district_code: string;
-  district_name: string;
-  province_id: string;
-  province_code: string;
-  _id: string;
-}
-export interface ProvinceLocationItem {
-  province_code: string;
-  province_name: string;
-  _id: string;
-}
-export interface SectorLocationItem {
-  district_id: string;
-  sector_code: string;
-  sector_name: string;
-  district_code: string;
-  _id: string;
-}
-export interface CountryLocationItem {
-  country_code: string;
-  country_name: string;
-  code: string;
-}
-export interface LocationAPI {
-  districts: DistrictLocationItem[];
-  provinces: ProvinceLocationItem[];
-  sectors: SectorLocationItem[];
-  countries: CountryLocationItem[];
-}
-
-export interface SchoolInterface {
-  school_code: string;
-  school_name: string;
-}
 
 const token = localStorage.getItem(APP_TOKEN_NAME);
 
@@ -85,7 +50,6 @@ export interface UserItemInterface {
   full_name: string;
   sex: string | null;
   dob: string | null;
-  marital_status: string | null;
   nid: string | null;
   email: string | null;
   phone_numbers: string;
@@ -108,11 +72,6 @@ export interface UserInterface {
   jwt: string;
   user_info: UserItemInterface;
   role: UserRoleInterface | undefined;
-  country: CountryLocationItem | null;
-  district: DistrictLocationItem | null;
-  sector: SectorLocationItem | null;
-  school: any | null;
-  stakeholder: any | null;
 }
 
 export interface Auth {
@@ -174,8 +133,6 @@ export const FC_Login = (
         type: ActionTypes.USER_LOGIN_SUCCESS_DATA,
         payload: {
           data: {
-            country: res.data.country,
-            district: res.data.district,
             jwt: res.data.jwt,
             role:
               res.data.role === undefined
@@ -187,9 +144,6 @@ export const FC_Login = (
                     role_id: res.data.role?.role_id,
                     role: res.data.role?.role,
                   },
-            school: res.data.school,
-            sector: res.data.sector,
-            stakeholder: res.data.stakeholder,
             user_info: res.data.user_info,
           },
           token: res.data.jwt,
@@ -236,8 +190,6 @@ export const FC_CheckLoggedIn = (callBack: (status: boolean) => void) => {
         type: ActionTypes.USER_LOGIN_SUCCESS_DATA,
         payload: {
           data: {
-            country: res.data.country,
-            district: res.data.district,
             jwt: res.data.jwt,
             role:
               res.data.role === undefined
@@ -249,9 +201,6 @@ export const FC_CheckLoggedIn = (callBack: (status: boolean) => void) => {
                     role_id: res.data.role?.role_id,
                     role: res.data.role?.role,
                   },
-            school: res.data.school,
-            sector: res.data.sector,
-            stakeholder: res.data.stakeholder,
             user_info: res.data.user_info,
           },
           token: token!,
@@ -280,29 +229,3 @@ export const FC_Logout = () => {
   };
 };
 
-export const FC_GetLocationsDetails = async (
-  callBack: (
-    loading: boolean,
-    res: {
-      data: LocationAPI | null;
-      type: "Error" | "Success";
-      msg: string;
-    } | null
-  ) => void
-) => {
-  // callBack(true, null);
-  try {
-    const res = await axios.get<LocationAPI>(`${DISTRICTS_LOCATION}`);
-    callBack(false, {
-      data: res.data,
-      msg: "",
-      type: "Success",
-    });
-  } catch (error: any) {
-    callBack(false, {
-      data: null,
-      msg: errorToText(error),
-      type: "Error",
-    });
-  }
-};

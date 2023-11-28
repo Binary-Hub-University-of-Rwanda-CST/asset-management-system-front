@@ -6,14 +6,13 @@ import { IoIosArrowDown, IoMdLogIn } from "react-icons/io";
 import { Auth } from "../../actions";
 import { RiComputerLine, RiLockPasswordLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { TbArrowsDiagonalMinimize2 } from "react-icons/tb";
+import { IoMenu } from "react-icons/io5";
 
 interface NavBarProps {
   auth: Auth;
   FC_Logout: () => void;
   setOpenVav: (status: boolean) => void;
   sideNavbarStatus: boolean;
-  SwitchEmployment: () => void;
 }
 interface NavBarState {
   view_user: boolean;
@@ -37,7 +36,7 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
           className={`${
             this.props.auth.isAuthenticated === false
               ? "bg-white"
-              : " bg-white text-black"
+              : " bg-white text-[#333333]"
           } py-1 pl-3 fixed top-0 right-0 left-0 z-50 border-b shadow-sm`}
         >
           <div
@@ -67,22 +66,11 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                   </div>
                 ) : (
                   <div className="my-2 flex flex-row items-center gap-3">
-                    <div
-                      onClick={() =>
-                        this.props.setOpenVav(!this.props.sideNavbarStatus)
-                      }
-                      className="bg-primary-100 rounded-md p-2 cursor-pointer hover:bg-primary-300"
-                    >
-                      {this.props.sideNavbarStatus === false ? (
-                        <TbArrowsDiagonalMinimize2 className="text-2xl text-primary-800 animate__animated animate__zoomIn" />
-                      ) : (
-                        <AiOutlineMenu className="text-2xl text-primary-800 animate__animated animate__fadeIn" />
-                      )}
-                    </div>
+
                     <div className="">
                       <div className="flex flex-row items-center gap-2 text-lg rounded-full w-max pr-3 cursor-pointer group">
                         <div>
-                          <RiComputerLine className="text-3xl text-primary-700" />
+                          <IoMenu className="text-3xl text-[#d9d9d9]" />
                         </div>
                         <span className="text-gray-700 font-bold">
                           ASSET MANAGEMENT SYSTEM
@@ -97,21 +85,22 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                   {/* User icon */}
                   <div className="relative">
                     <div
-                      className="flex flex-row items-center cursor-pointer group bg-gray-100 hover:bg-primary-100 py-2 pl-4 pr-1 rounded-md"
+                      className="flex flex-row items-center cursor-pointer group bg-[#f0f9ff] hover:bg-primary-100 py-2 pl-4 pr-1 rounded-md"
                       onClick={() =>
                         this.setState({ view_user: !this.state.view_user })
                       }
                     >
-                      <div className="text-sm pr-3 group-hover:text-primary-800">
-                        {this.props.auth.user?.user_info.full_name}
-                      </div>
-                      <div
+                       <div
                         className={`rounded-full flex items-center justify-center bg-gray-400 group-hover:bg-primary-800 text-white h-8 w-8  cursor-pointer`}
                       >
                         <FaUserCircle className="text-3xl animate__animated animate__fadeIn" />
                       </div>
+                      <div className="text-sm pr-3 group-hover:text-primary-800 ml-2">
+                        {this.props.auth.user?.user_info.full_name}
+                      </div>
+                     
                       <div className="ml-1">
-                        <IoIosArrowDown className="text-xl text-gray-500 group-hover:text-primary-800" />
+                        <IoIosArrowDown className="text-xl text-[#6cb2e1] group-hover:text-primary-800 ml-2" />
                       </div>
                     </div>
                     {this.state.view_user === true && (
@@ -145,21 +134,7 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                                   }
                                 </span>
                               </div>
-                              {this.props.auth.user !== null &&
-                                this.props.auth.user.district !== null && (
-                                  <div className="text-center text-accent-900 mb-1 text-sm">
-                                    {
-                                      this.props.auth.user.district
-                                        .district_name
-                                    }
-                                  </div>
-                                )}
-                              {this.props.auth.user !== null &&
-                                this.props.auth.user.school !== null && (
-                                  <div className="text-center text-accent-900 mb-1 text-sm">
-                                    {this.props.auth.user.school?.school_name}
-                                  </div>
-                                )}
+                            
                               <div className="font-bold text-center mb-4 text-white bg-primary-700 rounded-md px-2 text-xs">
                                 <span className="font-normal">
                                   {this.props.auth.user?.role?.role}
