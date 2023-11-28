@@ -10,7 +10,7 @@ function App() {
           <h1 className="text-2xl font-bold text-[#2d90d2]">
             UNIVERSITY OF RWANDA
           </h1>
-          <h2 className="text-xl border-l pl-2">ASSET MANAGEMENT SYSTEM PDF PREVIEW</h2>
+          <h2 className="text-xl border-l pl-2">ASSET MANAGEMENT SYSTEM </h2>
         </div>
       </div>
   );
