@@ -1,7 +1,6 @@
 // App.tsx
 
 import React from 'react';
-
 function App() {
   return (
     <div className="flex items-center justify-center h-screen box-sizing">
@@ -12,6 +11,7 @@ function App() {
         <h2 className="text-xl border-l pl-2 text-[#2a82d2] shadow-black">ASSET MANAGEMENT SYSTEM </h2>
       </div>
     </div>
+
   );
 }
 

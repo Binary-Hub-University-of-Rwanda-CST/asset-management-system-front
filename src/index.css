@@ -2,12 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .form-input,
-.form-textarea,
-.form-select,
-.form-multiselect {
-    @apply w-full rounded-md border border-white-light bg-white px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent;
-} */
+
   
   @keyframes zoom-in {
     0% {
