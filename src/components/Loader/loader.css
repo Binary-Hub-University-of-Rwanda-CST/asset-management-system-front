@@ -9,6 +9,8 @@
   .loader {
     border: 8px solid rgb(255, 255, 255);
     border-top: 8px solid #3498db;
+    border-top: 8px solid #3498db;
+    border-top: 8px solid #3498db;
     /* border-bottom: 8px solid rgb(219, 99, 52); */
     border-radius: 50%;
     width: 50px;
@@ -20,4 +22,4 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-  yvesloader
+  

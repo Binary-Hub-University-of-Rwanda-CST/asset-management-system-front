@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Loader from './components/loader'; 
+import Loader from './components/Loader/loader'; 
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -29,8 +29,8 @@ const App = () => {
       ) : (
         
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-          <h1 style={{ backgroundColor: 'white', textAlign: 'center' }}>page is loading</h1>
-          <p style={{ backgroundColor: 'white', textAlign: 'center', color: 'green' }}>spinning...</p>
+          <h1 style={{ backgroundColor: 'white', textAlign: 'center' }}>page snipping</h1>
+          <p style={{ backgroundColor: 'white', textAlign: 'center', color: 'green' }}> is loaded...</p>
         </div>
       )}
     </div>
