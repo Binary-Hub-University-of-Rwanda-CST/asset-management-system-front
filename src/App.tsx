@@ -28,7 +28,7 @@ const App = () => {
         <Loader />
       ) : (
         
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', padding:'20px' }}>
           <h1 style={{ backgroundColor: 'white', textAlign: 'center' }}>spinning changes</h1>
           <p style={{ backgroundColor: 'white', textAlign: 'center', color: 'green' }}> is loaded...</p>
         </div>
