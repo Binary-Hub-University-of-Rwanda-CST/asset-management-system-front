@@ -29,7 +29,7 @@ const App = () => {
       ) : (
         
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-          <h1 style={{ backgroundColor: 'white', textAlign: 'center' }}>page snipping</h1>
+          <h1 style={{ backgroundColor: 'white', textAlign: 'center' }}>spinning changes</h1>
           <p style={{ backgroundColor: 'white', textAlign: 'center', color: 'green' }}> is loaded...</p>
         </div>
       )}
