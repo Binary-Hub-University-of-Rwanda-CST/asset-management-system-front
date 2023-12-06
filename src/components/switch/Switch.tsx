@@ -1,24 +1,29 @@
-import React, { useState } from 'react';
+import React from "react";
 
-const ToggleSwitch = ({ on, off, isOn }:any) => {
-  const [toggleState, setToggleState] = useState(isOn);
+interface SwitchProps {
+  value: boolean;
+  onChange: () => void;
+}
 
-  const handleClick = () => {
-    setToggleState(!toggleState);
-  };
-
+const Switch = (props: SwitchProps) => {
+  const toggleClass = " transform translate-x-6";
   return (
-    <div className="flex items-center">
-      <span className={`text-sm mr-2 ${toggleState ? 'text-green-500' : 'text-gray-500'}`}>{toggleState ? on : off}</span>
-      <label className="flex items-center cursor-pointer">
-        <div className="relative">
-          <input type="checkbox" className="hidden form-input "   checked={toggleState} onChange={handleClick} />
-          <div className="toggle__line w-12 bg-primary rounded-full shadow-inner h-6"></div>
-          <div className={`toggle__dot absolute w-6 h-6 bg-white rounded-full shadow inset-y-0 left-0 ${toggleState ? 'translate-x-6' : 'translate-x-0'}`}></div>
-        </div>
-      </label>
+    <div
+      onClick={props.onChange}
+      className={`md:w-14 md:h-7 w-12 h-6 flex items-center ${
+        props.value === true ? "bg-primary-100" : "bg-gray-300"
+      } rounded-full p-1 cursor-pointer`}
+    >
+      {/* Switch */}
+      <div
+        className={`${
+          props.value === true ? "bg-primary-700" : "bg-white"
+        } md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transition transform${
+          props.value ? toggleClass : null
+        }`}
+      ></div>
     </div>
   );
 };
 
-export default ToggleSwitch;
+export default Switch;

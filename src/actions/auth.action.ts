@@ -59,9 +59,6 @@ export interface UserItemInterface {
   created_at: string;
   updated_by: string | null;
   updated_at: string;
-  archive: string;
-  archive_by: string | null;
-  archive_at: string | null;
   status: string;
   first_name: string | null;
   middle_name: string | null;
