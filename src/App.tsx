@@ -11,13 +11,6 @@ function App() {
         </h1>
         <h2 className="text-xl border-l pl-2 text-[#2a82d2] shadow-black">ASSET MANAGEMENT SYSTEM </h2>
       </div>
-      <ul className=' flex bg-blue-300 p-5 '>
-        <li>Chad </li>
-        <li className='text-red-300'>Somalia  </li>
-        <li>Andorra  </li>
-        <li>Western Sahara </li>
-        <li>Caribbean Netherlands  </li>
-      </ul>
     </div>
   );
 }

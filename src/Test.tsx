@@ -1,6 +1,6 @@
-//*************  SwitchToggle Test********
+// // *************  SwitchToggle Test********
 
-// import React, { useState } from "react";
+// // import React, { useState } from "react";
 // import Switch from "./components/switch/Switch";
 
 // const Test: React.FC = () => {
@@ -20,7 +20,7 @@
 // };
 
 // export default Test;
-// **************Loader Test*********
+// // **************Loader Test*********
 
 // import React from 'react'
 // import LoadingCircle from './components/Loading/Loader'
@@ -126,35 +126,35 @@
 
 // ***************  file preview test************
 import React, { useState } from "react";
-import FilePreview from "./components/FilePreview/FilePreview"; // Adjust the path accordingly
+// import FilePreview from "./components/FilePreview/FilePreview"; // Adjust the path accordingly
 
-const Test = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+// const Test = () => {
+//   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0] || null;
-    setSelectedFile(file);
-  };
+//   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     const file = event.target.files?.[0] || null;
+//     setSelectedFile(file);
+//   };
 
-  const handleClose = () => {
-    setSelectedFile(null);
-  };
+//   const handleClose = () => {
+//     setSelectedFile(null);
+//   };
 
-  return (
-    <div>
-      <input type="file" onChange={handleFileChange} />
-      {selectedFile && (
-        <FilePreview
-          selectedFile={selectedFile}
-          onClose={handleClose}
-          isComponent={false}
-          className="your-custom-class"
-        />
-      )}
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <input type="file" onChange={handleFileChange} />
+//       {/* {selectedFile && (
+//         <FilePreview
+//           selectedFile={selectedFile}
+//           onClose={handleClose}
+//           isComponent={false}
+//           className="your-custom-class"
+//         />
+//       )} */}
+//     </div>
+//   );
+// };
 
-export default Test;
+// export default Test;
 
 

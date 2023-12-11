@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import "./index.css";
-import Test from "./Test";
+// import Test from "./Test";
 // import "animate.css";
 import  App  from "./App";
 import  reducers from "./reducers";
@@ -15,8 +15,8 @@ const store = configureStore({
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* <App /> */}
-    <Test />
+    <App />
+    {/* <Test /> */}
   </Provider>,
   document.querySelector("#root")
 );
