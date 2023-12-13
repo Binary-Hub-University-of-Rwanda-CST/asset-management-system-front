@@ -1,6 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import { BrowserRouter } from 'react-router-dom';
 import "./index.css";
 import  App  from "./App";
 import { reducers } from "./reducers";
@@ -13,13 +14,11 @@ const store = configureStore({
   devTools: process.env.NODE_ENV !== "production",
 });
 
-ReactDOM.render(
+ReactDOM.createRoot(document.querySelector("#root") as HTMLElement).render(
+  <BrowserRouter>
   <Provider store={store}>
-    {/* <App /> */}
-    {/* <DashboardLoading/> */}
-    <Test/>
-
-
-  </Provider>,
-  document.querySelector("#root")
-);
+    <App />
+    {/* <Test /> */}
+  </Provider>
+  </BrowserRouter>
+)

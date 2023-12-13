@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-  
   @keyframes zoom-in {
     0% {
       transform: scale(0, 0);
@@ -16,4 +14,8 @@
     100% {
       transform: scale(1, 1);
     }
+  }
+  .spin-button-none::-webkit-outer-spin-button,
+  .spin-button-none::-webkit-inner-spin-button{
+    appearance: none;
   }
