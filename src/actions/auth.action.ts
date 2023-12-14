@@ -135,9 +135,7 @@ export const FC_Login = (
               res.data.role === undefined
                 ? undefined
                 : {
-                    access: res.data.role.access
-                      .toString()
-                      .split(",") as UserAccessList[],
+                  access: res.data.role.access?.toString().split(",") as UserAccessList[],
                     role_id: res.data.role?.role_id,
                     role: res.data.role?.role,
                   },
@@ -192,9 +190,7 @@ export const FC_CheckLoggedIn = (callBack: (status: boolean) => void) => {
               res.data.role === undefined
                 ? undefined
                 : {
-                    access: res.data.role.access
-                      .toString()
-                      .split(",") as UserAccessList[],
+                  access: res.data.role.access?.toString().split(",") as UserAccessList[],
                     role_id: res.data.role?.role_id,
                     role: res.data.role?.role,
                   },

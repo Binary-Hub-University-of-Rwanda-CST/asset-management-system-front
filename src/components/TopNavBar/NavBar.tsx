@@ -1,19 +1,36 @@
+
+
 import React, { Component } from "react";
 import { AiOutlineLogout, AiOutlineMenu } from "react-icons/ai";
-import UR_LOGO from "../../assets/images/UR_logo.png";
 import { FaUserCircle } from "react-icons/fa";
 import { IoIosArrowDown, IoMdLogIn } from "react-icons/io";
-import { Auth } from "../../actions";
-import { RiComputerLine, RiLockPasswordLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
-import { IoMenu } from "react-icons/io5";
+// import { Auth } from "../../actions";
+// import { Link } from "react-router-dom";
+import { TbArrowsDiagonalMinimize2 } from "react-icons/tb";
+import { RiLockPasswordLine } from "react-icons/ri";
+import TopNav from "../LoginTopNav/TopNav";
 
-interface NavBarProps {
-  auth: Auth;
-  FC_Logout: () => void;
-  setOpenVav: (status: boolean) => void;
-  sideNavbarStatus: boolean;
-}
+
+interface Auth{ 
+    isAuthenticated?: boolean;
+    user:{
+      user_info:{
+        full_name: string;
+        phone_numbers?: string;
+    };
+    role:{
+      role:string;
+    }
+  }
+  }
+
+  interface NavBarProps {
+    auth: Auth;
+    FC_Logout: () => void;
+    setOpenVav: (status: boolean) => void;
+    sideNavbarStatus: boolean;
+  }
+  
 interface NavBarState {
   view_user: boolean;
   loading: boolean;
@@ -33,74 +50,57 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
     return (
       <div>
         <div
-          className={`${
-            this.props.auth.isAuthenticated === false
-              ? "bg-white"
-              : " bg-white text-[#333333]"
-          } py-1 pl-3 fixed top-0 right-0 left-0 z-50 border-b shadow-sm`}
-        >
-          <div
-            className={`${
-              this.props.auth.isAuthenticated === false
-                ? "container mx-auto lg:px-10"
-                : ""
-            }`}
-          >
+          className= " bg-white text-black py-1 pl-3 fixed top-0 right-0 left-0 z-50 border-b shadow-sm"
+           
+        >{this.props.auth.isAuthenticated === true ? (
+          <div>
             <div className="flex flex-row items-center justify-between gap-3">
               <div className="flex flex-row items-center gap-2">
-                {this.props.auth.isAuthenticated === false && (
-                  <div>
-                    <img
-                      className="h-14"
-                      src={UR_LOGO}
-                      alt="Asset Management System"
-                    />
-                  </div>
-                )}
 
-                {this.props.auth.isAuthenticated === false ? (
-                  <div className="flex flex-row items-center gap-2">
-                    <div className="text-primary-800 py-4 font-extrabold text-lg">
-                      ASSET MANAGEMENT SYSTEM
-                    </div>
-                  </div>
-                ) : (
                   <div className="my-2 flex flex-row items-center gap-3">
-
+                    <div
+                      onClick={() =>
+                        this.props.setOpenVav(!this.props.sideNavbarStatus)
+                      }
+                      className="bg-primary-100 rounded-md p-2 cursor-pointer hover:bg-primary-300"
+                    >
+                      {this.props.sideNavbarStatus === false ? (
+                        <TbArrowsDiagonalMinimize2 className="text-2xl text-primary-800 animate__animated animate__zoomIn" />
+                      ) : (
+                        <AiOutlineMenu className="text-2xl text-primary-800 animate__animated animate__fadeIn" />
+                      )}
+                    </div>
                     <div className="">
                       <div className="flex flex-row items-center gap-2 text-lg rounded-full w-max pr-3 cursor-pointer group">
-                        <div>
-                          <IoMenu className="text-3xl text-[#d9d9d9]" />
-                        </div>
                         <span className="text-gray-700 font-bold">
                           ASSET MANAGEMENT SYSTEM
                         </span>
                       </div>
                     </div>
                   </div>
-                )}
+                
               </div>
-              {this.props.auth.isAuthenticated === true ? (
+              
                 <div className="flex flex-row items-center gap-2 justify-end mr-2">
                   {/* User icon */}
                   <div className="relative">
                     <div
-                      className="flex flex-row items-center cursor-pointer group bg-[#f0f9ff] hover:bg-primary-100 py-2 pl-4 pr-1 rounded-md"
+                      className="flex flex-row items-center cursor-pointer group bg-primary-blue-white hover:bg-primary-100 py-2 pl-4 pr-1 rounded-md"
                       onClick={() =>
                         this.setState({ view_user: !this.state.view_user })
                       }
                     >
-                       <div
-                        className={`rounded-full flex items-center justify-center bg-gray-400 group-hover:bg-primary-800 text-white h-8 w-8  cursor-pointer`}
+                      <div
+                        className={`rounded-full flex items-center justify-center mr-2 bg-gray-400 group-hover:bg-primary-800 text-white h-8 w-8  cursor-pointer`}
                       >
                         <FaUserCircle className="text-3xl animate__animated animate__fadeIn" />
                       </div>
-                      <div className="text-sm pr-3 group-hover:text-primary-800 ml-2">
+                      <div className="text-sm pr-3 group-hover:text-primary-800">
                         {this.props.auth.user?.user_info.full_name}
                       </div>
-                     
+
                       <div className="ml-1">
-                        <IoIosArrowDown className="text-xl text-[#6cb2e1] group-hover:text-primary-800 ml-2" />
+                        <IoIosArrowDown className="text-xl text-my-blue group-hover:text-primary-800" />
                       </div>
                     </div>
                     {this.state.view_user === true && (
@@ -134,7 +134,6 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                                   }
                                 </span>
                               </div>
-                            
                               <div className="font-bold text-center mb-4 text-white bg-primary-700 rounded-md px-2 text-xs">
                                 <span className="font-normal">
                                   {this.props.auth.user?.role?.role}
@@ -146,31 +145,33 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                               <div className="text-sm text-gray-600 mt-5 mb-2">
                                 ACTION MENU
                               </div>
-                              <Link
+                              {/* <Link
                                 onClick={() =>
                                   this.setState({ view_user: false })
                                 }
                                 to={"/profile"}
                                 className="flex flex-row items-center gap-2 bg-gray-50 rounded-md px-2 py-1 cursor-pointer hover:bg-primary-700 hover:text-white group"
-                              >
-                                <div>
+                              > */}
+                                <div className="flex gap-2 items-center mb-2">
                                   <FaUserCircle className="text-xl text-primary-700 group-hover:text-white" />
+                                  <div>User Profile</div>
                                 </div>
-                                <div>User Profile</div>
-                              </Link>
+                                
+                              {/* </Link> */}
 
-                              <Link
+                              {/* <Link
                                 onClick={() =>
                                   this.setState({ view_user: false })
                                 }
                                 to={"/change-password"}
                                 className="flex flex-row items-center gap-2 bg-gray-50 rounded-md px-2 py-1 cursor-pointer hover:bg-primary-700 hover:text-white group"
-                              >
-                                <div>
+                              > */}
+                                <div className=" flex gap-2 mb-2 items-center">
                                   <RiLockPasswordLine className="text-xl text-red-700 group-hover:text-white" />
+                                  <div>Change password</div>
                                 </div>
-                                <div>Change password</div>
-                              </Link>
+                                
+                              {/* </Link> */}
 
                               <div
                                 onClick={() => {
@@ -191,21 +192,15 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                     )}
                   </div>
                 </div>
-              ) : (
-                <div>
-                  <a
-                    href="https://www.ur.ac.rw"
-                    title="University of Rwanda Website"
-                    className="px-6 py-2 rounded-md border border-primary-800 hover:bg-primary-800 text-primary-800 font-bold hover:text-white w-max text-sm"
-                    target={"_blank"}
-                    rel="noreferrer"
-                  >
-                    Back to home
-                  </a>
-                </div>
-              )}
+             
+              
             </div>
           </div>
+           ) : (
+            <div>
+             <TopNav/>
+            </div>
+          )}
         </div>
       </div>
     );

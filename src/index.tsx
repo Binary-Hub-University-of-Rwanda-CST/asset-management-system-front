@@ -5,6 +5,8 @@ import "./index.css";
 import  App  from "./App";
 import { reducers } from "./reducers";
 import { configureStore } from "@reduxjs/toolkit";
+import Test from "./App.Test";
+import DashboardLoading from "./components/CoomingSoon/CoomingSoon";
 
 const store = configureStore({
   reducer: reducers,
@@ -13,7 +15,9 @@ const store = configureStore({
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    {/* <App /> */}
+    {/* <DashboardLoading/> */}
+    <Test/>
   </Provider>,
   document.querySelector("#root")
 );

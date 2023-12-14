@@ -11,8 +11,7 @@ export const isAccessAuthorized: any = (
   if (auth.user === null || auth.user.role === undefined) {
     return false;
   }
-  if (auth.user.role.access.find((itm) => itm === access) !== undefined) {
-    return true;
+  if (auth.user.role.access?.includes(access)) {
   }
   return false;
 };

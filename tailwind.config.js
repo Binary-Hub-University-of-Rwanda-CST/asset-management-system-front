@@ -11,6 +11,10 @@ module.exports = {
                 DEFAULT: '#4361ee',
                 light: '#eaf1ff',
                 'dark-light': 'rgba(67,97,238,.15)',
+                'my-bg' : '#2d90d2',
+                'black': '#000000', 'blue-white': '#f0f9ff',
+        
+                
             },
             success: {
                 DEFAULT: '#00ab55',
@@ -32,11 +36,16 @@ module.exports = {
                 light: '#e7f7ff',
                 'dark-light': 'rgba(33,150,243,.15)',
             },
-           
+
+            'dark-bg':'#e8e8e8',
+            'my-blue': '#2d90d2',
+            'dark-white': '#ececec',
+            'blue-white': '#f0f9ff',
+        
         },
         fontFamily: {
-            nunito: ['Nunito', 'sans-serif'],
-        },
+            inter: ['Inter', 'sans-serif'],
+          },
         spacing: {
             4.5: '18px',
         },

@@ -1,9 +1,7 @@
-//**************** TEST NAVBAR **********************************
-
 import React, { useState } from "react";
-import { NavBar } from "./components/TopNavBar/NavBar";
+import { NavBar } from "../../components/TopNavBar/NavBar";
 
-const App = () => {
+const MyTopNav = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(false);
 
   const auth = {
@@ -38,6 +36,4 @@ const App = () => {
   );
 };
 
-export default App;
-
-
+export default MyTopNav;

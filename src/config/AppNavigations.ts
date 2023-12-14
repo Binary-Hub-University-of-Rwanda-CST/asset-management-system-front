@@ -1,12 +1,13 @@
 import { IconType } from "react-icons";
 import { MdOutlineDashboard } from "react-icons/md";
 import { UserAccessList } from "./userAccess";
-import { FiSettings } from "react-icons/fi";
-import { BiGroup } from "react-icons/bi";
 import { BsDatabase } from "react-icons/bs";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { RiQrScan2Line } from "react-icons/ri";
 import { CiViewTable } from "react-icons/ci";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { FiUser } from "react-icons/fi";
+import { BiGroup } from "react-icons/bi";
 
 export enum MENU_TYPE {
   NONE = "NONE",
@@ -39,10 +40,6 @@ export interface SideNavigationInterface {
   subMenus: SideNavigationSubmenuInterface[];
 }
 
-/**
- * @description Appear always
- * @done_by Emmy
- */
 export const PUBLIC: NavigationInterface[] = [
   {
     title: "Login",
@@ -50,25 +47,16 @@ export const PUBLIC: NavigationInterface[] = [
   },
 ];
 
-/**
- * @description Appear once the user is not logged in
- * @done_by Emmy
- */
+
 export const NON_AUTHENTICATED_MENUS: NavigationInterface[] = [
-  {
-    title: "About",
-    url: "/about",
-  },
+
   {
     title: "Login",
     url: "/login",
   },
 ];
 
-/**
- * @description Appear once the user is logged in
- * @done_by Emmy
- */
+
 export const AUTHENTICATED_MENUS: SideNavigationInterface[] = [
   {
     icon: MdOutlineDashboard,
@@ -139,32 +127,43 @@ export const AUTHENTICATED_MENUS: SideNavigationInterface[] = [
     subMenus: [],
   },
   {
-    icon: CiViewTable,
-    title: "Reports",
-    label: "Reports",
-    url: "/reports",
+    icon: BiGroup,
+    title: "Staff Management",
+    label: "Staff Management",
+    url: "/users-list",
     menu_type: MENU_TYPE.ACTIVITIES,
     access: "all",
     subMenus: [],
   },
   {
-    icon: FiSettings,
-    title: "Settings",
-    label: "Settings",
-    url: "/settings",
-    menu_type: MENU_TYPE.OTHERS,
+    icon: CiViewTable,
+    title: "Reports",
+    label: "Reports",
+    url: "/reports",
+    menu_type: MENU_TYPE.REPORTS,
     access: "all",
     subMenus: [],
   },
   {
-    icon: BiGroup,
-    title: "User Management",
-    label: "User Management",
-    url: "/users-list",
-    menu_type: MENU_TYPE.OTHERS,
+    icon: FiUser,
+    title: "My Profile",
+    label: "My Profile",
+    url: "/my-profile",
+    menu_type: MENU_TYPE.PROFILE,
     access: "all",
     subMenus: [],
   },
+  
+  {
+    icon: RiLockPasswordLine,
+    title: "Change Password",
+    label: "Change Password",
+    url: "/change-password",
+    menu_type: MENU_TYPE.PROFILE,
+    access: "all",
+    subMenus: [],
+  },
+ 
 ];
 
 export const menus_categories = (): { key: MENU_TYPE; title: string }[] => {
@@ -172,7 +171,7 @@ export const menus_categories = (): { key: MENU_TYPE; title: string }[] => {
   for (const menu in MENU_TYPE) {
     response.push({
       key: menu as MENU_TYPE,
-      title: menu === MENU_TYPE.OTHERS ? "Others" : "",
+      title: menu === MENU_TYPE.PROFILE ? "profile" : MENU_TYPE.ACTIVITIES ? "activities" : " ",
     });
   }
   return response.filter((element) =>
