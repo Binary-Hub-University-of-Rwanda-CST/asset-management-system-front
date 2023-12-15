@@ -6,6 +6,7 @@ import { AiOutlineLogin, AiFillQuestionCircle } from 'react-icons/ai';
 import TopNav from '../../components/LoginTopNav/TopNav';
 import App from '../../App.Test';
 import Input from '../../components/Fragments/Input';
+import axios from 'axios';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -14,6 +15,7 @@ function Login() {
   const [usernameError, setUsernameError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [loggingIn, setLoggingIn] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -26,8 +28,27 @@ function Login() {
     return emailRegex.test(credential) || phoneRegex.test(credential);
   };
 
+  function handleLoginUser()
+  {
+    const loginData = {
+      "email": username,
+      "password": password
+    }
+    setLoggingIn(true);
+    axios.post("http://localhost:9090/auth/login", loginData, { withCredentials: false })
+  .then(res => {
+    setLoggingIn(false);
+    console.log(res);
+    alert("Login successful");
+  })
+  .catch(err => {
+    setLoggingIn(false);
+    console.log("Error-datch: ", err);
+    alert("Error: " + err.response.data.message);
+  });
+
+  }
   const handleLogin = async () => {
-   
    if(username.trim() === ''){
     setUsernameError('Email or Phone Number is Empty');
     setPasswordError(null);
@@ -53,6 +74,14 @@ function Login() {
       // const userData = await login(username, password);
       // Handle successful login (e.g., store user data in state or context)
       // console.log('Logged in:', userData);
+      const loginData = {
+        "email": username,
+        "password": password
+      }
+      setLoggingIn(true);
+      axios.post("http://localhost:9090/auth/login", loginData).
+      then(res => console.log(res))
+      .catch(err => console.error('Login failed:', err));
     } catch (error) {
       // Handle login error
       console.error('Login failed:', error);
@@ -71,7 +100,7 @@ function Login() {
               <div>
                 <h2 className="text-xl font-extrabold text-gray-900">Sign In</h2>
               </div>
-              <form className="mt-8 space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form className="mt-8 space-y-4" onSubmit={(event) => {event.preventDefault();}}>
                 <Input
                   title="Email or Phone Number"
                   type="text"
@@ -109,11 +138,11 @@ function Login() {
                   </h3>
                   <button
                     type="button"
-                    onClick={handleLogin}
+                    onClick={handleLoginUser}
                     className="flex flex-row gap-1 items-center bg-my-blue text-white px-5 py-2 rounded-md hover:bg-blue-600"
                   >
                     <AiOutlineLogin />
-                    Sign In
+                    {loggingIn ? "Signing In..." :"Sign In"}
                   </button>
                 </div>
               </form>
