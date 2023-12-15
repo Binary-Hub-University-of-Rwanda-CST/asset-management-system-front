@@ -1,0 +1,39 @@
+
+{
+  "auth": {
+    "isAuthenticated": true,
+    "loading": false,
+    "token": "your_token_here",
+    "user": {
+      "jwt": "hhh",
+      "role": null,
+      "country": null,
+      "district": null,
+      "sector": null,
+      "school": null,
+      "stakeholder": null,
+      "user_info": {
+        "full_name": "Edison UWIHANGANYE",
+        "sex": null,
+        "dob": null,
+        "marital_status": null,
+        "nid": null,
+        "email": null,
+        "phone_numbers": "123",
+        "user_id": "123",
+        "username": "edsn kvn ",
+        "created_by": "legend",
+        "created_at": "UR",
+        "updated_by": null,
+        "updated_at": "111",
+        "archive": "2023",
+        "archive_by": null,
+        "archive_at": null,
+        "status": "active",
+        "first_name": null,
+        "middle_name": null,
+        "last_name": null
+      }
+    }
+  }
+}

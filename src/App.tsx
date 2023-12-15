@@ -11,7 +11,10 @@ function App() {
         </h1>
         <h2 className="text-xl border-l pl-2 text-[#2a82d2] shadow-black">ASSET MANAGEMENT SYSTEM </h2>
       </div>
+
     </div>
+
+
   );
 }
 
