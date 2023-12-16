@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import "./index.css";
-// import Test from "./Test";
-// import "animate.css";
 import  App  from "./App";
-import  reducers from "./reducers";
+import { reducers } from "./reducers";
 import { configureStore } from "@reduxjs/toolkit";
+import Test from "./App.Test";
+import DashboardLoading from "./components/CoomingSoon/CoomingSoon";
 
 const store = configureStore({
   reducer: reducers,
@@ -15,8 +15,11 @@ const store = configureStore({
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
-    {/* <Test /> */}
+    {/* <App /> */}
+    {/* <DashboardLoading/> */}
+    <Test/>
+
+
   </Provider>,
   document.querySelector("#root")
 );

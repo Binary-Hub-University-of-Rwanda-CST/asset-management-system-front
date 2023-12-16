@@ -1,8 +1,7 @@
-//**************** TEST NAVBAR **********************************
 import React, { useState } from "react";
-import { NavBar } from "./components/TopNavBar/NavBar";
+import { NavBar } from "../../components/TopNavBar/NavBar";
 
-const App = () => {
+const MyTopNav = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(false);
 
   const auth = {
@@ -24,6 +23,7 @@ const App = () => {
     // Your logout logic goes here
     console.log("Logging out...");
   };
+
   return (
     <div>
       <NavBar
@@ -32,13 +32,8 @@ const App = () => {
         setOpenVav={setSideNavbarStatus}
         sideNavbarStatus={sideNavbarStatus}
       />
-
     </div>
-
-
   );
 };
 
-export default App;
-
-
+export default MyTopNav;

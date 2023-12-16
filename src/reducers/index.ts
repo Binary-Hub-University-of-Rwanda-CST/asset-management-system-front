@@ -1,12 +1,15 @@
-// combination of Reducers 
-import { combineReducers } from '@reduxjs/toolkit';
-import userReducer from './userReducer';
-import assetReducer from './assetReducer';
+import { combineReducers } from "redux";
+import { Auth, System } from "../actions";
+import { authReducer } from "./auth.reducer";
+import { systemReducer } from "./system.reducer";
 
-const rootReducer = combineReducers({
-  user: userReducer,
-  asset: assetReducer,
-  // Add other reducers here as our project grows
+// define the entire state into the entire side
+export interface StoreState {
+  auth: Auth;
+  system: System;
+}
+
+export const reducers = combineReducers<StoreState>({
+  auth: authReducer,
+  system: systemReducer,
 });
-
-export default rootReducer;

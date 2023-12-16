@@ -7,8 +7,8 @@ import { UserAccessList } from "../config/userAccess";
  */
 
 export interface UserRoleInterface {
-  access: UserAccessList[];
-  role_id: string;
+  access?: UserAccessList[];
+  role_id?: string;
   role: string;
 }
 
