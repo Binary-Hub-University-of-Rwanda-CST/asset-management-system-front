@@ -6,13 +6,9 @@ import { FaQuestionCircle } from "react-icons/fa";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 
 const ChangePassword: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
+ const closeModal = () => {
     setIsModalOpen(false);
   };
 
@@ -124,13 +120,6 @@ const ChangePassword: React.FC = () => {
 
   return (
     <div className="flex w-full ">
-      <button
-        onClick={openModal}
-        className="p-2 border-my-blue  bg-white border-2 rounded-lg flex items-center justify-center  "
-      >
-        Change Password
-      </button>
-
       <Modal isOpen={isModalOpen} onClose={closeModal} title="Change Password">
         <div className="flex flex-col gap-5 w-96 p-5 ">
           {Object.keys(passwordStates).map((key) => (
