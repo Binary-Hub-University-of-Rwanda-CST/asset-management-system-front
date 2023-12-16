@@ -25,7 +25,6 @@ const App = () => {
     // Your logout logic goes here
     console.log("Logging out...");
   };
-
   return (
     <div>
       <NavBar
@@ -35,6 +34,7 @@ const App = () => {
         sideNavbarStatus={sideNavbarStatus}
       />
     </div>
+
   );
 };
 
