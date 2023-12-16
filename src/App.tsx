@@ -1,5 +1,4 @@
 //**************** TEST NAVBAR **********************************
-
 import React, { useState } from "react";
 import { NavBar } from "./components/TopNavBar/NavBar";
 
@@ -33,7 +32,9 @@ const App = () => {
         setOpenVav={setSideNavbarStatus}
         sideNavbarStatus={sideNavbarStatus}
       />
+
     </div>
+
 
   );
 };
