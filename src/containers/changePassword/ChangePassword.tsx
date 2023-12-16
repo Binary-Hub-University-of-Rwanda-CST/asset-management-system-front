@@ -2,14 +2,15 @@
 import React, { useState } from "react";
 import Modal from "../../components/modal/Modal";
 import Input from "../../components/Fragments/Input";
+import { FaQuestionCircle } from "react-icons/fa";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 
 const ChangePassword: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // const openModal = () => {
-  //   setIsModalOpen(true);
-  // };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -123,12 +124,12 @@ const ChangePassword: React.FC = () => {
 
   return (
     <div className="flex w-full ">
-      {/* <button
+      <button
         onClick={openModal}
         className="p-2 border-my-blue  bg-white border-2 rounded-lg flex items-center justify-center  "
       >
         Change Password
-      </button> */}
+      </button>
 
       <Modal isOpen={isModalOpen} onClose={closeModal} title="Change Password">
         <div className="flex flex-col gap-5 w-96 p-5 ">
@@ -163,12 +164,12 @@ const ChangePassword: React.FC = () => {
                 passwordStates[key as keyof typeof passwordStates].showPassword ? (
                   <FaRegEyeSlash
                     onClick={(e) => toggleShowPassword(key as keyof typeof passwordStates, e)}
-                    className="text-my-blue items-center"
+                    className="text-my-blue"
                   />
                 ) : (
                   <FaRegEye
                     onClick={(e) => toggleShowPassword(key as keyof typeof passwordStates, e)}
-                    className="text-my-blue items-center"
+                    className="text-my-blue"
                   />
                 )
               }
