@@ -47,7 +47,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
        
        <div className="flex flex-row gap-5 items-center bold ">
         <button
-          className="flex gap-1 items-center text-[#2a82d2] bg-[#e1f3ff] rounded-lg p-2  top-2 left-2 hover:text-gray-800"
+          className="flex gap-1 ml-5 items-center text-[#2a82d2] bg-[#e1f3ff] rounded-lg p-2  top-2 left-2 hover:text-gray-800"
           onClick={onClose}
         >
           <FaArrowLeft /> 
