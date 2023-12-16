@@ -2,16 +2,17 @@
 import React from 'react';
 
 const NumberInput = ( props:{
-  title: "string",
-  type:"React.HTMLInputTypeAttribute",
-  min: string,
-  max:string,
+  title: string,
+  type: 'text' | 'password';
+  min?: string,
+  max?:string,
   onChange:(e:React.ChangeEvent<HTMLInputElement>)=>void
   disabled: boolean,
   value: string,
   error:string,
   onCloseError?:()=>void,
   className?:string,
+  icon?: React.ReactNode;
 }) => {
   return (
     <div className={`mb-4 ${props.className}`}>
