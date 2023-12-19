@@ -1,8 +1,18 @@
 //**************** TEST NAVBAR **********************************
 import React, { useState } from "react";
 import { NavBar } from "./components/TopNavBar/NavBar";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { Routes, Route, useLocation } from "react-router-dom";
+import EmailVerification from "./pages/resetPassword/emailVerification";
+import ResetPasswordForm from "./pages/resetPassword/resetPassword";
+import Reset from "./pages/resetPassword/reset";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
+  library.add(fab, fas);
   const [sideNavbarStatus, setSideNavbarStatus] = useState(false);
 
   const auth = {
@@ -25,20 +35,19 @@ const App = () => {
     console.log("Logging out...");
   };
   return (
-    <div>
+    <div className="app font-nunito">
       <NavBar
         auth={auth}
         FC_Logout={FC_Logout}
         setOpenVav={setSideNavbarStatus}
         sideNavbarStatus={sideNavbarStatus}
       />
-
+      <Routes>
+        <Route path="/resetpassword/*" element={<Reset />}></Route>
+      </Routes>
+      <ToastContainer />
     </div>
-
-
   );
 };
 
 export default App;
-
-
