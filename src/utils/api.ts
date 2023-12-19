@@ -1,4 +1,4 @@
-const server = "http://elearning.icte.reb.rw";
+const server = "http://ur.ac.rw";
 export const API_URL = `${server}/api`;
 
 // const server = "http://localhost:8888/projects";

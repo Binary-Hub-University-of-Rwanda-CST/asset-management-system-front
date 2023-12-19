@@ -4,9 +4,10 @@ import React, { useState } from 'react';
 import { FaRegEyeSlash, FaRegEye } from 'react-icons/fa';
 import { AiOutlineLogin, AiFillQuestionCircle } from 'react-icons/ai';
 import TopNav from '../../components/LoginTopNav/TopNav';
-import App from '../../App.Test';
+import App from '../../App';
 import Input from '../../components/Fragments/Input';
 import axios from 'axios';
+import { AuthData } from '../../utils/AuthData';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -39,7 +40,8 @@ function Login() {
   .then(res => {
     setLoggingIn(false);
     console.log(res);
-    alert("Login successful");
+    // alert("Login successful");
+    AuthData.isAuthenticated = true
   })
   .catch(err => {
     setLoggingIn(false);
@@ -90,7 +92,7 @@ function Login() {
 
   return (
     <>
-      {success ? (
+      {AuthData.isAuthenticated ? (
         <App />
       ) : (
         <div className="min-h-screen flex flex-col">

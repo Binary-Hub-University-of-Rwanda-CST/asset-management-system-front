@@ -1,8 +1,7 @@
-// ExampleComponent.tsx
+
 import React, { useState } from "react";
 import Modal from "../../components/modal/Modal";
 import Input from "../../components/Fragments/Input";
-import { FaQuestionCircle } from "react-icons/fa";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 
 const ChangePassword: React.FC = () => {
