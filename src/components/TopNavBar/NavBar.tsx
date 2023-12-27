@@ -5,7 +5,7 @@ import { AiOutlineLogout, AiOutlineMenu } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { IoIosArrowDown, IoMdLogIn } from "react-icons/io";
 // import { Auth } from "../../actions";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TbArrowsDiagonalMinimize2 } from "react-icons/tb";
 import { RiLockPasswordLine } from "react-icons/ri";
 import TopNav from "../LoginTopNav/TopNav";
@@ -52,7 +52,7 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
         <div
           className= " bg-white text-black py-1 pl-3 fixed top-0 right-0 left-0 z-50 border-b shadow-sm"
            
-        >{this.props.auth.isAuthenticated === true ? (
+        >
           <div>
             <div className="flex flex-row items-center justify-between gap-3">
               <div className="flex flex-row items-center gap-2">
@@ -152,8 +152,8 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                                 to={"/profile"}
                                 className="flex flex-row items-center gap-2 bg-gray-50 rounded-md px-2 py-1 cursor-pointer hover:bg-primary-700 hover:text-white group"
                               > */}
-                                <div className="flex gap-2 items-center mb-2">
-                                  <FaUserCircle className="text-xl text-primary-700 group-hover:text-white" />
+                                <div className="flex gap-2 items-center mb-2 bg-gray-50 rounded-md px-2 py-1 cursor-pointer hover:bg-primary-700 hover:text-my-blue hover:bg-blue-white group">
+                                  <FaUserCircle className="text-xl text-primary-700 group hover:text-my-blue" />
                                   <div>User Profile</div>
                                 </div>
                                 
@@ -166,8 +166,8 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
                                 to={"/change-password"}
                                 className="flex flex-row items-center gap-2 bg-gray-50 rounded-md px-2 py-1 cursor-pointer hover:bg-primary-700 hover:text-white group"
                               > */}
-                                <div className=" flex gap-2 mb-2 items-center">
-                                  <RiLockPasswordLine className="text-xl text-red-700 group-hover:text-white" />
+                                <div className=" flex gap-2 mb-2 items-center  flex-row  bg-gray-50 rounded-md px-2 py-1 cursor-pointer hover:bg-primary-700 hover:text-my-blue group">
+                                  <RiLockPasswordLine className="text-xl text-red-700 group-hover:text-my-blue" />
                                   <div>Change password</div>
                                 </div>
                                 
@@ -196,11 +196,7 @@ export class NavBar extends Component<NavBarProps, NavBarState> {
               
             </div>
           </div>
-           ) : (
-            <div>
-             <TopNav/>
-            </div>
-          )}
+
         </div>
       </div>
     );

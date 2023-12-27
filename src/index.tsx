@@ -6,7 +6,6 @@ import "./index.css";
 import  App  from "./App";
 import { reducers } from "./reducers";
 import { configureStore } from "@reduxjs/toolkit";
-import Test from "./App.Test";
 import DashboardLoading from "./components/CoomingSoon/CoomingSoon";
 
 const store = configureStore({
@@ -18,7 +17,8 @@ ReactDOM.createRoot(document.querySelector("#root") as HTMLElement).render(
   <BrowserRouter>
   <Provider store={store}>
     <App />
-    {/* <Test /> */}
+
   </Provider>
   </BrowserRouter>
 )
+

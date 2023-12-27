@@ -2,7 +2,7 @@
 import logo from '../../assets/images/UR_logo.png'
 import { AiOutlineLogin } from "react-icons/ai";
 
-function TopNav() {
+function LoginTopNav() {
 
     return (
       <div className="bg-white py-2 px-12 text-black flex justify-between items-center">
@@ -16,4 +16,4 @@ function TopNav() {
   };
 
 
-export default TopNav
+export default LoginTopNav

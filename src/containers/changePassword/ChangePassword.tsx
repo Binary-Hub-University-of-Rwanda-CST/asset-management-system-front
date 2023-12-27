@@ -1,8 +1,7 @@
-// ExampleComponent.tsx
+
 import React, { useState } from "react";
 import Modal from "../../components/modal/Modal";
 import Input from "../../components/Fragments/Input";
-import { FaQuestionCircle } from "react-icons/fa";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 
 const ChangePassword: React.FC = () => {
@@ -29,25 +28,26 @@ const ChangePassword: React.FC = () => {
       error: "",
     },
   });
-
+   
+  
   const handleChangePassword = () => {
     const { newPassword, confirmPassword, currentPassword } = passwordStates;
 
     // Check if any input is empty
-    if (!currentPassword.value || !newPassword.value || !confirmPassword.value) {
+    if (!currentPassword.value && !newPassword.value && !confirmPassword.value) {
       setPasswordStates((prevState) => ({
         ...prevState,
         currentPassword: {
           ...prevState.currentPassword,
-          error: "Input is empty",
+          error: "Current password is empty",
         },
         newPassword: {
           ...prevState.newPassword,
-          error: "Input is empty",
+          error: "new password is empty",
         },
         confirmPassword: {
           ...prevState.confirmPassword,
-          error: "Input is empty",
+          error: "comfirm Password is empty",
         },
       }));
       return;
@@ -83,7 +83,23 @@ const ChangePassword: React.FC = () => {
         },
       }));
       return;
-    }
+    };
+     // Check if the new password is strong
+  const isStrongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+    newPassword.value
+  );
+  if (!isStrongPassword) {
+    setPasswordStates((prevState) => ({
+      ...prevState,
+      newPassword: {
+        ...prevState.newPassword,
+        error:
+          "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
+      },
+    }));
+    return;
+  };
+    
 
     // logic for changing the password
     // Call API or function for changing the password
@@ -118,62 +134,66 @@ const ChangePassword: React.FC = () => {
     }));
   };
 
-  return (
-    <div className="flex w-full ">
-      <Modal isOpen={isModalOpen} onClose={closeModal} title="Change Password">
-        <div className="flex flex-col gap-5 w-96 p-5 ">
-          {Object.keys(passwordStates).map((key) => (
-            <Input
-              key={key}
-              title={`${key.charAt(0).toUpperCase()}${key.slice(1)} Password`}
-              type={passwordStates[key as keyof typeof passwordStates].showPassword ? "text" : "password"}
-              value={passwordStates[key as keyof typeof passwordStates].value}
-              onChange={(e) =>
-                setPasswordStates((prevState) => ({
-                  ...prevState,
-                  [key]: {
-                    ...prevState[key as keyof typeof passwordStates],
-                    value: e.target.value,
-                    error: "", // Clear error when input changes
-                  },
-                }))
-              }
-              disabled={false}
-              error={passwordStates[key as keyof typeof passwordStates].error}
-              onCloseError={() =>
-                setPasswordStates((prevState) => ({
-                  ...prevState,
-                  [key]: {
-                    ...prevState[key as keyof typeof passwordStates],
-                    error: "",
-                  },
-                }))
-              }
-              icon={
-                passwordStates[key as keyof typeof passwordStates].showPassword ? (
-                  <FaRegEyeSlash
-                    onClick={(e) => toggleShowPassword(key as keyof typeof passwordStates, e)}
-                    className="text-my-blue"
-                  />
-                ) : (
-                  <FaRegEye
-                    onClick={(e) => toggleShowPassword(key as keyof typeof passwordStates, e)}
-                    className="text-my-blue"
-                  />
-                )
-              }
-            />
-          ))}
-            <button
-              onClick={handleChangePassword}
-              className="bg-[#2d90d2] p-2 justify-center items-center text-white rounded-lg px-4"
-            >
-              Change Password
-            </button>
-        </div>
-      </Modal>
-    </div>
-  );
+  const inputTitles = ["Current Password", "New Password", "Confirm Password"];
+
+  
+return (
+  <div className="flex w-full">
+    <Modal isOpen={isModalOpen} onClose={closeModal} title="Change Password" backDrop={true}>
+      <div className="flex flex-col gap-5 w-96 p-5">
+        {Object.keys(passwordStates).map((key, index) => (
+          <Input
+            key={key}
+            title={inputTitles[index]}
+            type={passwordStates[key as keyof typeof passwordStates].showPassword ? "text" : "password"}
+            value={passwordStates[key as keyof typeof passwordStates].value}
+            onChange={(e) =>
+              setPasswordStates((prevState) => ({
+                ...prevState,
+                [key]: {
+                  ...prevState[key as keyof typeof passwordStates],
+                  value: e.target.value,
+                  error: "", // Clear error when input changes
+                },
+              }))
+            }
+            disabled={false}
+            
+            error={passwordStates[key as keyof typeof passwordStates].error}
+            onCloseError={() =>
+              setPasswordStates((prevState) => ({
+                ...prevState,
+                [key]: {
+                  ...prevState[key as keyof typeof passwordStates],
+                  error: "",
+                },
+              }))
+            }
+            icon={
+              passwordStates[key as keyof typeof passwordStates].showPassword ? (
+                <FaRegEyeSlash
+                  onClick={(e) => toggleShowPassword(key as keyof typeof passwordStates, e)}
+                  className="text-my-blue"
+                />
+              ) : (
+                <FaRegEye
+                  onClick={(e) => toggleShowPassword(key as keyof typeof passwordStates, e)}
+                  className="text-my-blue"
+                />
+              )
+            }
+          />
+        ))}
+        <button
+          onClick={handleChangePassword}
+          className="bg-[#2d90d2] p-2 justify-center items-center text-white rounded-lg px-4"
+        >
+          Change Password
+        </button>
+      </div>
+    </Modal>
+  </div>
+);
 };
 
 export default ChangePassword;
