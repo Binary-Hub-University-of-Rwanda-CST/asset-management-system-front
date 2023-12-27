@@ -3,6 +3,7 @@
 
 import React, { Component, Fragment } from "react";
 import { MdClose } from "react-icons/md";
+import { MdOutlineMenuOpen } from "react-icons/md";
 // import { Auth } from "../../actions";
 import UR_ICON from "../../assets/images/UR_logo.png";
 import {

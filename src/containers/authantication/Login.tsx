@@ -112,7 +112,7 @@ function Login() {
                     setUsernameError(null); // Clear username error on input change
                   }}
                   disabled={false}
-                  className="mb-4"
+                  className="mb-4 font-bold"
                   error={usernameError}
                   onCloseError={() => setUsernameError(null)}
                 />
@@ -129,7 +129,7 @@ function Login() {
                       <FaRegEye className="text-my-blue" onClick={toggleShowPassword} />
                     )
                   }
-                  className="mb-4"
+                  className="mb-4 font-bold"
                   error={passwordError}
                   onCloseError={() => setPasswordError(null)}
                 />

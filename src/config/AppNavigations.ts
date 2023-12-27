@@ -62,7 +62,7 @@ export const AUTHENTICATED_MENUS: SideNavigationInterface[] = [
     icon: MdOutlineDashboard,
     title: "Dashboard",
     label: "Dashboard",
-    url: "/dashboard",
+    url: "/",
     menu_type: MENU_TYPE.NONE,
     access: "all",
     subMenus: [],
