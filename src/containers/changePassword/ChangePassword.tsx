@@ -139,7 +139,7 @@ const ChangePassword: React.FC = () => {
   
 return (
   <div className="flex w-full">
-    <Modal isOpen={isModalOpen} onClose={closeModal} title="Change Password">
+    <Modal isOpen={isModalOpen} onClose={closeModal} title="Change Password" backDrop={true}>
       <div className="flex flex-col gap-5 w-96 p-5">
         {Object.keys(passwordStates).map((key, index) => (
           <Input
@@ -158,6 +158,7 @@ return (
               }))
             }
             disabled={false}
+            
             error={passwordStates[key as keyof typeof passwordStates].error}
             onCloseError={() =>
               setPasswordStates((prevState) => ({

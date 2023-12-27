@@ -16,7 +16,6 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
     {/* <DashboardLoading/> */}
-    {/* <Test/> */}
   </Provider>,
   document.querySelector("#root")
 );

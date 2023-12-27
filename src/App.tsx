@@ -1,6 +1,6 @@
+
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import { unstable_HistoryRouter } from "react-router-dom";
 import SideNavBar from "./components/SideNavBar/SideNavBar";
 import ChangePassword from "./containers/changePassword/ChangePassword";
 import Login from "./containers/authantication/Login";
@@ -60,6 +60,7 @@ const App = () => {
         </>
       )}
     </>
+
   );
 };
 
