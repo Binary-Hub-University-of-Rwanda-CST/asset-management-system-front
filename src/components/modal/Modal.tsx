@@ -1,3 +1,4 @@
+
 import React, { ReactNode, useEffect, useRef } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -75,57 +76,37 @@ const Modal: React.FC<ModalProps> = (props) => {
 
     return () => {
       window.removeEventListener("click", handleOutsideClick);
+      document.body.style.overflow = "";
     };
   }, [isOpen, onClose]);
 
-  // Map theme to Tailwind CSS color class
-  const themeColor = (() => {
-    switch (theme) {
-      case Themes.primary:
-        return "blue-500";
-      case Themes.secondary:
-        return "gray-300";
-      case Themes.danger:
-        return "red-500";
-      case Themes.success:
-        return "primary-800";
-      case Themes.warning:
-        return "yellow-500";
-      default:
-        return "white";
-    }
-  })();
+  if (!isOpen) {
+    return null;
+  }
 
   return (
-    <>
-      {isOpen && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-          <div
-            ref={modalRef}
-            className={`bg-white p-4 rounded-lg animate__animated animate__backInUp animate__faster ${widthSizeClass} ${
-              marginTop || "mt-8"
-            }`}
-          >
-            {padding.title && (
-              <div className="flex flex-row gap-5 items-center bold ">
-                {displayClose && (
-                  <button
-                    className="flex gap-1 ml-5 items-center text-[#2a82d2] bg-[#e1f3ff] rounded-lg p-2 top-2 left-2 hover:text-gray-800"
-                    onClick={onClose}
-                  >
-                    <FaArrowLeft />
-                    Back
-                  </button>
-                )}
-                <h2 className="font-bold">{title}</h2>
-              </div>
-            )}
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+      <div ref={modalRef} className="bg-white p-4 rounded-lg animate__animated animate__backInUp animate__faster ">
+       
+       <div className="flex flex-row gap-5 items-center bold ">
+        <button
+          className="flex gap-1 ml-5 items-center text-[#2a82d2] bg-[#e1f3ff] rounded-lg p-2  top-2 left-2 hover:text-gray-800"
+          onClick={onClose}
+        >
+          <FaArrowLeft /> 
+          Back
+        </button>
+        <h2 className="font-bold">{title}</h2>
+       </div>
 
-            <div className="flex flex-col">{children}</div>
-          </div>
-        </div>
-      )}
-    </>
+       <div className="flex flex-col">
+            {children}
+       </div>
+        
+
+        
+      </div>
+    </div>
   );
 };
 
