@@ -1,4 +1,3 @@
-My work on 2024-04-19: Wrote unit tests
 My work on 2024-04-20: Conducted code review
 My work on 2024-04-21: Conducted code review
 My work on 2024-04-22: Refactored legacy code
@@ -11,3 +10,4 @@ My work on 2024-04-28: Conducted code review
 My work on 2024-04-29: Updated documentation
 My work on 2024-04-30: Refactored legacy code
 My work on 2024-01-01: Implemented new feature
+My work on 2024-01-02: Updated documentation
