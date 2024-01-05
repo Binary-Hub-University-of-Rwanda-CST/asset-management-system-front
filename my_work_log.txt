@@ -1,7 +1,3 @@
-My work on 2024-04-20: Conducted code review
-My work on 2024-04-21: Conducted code review
-My work on 2024-04-22: Refactored legacy code
-My work on 2024-04-23: Optimized database queries
 My work on 2024-04-24: Refactored legacy code
 My work on 2024-04-25: Optimized database queries
 My work on 2024-04-26: Participated in team meeting
@@ -13,3 +9,4 @@ My work on 2024-01-01: Implemented new feature
 My work on 2024-01-02: Updated documentation
 My work on 2024-01-03: Wrote unit tests
 My work on 2024-01-04: Conducted code review
+My work on 2024-01-05: Deployed to production
