@@ -7,6 +7,7 @@ import Login from "./containers/authantication/Login";
 import { AuthData } from "./utils/AuthData";
 import { Dashboard } from "./containers/Dashboard/Dashboard";
 import { NavBar } from "./components/TopNavBar/NavBar";
+import { StockDashboard } from "./containers/StockManagement/StockDashbord";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -76,6 +77,7 @@ const App = () => {
                       path="/change-password"
                       element={<ChangePassword />}
                     />
+                   <Route path="/assets-stock" element ={<StockDashboard/>}/>
                     <Route path="/" element={<Dashboard />} />
                   </Routes>
                 </div>
