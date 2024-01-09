@@ -43,6 +43,11 @@ module.exports = {
             'blue-white': '#f0f9ff',
             'my-gray': '#f3f3f3'
         
+            greyBackground:'#B5B5B5',
+            white:'#FFFFFF',
+            blue:'#0085FF',
+            lightBlue:'#E1F3FF'
+           
         },
         fontFamily: {
             inter: ['Inter', 'sans-serif'],
