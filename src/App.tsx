@@ -7,6 +7,7 @@ import Login from "./containers/authantication/Login";
 import { AuthData } from "./utils/AuthData";
 import { Dashboard } from "./containers/Dashboard/Dashboard";
 import { NavBar } from "./components/TopNavBar/NavBar";
+import { StockDashboard } from "./containers/StockManagement/StockDashbord";
 
 const App = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(true);
@@ -51,6 +52,7 @@ const App = () => {
                       path="/change-password"
                       element={<ChangePassword />}
                     />
+                   <Route path="/assets-stock" element ={<StockDashboard/>}/>
                     <Route path="/" element={<Dashboard />} />
                   </Routes>
                 </div>

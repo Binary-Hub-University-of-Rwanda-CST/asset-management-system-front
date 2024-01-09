@@ -16,5 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "containers/changePassword", "containers/authantication"]
+  "include": ["src", "containers/changePassword", "containers/authantication"],
+  "types": ["react", "react-dom", "react-toastify"],
 }
