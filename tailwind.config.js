@@ -41,7 +41,10 @@ module.exports = {
             'my-blue': '#2d90d2',
             'dark-white': '#ececec',
             'blue-white': '#f0f9ff',
-            'my-gray': '#f3f3f3'
+            'my-gray': '#f3f3f3',
+            'danger': '#ffb1b1',
+            'confirm': '#3fcb6e',
+            'info': '#efca66'
         
         },
         fontFamily: {

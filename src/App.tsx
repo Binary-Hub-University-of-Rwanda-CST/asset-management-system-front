@@ -5,9 +5,13 @@ import SideNavBar from "./components/SideNavBar/SideNavBar";
 import ChangePassword from "./containers/changePassword/ChangePassword";
 import Login from "./containers/authantication/Login";
 import { AuthData } from "./utils/AuthData";
-import { Dashboard } from "./containers/Dashboard/Dashboard";
+import Dashboard from "./containers/Dashboard/Dashboard";
 import { NavBar } from "./components/TopNavBar/NavBar";
 import { StockDashboard } from "./containers/StockManagement/StockDashbord";
+import UploadStock from "./containers/StockManagement/UploadStock/UploadStock";
+import Monitoring from "./containers/AssetDistribution/Monitoring/Monitoring";
+import MyRequests from "./containers/AssetDistribution/Request/MyRequests";
+import RequestApproval from "./containers/AssetDistribution/Request/RequestApproval";
 
 const App = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(true);
@@ -53,6 +57,10 @@ const App = () => {
                       element={<ChangePassword />}
                     />
                    <Route path="/assets-stock" element ={<StockDashboard/>}/>
+                   <Route path="/upload-stock" element ={<UploadStock/>}/>
+                   <Route path="/assets-monitoring" element ={<Monitoring/>}/>
+                   <Route path="/my-assets-requests" element ={<MyRequests/>}/>
+                   <Route path="/assets-requests-approval" element ={<RequestApproval/>}/>
                     <Route path="/" element={<Dashboard />} />
                   </Routes>
                 </div>
