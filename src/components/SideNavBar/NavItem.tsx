@@ -1,6 +1,7 @@
 import React from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { NavLink } from "react-router-dom";
+import { NavLink as RRNavLink } from 'react-router-dom';
 import { SideNavigationInterface } from "../../config/AppNavigations";
 import { isAccessAuthorized } from "../../config/userAccess";
 
@@ -31,12 +32,13 @@ const NavItem: React.FC<NavItemProps> = (props) => {
   const generateClassName = (isActive: boolean) => {
     return isActive
       ? `${baseClass} bg-primary-100 text-my-blue animate__animated animate__fadeIn py-2 pl-3`
-      : `${baseClass} hover:bg-primary-100 py-2 pl-3 text-gray-500 hover:text-black`;
+      : `${baseClass} hover:bg-my-blue py-2 pl-3 text-gray-500 hover:text-black`;
   };
 
   return (
-    <NavLink
+    <RRNavLink
       to={props.nav.url}
+      // activeClassName="active-link"
       className={
         props.selectedMenuLink === props.nav.url
           ? "flex flex-col gap-2 pr-0 text-sm text-my-blue rounded-r-md group font-bold animate__animated animate__fadeIn animate__faster"
@@ -65,7 +67,7 @@ const NavItem: React.FC<NavItemProps> = (props) => {
       </div>
       {props.nav.subMenus.length > 0 &&
         props.selectedMenuLink === props.nav.url && (
-          <div className="font-normal border-l-4  border-primary-100 text-black ml-5">
+          <div className="font-normal border-l-4  border-blue-white text-black ml-5">
             {props.nav.subMenus
               .filter(
                 (itm) =>
@@ -83,7 +85,7 @@ const NavItem: React.FC<NavItemProps> = (props) => {
               ))}
           </div>
         )}
-    </NavLink>
+    </RRNavLink>
   );
 };
 

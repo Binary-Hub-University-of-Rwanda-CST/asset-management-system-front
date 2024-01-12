@@ -10,6 +10,8 @@ import { IoMdMenu } from "react-icons/io";
 import { GiConfirmed } from "react-icons/gi";
 import StockTable from "./DataTable";
 import StockLocation from "../../components/stockLocation/StockLocation";
+import Categories from "./Categories";
+import CategoriesData from "../../utils/CategoriesData";
 
 interface AppProps {
   auth: Auth;
@@ -45,8 +47,13 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
   const handleClosePopup = () => {
     setPopupOpen(false);
   };
+
+  const categoryData = CategoriesData.map(category =>{
+    return <Categories CategoryName={category.CategoryName} totalAsset={category.totalAsset}/>
+  });
+  const totalCategories = categoryData.length;
   return (
-    <div className="mr-4 mt-20 ml-72">
+    <div className="mr-4 mt-20 ml-[270px]">
       <div className="flex flex-row items-center gap-5 mb-2 bg-white rounded-lg p-3 animate__animated animate__fadeInRight animate__faster justify-between">
         <div className="pl-1 flex gap-2 items-center ">
           <GoDatabase className="text-4xl text-my-blue" />
@@ -63,7 +70,7 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
           <div className="flex flex-col justify-center align-center">
             <p className="text-gray-400 justify-center">category</p>
             <h2 className="text-black font-bold text-2xl flex justify-center">
-              08
+              {totalCategories}
             </h2>
           </div>
           <div className="flex flex-col justify-center align-center">
@@ -104,12 +111,10 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
             <h3 className="text-xl font-bold text-black justify-center">
               Asset Categories
             </h3>
-          </div>
-          <div className="border-2 border-my-blue rounded-lg p-2 justify-center items-center w-auto">
-            <h3 className="font-bold text-my-blue">Desktop</h3>
-            <h4 className="text-my-blue bg-blue-white rounded-lg w-auto p-1">
-              3,200
-            </h4>
+          </div> 
+          <div className=" flex flex-wrap gap-2 mt-2">
+         {categoryData}
+             
           </div>
           {/* ... (repeat the above block for each category) ... */}
           <button className="ml-8 p-2 border-2 border-my-blue text-my-blue rounded-lg w-3/4 bottom-2 absolute justify-center items-center">
@@ -117,7 +122,7 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
           </button>
         </div>
 
-        <div className="w-2/3 p-4 rounded-lg bg-white py-10 pb-16 animate__animated animate__fadeInRight animate__fast">
+        <div className="w-2/3 h-full p-4 rounded-lg bg-white py-10 pb-16 animate__animated animate__fadeInRight animate__fast">
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center">
               <IoMdMenu className="text-2xl text-gray-400" />

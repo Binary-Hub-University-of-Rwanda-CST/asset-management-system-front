@@ -27,7 +27,7 @@ const DataChart: React.FC = () => {
 
   const series = [
     {
-      name: 'Series 1',
+      name: 'Desktop',
       data: [1500, 2000, 400, 800, 1200],
     },
   ];

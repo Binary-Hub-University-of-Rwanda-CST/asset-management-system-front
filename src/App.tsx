@@ -4,28 +4,18 @@ import SideNavBar from "./components/SideNavBar/SideNavBar";
 import ChangePassword from "./containers/changePassword/ChangePassword";
 import Login from "./containers/authantication/Login";
 import { AuthData } from "./utils/AuthData";
-import { Dashboard } from "./containers/Dashboard/Dashboard";
+import Dashboard from "./containers/Dashboard/Dashboard";
 import { NavBar } from "./components/TopNavBar/NavBar";
 import { StockDashboard } from "./containers/StockManagement/StockDashbord";
 import "react-toastify/dist/ReactToastify.css";
+import UploadStock from "./containers/StockManagement/UploadStock/UploadStock";
+import Monitoring from "./containers/AssetDistribution/Monitoring/Monitoring";
+import MyRequests from "./containers/AssetDistribution/Request/MyRequests";
+import RequestApproval from "./containers/AssetDistribution/Request/RequestApproval";
 
 const App = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(true);
 
-  const auth = {
-    isAuthenticated: true,
-    user: {
-      user_info: {
-        full_name: "Edison UWIHANGANYE",
-        phone_numbers: "+270-788-240-303",
-      },
-      role: {
-        role: "Admin",
-      },
-    },
-    loading: false,
-    token: "yourAuthTokenHere",
-  };
 
   const FC_Logout = () => {
     AuthData.isAuthenticated = false;
@@ -56,17 +46,23 @@ const App = () => {
                 setOpenVav={(status) => setSideNavbarStatus(status)}
                 sideNavbarStatus={sideNavbarStatus}
               />
-
               {/* Main Content */}
-              <div className="flex-1 flex flex-col">
-                {/*  main content goes here */}
-                <Routes>
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/change-password" element={<ChangePassword />} />
-                  <Route path="/assets-stock" element={<StockDashboard />} />
-                  <Route path="/" element={<Dashboard />} />
-                </Routes>
-              </div>
+                <div className="flex-1 flex flex-col overflow-hidden">
+                  {/*  main content goes here */}
+                  <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route
+                      path="/change-password"
+                      element={<ChangePassword />}
+                    />
+                   <Route path="/assets-stock" element ={<StockDashboard/>}/>
+                   <Route path="/upload-stock" element ={<UploadStock/>}/>
+                   <Route path="/assets-monitoring" element ={<Monitoring/>}/>
+                   <Route path="/my-assets-requests" element ={<MyRequests/>}/>
+                   <Route path="/assets-requests-approval" element ={<RequestApproval/>}/>
+                    <Route path="/" element={<Dashboard />} />
+                  </Routes>
+                </div>
             </div>
           )}
         </>
