@@ -40,7 +40,6 @@ const StockLocation: React.FC<PopupProps> = ({ onClose }) => {
       onClose();
     }
   };
-
   const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       onClose();
