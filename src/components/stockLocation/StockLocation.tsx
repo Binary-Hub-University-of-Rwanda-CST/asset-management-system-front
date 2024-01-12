@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 import './Location.css';
 
 interface PopupProps {
@@ -20,18 +20,19 @@ const StockLocation: React.FC<PopupProps> = ({ onClose }) => {
   };
 
   const handleCreate = () => {
-    if(stockName.trim() == "")
-    {
-      toast.warning("Enter stock name please!")
-      return;
-    }
-    if(stockLocation.trim() == "")
-    {
-      toast.warning("Enter stock location please!")
-      return;
-    }
-    toast.success(`Stock "${stockName}" created successfully!`);
-    onClose();
+    // if(stockName.trim() == "")
+    // {
+    //   toast.warning("Enter stock name please!")
+    //   return;
+    // }
+    // if(stockLocation.trim() == "")
+    // {
+    //   toast.warning("Enter stock location please!")
+    //   return;
+    // }
+    // toast.success(`Stock "${stockName}" created successfully!`);
+    // onClose();
+    console.log(" stock created suceessfull ");
   };
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
