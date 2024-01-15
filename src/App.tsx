@@ -13,7 +13,6 @@ import Monitoring from "./containers/AssetDistribution/Monitoring/Monitoring";
 import MyRequests from "./containers/AssetDistribution/Request/MyRequests";
 import RequestApproval from "./containers/AssetDistribution/Request/RequestApproval";
 import AssetTracking from "./containers/AssetTracking/AssetTracking";
-// import DashboardLoading from "./components/CoomingSoon/CoomingSoon";
 import DashboardLoading from "./components/DashboardLoading/DashboardLoading";
 
 const App = () => {
