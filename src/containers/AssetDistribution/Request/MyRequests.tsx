@@ -82,25 +82,8 @@ const MyRequests: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =>
         </div>
         </div>
       </div>
-      {state.error !== null && (
-        <div className="w-full my-3">
-          {state.error !== "" && (
-            <Alert
-              alertType={AlertType.WARNING}
-              title={"Not found!"}
-              description={state.error}
-              close={() => {
-                setState({
-                  ...state,
-                  error: "",
-                });
-              }}
-              className={"border-2 border-white"}
-            />
-          )}
-        </div>
-      )}
-      <div className="p-4 rounded-lg bg-white py-10 pb-16 animate__animated animate__fadeInRight animate__fast">
+      
+      <div className="p-4 rounded-lg bg-white py-10 pb-16 overflow-y-auto overflow-x-auto">
        <RequestsTable/>
       </div>
     </div>

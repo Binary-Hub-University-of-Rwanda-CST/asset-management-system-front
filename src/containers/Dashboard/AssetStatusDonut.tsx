@@ -9,7 +9,7 @@ interface ApexDonutChartProps {
 const AssetStatusChart: React.FC<ApexDonutChartProps> = ({ data }) => {
   const options = {
     chart: {
-      type: 'donut' as const, // Specify the type as 'donut'
+      type: 'donut' as const,
     },
     labels: ['Active Assets', 'Inactive Assets', 'Disposed Assets'],
     responsive: [
@@ -25,6 +25,33 @@ const AssetStatusChart: React.FC<ApexDonutChartProps> = ({ data }) => {
         },
       },
     ],
+    plotOptions: {
+      pie: {
+        donut: {
+          labels: {
+            show: true,
+            total: {
+              showAlways: true,
+              show: true,
+              formatter: function (w: any) {
+                return data.reduce((a, b) => a + b, 0).toFixed(0);
+              },
+              label: 'Total',
+            },
+          },
+          size: '60%', // Adjust the size to control the thickness of the donut
+          background: 'transparent', // Set the color of the inner circle (hole)
+        },
+      },
+    },
+    tooltip: {
+      y: {
+        formatter: function (value: any, { series, w }: { series: any, w: any }) {
+          return `${value} Assets`;
+        },
+      },
+    },
+    colors: ['#22a8ff', '#ffb800', '#ff9c9c'], // Change the colors array to include the desired color for "Disposed Assets"
   };
 
   return (
@@ -32,7 +59,7 @@ const AssetStatusChart: React.FC<ApexDonutChartProps> = ({ data }) => {
       options={options}
       series={data}
       type="donut"
-      height={300}
+      height={400}
     />
   );
 };

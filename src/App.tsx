@@ -12,6 +12,9 @@ import UploadStock from "./containers/StockManagement/UploadStock/UploadStock";
 import Monitoring from "./containers/AssetDistribution/Monitoring/Monitoring";
 import MyRequests from "./containers/AssetDistribution/Request/MyRequests";
 import RequestApproval from "./containers/AssetDistribution/Request/RequestApproval";
+import AssetTracking from "./containers/AssetTracking/AssetTracking";
+// import DashboardLoading from "./components/CoomingSoon/CoomingSoon";
+import DashboardLoading from "./components/DashboardLoading/DashboardLoading";
 
 const App = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(true);
@@ -28,7 +31,7 @@ const App = () => {
       {!AuthData.isAuthenticated ? (
         <Login />
       ) : (
-        <>
+        <div className="h-screen">
           <div>
             <NavBar
               auth={AuthData}
@@ -47,25 +50,26 @@ const App = () => {
                 sideNavbarStatus={sideNavbarStatus}
               />
               {/* Main Content */}
-                <div className="flex-1 flex flex-col overflow-hidden">
+                <div className="flex-1 flex flex-col overflow-y-hidden">
                   {/*  main content goes here */}
                   <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route
-                      path="/change-password"
-                      element={<ChangePassword />}
-                    />
+                   <Route path="/login" element={<Login />} />
+                   <Route path="/change-password" element={<ChangePassword />}/>
                    <Route path="/assets-stock" element ={<StockDashboard/>}/>
                    <Route path="/upload-stock" element ={<UploadStock/>}/>
                    <Route path="/assets-monitoring" element ={<Monitoring/>}/>
                    <Route path="/my-assets-requests" element ={<MyRequests/>}/>
                    <Route path="/assets-requests-approval" element ={<RequestApproval/>}/>
-                    <Route path="/" element={<Dashboard />} />
+                   <Route path="/assets-tracking" element ={<AssetTracking/>}/>
+                   <Route path="/reports" element ={<DashboardLoading/>}/>
+                   <Route path="/users-list" element ={<DashboardLoading/>}/>
+                   {/* <Route path="/assets-tracking" element ={<AssetTracking/>}/> */}
+                   <Route path="/" element={<Dashboard />} />
                   </Routes>
                 </div>
             </div>
           )}
-        </>
+        </div>
       )}
     </>
   );

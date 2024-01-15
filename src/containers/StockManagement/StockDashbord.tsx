@@ -145,7 +145,7 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
             <button className={showtable? " text-black font-bold border-b-2 border-my-blue" : "text-black text-xl"} onClick={displayTable}>list</button>
             </div>
             <div>
-            <input type="text" placeholder=" search..."  className="bg-gray-200 py-1 px-16 rounded-lg text-black  outline-none font-bold" />
+          {showtable && <input type="text" placeholder=" search..."  className="bg-gray-200 py-1 px-16 rounded-lg text-black  outline-none font-bold" />}
             </div>
             </div>
           </div>

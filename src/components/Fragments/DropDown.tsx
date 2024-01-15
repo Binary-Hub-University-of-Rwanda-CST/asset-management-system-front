@@ -1,6 +1,6 @@
 // Dropdown.tsx
 import React, { useState } from 'react';
-import { GiConfirmed } from 'react-icons/gi';
+import { FaCheckCircle } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
 
 interface Option {
@@ -33,21 +33,21 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
   );
 
   return (
-    <div className="relative inline-block text-left z-50">
+    <div className="relative inline-block text-left ">
       <div>
         <button
           type="button"
           onClick={handleToggle}
-          className="flex items-center    w-72 rounded-md bg-blue-white shadow-sm px-4 py-2 text-xl font-medium text-black hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+          className="flex items-center w-96 rounded-md bg-blue-white shadow-sm px-4 py-2 text-xl font-medium text-black hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 "
           id="options-menu"
           aria-haspopup="true"
           aria-expanded="true"
         >
           {selectedOption ? (
-            <div className='flex flex-row justify-between items-center '>
+            <div className='flex flex-row justify-between items-center w-full '>
             <div className=' flex flex-row items-center gap-2'>
-                <GiConfirmed className='font-bold text-my-blue'/>
-              <span className="mr-2 font-bold">{selectedOption.CategoryName} </span><span> - Category</span>
+                <FaCheckCircle className='font-bold text-my-blue mr-2'/>
+              <span className="mr-3 font-bold">{selectedOption.CategoryName} </span><span> - Category</span>
               </div>
               <div>
 
@@ -61,7 +61,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
       </div>
 
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-72 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+        <div className="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
           <div className="p-2">
             <input
               type="text"
@@ -87,10 +87,10 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
                   }`}
                   role="menuitem"
                 >
-                  <>
-                    <span className="mr-2">{option.CategoryName}</span>
-                    <span>({option.totalAsset})</span>
-                  </>
+                  <div className='flex w-80 mx-2 justify-between items-center'>
+                    <span className="mr-2 text-lg">{option.CategoryName}</span>
+                    <span className='text-my-blue bg-blue-white rounded-lg px-2 py-1 '>{option.totalAsset}</span>
+                  </div>
                 </button>
               ))
             ) : (

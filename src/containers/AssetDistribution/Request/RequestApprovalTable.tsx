@@ -4,6 +4,7 @@ import RequestData from '../../../utils/RequestData';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaRegCheckCircle } from "react-icons/fa";
+import { CiCalendar } from "react-icons/ci";
 
 interface TableProps {
   selectedStatus: string | null;
@@ -61,16 +62,17 @@ const RequestApprovalTable: React.FC<TableProps> = ({ selectedStatus }) => {
 
   return (
     <div className="flex items-center flex-col w-full">
-      <div className="flex items-center">
+      <div className="flex items-center w-full gap-4 ">
         <input
           type="text"
           placeholder="Search Asset..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="p-2 pl-8 mb-4 border border-gray-300 rounded w-full"
+          className="p-2 pl-8 mb-4 border border-gray-300 rounded w-4/5"
         />
+        <button className=' flex gap-3 w-1/5  mb-3 rounded-lg py-2 items-center justify-center bg-blue-white text-my-blue'> <CiCalendar className=' text-xl  text-my-blue font-bold ' /> filter By Date</button>
       </div>
-      <table className="min-w-full bg-white border border-gray-300">
+      <table className="min-w-full bg-white border-b border-gray-300">
         <thead>
           <tr>
             <th className="py-2 px-4 border-b">No</th>

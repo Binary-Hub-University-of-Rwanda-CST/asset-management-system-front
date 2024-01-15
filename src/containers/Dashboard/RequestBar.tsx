@@ -58,7 +58,7 @@ const RequestChart: React.FC<RewuestBarProps> = ({ categories, series }) => {
       options={options}
       series={series}
       type="bar"
-      height={250}
+      height={200}
     />
   );
 };

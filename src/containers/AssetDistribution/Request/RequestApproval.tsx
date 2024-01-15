@@ -80,24 +80,8 @@ const RequestApproval: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError 
             Rejected Requests <span className="px-2 rounded-full bg-[#ca1d1d] text-white" >{rejectedCount}</span></button>
         </div>
       </div>
-      {state.error !== null && (
-        <div className="w-full my-3">
-          {state.error !== "" && (
-            <Alert
-              alertType={AlertType.WARNING}
-              title={"Not found!"}
-              description={state.error}
-              close={() => {
-                setState({
-                  ...state,
-                  error: "",
-                });
-              }}
-              className={"border-2 border-white"}
-            />
-          )}
-        </div>
-      )}
+      
+      
       <div className="p-4 rounded-lg overflow-y-auto bg-white py-10 pb-16 animate__animated animate__fadeInRight animate__fast ">
       <RequestApprovalTable selectedStatus={selectedStatus} />
       </div>

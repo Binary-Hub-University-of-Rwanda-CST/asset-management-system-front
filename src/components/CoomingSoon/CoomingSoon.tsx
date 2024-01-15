@@ -1,10 +1,10 @@
 import React from "react";
 import { FiLoader } from "react-icons/fi";
 
-const DashboardLoading = () => {
+const CoomingSoon = () => {
   return (
     <div>
-      <div className="h-full bg-white overflow-y-hidden pt-3">
+      <div className="h-full bg-white overflow-y-hidden pt-3 ml-[255px] mt-14">
         <div className="grid grid-cols-12 h-full bg-white ">
           <div className="col-span-12 p-2 h-ful">
             <div className="grid grid-cols-12 gap-3 h-full w-full ">
@@ -34,4 +34,4 @@ const DashboardLoading = () => {
   );
 };
 
-export default DashboardLoading;
+export default CoomingSoon;
