@@ -42,7 +42,7 @@ const RequestApproval: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError 
 
       
   return (
-    <div className="mr-4 mt-20 ml-72">
+    <div className="mr-4">
      <div  className=" flex flex-col mb-2 bg-white rounded-lg p-3 animate__animated animate__fadeInRight animate__faster">
       <div className="flex flex-row items-center justify-between ">
       <div className="flex flex-row items-center justify-between ">

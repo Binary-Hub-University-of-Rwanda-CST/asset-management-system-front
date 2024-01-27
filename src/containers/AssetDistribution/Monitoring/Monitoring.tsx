@@ -79,7 +79,7 @@ const Monitoring: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =>
   const options = CategoriesData;
 
   return (
-    <div className="mr-4 mt-20 ml-72">
+    <div className="mr-4 ">
       <div className="flex flex-col mb-2 bg-white rounded-lg p-3 gap-2 animate__animated animate__fadeInRight animate__faster justify-between">
       <div className="flex flex-row items-center gap-5 justify-between ">
         <div className="pl-1 flex gap-2 items-center ">

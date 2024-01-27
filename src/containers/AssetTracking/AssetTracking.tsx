@@ -31,7 +31,7 @@ const AssetTracking: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError })
 
   const options = CategoriesData;
   return (
-    <div className="mr-4 mt-20 ml-72 ">
+    <div className="mr-4">
       <div className="flex flex-row justify-between bg-white rounded-lg p-3">
         <div className="pl-1 flex gap-2 items-center ">
           <AiOutlineScan className="text-4xl text-my-blue" />

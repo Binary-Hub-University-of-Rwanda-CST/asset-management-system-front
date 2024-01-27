@@ -5,7 +5,7 @@ import ChangePassword from "./containers/changePassword/ChangePassword";
 import Login from "./containers/authantication/Login";
 import { AuthData } from "./utils/AuthData";
 import Dashboard from "./containers/Dashboard/Dashboard";
-import { NavBar } from "./components/TopNavBar/NavBar";
+import NavBar from "./components/TopNavBar/NavBar";
 import { StockDashboard } from "./containers/StockManagement/StockDashbord";
 import "react-toastify/dist/ReactToastify.css";
 import UploadStock from "./containers/StockManagement/UploadStock/UploadStock";
@@ -30,7 +30,7 @@ const App = () => {
       {!AuthData.isAuthenticated ? (
         <Login />
       ) : (
-        <div className="h-screen">
+        <div className="h-screen flex flex-col">
           <div>
             <NavBar
               auth={AuthData}
@@ -41,15 +41,18 @@ const App = () => {
           </div>
 
           {AuthData.isAuthenticated && (
-            <div className="flex h-screen bg-gray-100">
+            <div className="flex h-full bg-gray-100 flex-row">
               {/* Side Navigation Bar */}
-              <SideNavBar
+              <div>
+
+              { sideNavbarStatus && <SideNavBar
                 auth={AuthData}
                 setOpenVav={(status) => setSideNavbarStatus(status)}
                 sideNavbarStatus={sideNavbarStatus}
-              />
+              />}
+              </div>
               {/* Main Content */}
-                <div className="flex-1 flex flex-col overflow-y-hidden">
+                <div className={!sideNavbarStatus? 'flex flex-col overflow-y-auto mt-20  w-full ml-4' :" flex flex-col overflow-y-auto mt-20 ml-[270px] w-full"}>
                   {/*  main content goes here */}
                   <Routes>
                    <Route path="/login" element={<Login />} />

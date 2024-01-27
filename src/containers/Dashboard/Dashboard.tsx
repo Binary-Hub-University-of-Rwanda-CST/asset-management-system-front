@@ -54,7 +54,7 @@ const Dashboard: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => 
   };
 
   return (
-    <div className="mr-4 mt-20 ml-[270px]">
+    <div className="mr-4 ">
       <div className=" flex flex-col bg-white rounded-lg p-3 pb-0 animate__animated animate__fadeInRight animate__faster">
       <div className="  flex flex-row justify-between">
       <div className="flex flex-col  gap-2 mb-2">
@@ -91,7 +91,7 @@ const Dashboard: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => 
       </div>
       </div>
 
-      <div className="p-4 rounded-lg  py-4  flex flex-row gap-6 ">
+      <div className=" rounded-lg  py-4  flex flex-row gap-6 ">
         <div className="flex flex-col gap-4 w-1/4">
            <div className="rounded-lg p-0  w-full bg-white flex justify-center items-center  flex-col h-1/2">
             <h3 className="text-xl font-bold">Distribution Summary</h3>

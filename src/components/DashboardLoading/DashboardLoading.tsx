@@ -4,7 +4,7 @@ import { FiLoader } from "react-icons/fi";
 const DashboardLoading = () => {
   return (
     <div>
-      <div className="h-screen bg-white overflow-y-hidden pt-3 ml-[255px] mt-16">
+      <div className="h-screen bg-white overflow-y-hidden pt-3  rounded-md">
         <div className="grid grid-cols-12 h-full ">
           <div className="col-span-12 p-2 h-full">
             <div className="grid grid-cols-12 gap-3 h-full">

@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { StoreState } from "../../../reducers";
 import { Auth, FC_SetError, FC_SetSuccess } from "../../../actions";
 import Alert,{AlertType} from "../../../components/Alert/Alert";
-import { MdOutlineDashboard } from "react-icons/md";
-import { FaComputer } from "react-icons/fa6";
 import { GoDatabase } from "react-icons/go";
 
 interface AppProps {
@@ -23,7 +21,7 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
   }, []);
 
   return (
-    <div className="mr-4 mt-20 ml-72 ">
+    <div className="mr-4  ">
      <div className="flex flex-col  gap-5 mb-2 bg-white rounded-lg p-3 animate__animated animate__fadeInRight animate__faster justify-between">
        <div className="flex flex-row justify-between">
         <div className="pl-1 flex gap-2 items-center ">

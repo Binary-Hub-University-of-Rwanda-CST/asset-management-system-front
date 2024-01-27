@@ -12,6 +12,7 @@ import StockTable from "./DataTable";
 import StockLocation from "../../components/stockLocation/StockLocation";
 import Categories from "./Categories";
 import CategoriesData from "../../utils/CategoriesData";
+import { Link } from "react-router-dom";
 
 interface AppProps {
   auth: Auth;
@@ -53,7 +54,7 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
   });
   const totalCategories = categoryData.length;
   return (
-    <div className="mr-4 mt-20 ml-[270px]">
+    <div className="mr-4 ">
       <div className="flex flex-row items-center gap-5 mb-2 bg-white rounded-lg p-3 animate__animated animate__fadeInRight animate__faster justify-between">
         <div className="pl-1 flex gap-2 items-center ">
           <GoDatabase className="text-4xl text-my-blue" />
@@ -153,9 +154,9 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
             { !showtable ? <DataChart /> : <StockTable/>}
           </div>
           <div>
-          <button className=" flex ml-20 p-2  bg-my-blue text-white rounded-lg w-3/4 bottom-2 absolute justify-center items-center">
+          <Link to= '/upload-stock' className=" flex ml-20 p-2  bg-my-blue text-white rounded-lg w-3/4 bottom-2 absolute justify-center items-center">
             Upload- <span className="font-bold">Desktop </span> -  Stock
-          </button>
+          </Link>
           </div>
         </div>
       </div>
