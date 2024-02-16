@@ -1,4 +1,5 @@
 import React from "react";
+import { stockData } from "./StockData";
 
 interface Stock {
   no: number;
@@ -8,12 +9,12 @@ interface Stock {
 }
 
 const StockTable: React.FC = () => {
-  const stockData: Stock[] = [
-    { no: 1, stockName: "Stock A", stockLocation: "Location 1", totalDesktop: 500 },
-    { no: 2, stockName: "Stock B", stockLocation: "Location 2", totalDesktop: 800 },
-    { no: 3, stockName: "Stock C", stockLocation: "Location 3", totalDesktop: 1200 },
-    { no: 4, stockName: "Stock D", stockLocation: "Location 4", totalDesktop: 1500 },
-  ];
+  // const stockData: Stock[] = [
+  //   { no: 1, stockName: "Stock A", stockLocation: "Location 1", totalDesktop: 500 },
+  //   { no: 2, stockName: "Stock B", stockLocation: "Location 2", totalDesktop: 800 },
+  //   { no: 3, stockName: "Stock C", stockLocation: "Location 3", totalDesktop: 1200 },
+  //   { no: 4, stockName: "Stock D", stockLocation: "Location 4", totalDesktop: 1500 },
+  // ];
 
   return (
     <div className="container mx-auto p-4">
