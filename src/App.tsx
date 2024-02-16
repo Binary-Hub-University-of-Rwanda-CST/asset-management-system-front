@@ -51,9 +51,9 @@ const App = () => {
                 sideNavbarStatus={sideNavbarStatus}
               />}
               </div>
-              {/* Main Content */}
+              
                 <div className={!sideNavbarStatus? 'flex flex-col overflow-y-auto mt-20  w-full ml-4' :" flex flex-col overflow-y-auto mt-20 ml-[270px] w-full"}>
-                  {/*  main content goes here */}
+                  {/*  main Routes */}
                   <Routes>
                    <Route path="/login" element={<Login />} />
                    <Route path="/change-password" element={<ChangePassword />}/>
@@ -65,7 +65,6 @@ const App = () => {
                    <Route path="/assets-tracking" element ={<AssetTracking/>}/>
                    <Route path="/reports" element ={<DashboardLoading/>}/>
                    <Route path="/users-list" element ={<DashboardLoading/>}/>
-                   {/* <Route path="/assets-tracking" element ={<AssetTracking/>}/> */}
                    <Route path="/" element={<Dashboard />} />
                   </Routes>
                 </div>

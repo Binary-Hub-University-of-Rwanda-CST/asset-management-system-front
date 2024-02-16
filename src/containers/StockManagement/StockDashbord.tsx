@@ -7,7 +7,7 @@ import Alert, { AlertType } from "../../components/Alert/Alert";
 import { GoDatabase } from "react-icons/go";
 import { MdOutlineAddBusiness } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
-import { GiConfirmed } from "react-icons/gi";
+import { FaRegCheckCircle } from "react-icons/fa";
 import StockTable from "./DataTable";
 import StockLocation from "../../components/stockLocation/StockLocation";
 import Categories from "./Categories";
@@ -25,9 +25,7 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
   const [success, setSuccess] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  useEffect(() => {
-    // componentDidMount logic here
-  }, []);
+ 
 
   const [showtable, setShowTable] = useState(false);
 
@@ -52,17 +50,25 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
   const categoryData = CategoriesData.map(category =>{
     return <Categories CategoryName={category.CategoryName} totalAsset={category.totalAsset}/>
   });
+  const data = [
+    { category: 'Category A', value: 50 },
+    { category: 'Category B', value: 70 },
+    { category: 'Category C', value: 30 },
+    // Add more data points as needed
+  ];
+  
+  
   const totalCategories = categoryData.length;
   return (
     <div className="mr-4 ">
       <div className="flex flex-row items-center gap-5 mb-2 bg-white rounded-lg p-3 animate__animated animate__fadeInRight animate__faster justify-between">
         <div className="pl-1 flex gap-2 items-center ">
-          <GoDatabase className="text-4xl text-my-blue" />
+          <GoDatabase className="text-4xl font-bold text-my-blue" />
           <div className="flex item-center flex-col">
             <div className="flex text-black text-xl font-bold px-2">
               Stock Management
             </div>
-            <div className="px-2 rounded-md bg-primary-700 text-black w-max text-sm">
+            <div className="px-2 rounded-md bg-primary-700 text-black  w-max text-sm">
               Manage Stock From Different Location In One College
             </div>
           </div>
@@ -71,7 +77,7 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
           <div className="flex flex-col justify-center align-center">
             <p className="text-gray-400 justify-center">category</p>
             <h2 className="text-black font-bold text-2xl flex justify-center">
-              {totalCategories}
+              {totalCategories<10 ? `0${totalCategories}`: `${totalCategories}`}
             </h2>
           </div>
           <div className="flex flex-col justify-center align-center">
@@ -90,22 +96,7 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
         </div>
       </div>
 
-      {error !== null && (
-        <div className="w-full my-3">
-          {error !== "" && (
-            <Alert
-            alertType={AlertType.WARNING}
-            title={"Not found!"}
-            description={error}
-              close={() => {
-                setError("");
-              }}
-              className={"border-2 border-white"}
-            />
-          )}
-        </div>
-      )}
-
+      
       <div className="flex flex-row gap-4">
         <div className="relative w-1/3 p-4 rounded-lg bg-white py-10 pb-16 animate__animated animate__fadeInRight animate__fast min-h-96">
           <div className="flex">
@@ -113,7 +104,7 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
               Asset Categories
             </h3>
           </div> 
-          <div className=" flex flex-wrap gap-2 mt-2">
+          <div className=" flex  justify-center flex-wrap gap-2 mt-2">
          {categoryData}
              
           </div>
@@ -123,14 +114,14 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
           </button>
         </div>
 
-        <div className="w-2/3 h-full p-4 rounded-lg bg-white py-10 pb-16 animate__animated animate__fadeInRight animate__fast">
+        <div className="w-2/3 h-full p-4 rounded-lg relative bg-white py-10 pb-16 animate__animated animate__fadeInRight animate__fast">
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center">
               <IoMdMenu className="text-2xl text-gray-400" />
               <h3 className="text-black font-bold"> Desktop - Assets</h3>
             </div>
             <div className="flex flex-row items-center gap-2">
-              <GiConfirmed className="text-3xl text-[#53cc75]" />
+            <FaRegCheckCircle className="text-3xl font-bold text-confirm"/>
               <div>
                 <h4>total Desktop</h4>
                 <h3 className="font-bold text-xl">3,200</h3>
@@ -143,7 +134,7 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
             <button className={!showtable? " text-black font-bold border-b-2 border-my-blue" : "text-black text-xl"} onClick={displayDashboard}> Dashboard</button>
             </div>
             <div>
-            <button className={showtable? " text-black font-bold border-b-2 border-my-blue" : "text-black text-xl"} onClick={displayTable}>list</button>
+            <button className={showtable? " text-black font-bold border-b-2 border-my-blue" : "text-black text-xl"} onClick={displayTable}>List</button>
             </div>
             <div>
           {showtable && <input type="text" placeholder=" search..."  className="bg-gray-200 py-1 px-16 rounded-lg text-black  outline-none font-bold" />}
@@ -151,7 +142,8 @@ const App: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => {
             </div>
           </div>
           <div className="bg-white p-2">
-            { !showtable ? <DataChart /> : <StockTable/>}
+            {/* { !showtable ? <Rechart data={data}/> : <StockTable/>} */}
+            { !showtable ? <DataChart/> : <StockTable/>}
           </div>
           <div>
           <Link to= '/upload-stock' className=" flex ml-20 p-2  bg-my-blue text-white rounded-lg w-3/4 bottom-2 absolute justify-center items-center">

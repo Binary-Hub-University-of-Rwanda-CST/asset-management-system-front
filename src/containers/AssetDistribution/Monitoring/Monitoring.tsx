@@ -2,7 +2,6 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { StoreState } from "../../../reducers";
 import { Auth, FC_SetError, FC_SetSuccess } from "../../../actions";
-import Alert, { AlertType } from "../../../components/Alert/Alert";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GiConfirmed } from "react-icons/gi";
@@ -128,26 +127,8 @@ const Monitoring: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =>
           </div>
       </div>
 
-      {state.error !== null && (
-        <div className="w-full my-3">
-          {state.error !== "" && (
-            <Alert
-              alertType={AlertType.WARNING}
-              title={"Not found!"}
-              description={state.error}
-              close={() => {
-                setState({
-                  ...state,
-                  error: "",
-                });
-              }}
-              className={"border-2 border-white"}
-            />
-          )}
-        </div>
-      )}
       <div className=" rounded-lg bg-white py-2 pb-16 ">
-        <div className="flex items-center  gap-2 border-b-2 border-my-gray py-2 ">
+        <div className="flex items-center  gap-2 border-b-2 border-my-gray py-2 relative ">
           <button 
           onClick={ShowGraphData}
           className={!showTableData ? " py-2 bg-blue-white font-bold text-xl rounded-lg px-4 flex flex-row items-center  gap-2 text-my-blue ml-4" :"py-2 bg-my-gray rounded-lg px-4 flex flex-row items-center text-xl gap-2 ml-4 "}>
