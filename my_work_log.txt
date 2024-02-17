@@ -11,3 +11,4 @@ My work on 2024-02-13: Refactored legacy code
 My work on 2024-02-14: Updated documentation
 My work on 2024-02-15: Optimized database queries
 My work on 2024-02-16: Refactored legacy code
+My work on 2024-02-17: Wrote unit tests
