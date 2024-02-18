@@ -1,4 +1,4 @@
-// src/components/ApexDonutChart.tsx
+
 import React from 'react';
 import Chart from 'react-apexcharts';
 
@@ -14,10 +14,10 @@ const AssetStatusChart: React.FC<ApexDonutChartProps> = ({ data }) => {
     labels: ['Active Assets', 'Inactive Assets', 'Disposed Assets'],
     responsive: [
       {
-        breakpoint: 480,
+        breakpoint: 100,
         options: {
           chart: {
-            width: 200,
+            width: 320,
           },
           legend: {
             position: 'bottom',
@@ -39,7 +39,7 @@ const AssetStatusChart: React.FC<ApexDonutChartProps> = ({ data }) => {
               label: 'Total',
             },
           },
-          size: '60%', // Adjust the size to control the thickness of the donut
+          size: '50%', // Adjust the size to control the thickness of the donut
           background: 'transparent', // Set the color of the inner circle (hole)
         },
       },
@@ -51,7 +51,7 @@ const AssetStatusChart: React.FC<ApexDonutChartProps> = ({ data }) => {
         },
       },
     },
-    colors: ['#22a8ff', '#ffb800', '#ff9c9c'], // Change the colors array to include the desired color for "Disposed Assets"
+    colors: ['#22a8ff', '#ffb800', '#ff9c9c'], 
   };
 
   return (
@@ -59,7 +59,7 @@ const AssetStatusChart: React.FC<ApexDonutChartProps> = ({ data }) => {
       options={options}
       series={data}
       type="donut"
-      height={400}
+      height='300px'
     />
   );
 };

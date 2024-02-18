@@ -22,7 +22,7 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
 
   return (
     <div className="mr-4  ">
-     <div className="flex flex-col  gap-5 mb-2 bg-white rounded-lg p-3 animate__animated animate__fadeInRight animate__faster justify-between">
+     <div className="flex flex-col  gap-5 mb-2 bg-white rounded-lg p-3  justify-between">
        <div className="flex flex-row justify-between">
         <div className="pl-1 flex gap-2 items-center ">
           <GoDatabase className="text-4xl text-my-blue" />
@@ -71,7 +71,7 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
           )}
         </div>
       )}
-      <div className="bg-white py-10 pb-16  rounded-lg animate__animated animate__fadeInRight animate__fast ">
+      <div className="bg-white py-10 pb-16  rounded-lg animate__animated animate__zoomIn animate__fast ">
       <div className=" flex flex-col p-4 rounded-lg bg-my-gray mx-12 gap-2 mb-56 ">
         <div className="flex items-center justify-center w-full">
           <h3 className="font-bold text-2xl text-black">No Asset Uploaded </h3>

@@ -32,7 +32,7 @@ const AssetTracking: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError })
   const options = CategoriesData;
   return (
     <div className="mr-4">
-      <div className="flex flex-row justify-between bg-white rounded-lg p-3">
+      <div className="flex flex-row justify-between bg-white rounded-lg p-3 animate__animated animate__faster animate__fadeInBottomLeft">
         <div className="pl-1 flex gap-2 items-center ">
           <AiOutlineScan className="text-4xl text-my-blue" />
           <div className="flex item-center flex-col">
@@ -48,7 +48,7 @@ const AssetTracking: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError })
           <Dropdown options={options}/>
         </div>
         </div>
-      <div className=" py-4 rounded-lg animate__animated animate__fadeInRight animate__fast flex flex-row gap-4 ">
+      <div className=" py-4 rounded-lg  flex flex-row gap-4 ">
      <div className="flex flex-col w-1/3 justify-center items-center px-10 py-4 bg-white rounded-lg">
       <FaHashtag className="text-my-blue font-bold  text-7xl"/>
       <h3 className="text-3xl font-bold  ">Serial Number</h3>
@@ -67,7 +67,7 @@ const AssetTracking: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError })
      </div>
     </div>
 
-    <div className=" w-full bg-white rounded-lg px-4 py-4 flex flex-row  justify-between animate__animated animate__fadeInRight animate__slow">
+    <div className=" w-full bg-white rounded-lg px-4 py-4 flex flex-row  justify-between animate__animated">
       <div className="flex flex-row gap-4  items-center">
         <FaSearch className="text-5xl font-bold  text-info"/>
         <div>

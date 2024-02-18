@@ -38,9 +38,9 @@ module.exports = {
             },
 
             'dark-bg':'#e8e8e8',
-            'my-blue': '#2d90d2',
+            'my-blue': ' #0085ff',
             'dark-white': '#ececec',
-            'blue-white': '#f0f9ff',
+            'blue-white': '#e1f3ff',
             'my-gray': '#f3f3f3',
             'greyBackground':'#B5B5B5',
             'white':'#FFFFFF',

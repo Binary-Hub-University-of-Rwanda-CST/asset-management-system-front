@@ -79,7 +79,7 @@ const Monitoring: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =>
 
   return (
     <div className="mr-4 ">
-      <div className="flex flex-col mb-2 bg-white rounded-lg p-3 gap-2 animate__animated animate__fadeInRight animate__faster justify-between">
+      <div className="flex flex-col mb-2 bg-white rounded-lg p-3 gap-2  justify-between">
       <div className="flex flex-row items-center gap-5 justify-between ">
         <div className="pl-1 flex gap-2 items-center ">
           <IoShareSocialOutline className="text-4xl text-my-blue" />
@@ -92,7 +92,7 @@ const Monitoring: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =>
             </div>
           </div>
           </div>
-        <div className="flex justify-center items-center z-50">
+        <div className="flex justify-center items-center ">
       <Dropdown  options={options} />
         </div>
       </div>
@@ -127,7 +127,7 @@ const Monitoring: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =>
           </div>
       </div>
 
-      <div className=" rounded-lg bg-white py-2 pb-16 ">
+      <div className=" rounded-lg bg-white py-2 pb-16 animate__animated animate__fadeInUp animate__faster  ">
         <div className="flex items-center  gap-2 border-b-2 border-my-gray py-2 relative ">
           <button 
           onClick={ShowGraphData}

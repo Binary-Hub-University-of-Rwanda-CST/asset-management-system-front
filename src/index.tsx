@@ -7,6 +7,7 @@ import  App  from "./App";
 import { reducers } from "./reducers";
 import { configureStore } from "@reduxjs/toolkit";
 import DashboardLoading from "./components/CoomingSoon/CoomingSoon";
+import Test from "./App.Test";
 
 const store = configureStore({
   reducer: reducers,
@@ -17,6 +18,8 @@ ReactDOM.createRoot(document.querySelector("#root") as HTMLElement).render(
   <BrowserRouter>
   <Provider store={store}>
     <App />
+    {/* <Test/> */}
+    
 
   </Provider>
   </BrowserRouter>

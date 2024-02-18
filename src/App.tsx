@@ -65,6 +65,7 @@ const App = () => {
                    <Route path="/assets-tracking" element ={<AssetTracking/>}/>
                    <Route path="/reports" element ={<DashboardLoading/>}/>
                    <Route path="/users-list" element ={<DashboardLoading/>}/>
+                   <Route path="/my-profile" element ={<DashboardLoading/>}/>
                    <Route path="/" element={<Dashboard />} />
                   </Routes>
                 </div>

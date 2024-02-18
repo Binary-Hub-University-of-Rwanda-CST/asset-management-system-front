@@ -42,8 +42,8 @@ const RequestApproval: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError 
 
       
   return (
-    <div className="mr-4">
-     <div  className=" flex flex-col mb-2 bg-white rounded-lg p-3 animate__animated animate__fadeInRight animate__faster">
+    <div className="mr-4 ">
+     <div  className=" flex flex-col mb-2 bg-white rounded-lg p-3 ">
       <div className="flex flex-row items-center justify-between ">
       <div className="flex flex-row items-center justify-between ">
         <div className="pl-1 flex gap-2 items-center  ">
@@ -82,7 +82,7 @@ const RequestApproval: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError 
       </div>
       
       
-      <div className="p-4 rounded-lg overflow-y-auto bg-white py-10 pb-16 animate__animated animate__fadeInRight animate__fast ">
+      <div className="p-4 rounded-lg overflow-y-auto bg-white py-10 pb-16 animate__animated animate__fadeInUp animate__fast  ">
       <RequestApprovalTable selectedStatus={selectedStatus} />
       </div>
     </div>

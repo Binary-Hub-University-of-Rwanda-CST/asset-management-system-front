@@ -60,8 +60,8 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
         </button>
       </div>
 
-      {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+      {isOpen && ( 
+        <div className=" origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50  ">
           <div className="p-2">
             <input
               type="text"

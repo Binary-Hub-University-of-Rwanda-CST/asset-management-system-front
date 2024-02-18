@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Location.css';
-
+import Alert, { AlertType } from '../Alert/Alert';
 interface PopupProps {
   onClose: () => void;
 }
@@ -10,6 +10,7 @@ interface PopupProps {
 const StockLocation: React.FC<PopupProps> = ({ onClose }) => {
   const [stockName, setStockName] = useState('');
   const [stockLocation, setStockLocation] = useState('');
+  const [isAlert, setAlert] = useState(false)
 
   const handleStockNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStockName(e.target.value);
@@ -18,21 +19,32 @@ const StockLocation: React.FC<PopupProps> = ({ onClose }) => {
   const handleStockLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStockLocation(e.target.value);
   };
+  const [error, setError] = useState('');
+ 
+ const closeAlert = () => {
+  setAlert(false);
+ }
 
   const handleCreate = () => {
-    // if(stockName.trim() == "")
-    // {
-    //   toast.warning("Enter stock name please!")
-    //   return;
-    // }
-    // if(stockLocation.trim() == "")
-    // {
-    //   toast.warning("Enter stock location please!")
-    //   return;
-    // }
-    // toast.success(`Stock "${stockName}" created successfully!`);
-    // onClose();
-    console.log(" stock created suceessfull ");
+    if(stockName.trim() == "")
+    {
+      setError('Enter stock Name Please!');
+    }
+    else if(stockLocation.trim() == "")
+    {
+      setError('Enter Stock Location please!');
+    }
+    else
+    {
+    setError( `Stock "${stockName}" created successfully!`);
+    setTimeout(() => {
+      onClose();
+    }, 3000);
+    }
+
+  
+  //   // onClose();
+  setAlert(true);
   };
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -55,13 +67,14 @@ const StockLocation: React.FC<PopupProps> = ({ onClose }) => {
 
   return (
     <div className="popup-container " onClick={handleOverlayClick}>
-      <div className="popup animate__animated animate__backInUp animate__faster rounded-lg">
+      <div className="popup animate__animated animate__zoomIn animate__faster rounded-lg">
         <div className="popup-header">
-          <button className="back-button rounded-lg bg-blue-white px-2 text-xl" onClick={onClose}>
+          <button className="back-button rounded-lg bg-blue-white px-4 text-xl" onClick={onClose}>
             &#8592; Back
           </button>
           <h4 className='font-bold'>Create new stock location</h4>
         </div>
+      {isAlert && <Alert alertType= {AlertType.WARNING} title={error} close={closeAlert}  timeOut={2000} />}
         {/* <hr className="hr"></hr> */}
         <div className="popup-body">
           <label className='text-black text-lg'>
@@ -81,6 +94,7 @@ const StockLocation: React.FC<PopupProps> = ({ onClose }) => {
           </button>
         </div>
       </div>
+      
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { FiLoader } from "react-icons/fi";
 const DashboardLoading = () => {
   return (
     <div>
-      <div className="h-screen bg-white overflow-y-hidden pt-3  rounded-md">
+      <div className="h-[600px] bg-white overflow-y-hidden pt-3  rounded-md animate__animated animate__zoomIn">
         <div className="grid grid-cols-12 h-full ">
           <div className="col-span-12 p-2 h-full">
             <div className="grid grid-cols-12 gap-3 h-full">
@@ -12,10 +12,7 @@ const DashboardLoading = () => {
                 <div className="bg-gray-200 rounded-full h-12 w-12 animate-pulse"></div>
                 <div className="bg-gray-200 rounded-full w-1/2 h-12 animate-pulse"></div>
               </div>
-              <div className="col-span-3 bg-gray-200 rounded-2xl w-full h-20 animate-pulse"></div>
-              <div className="col-span-3 bg-gray-200 rounded-2xl w-full h-20 animate-pulse"></div>
-              <div className="col-span-3 bg-gray-200 rounded-2xl w-full h-20 animate-pulse"></div>
-              <div className="col-span-3 bg-gray-200 rounded-2xl w-full h-20 animate-pulse"></div>
+              <div className="col-span-3 bg-gray-200 rounded-2xl w-full h-20 animate-pulse animate"></div>
               <div className="col-span-3 bg-gray-200 rounded-2xl w-full h-20 animate-pulse"></div>
               <div className="col-span-3 bg-gray-200 rounded-2xl w-full h-20 animate-pulse"></div>
               <div className="col-span-3 bg-gray-200 rounded-2xl w-full h-20 animate-pulse"></div>
@@ -32,7 +29,8 @@ const DashboardLoading = () => {
                     <div>
                       <FiLoader className="text-5xl animate-spin text-gray-700" />
                     </div>
-                    <span>COOMING SOON...</span>
+                    <span>We are still working on it...</span>
+                   
                   </div>
                 </div>
               </div>

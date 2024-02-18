@@ -54,13 +54,13 @@ const Dashboard: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => 
   };
 
   return (
-    <div className="mr-4 ">
-      <div className=" flex flex-col bg-white rounded-lg p-3 pb-0 animate__animated animate__fadeInRight animate__faster">
+    <div className="mr-4 animate__animated  animate__fadeInTopLeft animate__faster ">
+      <div className=" flex flex-col bg-white rounded-lg p-3 pb-0 ">
       <div className="  flex flex-row justify-between">
       <div className="flex flex-col  gap-2 mb-2">
 
-        <div className="flex flex-row items-center gap-2">
-          <MdOutlineDashboard className="text-4xl text-my-blue" />
+        <div className="flex flex-row items-center gap-1">
+          <MdOutlineDashboard className="text-3xl text-my-blue" />
           <div className="px-2 rounded-md bg-primary-700 text-black w-max text-xl font-bold">
             Dashboard
           </div>
@@ -91,14 +91,14 @@ const Dashboard: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => 
       </div>
       </div>
 
-      <div className=" rounded-lg  py-4  flex flex-row gap-6 ">
+      <div className=" rounded-lg  py-4  flex flex-row gap-6  animate__animated animate__fadeInTopLeft  ">
         <div className="flex flex-col gap-4 w-1/4">
-           <div className="rounded-lg p-0  w-full bg-white flex justify-center items-center  flex-col h-1/2">
-            <h3 className="text-xl font-bold">Distribution Summary</h3>
+           <div className="rounded-lg p-0  w-full bg-white flex justify-center items-center  flex-col h-[320px]">
+            <h3 className="text-xl ">Distribution Summary</h3>
             <AssetStatusChart data={chartData} />
           </div>
-        <div className="flex justify-center items-center bg-white rounded-lg p-4 flex-col h-1/2">
-        <h3 className="text-xl font-bold"> Pending Request Summary</h3>
+        <div className="flex justify-center items-center bg-white rounded-lg p-4 flex-col h-[320px]">
+        <h3 className="text-xl"> Pending Request Summary</h3>
         <div className="flex ">
         <RequestChart categories={RequestData.categories} series={RequestData.series} />
            </div>

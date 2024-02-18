@@ -41,7 +41,7 @@ const MyRequests: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =>
   const rejectedCount = RequestData.filter((item) => item.status.toLowerCase() === 'rejected').length;
   return (
     <div className="mr-4">
-      <div className="flex flex-row items-center justify-between mb-2 bg-white rounded-lg p-3 animate__animated animate__fadeInRight animate__faster">
+      <div className="flex flex-row items-center justify-between mb-2 bg-white rounded-lg p-3 ">
       <div className="flex flex-row items-center justify-between ">
         <div className="pl-1 flex gap-2 items-center  ">
           <PiFolderUserBold className="text-4xl text-my-blue" />
@@ -83,7 +83,7 @@ const MyRequests: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =>
         </div>
       </div>
       
-      <div className="p-4 rounded-lg bg-white py-10 pb-16 overflow-y-auto overflow-x-auto">
+      <div className="p-4 rounded-lg bg-white py-10 pb-16 overflow-y-auto overflow-x-auto animate__animated animate__fadeInUp animate__faster">
        <RequestsTable/>
       </div>
     </div>
