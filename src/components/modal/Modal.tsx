@@ -40,7 +40,7 @@ const Modal: React.FC<ModalProps> = (props) => {
 
   return (
     <div
-     className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+     className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
       <div ref={modalRef} className="bg-white py-4 rounded-lg animate__animated animate__zoomIn animate__faster ">
        
        <div className="flex flex-row gap-5 items-center bold border-blue-white border-b-2 pb-2 mx-0 ">

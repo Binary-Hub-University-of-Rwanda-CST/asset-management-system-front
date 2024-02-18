@@ -1,6 +1,6 @@
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import ChangePassword from './containers/changePassword/ChangePassword';
 import Login from './containers/authantication/Login';
 import DashboardLoading from './components/CoomingSoon/CoomingSoon';
@@ -8,8 +8,15 @@ import AssetListing from './containers/StockManagement/AssetListing/AssetListing
 import AssetStatusChart from './containers/Dashboard/AssetStatusDonut';
 import CreateNewCategory from './containers/StockManagement/CreateNewCategory';
 import Alert, { AlertType } from './components/Alert/Alert';
+import TableModal from './components/TableModal/TableModal';
 const chartData = [40, 30, 30];
 function Test() {
+
+  const [viewTable, SetViewTable] = useState(true);
+
+  const backToList = () => {
+    SetViewTable(false);
+  }
 
   const closeMe =() =>{
     alert('hey');
@@ -19,8 +26,13 @@ function Test() {
     // <CreateNewCategory/>
     // <AssetListing/>
     // <AssetStatusChart data={chartData} />
+    <TableModal
+     onClose={backToList}
+      title = 'MUHABURA STORE ' 
+      isOpen = {viewTable} 
+       tag={['desktops -category ', 'lenovo']} />
 
-    <Alert title='error in your submission ' alertType={AlertType.WARNING} close={closeMe} />
+    // <Alert title='error in your submission ' alertType={AlertType.WARNING} close={closeMe} />
 
 
 
