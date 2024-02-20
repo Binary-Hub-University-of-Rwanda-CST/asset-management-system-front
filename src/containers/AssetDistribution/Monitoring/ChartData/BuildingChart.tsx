@@ -12,7 +12,7 @@ const BuildingsChart: React.FC = () => {
       bar: {
         horizontal: true,
         borderRadius: 5,
-        barHeight: '80%', // Adjust the bar height as needed
+        barHeight: '80%', 
         distributed: false,
       },
     },

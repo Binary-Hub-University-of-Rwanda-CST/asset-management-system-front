@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import React, { useState, lazy } from 'react';
 import ChangePassword from './containers/changePassword/ChangePassword';
 import Login from './containers/authantication/Login';
 import DashboardLoading from './components/CoomingSoon/CoomingSoon';
@@ -9,10 +9,13 @@ import AssetStatusChart from './containers/Dashboard/AssetStatusDonut';
 import CreateNewCategory from './containers/StockManagement/CreateNewCategory';
 import Alert, { AlertType } from './components/Alert/Alert';
 import TableModal from './components/TableModal/TableModal';
+import FullAssets from './utils/FullAssets';
+import FakeAssetsData from './utils/FakeAssetsData';
 const chartData = [40, 30, 30];
+
 function Test() {
 
-  const [viewTable, SetViewTable] = useState(true);
+  const [viewTable, SetViewTable] = useState(false);
 
   const backToList = () => {
     SetViewTable(false);
@@ -21,23 +24,33 @@ function Test() {
   const closeMe =() =>{
     alert('hey');
   }
+  
+  const tableHeaders = [
+    "Asset ID",
+    "Category ID",
+    "Brand ID",
+    "Stock ID",
+    "Supplier ID",
+    "Purchase Order Number",
+    "Value",
+    "Date In",
+  ];
+ const tags = ['Dektop -catgory', 'Muhabura'];
   return (
-    // < ChangePassword />
-    // <CreateNewCategory/>
-    // <AssetListing/>
-    // <AssetStatusChart data={chartData} />
-    <TableModal
-     onClose={backToList}
-      title = 'MUHABURA STORE ' 
-      isOpen = {viewTable} 
-       tag={['desktops -category ', 'lenovo']} />
-
-    // <Alert title='error in your submission ' alertType={AlertType.WARNING} close={closeMe} />
-
-
-
+    <div className=" flex items-center justify-center h-screen App">
+      <button onClick={() => SetViewTable(true)} className=' animate__animated animate__fast animate__rubberBand   text-2xl bg-my-blue px-10 py-4 rounded-xl  text-white '>show fake reports
+      </button>
+      <TableModal
+        isOpen={viewTable}
+        onClose={backToList}
+        title=" vist Muhabura Store"
+        tableHeaders={tableHeaders}
+        tableData={FakeAssetsData}
+        tag={tags}
+      />
+    </div>
   );
-}
+};
 
 export default Test;
 // import React, { useState } from "react";

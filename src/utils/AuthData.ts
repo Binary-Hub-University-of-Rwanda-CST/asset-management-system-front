@@ -1,5 +1,5 @@
 export const AuthData = {
-    isAuthenticated: false,
+    isAuthenticated: true,
     user: {
       user_info: {
         full_name: "Edison UWIHANGANYE",

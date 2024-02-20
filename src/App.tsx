@@ -14,6 +14,8 @@ import MyRequests from "./containers/AssetDistribution/Request/MyRequests";
 import RequestApproval from "./containers/AssetDistribution/Request/RequestApproval";
 import AssetTracking from "./containers/AssetTracking/AssetTracking";
 import DashboardLoading from "./components/DashboardLoading/DashboardLoading";
+import CoomingSoon from "./components/CoomingSoon/CoomingSoon";
+import Test from "./App.Test";
 
 const App = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(true);
@@ -63,14 +65,15 @@ const App = () => {
                    <Route path="/my-assets-requests" element ={<MyRequests/>}/>
                    <Route path="/assets-requests-approval" element ={<RequestApproval/>}/>
                    <Route path="/assets-tracking" element ={<AssetTracking/>}/>
-                   <Route path="/reports" element ={<DashboardLoading/>}/>
+                   <Route path="/reports" element ={<Test/>}/>
                    <Route path="/users-list" element ={<DashboardLoading/>}/>
-                   <Route path="/my-profile" element ={<DashboardLoading/>}/>
+                   <Route path="/my-profile" element ={<CoomingSoon/>}/>
                    <Route path="/" element={<Dashboard />} />
                   </Routes>
                 </div>
             </div>
           )}
+
         </div>
       )}
     </>

@@ -3,8 +3,6 @@
 
 import React, { Component, Fragment } from "react";
 import { MdClose } from "react-icons/md";
-import { MdOutlineMenuOpen } from "react-icons/md";
-// import { Auth } from "../../actions";
 import UR_ICON from "../../assets/images/UR_logo.png";
 import {
   AUTHENTICATED_MENUS,
@@ -67,7 +65,7 @@ export class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
               </div>
             </div>
           </div>
-          <div className="flex flex-col mb-3 mt-5">
+          <div className="flex flex-col mb-3 mt-5 ">
             {menus_categories()
               .filter(
                 (itm) =>
@@ -85,7 +83,7 @@ export class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
                   {item.key === MENU_TYPE.ACTIVITIES &&
                     menus.filter((itm) => itm.menu_type === item.key).length >
                       0 && (
-                      <div className="text-gray-400 uppercase text-xs px-5 mb-1 mt-4">
+                      <div className="text-gray-400 uppercase text-xs px-5 mb-1 mt-4 ">
                         {item.title}
                       </div>
                     )}
@@ -111,7 +109,11 @@ export class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
                           })
                         }
                         auth={this.props.auth}
+                        updateSelectedMenu={(selectedMenuLink: string) =>
+                          this.setState({ selectedMenuLink })
+                        }
                       />
+
                     ))}
                 </div>
               ))}

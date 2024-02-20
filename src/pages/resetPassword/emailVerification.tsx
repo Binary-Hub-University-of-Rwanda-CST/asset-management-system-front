@@ -6,6 +6,7 @@ import { isValidEmail } from "../../utils/AxiosToken";
 import { useEmailVerify } from "./hooks";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { error } from "console";
 
 export default function EmailVerification() {
   const navigate = useNavigate();
@@ -37,6 +38,9 @@ export default function EmailVerification() {
     const { value } = event.target;
     setEmail(value);
   };
+  const closeAlert = () =>{
+    setEmailError('');
+  }
   return (
     <div className="bg-greyBackground min-h-screen min-w-full flex items-center justify-center">
       <div className="reset-cont bg-white w-full md:w-1/2 p-5 rounded-xl mt-[-10%]">
@@ -45,7 +49,7 @@ export default function EmailVerification() {
             <FontAwesomeIcon icon="arrow-left" className="me-2" />
             Back
           </button>
-          <h1 className="font-bold text-2xl font-bold">Reset Password</h1>
+          <h1 className="text-2xl font-bold">Reset Password</h1>
         </div>
         <Input
           title={"Email"}
@@ -54,6 +58,7 @@ export default function EmailVerification() {
           value={email}
           error={emailError}
           disabled={false}
+          onCloseError={closeAlert}
         />
         <div className="flex justify-center">
           <Button

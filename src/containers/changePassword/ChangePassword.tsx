@@ -1,15 +1,11 @@
 
 import React, { useState } from "react";
-import Modal from "../../components/modal/Modal";
 import Input from "../../components/Fragments/Input";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 const ChangePassword: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
 
- const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   const [passwordStates, setPasswordStates] = useState({
     currentPassword: {
@@ -30,10 +26,14 @@ const ChangePassword: React.FC = () => {
   });
    
   
+  
   const handleChangePassword = () => {
     const { newPassword, confirmPassword, currentPassword } = passwordStates;
+    const isStrongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+      newPassword.value
+    );
 
-    // Check if any input is empty
+    // Check if all input is empty
     if (!currentPassword.value && !newPassword.value && !confirmPassword.value) {
       setPasswordStates((prevState) => ({
         ...prevState,
@@ -52,9 +52,32 @@ const ChangePassword: React.FC = () => {
       }));
       return;
     }
-
+    // check if is any input is empty
+    else if (!currentPassword.value ) {
+      setPasswordStates((prevState) => ({
+        ...prevState,
+        currentPassword: {
+          ...prevState.currentPassword,
+          error: "Current password is empty",
+        },
+      
+      }));
+      return;
+    }
+    else if ( !newPassword.value  ) {
+      setPasswordStates((prevState) => ({
+        ...prevState,
+        
+        newPassword: {
+          ...prevState.newPassword,
+          error: "new password is empty",
+        },
+        
+      }));
+      return;
+    }
     // Check if new password is the same as the old password
-    if (currentPassword.value === newPassword.value) {
+    else if (currentPassword.value === newPassword.value) {
       setPasswordStates((prevState) => ({
         ...prevState,
         currentPassword: {
@@ -68,9 +91,33 @@ const ChangePassword: React.FC = () => {
       }));
       return;
     }
-
+    // check is new password is strong
+    else
+    if (!isStrongPassword) {
+      setPasswordStates((prevState) => ({
+        ...prevState,
+        newPassword: {
+          ...prevState.newPassword,
+          error:
+            "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
+        },
+      }));
+      return;
+    }
+    // check if comfirm password is empty
+    else if ( !confirmPassword.value) {
+      setPasswordStates((prevState) => ({
+        ...prevState,
+        
+        confirmPassword: {
+          ...prevState.confirmPassword,
+          error: "comfirm Password is empty",
+        },
+      }));
+      return;
+    }
     // Check if new password and confirm password match
-    if (newPassword.value !== confirmPassword.value) {
+     if (newPassword.value !== confirmPassword.value) {
       setPasswordStates((prevState) => ({
         ...prevState,
         newPassword: {
@@ -84,26 +131,13 @@ const ChangePassword: React.FC = () => {
       }));
       return;
     };
-     // Check if the new password is strong
-  const isStrongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
-    newPassword.value
-  );
-  if (!isStrongPassword) {
-    setPasswordStates((prevState) => ({
-      ...prevState,
-      newPassword: {
-        ...prevState.newPassword,
-        error:
-          "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
-      },
-    }));
-    return;
-  };
+    
     
 
     // logic for changing the password
     // Call API or function for changing the password
     // Reset the form and clear any errors
+    
     setPasswordStates({
       currentPassword: {
         value: "",
@@ -138,9 +172,12 @@ const ChangePassword: React.FC = () => {
 
   
 return (
-  <div className="flex w-full">
-    <Modal isOpen={isModalOpen} onClose={closeModal} title="Change Password">
-      <div className="flex flex-col gap-5 w-96 p-5">
+  <div className="flex w-full justify-center">
+    {/* <Modal isOpen={isModalOpen} onClose={closeModal} title="Change Password"> */}
+      <div className=" animate__animated animate__fast animate__zoomIn flex flex-col gap-5 w-[600px] p-5 bg-white rounded-xl mt-6">
+        <h3 className=" text-2xl font-bold flex flex-row items-center gap-2 ">
+          <RiLockPasswordLine className="text-5xl font-bold" />
+           Change password</h3>
         {Object.keys(passwordStates).map((key, index) => (
           <Input
             key={key}
@@ -186,12 +223,12 @@ return (
         ))}
         <button
           onClick={handleChangePassword}
-          className="bg-[#2d90d2] p-2 justify-center items-center text-white rounded-lg px-4"
+          className="bg-[#2d90d2] p-2 justify-center items-center text-white rounded-lg px-4 text-xl"
         >
           Change Password
         </button>
       </div>
-    </Modal>
+    {/* </Modal> */}
   </div>
 );
 };
