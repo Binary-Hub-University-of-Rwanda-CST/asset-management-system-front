@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { StoreState } from "../../reducers";
 import { Auth, FC_SetError, FC_SetSuccess } from "../../actions";
 import { MdOutlineDashboard } from "react-icons/md";
-import Dropdown from "../../components/Fragments/DropDown";
+import Dropdown, {Option, DropdownProps} from "../../components/Fragments/DropDown";
 import CategoriesData from "../../utils/CategoriesData";
 import { TbDatabase } from "react-icons/tb";
 import { FiShare2 } from "react-icons/fi";
@@ -37,7 +37,11 @@ const Dashboard: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => 
     // You can place your componentDidMount logic here
   }, []);
 
-  const options = CategoriesData;
+  const options: Option[] = CategoriesData.map(item => ({
+    OptionName: item.CategoryName,
+    value: item.totalAsset
+  })
+  );
   const chartData = [40, 30, 30];
   const RequestData = {
     categories: ['Muhabura Block', 'Agaciro Block', 'AGH block', ],
@@ -65,7 +69,7 @@ const Dashboard: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => 
             Dashboard
           </div>
         </div>
-          <Dropdown  options={options} />
+          <Dropdown  options={options} tag="Category" />
       </div>
       <div className="flex flex-row gap-4 items-center">
         <div className="flex flex-row bg-blue-white px-4 py-2 rounded-lg h-fit items-center gap-2 w-40"> 

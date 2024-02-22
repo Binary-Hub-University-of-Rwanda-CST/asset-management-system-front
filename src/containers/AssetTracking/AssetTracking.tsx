@@ -10,7 +10,7 @@ import { FaBarcode } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineArrowOutward } from "react-icons/md";
 
-import Dropdown from "../../components/Fragments/DropDown";
+import Dropdown, {Option} from "../../components/Fragments/DropDown";
 import CategoriesData from "../../utils/CategoriesData";
 
 interface AppProps {
@@ -29,7 +29,11 @@ const AssetTracking: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError })
   }, []);
 
 
-  const options = CategoriesData;
+  const options: Option[] = CategoriesData.map(item => ({
+    OptionName: item.CategoryName,
+    value: item.totalAsset
+  })
+  );
   return (
     <div className="mr-4">
       <div className="flex flex-row justify-between bg-white rounded-lg p-3 animate__animated animate__faster animate__fadeInBottomLeft">
@@ -45,7 +49,7 @@ const AssetTracking: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError })
           </div>
         </div>
         <div className="flex flex-row gap-2">
-          <Dropdown options={options}/>
+          <Dropdown options={options} tag="Category"/>
         </div>
         </div>
       <div className=" py-4 rounded-lg  flex flex-row gap-4 ">

@@ -23,8 +23,7 @@ const App = () => {
 
   const FC_Logout = () => {
     AuthData.isAuthenticated = false;
-    console.log('Signing out...');
-    console.log(AuthData.isAuthenticated);
+    setSideNavbarStatus(false);
   };
 
   return (

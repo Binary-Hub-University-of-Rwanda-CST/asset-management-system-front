@@ -32,7 +32,7 @@ function CreateNewCategory() {
             <h3 className=' font-bold text-md '>No specification Added</h3>
             <h5 className=' items-center   mb-2 text-sm text-gray-600'> please click the following button to create new <br />
             specification and value</h5>
-            <button className=' border-my-blue border-2  items-center w-full rounded-md  py-2 bg-white text-my-blue text-xl '> Create <span className='font-bold'>-new-</span>  specifification</button>
+            <button className=' border-my-blue border-2  items-center w-full rounded-md  py-2 bg-white text-my-blue text-xl '> Create <span className='font-bold'>-{categoryName? categoryName : 'new'}-</span>  specifification</button>
         </div>
         <button className=' w-full py-2 bg-my-blue rounded-md text-white text-xl mt-5'>create <span className='font-bold'>-{categoryName? categoryName : 'new'}-</span>  category</button>
 

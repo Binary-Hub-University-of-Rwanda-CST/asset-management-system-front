@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { stockData } from "./StockData";
+import { stockData } from "../../utils/StockLocation";
 import AppModal, { ModalSize, Themes, ModalMarginTop } from "../../components/AppModal/AppModal";
 
 interface Stock {

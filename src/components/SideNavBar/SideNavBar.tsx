@@ -4,11 +4,7 @@
 import React, { Component, Fragment } from "react";
 import { MdClose } from "react-icons/md";
 import UR_ICON from "../../assets/images/UR_logo.png";
-import {
-  AUTHENTICATED_MENUS,
-  MENU_TYPE,
-  menus_categories,
-} from "../../config/AppNavigations";
+import {AUTHENTICATED_MENUS, MENU_TYPE,menus_categories,} from "../../config/AppNavigations";
 import NavItem from "./NavItem";
 import { isAccessAuthorized } from "../../config/userAccess";
 

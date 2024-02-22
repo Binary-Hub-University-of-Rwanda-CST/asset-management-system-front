@@ -4,6 +4,7 @@ import { StoreState } from "../../../reducers";
 import { Auth, FC_SetError, FC_SetSuccess } from "../../../actions";
 import Alert,{AlertType} from "../../../components/Alert/Alert";
 import { GoDatabase } from "react-icons/go";
+import UploadModal from "./Components/UploadModal";
 
 interface AppProps {
   auth: Auth;
@@ -15,7 +16,16 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<string>("");
   const [error, setError] = useState<string>("");
+   
+  const [UploadData, setUploadData] = useState(false);
 
+  const closeUploadDataModal = () => {
+      setUploadData(false);
+  };
+  const CreateUploadData = () =>{
+    setUploadData(true);
+    // alert(UploadData);
+  }
   useEffect(() => {
     // componentDidMount logic goes here if needed
   }, []);
@@ -80,10 +90,17 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
           click  the following button to upload the Asset In Specific Stock
         </div>
         <div className="text-center  font-light text-black">
-         <button className=" bg-my-blue text-white rounded-lg py-2 px-6 text-xl">Upload Stock</button>
+         <button 
+         onClick={CreateUploadData}
+         className=" bg-my-blue text-white rounded-lg py-2 px-6 text-xl">Upload Stock</button>
         </div>
       </div>
     </div>
+    {
+      UploadData &&
+      <UploadModal close={closeUploadDataModal}/>
+    }
+
     </div>
   );
 };

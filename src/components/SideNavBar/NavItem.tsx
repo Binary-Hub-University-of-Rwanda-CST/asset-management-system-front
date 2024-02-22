@@ -12,7 +12,9 @@ interface NavItemProps {
   auth: Auth;
   updateSelectedMenu: (selectedMenuLink: string) => void;
 }
-
+function activelink(props:NavItemProps, link:string){
+props.updateSelectedMenu(link);
+}
 interface Auth{ 
   isAuthenticated?: boolean;
   user:{
@@ -31,28 +33,19 @@ const NavItem: React.FC<NavItemProps> = (props) => {
     "flex flex-row items-center gap-2 pr-3 py-0 text-sm mr-3 rounded-r-full groupzz";
 
   const hasSubmenu = props.nav.subMenus.length > 0;
-
+  const submenustyle = !hasSubmenu ? ' bg-blue-white': '';
 
   return (
     <RRNavLink
       to={props.nav.url}
       className={
          props.selectedMenuLink === props.nav.url
-          ? `${baseClass} flex flex-col justify-start  bg-blue-white font-bold text-my-blue animate__animated animate__fadeIn py-2 pl-3 bg-blue-500`
-          : `${baseClass} flex flex-col justify-start  hover:  py-2 pl-3 text-gray-500 hover:text-black`
+          ? `${baseClass} flex flex-col justify-start hover:text-black ${submenustyle} font-bold text-my-blue animate__animated animate__fadeIn py-1 pl-3 bg-blue-500`
+          : `${baseClass} flex flex-col justify-start  hover:bg-my-gray   pl-3 text-gray-500 hover:text-black`
       }
       onClick={() => props.updateSelectedMenu(props.nav.url)}
     >
 
-{/* <RRNavLink
-      to={props.nav.url}
-      className={
-        props.selectedMenuLink === props.nav.url
-          ? `${baseClass} flex flex-col justify-start bg-blue-white  text-my-blue animate__animated animate__fadeIn py-2 pl-3 bg-blue-500`
-          : `${baseClass} flex flex-col justify-start  hover:bg-blue-white  py-2 pl-3 text-gray-500 hover:text-black`
-      }
-      onClick={() => props.updateSelectedMenu(props.nav.url)}
-    > */}
 
       <div
         onClick={() => hasSubmenu && props.setSelectedMenu(props.nav.url)}
@@ -81,18 +74,22 @@ const NavItem: React.FC<NavItemProps> = (props) => {
                 isAccessAuthorized(props.auth, itm.access) === true
             )
             .map((subMenu, s) => (
-              <NavLink
-                key={s + 1}
-                to={subMenu.url}
-                className={`${
-                  props.selectedMenuLink === subMenu.url
-                    ? `${baseClass} bg-primary-100 text-my-blue animate__animated animate__fadeIn py-2 pl-3 bg-blue-500`
-                    : `${baseClass} hover:bg-blue-white  py-2 pl-3 text-gray-500 hover:text-black`
-                } hover:bg-blue-white hover:font-bold ` }
-                onClick={() => props.updateSelectedMenu(subMenu.url)}
-              >
-                <div>{subMenu.title}</div>
-              </NavLink>
+              // In the NavItem component:
+            <NavLink
+              key={s + 1}
+              to={subMenu.url}
+              className={`${
+                props.selectedMenuLink === subMenu.url
+                  ? `${baseClass} bg-blue-white text-my-blue font-bold animate__animated animate__fadeIn py-2 pl-3 bg-blue-500`
+                  : `${baseClass} hover:bg-blue-white  py-2 pl-3 text-gray-500 hover:text-black`
+              } hover:bg-my-gray  `}
+              onClick={() => {
+                props.setSelectedMenu(subMenu.url); // Update selectedMenuLink in the parent component
+              }}
+            >
+              <div>{subMenu.title}</div>
+            </NavLink>
+
             ))}
         </div>
       )}

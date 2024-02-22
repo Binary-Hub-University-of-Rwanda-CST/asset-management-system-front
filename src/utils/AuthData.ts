@@ -12,3 +12,5 @@ export const AuthData = {
     loading: false, 
     token: "AuthTokenHere goes here", 
   };
+  
+  

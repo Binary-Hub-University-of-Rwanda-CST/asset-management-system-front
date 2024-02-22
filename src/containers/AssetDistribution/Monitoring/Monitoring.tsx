@@ -9,7 +9,7 @@ import { CiViewTable } from "react-icons/ci";
 import { ImStatsBars } from "react-icons/im";
 import { RiFileExcel2Line } from "react-icons/ri";  
 
-import Dropdown from "../../../components/Fragments/DropDown";
+import Dropdown, {Option} from "../../../components/Fragments/DropDown";
 import CategoriesData from "../../../utils/CategoriesData";
 import DepartmentsChart from "./ChartData/DepartmentChartData";
 import BuildingsChart from "./ChartData/BuildingChart";
@@ -75,8 +75,11 @@ const Monitoring: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =>
   else if (!byDepartment && showTableData){
     dataPresented = <BuildingsTable/>
   }
-  const options = CategoriesData;
-
+  const options: Option[] = CategoriesData.map(item => ({
+    OptionName: item.CategoryName,
+    value: item.totalAsset
+  })
+  );
   return (
     <div className="mr-4 ">
       <div className="flex flex-col mb-2 bg-white rounded-lg p-3 gap-2  justify-between">
@@ -93,7 +96,7 @@ const Monitoring: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =>
           </div>
           </div>
         <div className="flex justify-center items-center ">
-      <Dropdown  options={options} />
+      <Dropdown  options={options} tag="Categotry" />
         </div>
       </div>
        <div className="flex flex-row  justify-between">
