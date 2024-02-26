@@ -1,16 +1,16 @@
 // RequestApprovalTable.tsx
 import React, { useState, useEffect } from 'react';
-import RequestData from '../../../utils/RequestData';
+import RequestData from '../../../../utils/RequestData';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { CiCalendar } from "react-icons/ci";
+import { statusColor, statusIcon} from './RequestTable';
 
 interface TableProps {
   selectedStatus: string | null;
 }
-let bgColor:string;
-let statusIcon: any;
+
 
 interface RequestItem {
   no: number;
@@ -45,21 +45,6 @@ const RequestApprovalTable: React.FC<TableProps> = ({ selectedStatus }) => {
       setFilteredData(searchData);
     }, [searchTerm, selectedStatus]);
 
-  RequestData.map(item =>{
-    if (item.status.toLowerCase()== 'pending'){
-         bgColor = 'py-1 px-6 bg-info rounded-lg';
-         statusIcon = <AiOutlineExclamationCircle/>;
-    }
-    else if (item.status =='approved'){
-        bgColor = 'py-1 px-6 bg-confirm rounded-lg';
-        statusIcon = <FaRegCheckCircle/>
-    }
-    else if (item.status){
-        bgColor = 'py-1 px-6 bg-danger rounded-lg';
-        statusIcon = <RiDeleteBin6Line/>
-    }
-  })
-
   return (
     <div className="flex items-center flex-col w-full">
       <div className="flex items-center w-full gap-4 ">
@@ -93,7 +78,13 @@ const RequestApprovalTable: React.FC<TableProps> = ({ selectedStatus }) => {
               <td className="py-2 px-4 border-b">{item.specification}</td>
               <td className="py-2 px-4 border-b">{item.number}</td>
               <td className="py-2 px-4 border-b">
-                <span className='px-4 py-2 border-2 rounded-lg my-2 border-info'>{item.status}</span></td>
+              <span className={`flex flex-row gap-1 items-center  ${statusColor(item.status)} rounded-3xl py-1 justify-center w-fit pl-1 pr-4`}>
+                    {
+                      statusIcon(item.status)
+                    }
+                  {item.status}
+                  </span>
+                  </td>
             </tr>
           ))}
         </tbody>

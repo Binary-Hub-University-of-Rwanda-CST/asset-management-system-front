@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import Modal from '../../../../components/modal/Modal';
-import Dropdown, { Option, dropdownStyle } from '../../../../components/Fragments/DropDown';
-import FullAssets from '../../../../utils/FullAssets';
+import Modal from '../../../components/modal/Modal';
+import Dropdown, { Option, dropdownStyle } from '../../../components/Fragments/DropDown';
+import FullAssets from '../../../utils/FullAssets';
 import { BsCloudUpload } from "react-icons/bs";
 import { RiFileExcel2Line } from "react-icons/ri";
 

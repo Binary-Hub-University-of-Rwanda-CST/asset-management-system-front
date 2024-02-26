@@ -1,7 +1,40 @@
 import React, { useState } from 'react';
-import RequestData from '../../../utils/RequestData';
+import RequestData from '../../../../utils/RequestData';
+import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaRegCheckCircle } from "react-icons/fa";
+import { IoClose } from 'react-icons/io5';
 
+export function statusIcon(status:string){
+  switch(status.toLocaleLowerCase()){
+    case 'approved':
+      return <FaRegCheckCircle className=' text-2xl font-bold  text-green-600'/>
+      case 'rejected':
+        return <IoClose className=' text-2xl font-bold  text-red-800'/>
+        case 'pending':
+          return <AiOutlineExclamationCircle className=' text-2xl font-bold text-yellow-700'/>
+          default:
+            return 
+
+  }
  
+}
+
+ export function statusColor(status:string){
+  switch(status.toLocaleLowerCase()){
+    case 'approved':
+      return   'bg-green-200'
+      case 'rejected':
+        return 'bg-danger'
+        case 'pending':
+          return 'bg-yellow-200'
+          default:
+            return 
+
+  }
+ 
+}
+
 
 const RequestsTable: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,6 +49,7 @@ const RequestsTable: React.FC = () => {
           .includes(searchTerm.toLowerCase())
       )
     : [];
+
 
   return (
     <div>
@@ -45,7 +79,15 @@ const RequestsTable: React.FC = () => {
               <td className="py-2 px-4 border-b">{item.brand}</td>
               <td className="py-2 px-4 border-b">{item.specification}</td>
               <td className="py-2 px-4 border-b">{item.number}</td>
-              <td className="py-2 px-4 border-b">{item.status}</td>
+              <td className="py-2 px-4 border-b">
+                <span className={`flex flex-row gap-1 items-center  ${statusColor(item.status)} rounded-3xl py-1 justify-center w-fit pr-4 pl-1`}>
+                    {
+                      statusIcon(item.status)
+                    }
+                  {item.status}
+                 
+                  </span>
+                </td>
             </tr>
           ))}
         </tbody>

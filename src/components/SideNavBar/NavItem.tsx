@@ -30,20 +30,17 @@ interface Auth{
 
 const NavItem: React.FC<NavItemProps> = (props) => {
   const baseClass =
-    "flex flex-row items-center gap-2 pr-3 py-0 text-sm mr-3 rounded-r-full groupzz";
+    "flex flex-row items-center gap-2 pr-3 py-0 text-sm mr-3 rounded-r-full";
 
   const hasSubmenu = props.nav.subMenus.length > 0;
-  const submenustyle = !hasSubmenu ? ' bg-blue-white': '';
+  const submenustyle = !hasSubmenu ? ' bg-blue-white':'';
 
   return (
     <RRNavLink
       to={props.nav.url}
-      className={
-         props.selectedMenuLink === props.nav.url
-          ? `${baseClass} flex flex-col justify-start hover:text-black ${submenustyle} font-bold text-my-blue animate__animated animate__fadeIn py-1 pl-3 bg-blue-500`
-          : `${baseClass} flex flex-col justify-start  hover:bg-my-gray   pl-3 text-gray-500 hover:text-black`
-      }
-      onClick={() => props.updateSelectedMenu(props.nav.url)}
+      className={({isActive}) => isActive ?` ${baseClass} flex flex-col justify-start  hover:text-black ${submenustyle} font-bold text-my-blue animate__animated animate__fadeIn py-1 pl-3 bg-blue-500`: `${baseClass} flex flex-col justify-start   pl-3 text-gray-500 hover:text-black hover:bg-${!hasSubmenu ? 'my-gray':'none'} hover:font-bold`}
+      onClick={() => props.updateSelectedMenu(props.nav.url) }
+
     >
 
 
@@ -74,18 +71,11 @@ const NavItem: React.FC<NavItemProps> = (props) => {
                 isAccessAuthorized(props.auth, itm.access) === true
             )
             .map((subMenu, s) => (
-              // In the NavItem component:
             <NavLink
               key={s + 1}
               to={subMenu.url}
-              className={`${
-                props.selectedMenuLink === subMenu.url
-                  ? `${baseClass} bg-blue-white text-my-blue font-bold animate__animated animate__fadeIn py-2 pl-3 bg-blue-500`
-                  : `${baseClass} hover:bg-blue-white  py-2 pl-3 text-gray-500 hover:text-black`
-              } hover:bg-my-gray  `}
-              onClick={() => {
-                props.setSelectedMenu(subMenu.url); // Update selectedMenuLink in the parent component
-              }}
+              className={({isActive}) => isActive ?`${baseClass} bg-primary-100 text-my-blue animate__animated animate__fadeIn py-2 pl-3 bg-blue-white font-bold `: `${baseClass}  justify-start  hover:bg-my-gray py-1  pl-3 text-gray-500 hover:text-black` }
+              
             >
               <div>{subMenu.title}</div>
             </NavLink>

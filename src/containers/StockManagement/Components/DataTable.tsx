@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { stockData } from "../../utils/StockLocation";
-import AppModal, { ModalSize, Themes, ModalMarginTop } from "../../components/AppModal/AppModal";
+import { stockData } from "../../../utils/StockLocation";
+import AppModal, { ModalSize, Themes, ModalMarginTop } from "../../../components/AppModal/AppModal";
 
 interface Stock {
   no: number;

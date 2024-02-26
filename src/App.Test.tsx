@@ -6,7 +6,7 @@ import Login from './containers/authantication/Login';
 import DashboardLoading from './components/CoomingSoon/CoomingSoon';
 import AssetListing from './containers/StockManagement/AssetListing/AssetListing';
 import AssetStatusChart from './containers/Dashboard/AssetStatusDonut';
-import CreateNewCategory from './containers/StockManagement/CreateNewCategory';
+import CreateNewCategory from './containers/StockManagement/Components/CreateNewCategory';
 import Alert, { AlertType } from './components/Alert/Alert';
 import TableModal from './components/TableModal/TableModal';
 import FullAssets from './utils/FullAssets';

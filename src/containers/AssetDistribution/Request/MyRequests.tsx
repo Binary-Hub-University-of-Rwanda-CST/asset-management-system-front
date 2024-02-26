@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { StoreState } from "@react-pdf-viewer/core"; 
 import { Auth, FC_SetError, FC_SetSuccess } from "../../../actions";
 import Alert, { AlertType } from "../../../components/Alert/Alert";
-import RequestsTable from "./RequestTable";
+import RequestsTable from "./Components/RequestTable";
 
 import { FaComputer } from "react-icons/fa6";
 import { PiFolderUserBold } from "react-icons/pi";

@@ -7,7 +7,6 @@ import { AuthData } from "./utils/AuthData";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import NavBar from "./components/TopNavBar/NavBar";
 import { StockDashboard } from "./containers/StockManagement/StockDashbord";
-import "react-toastify/dist/ReactToastify.css";
 import UploadStock from "./containers/StockManagement/UploadStock/UploadStock";
 import Monitoring from "./containers/AssetDistribution/Monitoring/Monitoring";
 import MyRequests from "./containers/AssetDistribution/Request/MyRequests";
@@ -16,6 +15,9 @@ import AssetTracking from "./containers/AssetTracking/AssetTracking";
 import DashboardLoading from "./components/DashboardLoading/DashboardLoading";
 import CoomingSoon from "./components/CoomingSoon/CoomingSoon";
 import Test from "./App.Test";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
+import RequestValidation from "./containers/AssetDistribution/Request/Components/RequestValidation";
+
 
 const App = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(true);
@@ -68,6 +70,8 @@ const App = () => {
                    <Route path="/users-list" element ={<DashboardLoading/>}/>
                    <Route path="/my-profile" element ={<CoomingSoon/>}/>
                    <Route path="/" element={<Dashboard />} />
+                   <Route path="*" element ={<PageNotFound/>}/>
+                   <Route path="/fake" element ={<RequestValidation/>}/>
                   </Routes>
                 </div>
             </div>

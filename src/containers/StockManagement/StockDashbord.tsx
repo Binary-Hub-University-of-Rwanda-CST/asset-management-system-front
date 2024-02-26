@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { StoreState } from "../../reducers";
-import DataChart from "./DataChart";
+import DataChart from "./Components/DataChart";
 import { Auth, FC_SetError, FC_SetSuccess } from "../../actions";
 import { GoDatabase } from "react-icons/go";
 import { MdOutlineAddBusiness } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
 import { FaRegCheckCircle } from "react-icons/fa";
-import StockTable from "./DataTable";
+import StockTable from "./Components/DataTable";
 import StockLocation from "../../components/stockLocation/StockLocation";
 import Modal from '../../components/modal/Modal'
-import Categories from "./Categories";
+import Categories from "./Components/Categories";
 import CategoriesData from "../../utils/CategoriesData";
 import { Link } from "react-router-dom";
 import { number } from "prop-types";

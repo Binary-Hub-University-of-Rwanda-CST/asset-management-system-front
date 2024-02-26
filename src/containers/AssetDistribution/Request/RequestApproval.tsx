@@ -7,7 +7,7 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { BsFillPrinterFill } from "react-icons/bs";
 import RequestData from "../../../utils/RequestData";
 
-import RequestApprovalTable from "./RequestApprovalTable";
+import RequestApprovalTable from "./Components/RequestApprovalTable";
 
 interface AppProps {
   auth: Auth;

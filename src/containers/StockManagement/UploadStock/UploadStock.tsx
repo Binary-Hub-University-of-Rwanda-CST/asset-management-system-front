@@ -4,7 +4,7 @@ import { StoreState } from "../../../reducers";
 import { Auth, FC_SetError, FC_SetSuccess } from "../../../actions";
 import Alert,{AlertType} from "../../../components/Alert/Alert";
 import { GoDatabase } from "react-icons/go";
-import UploadModal from "./Components/UploadModal";
+import UploadModal from "../Components/UploadModal";
 
 interface AppProps {
   auth: Auth;
