@@ -1,8 +1,3 @@
-My work on 2024-02-26: Refactored legacy code
-My work on 2024-02-27: Refactored legacy code
-My work on 2024-02-28: Participated in team meeting
-My work on 2024-02-29: Refactored legacy code
-My work on 2024-03-01: Updated documentation
 My work on 2024-03-02: Refactored legacy code
 My work on 2024-03-03: Conducted code review
 My work on 2024-03-04: Participated in team meeting
@@ -14,3 +9,4 @@ My work on 2024-03-09: Investigated performance issues
 My work on 2024-03-10: Investigated performance issues
 My work on 2024-03-11: Wrote unit tests
 My work on 2024-03-12: Refactored legacy code
+My work on 2024-03-13: Participated in team meeting
