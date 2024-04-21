@@ -1,5 +1,3 @@
-My work on 2024-04-04: Deployed to production
-My work on 2024-04-05: Conducted code review
 My work on 2024-04-06: Deployed to production
 My work on 2024-04-07: Participated in team meeting
 My work on 2024-04-08: Investigated performance issues
@@ -15,3 +13,4 @@ My work on 2024-04-17: Implemented new feature
 My work on 2024-04-18: Deployed to production
 My work on 2024-04-19: Wrote unit tests
 My work on 2024-04-20: Conducted code review
+My work on 2024-04-21: Conducted code review
