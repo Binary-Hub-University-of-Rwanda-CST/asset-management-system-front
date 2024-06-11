@@ -8,9 +8,12 @@ import App from '../../App';
 import Input from '../../components/Fragments/Input_backup';
 import axios from 'axios';
 import { AuthData } from '../../utils/AuthData';
+import { API_URL } from '../../utils/api';
+import Alert, {AlertType} from '../../components/Alert/Alert';
 
 function Login() {
   const [username, setUsername] = useState('');
+  const [loginError, setloginError] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [usernameError, setUsernameError] = useState<string | null>(null);
@@ -36,7 +39,7 @@ function Login() {
       "password": password
     }
     setLoggingIn(true);
-    axios.post("http://localhost:9090/auth/login", loginData, { withCredentials: false })
+    axios.post(`${API_URL}/auth/login`, loginData, { withCredentials: false })
   .then(res => {
     setLoggingIn(false);
     console.log(res);
@@ -46,49 +49,53 @@ function Login() {
   .catch(err => {
     setLoggingIn(false);
     console.log("Error-datch: ", err);
-    alert("Error: " + err.response.data.message);
+    // alert("Error: " + err.response.data.message);
+    setloginError(err.response.data.message);
   });
 
   }
-  const handleLogin = async () => {
-   if(username.trim() === ''){
-    setUsernameError('Email or Phone Number is Empty');
-    setPasswordError(null);
-    return;
-   }
-    else if (!isCredentialValid(username)) {
-      setUsernameError('Please enter a valid email address or phone number.');
-      setPasswordError(null); // Clear password error
-      return;
-    }
+  const errorClose =()=>{
+    console.log('');
+  }
+  // const handleLogin = async () => {
+  //  if(username.trim() === ''){
+  //   setUsernameError('Email or Phone Number is Empty');
+  //   setPasswordError(null);
+  //   return;
+  //  }
+  //   else if (!isCredentialValid(username)) {
+  //     setUsernameError('Please enter a valid email address or phone number.');
+  //     setPasswordError(null); // Clear password error
+  //     return;
+  //   }
 
-    if (password.trim() === '') {
-      setPasswordError('Please enter your password.');
-      setUsernameError(null); // Clear username error
-      return;
-    } else {
-      setSuccess(true);
-    }
+  //   if (password.trim() === '') {
+  //     setPasswordError('Please enter your password.');
+  //     setUsernameError(null); // Clear username error
+  //     return;
+  //   } else {
+  //     setSuccess(true);
+  //   }
 
-    try {
-      // login logic
-      console.log('Simulating login...');
-      // const userData = await login(username, password);
-      // Handle successful login (e.g., store user data in state or context)
-      // console.log('Logged in:', userData);
-      const loginData = {
-        "email": username,
-        "password": password
-      }
-      setLoggingIn(true);
-      axios.post("http://localhost:9090/auth/login", loginData).
-      then(res => console.log(res))
-      .catch(err => console.error('Login failed:', err));
-    } catch (error) {
-      // Handle login error
-      console.error('Login failed:', error);
-    }
-  };
+  //   try {
+  //     // login logic
+  //     console.log('Simulating login...');
+  //     // const userData = await login(username, password);
+  //     // Handle successful login (e.g., store user data in state or context)
+  //     // console.log('Logged in:', userData);
+  //     const loginData = {
+  //       "email": username,
+  //       "password": password
+  //     }
+  //     setLoggingIn(true);
+  //     axios.post("http://localhost:9090/auth/login", loginData).
+  //     then(res => console.log(res))
+  //     .catch(err => console.error('Login failed:', err));
+  //   } catch (error) {
+  //     // Handle login error
+  //     console.error('Login failed:', error);
+  //   }
+  // };
 
   return (
     <>
@@ -124,15 +131,16 @@ function Login() {
                   disabled={false}
                   icon={
                     showPassword ? (
-                      <FaRegEyeSlash className="text-my-blue" onClick={toggleShowPassword} />
+                      <FaRegEyeSlash className="text-my-blue cursor-pointer" onClick={toggleShowPassword} />
                     ) : (
-                      <FaRegEye className="text-my-blue" onClick={toggleShowPassword} />
+                      <FaRegEye className="text-my-blue cursor-pointer " onClick={toggleShowPassword} />
                     )
                   }
                   className="mb-4 font-bold"
                   error={passwordError}
                   onCloseError={() => setPasswordError(null)}
                 />
+                {loginError !== "" ? <Alert alertType= {AlertType.WARNING} title={loginError} close={errorClose} />: ""}
                 <div className="flex flex-row justify-between">
                   <h3 className="flex gap-1 items-center font-light hover:text-primary-800 hover:underline cursor-pointer text-sm">
                     <AiFillQuestionCircle className="text-my-blue" />

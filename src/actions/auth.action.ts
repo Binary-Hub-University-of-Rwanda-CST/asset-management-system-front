@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ActionTypes } from "./types";
-import { API_URL, DISTRICTS_LOCATION } from "../utils/api";
+import { API_URL } from "../utils/api";
 import { APP_TOKEN_NAME, setAxiosToken } from "../utils/AxiosToken";
 import { errorToText } from "../utils/functions";
 import {
@@ -46,29 +46,69 @@ export interface PermissionInterface {
 
 const token = localStorage.getItem(APP_TOKEN_NAME);
 
-export interface UserItemInterface {
-  full_name: string;
-  sex: string | null;
-  dob: string | null;
-  nid: string | null;
-  email: string | null;
-  phone_numbers: string;
-  user_id: string;
-  username: string;
-  created_by: string;
-  created_at: string;
-  updated_by: string | null;
-  updated_at: string;
-  status: string;
-  first_name: string | null;
-  middle_name: string | null;
-  last_name: string | null;
+// export interface UserItemInterface {
+//   full_name: string;
+//   sex: string | null;
+//   dob: string | null;
+//   nid: string | null;
+//   email: string | null;
+//   phone_numbers: string;
+//   user_id: string;
+//   username: string;
+//   created_by: string;
+//   created_at: string;
+//   updated_by: string | null;
+//   updated_at: string;
+//   status: string;
+//   first_name: string | null;
+//   middle_name: string | null;
+//   last_name: string | null;
+// }
+
+interface UserItemInterface {
+  id: string;
+  names: string;
+  phone: string;
+  email: string;
+  password: string;
+  location: {
+    building: { id: string; name: string };
+    room: { id: string; name: string };
+    status: 'ACTIVE' | 'INACTIVE';
+  }[];
+  is_line_manager: boolean;
+  occupation_address: {
+    id: string;
+    name: string;
+    type: 'DEPARTMENT' | 'SCHOOL' | 'COLLEGE' | 'CAMPUS' | 'UR';
+    parent_id: string | null;
+  };
+  report_to: string;
+  role: {
+    id: string;
+    name: string;
+    access: string[];
+  };
+  custom_access: string[];
 }
 
+
+// export interface UserInterface {
+//   token: string;
+//  user: UserItemInterface;
+//   role: UserRoleInterface | undefined ;
+// }
 export interface UserInterface {
-  jwt: string;
-  user_info: UserItemInterface;
-  role: UserRoleInterface | undefined;
+  token: TokenInterface;
+ user: UserItemInterface;
+  role: UserRoleInterface | undefined ;
+}
+export interface TokenInterface{
+  access: Access
+}
+export interface Access{
+  token: string;
+  expires: Date;
 }
 
 export interface Auth {
@@ -111,6 +151,7 @@ export interface FetchLoginDetails {
  * @param MsgHandler return the error from the API
  * @returns
  */
+
 export const FC_Login = (
   data: {
     username: string;
@@ -125,12 +166,12 @@ export const FC_Login = (
         data
       );
       console.log({ data_after_login: res.data });
-      localStorage.setItem(APP_TOKEN_NAME, res.data.jwt);
+      localStorage.setItem(APP_TOKEN_NAME, res.data.token.access.token);
       dispatch<LoginSuccessDetails>({
         type: ActionTypes.USER_LOGIN_SUCCESS_DATA,
         payload: {
           data: {
-            jwt: res.data.jwt,
+            token: res.data.token,
             role:
               res.data.role === undefined
                 ? undefined
@@ -139,16 +180,16 @@ export const FC_Login = (
                     role_id: res.data.role?.role_id,
                     role: res.data.role?.role,
                   },
-            user_info: res.data.user_info,
+           user: res.data.user,
           },
-          token: res.data.jwt,
+          token: res.data.token.access.token,
         },
       });
       dispatch<SetSystemSuccessMessageAction>({
         type: ActionTypes.SET_SYSTEM_SUCCESS_MESSAGE,
         payload:
           "Welcome dear " +
-          res.data.user_info.first_name +
+          res.data.user.names +
           " You have successfully logged In",
       });
       CallbackFunc(true, "");
@@ -178,23 +219,23 @@ export const FC_CheckLoggedIn = (callBack: (status: boolean) => void) => {
     try {
       setAxiosToken();
       const res = await axios.get<UserInterface>(
-        `${API_URL}/user/current/info`
+        `${API_URL}/auth/login`
       );
       console.log({ logged_user_details: res.data });
       dispatch<LoginSuccessDetails>({
         type: ActionTypes.USER_LOGIN_SUCCESS_DATA,
         payload: {
           data: {
-            jwt: res.data.jwt,
+            token: res.data.token,
             role:
-              res.data.role === undefined
+              res.data.role?.role === undefined
                 ? undefined
                 : {
                   access: res.data.role.access?.toString().split(",") as UserAccessList[],
                     role_id: res.data.role?.role_id,
                     role: res.data.role?.role,
                   },
-            user_info: res.data.user_info,
+           user: res.data.user,
           },
           token: token!,
         },
