@@ -33,14 +33,14 @@ const Alert = (props: AlertProps) => {
       ? "blue"
       : "gray";
 
-  useEffect(() => {
-    setTimeout(
-      () => {
-        props.close();
-      },
-      props.timeOut === undefined ? 7000 : props.timeOut
-    );
-  });
+  // useEffect(() => {
+    // setTimeout(
+    //   () => {
+    //     props.close();
+    //   },
+    //   props.timeOut === undefined ? 7000 : props.timeOut
+    // );
+  // });
 
   return (
     <div
@@ -71,7 +71,7 @@ const Alert = (props: AlertProps) => {
         <div
           onClick={props.close}
           className="flex items-center justify-center bg-white rounded-full h-8 w-8 cursor-pointer hover:bg-red-200"
-        >
+        > 
           <IoMdClose className="text-2xl" />
         </div>
       </div>

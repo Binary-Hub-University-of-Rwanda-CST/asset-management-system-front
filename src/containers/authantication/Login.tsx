@@ -140,7 +140,13 @@ function Login() {
                   error={passwordError}
                   onCloseError={() => setPasswordError(null)}
                 />
-                {loginError !== "" ? <Alert alertType= {AlertType.WARNING} title={loginError} close={errorClose} />: ""}
+                {loginError !== "" &&
+                 <Alert
+                  alertType= {AlertType.WARNING}
+                  title={loginError}
+                    close={() => {setloginError( ""); }} 
+                    className=' animate__fadeIn text-red-600 bg-red-200'
+                    />}
                 <div className="flex flex-row justify-between">
                   <h3 className="flex gap-1 items-center font-light hover:text-primary-800 hover:underline cursor-pointer text-sm">
                     <AiFillQuestionCircle className="text-my-blue" />
