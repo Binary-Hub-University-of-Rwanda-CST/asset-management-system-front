@@ -41,7 +41,7 @@ function Login() {
     setLoggingIn(false);
     console.log(res);
     // alert("Login successful");
-    AuthData.isAuthenticated = true
+    AuthData.isAuthenticated = true;
   })
   .catch(err => {
     setLoggingIn(false);

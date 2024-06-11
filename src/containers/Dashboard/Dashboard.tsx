@@ -34,7 +34,6 @@ const Dashboard: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => 
 
   useEffect(() => {
     // Equivalent to componentDidMount
-    // You can place your componentDidMount logic here
   }, []);
 
   const options: Option[] = CategoriesData.map(item => ({
@@ -99,7 +98,7 @@ const Dashboard: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => 
         <div className="flex flex-col gap-4 w-1/4">
            <div className="rounded-lg p-0  w-full bg-white flex justify-center items-center  flex-col h-[320px]">
             <h3 className="text-xl ">Distribution Summary</h3>
-            <AssetStatusChart data={chartData} />
+            {/* <AssetStatusChart data={chartData} /> */}
           </div>
         <div className="flex justify-center items-center bg-white rounded-lg p-4 flex-col h-[320px]">
         <h3 className="text-xl"> Pending Request Summary</h3>
