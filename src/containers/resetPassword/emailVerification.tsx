@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import { Button } from "../../components/reusables/reusable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Input from "../../components/Fragments/Input";
+import Input from "../../components/Fragments/Input_backup";
 import { isValidEmail } from "../../utils/AxiosToken";
 import { useEmailVerify } from "./hooks";
 import { toast } from "react-toastify";
