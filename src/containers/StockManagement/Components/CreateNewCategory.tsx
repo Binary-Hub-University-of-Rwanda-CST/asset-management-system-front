@@ -226,12 +226,14 @@ const CreateNewCategory: React.FC<CreateNewCategoryProps> = ({ isOpen, onClose }
                 </div>
 
                 {error && (
-                    <Alert
+                    <div className='w-full flex justify-center items-center'>
+                        <Alert
                         close={closeAlert}
                         title={error}
                         alertType={AlertType.WARNING}
-                        className='bg-red-200 text-red-900 w-5/6 justify-self-center mx-8 animate__animated  animate__shakeX'
+                        className='bg-red-200 text-red-900 w-5/6 justify-self-center  animate__animated  animate__shakeX'
                     />
+                    </div>
                 )}
             </Modal>
             {loading && <LoadingCircle title='Creating category' />}
