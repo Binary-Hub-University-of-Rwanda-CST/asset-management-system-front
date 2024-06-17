@@ -3,23 +3,23 @@
  * @param error
  * @returns
  */
-// export const errorToText = (error: any): string => {
-//   console.log({ ...error });
-//   if (JSON.parse(error?.request?.response)) {
-//     let error_res = JSON.parse(error?.request?.response);
-//     if (error_res.errors.length >= 1) {
-//       if (error_res.errors[0].msg) {
-//         return error_res.errors[0].msg;
-//       } else {
-//         return error_res.errors[0].message;
-//       }
-//     } else {
-//       return "Something went wrong, please try again later";
-//     }
-//   } else {
-//     return "Something went wrong, please try again later";
-//   }
-// };
+export const errorToText = (error: any): string => {
+  console.log({ ...error });
+  if (JSON.parse(error?.request?.response)) {
+    let error_res = JSON.parse(error?.request?.response);
+    if (error_res.errors.length >= 1) {
+      if (error_res.errors[0].msg) {
+        return error_res.errors[0].msg;
+      } else {
+        return error_res.errors[0].message;
+      }
+    } else {
+      return "Something went wrong, please try again later";
+    }
+  } else {
+    return "Something went wrong, please try again later";
+  }
+};
 
 interface ErrorToArrayInterface {
   message: string;

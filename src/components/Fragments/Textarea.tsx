@@ -16,7 +16,7 @@ const Textarea = (props: {
         className={`px-3 py-2 text-sm w-full border  ${
           props.error !== "" ? "border-red-600" : ""
         } rounded-md ${
-          props.className !== undefined ? props.className : "bg-gray-100"
+          props.className !== undefined ? props.className : "bg-gray-200"
         }`}
         disabled={props.disabled}
         value={props.value}

@@ -17,7 +17,7 @@ const FileInput = (props: {
         className={`px-3 py-2 text-sm w-full border ${
           props.error !== "" ? "border-red-600" : ""
         } rounded-md ${
-          props.className === undefined ? "bg-gray-100" : props.className
+          props.className === undefined ? "bg-gray-200" : props.className
         }`}
         disabled={props.disabled}
         onChange={(e) => {

@@ -7,6 +7,7 @@ import UR_ICON from "../../assets/images/UR_logo.png";
 import {AUTHENTICATED_MENUS, MENU_TYPE,menus_categories,} from "../../config/AppNavigations";
 import NavItem from "./NavItem";
 import { isAccessAuthorized } from "../../config/userAccess";
+import { Auth } from "../../actions";
 
 interface SideNavBarProps {
   auth: Auth;
@@ -16,18 +17,19 @@ interface SideNavBarProps {
 interface SideNavBarState {
   selectedMenuLink: string;
 }
-interface Auth{ 
-  isAuthenticated?: boolean;
-  user:{
-    user_info:{
-      full_name: string;
-      phone_numbers?: string;
-  };
-  role:{
-    role:string;
-  }
-}
-}
+// interface Auth{ 
+//   isAuthenticated?: boolean;
+//   user:{
+//     user_info:{
+//       full_name: string;
+//       phone_numbers?: string;
+//   };
+//   role:{
+//     role:string;
+//   }
+// }
+// }
+
 
 export class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
   constructor(props: SideNavBarProps) {

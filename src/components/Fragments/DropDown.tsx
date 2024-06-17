@@ -46,7 +46,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options, tag ,style }) => {
         <button
           type="button"
           onClick={handleToggle}
-          className={style ? style.buttonStyle :`flex items-center w-96 rounded-md bg-blue-white shadow-sm px-4 py-2 text-xl font-medium text-black hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 `}
+          className={style ? style.buttonStyle :`flex items-center w-96 rounded-md bg-blue-white shadow-sm px-4 py-2  text-md font-medium text-black hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 `}
           id="options-menu"
           aria-haspopup="true"
           aria-expanded="true"
@@ -91,7 +91,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options, tag ,style }) => {
                 <button
                   key={option.OptionName}
                   onClick={() => handleSelect(option)}
-                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 ${
+                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900 ${
                     option === selectedOption ? 'bg-gray-200' : ''
                   }`}
                   role="menuitem"

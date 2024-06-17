@@ -1,11 +1,11 @@
-// 
 import { configureStore } from '@reduxjs/toolkit';
-// import rootReducer from '../reducers';
-import { reducers } from '../reducers';
+import { rootReducers } from '../reducers';
 
 const store = configureStore({
-  reducer: reducers,
-  // Other store configurations...
+  reducer: rootReducers,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -17,3 +17,9 @@ export type Action =
   | LogoutUser
   | SetSystemErrorMessageAction
   | SetSystemSuccessMessageAction;
+
+
+  // actionTypes.ts
+export const FETCH_ASSETS_REQUEST = 'FETCH_ASSETS_REQUEST';
+export const FETCH_ASSETS_SUCCESS = 'FETCH_ASSETS_SUCCESS';
+export const FETCH_ASSETS_FAILURE = 'FETCH_ASSETS_FAILURE';

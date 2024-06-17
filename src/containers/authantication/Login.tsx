@@ -1,25 +1,28 @@
-
-
 import React, { useState } from 'react';
 import { FaRegEyeSlash, FaRegEye } from 'react-icons/fa';
 import { AiOutlineLogin, AiFillQuestionCircle } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
 import TopNav from '../../components/LoginTopNav/TopNav';
 import App from '../../App';
 import Input from '../../components/Fragments/Input_backup';
+import Alert, { AlertType } from '../../components/Alert/Alert';
+import { FC_Login } from '../../actions';
+import { RootState, AppDispatch } from '../../app/store';
+import LoadingCircle from '../../components/Loading/LoadingCircle';
 import axios from 'axios';
-import { AuthData } from '../../utils/AuthData';
-import { API_URL } from '../../utils/api';
-import Alert, {AlertType} from '../../components/Alert/Alert';
+import { defaultState } from '../../reducers/auth.reducer';
 
-function Login() {
+const Login = () => {
   const [username, setUsername] = useState('');
-  const [loginError, setloginError] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [usernameError, setUsernameError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
+  const [loginError, setLoginError] = useState('');
   const [loggingIn, setLoggingIn] = useState(false);
+
+  const dispatch = useDispatch<AppDispatch>();
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -28,78 +31,73 @@ function Login() {
   const isCredentialValid = (credential: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[0-9]{10}$/;
-
     return emailRegex.test(credential) || phoneRegex.test(credential);
   };
 
-  function handleLoginUser()
-  {
+  const [user, setUser] =useState(defaultState.isAuthenticated);
+  const handleLoginUser = async () => {
+    if (!validateCredentials()) return;
+
     const loginData = {
-      "email": username,
-      "password": password
-    }
+      email: username,
+      password: password,
+    };
+
     setLoggingIn(true);
-    axios.post(`${API_URL}/auth/login`, loginData, { withCredentials: false })
-  .then(res => {
-    setLoggingIn(false);
-    console.log(res);
-    // alert("Login successful");
-    AuthData.isAuthenticated = true;
-  })
-  .catch(err => {
-    setLoggingIn(false);
-    console.log("Error-datch: ", err);
-    // alert("Error: " + err.response.data.message);
-    setloginError(err.response.data.message);
-  });
 
-  }
-  const errorClose =()=>{
-    console.log('');
-  }
-  // const handleLogin = async () => {
-  //  if(username.trim() === ''){
-  //   setUsernameError('Email or Phone Number is Empty');
-  //   setPasswordError(null);
-  //   return;
-  //  }
-  //   else if (!isCredentialValid(username)) {
-  //     setUsernameError('Please enter a valid email address or phone number.');
-  //     setPasswordError(null); // Clear password error
-  //     return;
-  //   }
+    try {
+      const response = await axios.post('https://ur-assets-management-system-backend.onrender.com/api/v1/auth/login', loginData);
 
-  //   if (password.trim() === '') {
-  //     setPasswordError('Please enter your password.');
-  //     setUsernameError(null); // Clear username error
-  //     return;
-  //   } else {
-  //     setSuccess(true);
-  //   }
+      setLoggingIn(false);
 
-  //   try {
-  //     // login logic
-  //     console.log('Simulating login...');
-  //     // const userData = await login(username, password);
-  //     // Handle successful login (e.g., store user data in state or context)
-  //     // console.log('Logged in:', userData);
-  //     const loginData = {
-  //       "email": username,
-  //       "password": password
-  //     }
-  //     setLoggingIn(true);
-  //     axios.post("http://localhost:9090/auth/login", loginData).
-  //     then(res => console.log(res))
-  //     .catch(err => console.error('Login failed:', err));
-  //   } catch (error) {
-  //     // Handle login error
-  //     console.error('Login failed:', error);
-  //   }
-  // };
+      if (response.data.message === 'Login Successful') {
+        const token = response.data.data.token.access.token;
+        const userData = response.data.data.user;
+
+        // Save token and user data to localStorage
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(userData));
+        setUser(true); 
+        
+
+        // Alternatively, you can dispatch an action to store token and user data in Redux store
+        // dispatch(setToken(token));
+        // dispatch(setUser(userData));
+
+        console.log('Login successful!');
+      } else {
+        setLoginError('Login failed. Please check your credentials.');
+        console.error('Login failed:', response.data.message);
+      }
+    } catch (error) {
+      setLoggingIn(false);
+      setLoginError('An error occurred during login. Please try again.');
+      console.error('Login error:', error);
+    }
+  };
+
+  const validateCredentials = (): boolean => {
+    if (username.trim() === '') {
+      setUsernameError('Email or Phone Number is Empty');
+      setPasswordError(null);
+      return false;
+    }
+    if (!isCredentialValid(username)) {
+      setUsernameError('Please enter a valid email address or phone number.');
+      setPasswordError(null);
+      return false;
+    }
+    if (password.trim() === '') {
+      setPasswordError('Please enter your password.');
+      setUsernameError(null);
+      return false;
+    }
+    return true;
+  };
 
   return (
     <>
-      {AuthData.isAuthenticated ? (
+      {isAuthenticated ? (
         <App />
       ) : (
         <div className="min-h-screen flex flex-col">
@@ -109,14 +107,18 @@ function Login() {
               <div>
                 <h2 className="text-xl font-extrabold text-gray-900">Sign In</h2>
               </div>
-              <form className="mt-8 space-y-4" onSubmit={(event) => {event.preventDefault();}}>
+              <form className="mt-8 space-y-4" onSubmit={(event) => {
+                event.preventDefault();
+                handleLoginUser();
+              }}>
                 <Input
                   title="Email or Phone Number"
                   type="text"
                   value={username}
                   onChange={(e) => {
                     setUsername(e.target.value);
-                    setUsernameError(null); // Clear username error on input change
+                    setUsernameError(null);
+                    setLoginError('');
                   }}
                   disabled={false}
                   className="mb-4 font-bold"
@@ -127,47 +129,53 @@ function Login() {
                   title="Password"
                   type={showPassword ? 'text' : 'password'}
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setLoginError('');
+                    setPasswordError(null);
+                  }}
                   disabled={false}
                   icon={
                     showPassword ? (
                       <FaRegEyeSlash className="text-my-blue cursor-pointer" onClick={toggleShowPassword} />
                     ) : (
-                      <FaRegEye className="text-my-blue cursor-pointer " onClick={toggleShowPassword} />
+                      <FaRegEye className="text-my-blue cursor-pointer" onClick={toggleShowPassword} />
                     )
                   }
                   className="mb-4 font-bold"
                   error={passwordError}
                   onCloseError={() => setPasswordError(null)}
                 />
-                {loginError !== "" &&
-                 <Alert
-                  alertType= {AlertType.WARNING}
-                  title={loginError}
-                    close={() => {setloginError( ""); }} 
-                    className=' animate__fadeIn text-red-600 bg-red-200'
-                    />}
+                {loginError && (
+                  <Alert
+                    alertType={AlertType.WARNING}
+                    title={loginError}
+                    close={() => setLoginError('')}
+                    className="animate__fadeIn text-red-600 bg-red-200"
+                  />
+                )}
                 <div className="flex flex-row justify-between">
                   <h3 className="flex gap-1 items-center font-light hover:text-primary-800 hover:underline cursor-pointer text-sm">
                     <AiFillQuestionCircle className="text-my-blue" />
                     Forgot Password
                   </h3>
                   <button
-                    type="button"
-                    onClick={handleLoginUser}
+                    type="submit"
                     className="flex flex-row gap-1 items-center bg-my-blue text-white px-5 py-2 rounded-md hover:bg-blue-600"
+                    disabled={loggingIn}
                   >
                     <AiOutlineLogin />
-                    {loggingIn ? "Signing In..." :"Sign In"}
+                    {loggingIn ? 'Signing In...' : 'Sign In'}
                   </button>
                 </div>
               </form>
             </div>
           </div>
+          {loggingIn && <LoadingCircle title='Authenticating user' />}
         </div>
       )}
     </>
   );
-}
+};
 
 export default Login;

@@ -22,56 +22,49 @@ interface AlertProps {
 }
 
 const Alert = (props: AlertProps) => {
-  const color =
-    props.alertType === AlertType.SUCCESS
-      ? "green"
-      : props.alertType === AlertType.DANGER
-      ? "red"
-      : props.alertType === AlertType.WARNING
-      ? "yellow"
-      : props.alertType === AlertType.INFO
-      ? "blue"
-      : "gray";
+  const { alertType, title, description, close, className, timeOut } = props;
 
-  // useEffect(() => {
-    // setTimeout(
-    //   () => {
-    //     props.close();
-    //   },
-    //   props.timeOut === undefined ? 7000 : props.timeOut
-    // );
-  // });
+  useEffect(() => {
+    if (timeOut) {
+      const timer = setTimeout(() => {
+        close();
+      }, timeOut);
+      return () => clearTimeout(timer);
+    }
+  }, [close, timeOut]);
+
+  const color = alertType === AlertType.SUCCESS ? "green"
+               : alertType === AlertType.DANGER ? "red"
+               : alertType === AlertType.WARNING ? "yellow"
+               : alertType === AlertType.INFO ? "blue"
+               : "gray";
+
+  const alertClassNames = `flex flex-row items-center w-full justify-between gap-4 md:gap-14 text-${color}-900 bg-${color}-100 rounded-md p-2 animate__animated ${alertType === AlertType.DANGER ? "animate__shakeX" : "animate__fadeIn"} ${className || ""}`;
 
   return (
-    <div
-      className={`flex flex-row items-center w-full justify-between gap-4 md:gap-14 text-${color}-900 bg-${color}-100 rounded-md p-2 animate__animated ${
-        props.alertType === AlertType.DANGER
-          ? "animate__shakeX"
-          : "animate__fadeIn"
-      } ${props.className !== undefined ? props.className : ""}`}
-    >
+    <div className={alertClassNames}>
       <div className="flex flex-row items-center gap-3 w-full">
-        <div className="">
-          {props.alertType === AlertType.SUCCESS && (
+        <div>
+          {alertType === AlertType.SUCCESS && (
             <BsCheckCircle className={`text-${color}-600 text-3xl`} />
           )}
-          {props.alertType === AlertType.DANGER && (
+          {alertType === AlertType.DANGER && (
             <MdReportGmailerrorred className={`text-${color}-900 text-4xl`} />
           )}
-          {props.alertType === AlertType.WARNING && (
+          {alertType === AlertType.WARNING && (
             <RiErrorWarningLine className={`text-${color}-900 text-4xl`} />
           )}
         </div>
         <div className="flex flex-col gap-0">
-          <div className={`text-base font-extrabold -mb-1`}>{props.title}</div>
-          <div className="text-sm font-normal">{props.description}</div>
+          <div className="text-base font-extrabold -mb-1">{title}</div>
+          <div className="text-sm font-normal">{description}</div>
         </div>
       </div>
       <div>
         <div
-          onClick={props.close}
-          className="flex items-center justify-center bg-white rounded-full h-8 w-8 cursor-pointer hover:bg-red-200"
-        > 
+          onClick={close}
+          className="flex items-center justify-center bg-white rounded-full h-8 w-8 cursor-pointer hover:bg-red-300"
+        >
           <IoMdClose className="text-2xl" />
         </div>
       </div>

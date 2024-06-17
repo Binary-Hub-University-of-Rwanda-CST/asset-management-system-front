@@ -63,8 +63,8 @@ const Dashboard: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => 
       <div className="flex flex-col  gap-2 mb-2">
 
         <div className="flex flex-row items-center gap-1">
-          <MdOutlineDashboard className="text-3xl text-my-blue" />
-          <div className="px-2 rounded-md bg-primary-700 text-black w-max text-xl font-bold">
+          <MdOutlineDashboard className="text-2xl text-my-blue" />
+          <div className="px-2 rounded-md bg-primary-700 text-black w-max text-xl  font-bold">
             Dashboard
           </div>
         </div>
@@ -72,23 +72,23 @@ const Dashboard: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => 
       </div>
       <div className="flex flex-row gap-4 items-center">
         <div className="flex flex-row bg-blue-white px-4 py-2 rounded-lg h-fit items-center gap-2 w-40"> 
-        <TbDatabase className="text-5xl font-bold text-my-blue"/>
+        <TbDatabase className="text-3xl font-bold text-my-blue"/>
         <div className="flex flex-col gap-0">
         <h5>Stock</h5>
-        <h3 className="text-xl font-bold">3860</h3>
+        <h3 className="text-sm font-bold">3860</h3>
         </div>
         </div>
         <div className="flex flex-row bg-[#dcf1e6] px-4 py-2 rounded-lg h-fit items-center gap-2 w-40">  
-        <FiShare2 className="text-5xl font-bold text-confirm"/>
+        <FiShare2 className="text-3xl font-bold text-confirm"/>
         <div className="flex flex-col gap-0">
         <h5>Distributed</h5>
-        <h3 className="text-xl font-bold">3200</h3>
+        <h3 className="text-md font-bold">3200</h3>
         </div>
          </div>
       </div>
       </div>
 
-      <div className=" ml-32 mt-2 flex flex-row gap-10 text-xl">
+      <div className=" ml-32  flex flex-row gap-10 text-xl">
         <button>Stock</button>
         <button className="font-bold border-b-2  border-my-blue p-2">Distribution </button>
       </div>
@@ -98,7 +98,7 @@ const Dashboard: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) => 
         <div className="flex flex-col gap-4 w-1/4">
            <div className="rounded-lg p-0  w-full bg-white flex justify-center items-center  flex-col h-[320px]">
             <h3 className="text-xl ">Distribution Summary</h3>
-            {/* <AssetStatusChart data={chartData} /> */}
+            <AssetStatusChart data={chartData} />
           </div>
         <div className="flex justify-center items-center bg-white rounded-lg p-4 flex-col h-[320px]">
         <h3 className="text-xl"> Pending Request Summary</h3>

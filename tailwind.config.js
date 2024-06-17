@@ -41,7 +41,7 @@ module.exports = {
             'my-blue': ' #0085ff',
             'dark-white': '#ececec',
             'blue-white': '#e1f3ff',
-            'my-gray': '#f3f3f3',
+            'my-gray': '#d9d9d9',
             'greyBackground':'#B5B5B5',
             'white':'#FFFFFF',
             'blue':'#0085FF',

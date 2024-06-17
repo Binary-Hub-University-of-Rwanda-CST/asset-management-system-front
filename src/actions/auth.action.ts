@@ -4,10 +4,7 @@ import { ActionTypes } from "./types";
 import { API_URL } from "../utils/api";
 import { APP_TOKEN_NAME, setAxiosToken } from "../utils/AxiosToken";
 import { errorToText } from "../utils/functions";
-import {
-  SetSystemSuccessMessageAction,
-  UserRoleInterface,
-} from "./system.action";
+// import { SetSystemSuccessMessageAction, UserRoleInterface,} from "./system.action";
 import { UserAccessList } from "../config/userAccess";
 
 /**
@@ -46,24 +43,6 @@ export interface PermissionInterface {
 
 const token = localStorage.getItem(APP_TOKEN_NAME);
 
-// export interface UserItemInterface {
-//   full_name: string;
-//   sex: string | null;
-//   dob: string | null;
-//   nid: string | null;
-//   email: string | null;
-//   phone_numbers: string;
-//   user_id: string;
-//   username: string;
-//   created_by: string;
-//   created_at: string;
-//   updated_by: string | null;
-//   updated_at: string;
-//   status: string;
-//   first_name: string | null;
-//   middle_name: string | null;
-//   last_name: string | null;
-// }
 
 interface UserItemInterface {
   id: string;
@@ -98,10 +77,15 @@ interface UserItemInterface {
 //  user: UserItemInterface;
 //   role: UserRoleInterface | undefined ;
 // }
+export interface userRoleInterface{
+id:string,
+name:string
+access:any
+}
 export interface UserInterface {
-  token: TokenInterface;
+token: TokenInterface;
  user: UserItemInterface;
-  role: UserRoleInterface | undefined ;
+  role: userRoleInterface | undefined ;
 }
 export interface TokenInterface{
   access: Access
@@ -115,7 +99,7 @@ export interface Auth {
   loading: boolean;
   isAuthenticated: boolean;
   token: string;
-  user: UserInterface | null;
+  user: UserItemInterface | null;
 }
 
 //* ********************** ACTION TYPE INTERCACES ********************** */
@@ -128,19 +112,14 @@ export interface LoginSuccessDetails {
   type: ActionTypes.USER_LOGIN_SUCCESS_DATA;
   payload: {
     data: UserInterface;
-    token: string;
+    // token: string;
   };
 }
 
 export interface LogoutUser {
   type: ActionTypes.LOGOUT;
 }
-
-export interface FetchLoginDetails {
-  type: ActionTypes.LOGIN_DETAILS;
-  payload: Auth;
-}
-
+ 
 /**
  * * ****************************** ACTIONS *****************************
  */
@@ -152,52 +131,37 @@ export interface FetchLoginDetails {
  * @returns
  */
 
-export const FC_Login = (
-  data: {
-    username: string;
-    password: string;
-  },
-  CallbackFunc: Function
-) => {
+
+
+export const FC_Login = (data: { email: string; password: string }, callback: Function) => {
   return async (dispatch: Dispatch) => {
     try {
-      const res = await axios.post<UserInterface>(
-        `${API_URL}/user/account/login`,
-        data
-      );
-      console.log({ data_after_login: res.data });
-      localStorage.setItem(APP_TOKEN_NAME, res.data.token.access.token);
+      const res = await axios.post<UserInterface>(`${API_URL}/auth/login`, data);
+      console.log("Login Response:", res.data); // Log the response data
+
       dispatch<LoginSuccessDetails>({
         type: ActionTypes.USER_LOGIN_SUCCESS_DATA,
         payload: {
           data: {
             token: res.data.token,
-            role:
-              res.data.role === undefined
-                ? undefined
-                : {
-                  access: res.data.role.access?.toString().split(",") as UserAccessList[],
-                    role_id: res.data.role?.role_id,
-                    role: res.data.role?.role,
-                  },
-           user: res.data.user,
+            user: res.data.user,
+            role: res.data.role === undefined ? undefined : {
+              access: res.data.role.access?.toString().split(",") as UserAccessList[],
+              id: res.data.role?.id,
+              name: res.data.role.name,
+            },
           },
-          token: res.data.token.access.token,
         },
       });
-      dispatch<SetSystemSuccessMessageAction>({
-        type: ActionTypes.SET_SYSTEM_SUCCESS_MESSAGE,
-        payload:
-          "Welcome dear " +
-          res.data.user.names +
-          " You have successfully logged In",
-      });
-      CallbackFunc(true, "");
+
+      callback(true, "");
     } catch (error: any) {
-      CallbackFunc(false, errorToText(error));
+      console.error("Login Error:", error); // Log the error for debugging
+      callback(false, errorToText(error));
     }
   };
 };
+
 
 /**
  * @description Check if the user is logged in based on the logged in account
@@ -205,7 +169,6 @@ export const FC_Login = (
  * @param MsgHandler return the error from the API
  * @returns
  */
-
 export const FC_CheckLoggedIn = (callBack: (status: boolean) => void) => {
   callBack(false);
   return async (dispatch: Dispatch) => {
@@ -227,17 +190,15 @@ export const FC_CheckLoggedIn = (callBack: (status: boolean) => void) => {
         payload: {
           data: {
             token: res.data.token,
-            role:
-              res.data.role?.role === undefined
-                ? undefined
-                : {
+            role: res.data.role?.name === undefined
+              ? undefined
+              : {
                   access: res.data.role.access?.toString().split(",") as UserAccessList[],
-                    role_id: res.data.role?.role_id,
-                    role: res.data.role?.role,
-                  },
-           user: res.data.user,
+                  id: res.data.role?.id,
+                  name: res.data.role.name,
+                },
+            user: res.data.user,
           },
-          token: token!,
         },
       });
       callBack(true);

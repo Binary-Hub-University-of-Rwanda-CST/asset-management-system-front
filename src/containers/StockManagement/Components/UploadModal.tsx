@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import Modal from '../../../components/modal/Modal';
+import Modal, {ModalSize, ModalMarginTop} from '../../../components/modal/Modal';
 import Dropdown, { Option, dropdownStyle } from '../../../components/Fragments/DropDown';
 import FullAssets from '../../../utils/FullAssets';
 import { BsCloudUpload } from "react-icons/bs";
@@ -56,10 +56,12 @@ function UploadModal(props: ModalProps) {
     return (
         <div>
             <Modal
+
+            widthSizeClass={ModalSize.medium}
                 isOpen={isModalOpen}
                 onClose={props.close}
                 title="Upload Assets Data">
-                <div className='flex flex-col items-start p-5 w-[650px]'>
+                <div className='flex flex-col items-start p-5'>
 
                     <div className='flex flex-col gap-1 '>
                         <div className='flex flex-col gap-1 '>
