@@ -231,7 +231,7 @@ const CreateNewCategory: React.FC<CreateNewCategoryProps> = ({ isOpen, onClose }
                         close={closeAlert}
                         title={error}
                         alertType={AlertType.WARNING}
-                        className='bg-red-200 text-red-900 w-5/6 justify-self-center  animate__animated  animate__shakeX'
+                        className='bg-red-200 text-red-900 w-5/6  justify-self-center  animate__animated  animate__shakeX'
                     />
                     </div>
                 )}
