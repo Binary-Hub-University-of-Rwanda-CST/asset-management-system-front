@@ -163,7 +163,7 @@ const AssetList: React.FC<Props> = ({ assets, loading, error, fetchAssets }) => 
 console.log(" all assets:  " + assets); 
 
      return (
-        <div> 
+        <div className='flex ju items-center '>  
           {/* <h1>Asset Data</h1>
             {assets.map((assetData, index) => (
                 <div key={index}>
