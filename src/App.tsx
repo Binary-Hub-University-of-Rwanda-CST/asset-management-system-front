@@ -19,6 +19,8 @@ import CoomingSoon from "./components/CoomingSoon/CoomingSoon";
 import Test from "./App.Test";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import RequestValidation from "./containers/AssetDistribution/Request/Components/RequestValidation";
+import StockLoading from "./components/StockLoading/StockLoading";
+import { fetchAssets } from "./actions";
 
 const App = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(true);
@@ -76,7 +78,9 @@ const App = () => {
                     path="/change-password"
                     element={<ChangePassword />}
                   />
-                  <Route path="/assets-stock" element={<StockDashboard />} />
+                  {/* <Route path="/assets-stock" element={<StockDashboard />} />  */}
+                  <Route path="/assets-stock" element={<StockDashboard fetchAsset={fetchAssets} />} />
+
                   <Route path="/upload-stock" element={<UploadStock />} />
                   <Route
                     path="/assets-monitoring"
@@ -94,12 +98,13 @@ const App = () => {
                     path="/assets-tracking"
                     element={<AssetTracking />}
                   />
-                  <Route path="/reports" element={<Test />} />
+                  <Route path="/reports" element={<Test />} /> 
                   <Route path="/users-list" element={<DashboardLoading />} />
                   <Route path="/my-profile" element={<CoomingSoon />} />
                   <Route path="/" element={<Dashboard />} />
                   <Route path="*" element={<PageNotFound />} />
                   <Route path="/fake" element={<RequestValidation />} />
+                  <Route path="/stockloading" element={<StockLoading />} />         
                 </Routes>
               </div>
             </div>

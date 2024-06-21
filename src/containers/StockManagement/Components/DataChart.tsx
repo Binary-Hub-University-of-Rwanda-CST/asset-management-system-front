@@ -1,18 +1,25 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
-import { stockData } from '../../../utils/StockLocation';
 
+interface Stock {
+  no: string;
+  stockName: string;
+  stockLocation: string;
+  totalAsset: number;
+}
 
+interface DataChartProps {
+  activeCategoryData: Stock[];
+  categoryName: string; // New prop for category name
+}
 
-const DataChart: React.FC = () => {
-
-
+const DataChart: React.FC<DataChartProps> = ({ activeCategoryData, categoryName }) => {
   // Extract stock location names
-  const categories = stockData.map(stock => stock.stockLocation);
+  const categories = activeCategoryData.map(stock => stock.stockLocation);
 
   // Extract total desktop values
-  const desktopValues = stockData.map(stock => stock.totalDesktop);
+  const desktopValues = activeCategoryData.map(stock => stock.totalAsset);
 
   const options: ApexOptions = {
     chart: {
@@ -38,18 +45,18 @@ const DataChart: React.FC = () => {
       },
     },
     grid: {
-      show: true, // Show grid lines
-      borderColor: '#f0f0f0', // Color of grid lines
-      strokeDashArray: 0, // Length of dash stroke
-      position: 'back', // Position of grid lines
+      show: true,
+      borderColor: '#f0f0f0',
+      strokeDashArray: 0,
+      position: 'back',
       xaxis: {
         lines: {
-          show: true, // Hide horizontal grid lines
+          show: true,
         },
       },
       yaxis: {
         lines: {
-          show: false, // Show vertical grid lines
+          show: false,
         },
       },
     },
@@ -57,15 +64,15 @@ const DataChart: React.FC = () => {
 
   const series = [
     {
-      name: 'Desktop',
+      name: categoryName, // Use categoryName prop dynamically
       data: desktopValues,
     },
   ];
 
   return (
     <div className="p-4 rounded-3xl m-2 shadow-xl border-1 border-[#bbbdc3] ">
-      <h1 className="text-lg ml-16 mb-1">Desktop stock summary in stock location</h1>
-      <h2 className='text-black ml-16  font-bold'> 3,000</h2>
+      <h1 className="text-lg ml-16 mb-1">{categoryName} stock summary in stock location</h1>
+      <h2 className='text-black ml-16  font-bold'> {desktopValues.reduce((total, value) => total + value, 0)}</h2>
       <ReactApexChart
         options={options}
         series={series}

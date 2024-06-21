@@ -1,8 +1,7 @@
 import React from 'react';
 
 interface CategoriesProps {
-  key:number,
-  id:number,
+  id:number | string,
   CategoryName: string;
   totalAsset: number;
   handleActive:any;

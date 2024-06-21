@@ -53,6 +53,7 @@
 // };
 
 // export default Test;
+
 // import React, { useState } from "react";
 // import TableModal from "./components/TableModal/TableModal";
 // import FullAssets from "./utils/FullAssets";
@@ -109,16 +110,16 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { RootState } from './app/store';
 import { fetchAssets } from './actions/asset.action';
-import { Asset } from './actions/asset.action';
+import { Assets } from './actions/asset.action';
 import DataLoading from './components/dataLoading/DataLoading';
 interface Props {
-  assets: Asset[];
+  assets: Assets[];
   loading: boolean;
   error: string | null;
   fetchAssets: () => void;
 }
 
-const AssetList: React.FC<Props> = ({ assets, loading, error, fetchAssets }) => {
+const AssetList: React.FC<Props> = ({ assets, loading, error, fetchAssets }) => { 
   useEffect(() => {
     fetchAssets();
   }, [fetchAssets]);
@@ -130,26 +131,36 @@ const AssetList: React.FC<Props> = ({ assets, loading, error, fetchAssets }) => 
   if (error) {
     return <div>Error: {error}</div>;
   }
+console.log(" all assets:  " + assets); 
 
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Asset List</h1>
-      <div className="grid grid-cols-1 gap-4">
-        {assets.map(asset => (
-          <div key={asset.asset_id} className="bg-white shadow-md rounded-md p-4">
-            <h2 className="text-lg font-semibold">{asset.category.category_name}</h2>
-            <p className="text-gray-600">{asset.brand.name}</p>
-            <p className="text-gray-600">{asset.stock.name}</p>
-            <p className="text-gray-600">{asset.supplier.name}</p>
-            <p className="mt-2">Purchase Order: {asset.purchase_order_number}</p>
-            <p>Value: ${asset.value}</p>
-            <p>Life Span: {asset.life_span_years} years</p>
-            <p>Date In: {asset.date_in}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+     return (
+        <div> 
+          <h1>Asset Data</h1>
+            {assets.map((assetData, index) => (
+                <div key={index}>
+                    <h2>Category: {assetData.category.name}</h2>
+                    {assetData.stock.map(stockItem => (
+                        <div key={stockItem.id}>
+                            <h3>Stock: {stockItem.name}</h3>
+                            <p>Location: {stockItem.location}</p>
+                            <ul>
+                                {stockItem.asset.map((asset, i) => (
+                                    <li key={i}>
+                                        <h4>Specifications:</h4>
+                                        <ul>
+                                            {asset.specification.map((spec, j) => (
+                                                <li key={j}>{spec.name}: {spec.value}</li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            ))}
+        </div>
+    );
 };
 
 const mapStateToProps = (state: RootState) => ({
@@ -158,4 +169,50 @@ const mapStateToProps = (state: RootState) => ({
   error: state.asset.error,
 });
 
-export default connect(mapStateToProps, { fetchAssets })(AssetList);
+export default connect(mapStateToProps, { fetchAssets })(AssetList); 
+// import React from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { RootState } from './app/store';
+
+// const AssetsComponent: React.FC = () => {
+//     const assetsData = useSelector((state: RootState) => state.asset.assets);
+//     console.log(" Asset dat" + assetsData); 
+    
+//     const dispatch = useDispatch();
+
+//     // Optionally, define functions to dispatch actions
+//     // const handleSomeAction = () => {
+//     //     dispatch(assetsActions.someAction());
+//     // };
+
+    // return (
+    //     <div>
+    //       <h1>Asset Data</h1>
+    //         {assetsData.map((assetData, index) => (
+    //             <div key={index}>
+    //                 <h2>Category: {assetData.category.name}</h2>
+    //                 {assetData.stock.map(stockItem => (
+    //                     <div key={stockItem.id}>
+    //                         <h3>Stock: {stockItem.name}</h3>
+    //                         <p>Location: {stockItem.location}</p>
+    //                         <ul>
+    //                             {stockItem.asset.map((asset, i) => (
+    //                                 <li key={i}>
+    //                                     <h4>Specifications:</h4>
+    //                                     <ul>
+    //                                         {asset.specification.map((spec, j) => (
+    //                                             <li key={j}>{spec.name}: {spec.value}</li>
+    //                                         ))}
+    //                                     </ul>
+    //                                 </li>
+    //                             ))}
+    //                         </ul>
+    //                     </div>
+    //                 ))}
+    //             </div>
+    //         ))}
+    //     </div>
+    // );
+// };
+
+// export default AssetsComponent;

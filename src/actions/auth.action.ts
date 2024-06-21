@@ -4,7 +4,6 @@ import { ActionTypes } from "./types";
 import { API_URL } from "../utils/api";
 import { APP_TOKEN_NAME, setAxiosToken } from "../utils/AxiosToken";
 import { errorToText } from "../utils/functions";
-// import { SetSystemSuccessMessageAction, UserRoleInterface,} from "./system.action";
 import { UserAccessList } from "../config/userAccess";
 
 /**
@@ -51,10 +50,18 @@ interface UserItemInterface {
   email: string;
   password: string;
   location: {
-    building: { id: string; name: string };
-    room: { id: string; name: string };
+    building: 
+    { 
+      id: string; 
+      name: string
+     };
+    room: {
+       id: string; 
+       name: string 
+      };
     status: 'ACTIVE' | 'INACTIVE';
   }[];
+  
   is_line_manager: boolean;
   occupation_address: {
     id: string;

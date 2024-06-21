@@ -1,9 +1,9 @@
 // reducers.ts
-import { Asset } from '../actions/asset.action';
+import { Assets } from '../actions/asset.action';
 import { FETCH_ASSETS_REQUEST, FETCH_ASSETS_SUCCESS, FETCH_ASSETS_FAILURE } from '../actions/types';
 
 export interface AssetState {
-  assets: Asset[];
+  assets: Assets[];
   loading: boolean;
   error: string | null;
 }
@@ -38,6 +38,6 @@ const assetReducer = (state = initialState, action: any): AssetState => {
     default:
       return state;
   }
-};
+}; 
 
 export default assetReducer;

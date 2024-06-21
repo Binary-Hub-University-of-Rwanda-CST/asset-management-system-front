@@ -7,10 +7,6 @@
     "user": {
       "jwt": "hhh",
       "role": null,
-      "country": null,
-      "district": null,
-      "sector": null,
-      "school": null,
       "stakeholder": null,
       "user_info": {
         "full_name": "Edison UWIHANGANYE",

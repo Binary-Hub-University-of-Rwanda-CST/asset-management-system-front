@@ -64,17 +64,17 @@ const TableModal: React.FC<ModalProps> = (props) => {
   return (
     <>
       {isOpen && (
-        <div className="fixed top-0 left-0 w-screen h-full flex items-center justify-center bg-black bg-opacity-50 pt-32 px-4 ">
-          <div ref={modalRef} className="bg-white w-full h-full  py-4 rounded-t-xl animate__animated animate__fadeInUp animate__faster ">
+        <div className="fixed top-0 left-0 w-screen h-full flex items-center justify-center bg-black bg-opacity-50 pt-20 px-4 z-50  ">
+          <div  className="bg-white w-full h-full  py-4 rounded-t-xl animate__animated animate__fadeInUp animate__faster ">
             <div className="flex flex-row gap-3 items-center bold border-blue-white border-b-2 pb-2 mx-0 px-5 ">
               <button
-                className="flex gap-1  items-center text-my-blue bg-blue-white rounded-lg p-2  top-2 left-2 hover:text-gray-800"
+                className="flex gap-1  items-center text-my-blue bg-blue-white rounded-lg py-1 px-2  top-2 left-2 hover:text-gray-800"
                 onClick={onClose}
               >
                 Back to list
               </button>
-              <h2 className="font-bold text-xl pr-5">{title}</h2>
-              {tag && tag.map(tag => <span className=" bg-blue-white text-my-blue font-bold text-sm rounded-md px-2 py-1">{tag}</span>)}
+              <h4  className="font-bold text-md  pr-5">{title}</h4>
+              {tag && tag.map(tag => <span className=" bg-blue-white text-my-blue font-bold   text-sm rounded-md px-2 py-1">{tag}</span>)}
             </div>
 
             <div className="flex flex-col px-6  py-2 ">
@@ -84,34 +84,34 @@ const TableModal: React.FC<ModalProps> = (props) => {
                   name="search"
                   id="search"
                   placeholder="Search..."
-                  className="py-2 text-md w-11/12 bg-my-gray rounded-lg px-8 text-xl focus:outline-my-gray focus:bg-white pl-10 relative"
+                  className="py-1 text-sm  w-11/12 bg-my-gray rounded-lg px-8 focus:outline-my-gray focus:bg-white pl-10 relative"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <span className="absolute left-4 top-6 transform -translate-y-1/2 text-gray-500">
+                <span className="absolute left-4 top-4  transform -translate-y-1/2 text-gray-500">
                   <FaSearch />
                 </span>
 
-                <button className=" flex  items-center justify-center rounded-lg px-8 bg-green-600 w-1/12 ml-4 text-white text-xl" onClick={exportToCSV}><FaFileExcel className="" />Export</button>
+                <button className=" flex  items-center justify-center rounded-md  px-8 bg-green-600 w-1/12 ml-4 text-white text-sm " onClick={exportToCSV}><FaFileExcel className="" />Export</button>
               </div>
 
               <div className="overflow-x-auto mt-4">
-                <div style={{ maxHeight: "600px" }}>
+                <div style={{ maxHeight: "600px"}}>
                   <table className="min-w-full">
                     <thead>
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">No</th>
+                        <th className="px-4  py-2  text-left text-sm  font-bold text-black  uppercase tracking-wider">No</th>
                         {tableHeaders.map(header => (
-                          <th key={header} className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">{header}</th>
+                          <th key={header} className="px-4  py-3 text-left text-sm  font-bold   text-black uppercase tracking-wider">{header}</th>
                         ))}
                       </tr>
                     </thead>
                     <tbody className="">
                       {filteredData.map((row, rowIndex) => (
-                        <tr key={rowIndex} className="border-t">
-                          <td className="px-4 py-2">{rowIndex + 1}</td>
+                        <tr key={rowIndex} className="border-t py-1 ">
+                          <td className="px-4 py-1   font-sm ">{rowIndex + 1}</td>
                           {tableHeaders.map((header, cellIndex) => (
-                            <td key={cellIndex} className="px-4 py-2">{row[header.toLowerCase().replace(/\s+/g, '_')]}</td>
+                            <td key={cellIndex} className="px-4 font-sm py-1 ">{row[header.toLowerCase().replace(/\s+/g, '_')]}</td>
                           ))}
                         </tr>
                       ))}
