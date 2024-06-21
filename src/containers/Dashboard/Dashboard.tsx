@@ -154,7 +154,7 @@ const AssetList: React.FC<Props> = ({ assets, loading, error, fetchAssets }) => 
   }, [fetchAssets]);
 
   if (loading) {
-    return <Loader/>;       
+    return <div className='flex justify-center items-center  mt-20 '><Loader/></div>;       
   }
 
   if (error) {
@@ -163,7 +163,7 @@ const AssetList: React.FC<Props> = ({ assets, loading, error, fetchAssets }) => 
 console.log(" all assets:  " + assets); 
 
      return (
-        <div className='flex ju items-center '>  
+        <div className=''>  
           {/* <h1>Asset Data</h1>
             {assets.map((assetData, index) => (
                 <div key={index}>
