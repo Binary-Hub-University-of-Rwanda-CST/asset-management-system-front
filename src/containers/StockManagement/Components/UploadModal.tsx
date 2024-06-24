@@ -160,7 +160,7 @@ const UploadModal: React.FC<ModalProps> = (props) => {
               tag='Assets'
               style={style}
               onChange={handleCategoryChange}
-            //   value={selectedCategoryOption || ''}
+              value={selectedCategoryOption || ''} 
             />
           </div>
           <div className='flex flex-col gap-1'>

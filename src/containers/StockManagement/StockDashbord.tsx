@@ -136,7 +136,7 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
 
       <div className="flex flex-row gap-4">
         <div className="relative w-1/3 px-4 rounded-lg bg-white py-10 pb-16 animate__animated animate__fast   min-h-96">
-          <div className="flex">
+          <div className="flex justify-center pb-2 ">
             <h3 className="text-md font-bold text-black justify-center">{totalCategories>0? "Asset Categories" : " No Category current  "}</h3>
           </div>
           <div className="flex justify-center flex-wrap gap-2 mt-2">

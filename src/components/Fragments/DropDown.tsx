@@ -17,6 +17,7 @@ export interface DropdownProps {
   style?: dropdownStyle;
   tag?: string;
   onChange?: (optionName: string) => void;
+  value? : string  
 }
 
 const Dropdown: React.FC<DropdownProps> = ({ options, tag, style, onChange }) => {
