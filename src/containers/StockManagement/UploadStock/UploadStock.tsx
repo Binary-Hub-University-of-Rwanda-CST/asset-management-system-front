@@ -5,6 +5,12 @@ import { Auth, FC_SetError, FC_SetSuccess } from "../../../actions";
 import Alert,{AlertType} from "../../../components/Alert/Alert";
 import { GoDatabase } from "react-icons/go";
 import UploadModal from "../Components/UploadModal";
+import { useDispatch } from "react-redux"; 
+import { fetchCategories } from "../../../actions/category.action";
+import { fetchStocks } from "../../../actions/stock.action";
+import { fetchBrands } from "../../../actions/brand.action";
+import { AppDispatch } from "../../../app/store";
+
 
 interface AppProps {
   auth: Auth;
@@ -26,9 +32,13 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
     setUploadData(true);
     // alert(UploadData);
   }
+  const dispatch: AppDispatch = useDispatch();
+
   useEffect(() => {
-    // componentDidMount logic goes here if needed
-  }, []);
+    dispatch(fetchCategories());
+    dispatch(fetchStocks()); 
+    dispatch(fetchBrands()); 
+  }, [dispatch]); 
 
   return (
     <div className="mr-4  ">

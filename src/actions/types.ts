@@ -19,7 +19,37 @@ export type Action =
   | SetSystemSuccessMessageAction;
 
 
-  // actionTypes.ts
+ /*
+                *ASSET  TYPES
+                @codeWithEdison
+*/
 export const FETCH_ASSETS_REQUEST = 'FETCH_ASSETS_REQUEST';
 export const FETCH_ASSETS_SUCCESS = 'FETCH_ASSETS_SUCCESS';
 export const FETCH_ASSETS_FAILURE = 'FETCH_ASSETS_FAILURE';
+
+
+/*
+                *CATEGORY TYPES
+                @codeWithEdison
+                
+*/
+export const FETCH_CATEGORIES_REQUEST = 'FETCH_CATEGORIES_REQUEST';
+export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
+export const FETCH_CATEGORIES_FAILURE = 'FETCH_CATEGORIES_FAILURE';
+
+/*
+                *STOCKS TYPES
+                 @codeWithEdison
+*/
+export const FETCH_STOCKS_REQUEST = 'FETCH_STOCKS_REQUEST';
+export const FETCH_STOCKS_SUCCESS = 'FETCH_STOCKS_SUCCESS';
+export const FETCH_STOCKS_FAILURE = 'FETCH_STOCKS_FAILURE';
+
+/*
+                *BRAND TYPES
+                @codeWithEdison
+                
+*/
+export const FETCH_BRANDS_REQUEST = 'FETCH_BRANDS_REQUEST';
+export const FETCH_BRANDS_SUCCESS = 'FETCH_BRANDS_SUCCESS';
+export const FETCH_BRANDS_FAILURE = 'FETCH_BRANDS_FAILURE';

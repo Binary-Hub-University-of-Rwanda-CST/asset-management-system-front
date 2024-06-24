@@ -46,7 +46,7 @@ export class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
           <div className="flex items-center justify-center px-5 mt-4 py-4">
             <img
               src={UR_ICON}
-              alt="Rwanda Basic Education Board"
+              alt="ASSET MANAGEMENT SYSTEM -UR" 
               className="hidden md:block w-32"
             />
           </div>
