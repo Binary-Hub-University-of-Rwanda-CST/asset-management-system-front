@@ -4,7 +4,7 @@ import { APP_TOKEN_NAME } from "../utils/AxiosToken";
  export const defaultState: Auth = {
   user: null,
   loading: true,
-  isAuthenticated: true,   
+  isAuthenticated: true,     
   token: "",
 };
 
@@ -19,10 +19,10 @@ export const authReducer = (state: Auth = defaultState, action: Action): Auth =>
     case ActionTypes.USER_LOGIN_SUCCESS_DATA:
       return {
         ...state,
-        user: action.payload.data.user,
+        user: action.payload.data.user, 
         token: action.payload.data.token.access.token,
         loading: false,
-        isAuthenticated: true, // Set isAuthenticated based on login success
+        isAuthenticated: true, 
       };
     case ActionTypes.LOGOUT:
       localStorage.removeItem(APP_TOKEN_NAME);

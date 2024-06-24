@@ -24,13 +24,8 @@ import { fetchAssets } from "./actions";
 
 const App = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(true);
+
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  const dispatch = useDispatch<AppDispatch>();
-  
-  const handleLogout = () => {
-    dispatch(FC_Logout()); // Dispatch the logout action to update the state
-    setSideNavbarStatus(false);
-    };
     
     const authData = useSelector((state: RootState) => state.auth);
     console.log(authData); 
@@ -79,7 +74,7 @@ const App = () => {
                     element={<ChangePassword />}
                   />
                   {/* <Route path="/assets-stock" element={<StockDashboard />} />  */}
-                  <Route path="/assets-stock" element={<StockDashboard fetchAsset={fetchAssets} />} />
+                  <Route path="/assets-stock" element={<StockDashboard />} /> 
 
                   <Route path="/upload-stock" element={<UploadStock />} />
                   <Route

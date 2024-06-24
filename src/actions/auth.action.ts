@@ -7,7 +7,7 @@ import { errorToText } from "../utils/functions";
 import { UserAccessList } from "../config/userAccess";
 
 /**
- * * ****************************** INTERFACES *****************************
+ * * ******************************  AUTH INTERFACES *****************************
  */
 
 export enum BooleanEnum {
@@ -128,7 +128,7 @@ export interface LogoutUser {
 }
  
 /**
- * * ****************************** ACTIONS *****************************
+ * * ****************************** AUTH  ACTIONS *****************************
  */
 
 /**

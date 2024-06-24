@@ -5,6 +5,9 @@ import { API_URL } from '../../../utils/api';
 import LoadingCircle from '../../../components/Loading/LoadingCircle';
 import Alert, { AlertType } from '../../../components/Alert/Alert';
 import Successfully from '../../../components/Successfully/Successfully';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../app/store';
+import { fetchAssets } from '../../../actions';
 
 interface Specification {
     name: string;
@@ -33,7 +36,8 @@ const CreateNewCategory: React.FC<CreateNewCategoryProps> = ({ isOpen, onClose }
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
-    const navigate = useNavigate(); // Initialize useNavigate
+    const dispatch: AppDispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleCategoryName = (e: ChangeEvent<HTMLInputElement>) => {
         setCategoryName(e.target.value);
@@ -67,6 +71,7 @@ const CreateNewCategory: React.FC<CreateNewCategoryProps> = ({ isOpen, onClose }
         setSuccessMessage(null);
         setShowSuccessPopup(false);
         onClose();
+        dispatch(fetchAssets());  
         navigate('/assets-stock');
     };
 

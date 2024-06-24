@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { StoreState } from "../../reducers";
+// import { StoreState } from "../../reducers";
 import DataChart from "./Components/DataChart";
 import { FC_SetError, FC_SetSuccess } from "../../actions";
 import { fetchAssets } from "../../actions/asset.action";
 import { GoDatabase } from "react-icons/go";
-import { MdOutlineAddBusiness } from "react-icons/md";
+// import { MdOutlineAddBusiness } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
 import { FaRegCheckCircle } from "react-icons/fa";
 import StockTable from "./Components/DataTable";
@@ -22,13 +22,14 @@ interface stockProps {
   assetsData: Assets[];
   assetLoading: boolean;
   assetError: string | null;
-  fetchAsset: () => void;
+  fetchAssets: () => void; 
 }
 
-const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetchAsset }) => {
-  useEffect(() => {
-    fetchAsset();
-  }, [fetchAsset]);
+const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetchAssets}) => {
+  
+   useEffect(() => {
+    fetchAssets();
+  }, [fetchAssets]);
 
   const [showTable, setShowTable] = useState(false);
   const [isStockModalOpen, setIsStockModalOpen] = useState(false);
@@ -179,13 +180,13 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
                 </button>
               </div>
               <div>
-                {showTable && (
+                {/* {showTable && (
                   <input
                     type="text"
                     placeholder="search..."
                     className="bg-gray-200 py-1 px-16 rounded-lg text-black outline-none font-bold animate__animated animate__faster animate__zoomIn"
                   />
-                )}
+                )} */}
               </div>
             </div>
           </div>

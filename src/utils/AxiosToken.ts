@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const APP_TOKEN_NAME = "fda_t_tosoweuhfsofo";
+export const APP_TOKEN_NAME = "ams_ur_binary_hub";
 
 export const setAxiosToken = () => {
   if (localStorage[APP_TOKEN_NAME]) {

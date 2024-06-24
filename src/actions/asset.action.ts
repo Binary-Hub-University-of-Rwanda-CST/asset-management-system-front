@@ -85,7 +85,7 @@ export const fetchAssets = () => async (dispatch: Dispatch) => {
 
   try {
     const response = await fetch(`${API_URL}/asset/customized`); 
-    console.log(response); 
+    // console.log(response); 
     
     if (!response.ok) {
       throw new Error('Failed to fetch assets');
