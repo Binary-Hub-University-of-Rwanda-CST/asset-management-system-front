@@ -47,7 +47,7 @@ const App = () => {
           </div>
 
           {isAuthenticated && (
-            <div className="flex h-full bg-gray-200 flex-row">
+            <div className="flex h-full bg-gray-100 flex-row">
               {/* Side Navigation Bar */}
               <div>
                 {sideNavbarStatus && (

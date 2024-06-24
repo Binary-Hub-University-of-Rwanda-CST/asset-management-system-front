@@ -11,7 +11,7 @@ const SearchInput = (props: {
       <div className="relative w-full">
         <input
           type="search"
-          className="bg-gray-200 rounded-md px-3 py-2 w-full pl-10 text-sm font-light"
+          className="bg-gray-100 rounded-md px-3 py-2 w-full pl-10 text-sm font-light"
           placeholder={
             props.placeholder === undefined
               ? "Search by keyword"

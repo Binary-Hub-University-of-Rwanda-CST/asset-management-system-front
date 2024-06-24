@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaArrowLeft, FaSearch, FaFileExcel } from "react-icons/fa";
+import { RiH1 } from "react-icons/ri";
 
 interface ModalProps {
   isOpen: boolean;
@@ -43,12 +44,13 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
     // Filter table data based on search term
     const filtered = tableData.filter(row =>
       tableHeaders.some(header => {
-        const value = row.specifications?.[header];
+        const value = row.specifications?.[header]; // Access nested value
         return String(value).toLowerCase().includes(searchTerm.toLowerCase());
       })
     );
     setFilteredData(filtered);
   }, [searchTerm, tableData, tableHeaders]);
+   
 
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -66,6 +68,9 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
     link.click();
   };
 
+  console.log('table data: '+ tableData); 
+  console.log('table header: '+ tableHeaders);   
+  
   return (
     <>
       {isOpen && (
@@ -104,7 +109,7 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
 
               <div className="overflow-x-auto mt-4">
                 <div style={{ maxHeight: "600px" }}>
-                  <table className="min-w-full">
+                 { tableData.length > 0 ?  <table className="min-w-full">
                     <thead>
                       <tr>
                         <th className="px-4 py-2 text-left text-sm font-bold text-black uppercase">No</th>
@@ -114,16 +119,19 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
                       </tr>
                     </thead>
                     <tbody>
-                      {filteredData.map((row, rowIndex) => (
-                        <tr key={rowIndex} className="border-t py-1">
-                          <td className="px-4 py-1 font-sm">{rowIndex + 1}</td>
-                          {tableHeaders.map((header, cellIndex) => (
-                            <td key={cellIndex} className="px-4 font-sm py-1">{row.specifications?.[header]}</td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                        {filteredData.map((row, rowIndex) => (
+                          <tr key={rowIndex} className="border-t py-1">
+                            <td className="px-4 py-1 font-sm">{rowIndex + 1}</td>
+                            {tableHeaders.map((header, cellIndex) => (
+                              <td key={cellIndex} className="px-4 font-sm py-1">{row[header]}</td>
+                            ))}
+                          </tr>
+                        ))}
+                     </tbody> 
+
+                  </table> : 
+                  <h1 className=" text-center "> no data  found </h1>
+                  }
                 </div>
               </div>
 

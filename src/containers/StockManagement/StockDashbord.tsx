@@ -187,7 +187,7 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
                   <input
                     type="text"
                     placeholder="search..."
-                    className="bg-gray-200 py-1 px-16 rounded-lg text-black outline-none font-bold animate__animated animate__faster animate__zoomIn"
+                    className="bg-gray-100 py-1 px-16 rounded-lg text-black outline-none font-bold animate__animated animate__faster animate__zoomIn"
                   />
                 )} */}
               </div>

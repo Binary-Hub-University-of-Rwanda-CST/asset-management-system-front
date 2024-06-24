@@ -160,7 +160,7 @@ const CreateNewCategory: React.FC<CreateNewCategoryProps> = ({ isOpen, onClose }
                                     <li key={index} className='m-2'>
                                         <strong className='text-my-blue'>{spec.name}:</strong>
                                         {spec.values.map((value, idx) => (
-                                            <span key={idx} className='bg-gray-200 rounded-md px-3 py-1 text-sm ml-2'>
+                                            <span key={idx} className='bg-gray-100 rounded-md px-3 py-1 text-sm ml-2'>
                                                 {value}
                                             </span>
                                         ))}
@@ -192,7 +192,7 @@ const CreateNewCategory: React.FC<CreateNewCategoryProps> = ({ isOpen, onClose }
                                 />
                                 <div className='m-2 flex flex-wrap'>
                                     {newSpecValues.map((value, index) => (
-                                        <span key={index} className='bg-gray-200 rounded-full px-3 py-1 text-sm m-1'>
+                                        <span key={index} className='bg-gray-100 rounded-full px-3 py-1 text-sm m-1'>
                                             {value}
                                         </span>
                                     ))}

@@ -91,8 +91,8 @@ const Dropdown: React.FC<DropdownProps> = ({ options, tag ,style }) => {
                 <button
                   key={option.OptionName}
                   onClick={() => handleSelect(option)}
-                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900 ${
-                    option === selectedOption ? 'bg-gray-200' : ''
+                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 ${
+                    option === selectedOption ? 'bg-gray-100' : ''
                   }`}
                   role="menuitem"
                 >

@@ -16,7 +16,7 @@ const CoomingSoon = () => {
     <div>
 
     </div>
-<div className="col-span-8 bg-gray-200 rounded-lg  w-full  animate-pulse">
+<div className="col-span-8 bg-gray-100 rounded-lg  w-full  animate-pulse">
 <div className="w-full flex flex-col items-center justify-center ga-5">
   {/* <div></div> */}
   <div className=" animate__animated animate__slower animate__zoomIn fixed top-0 bottom-0 justify-center  text-center text-3xl font-extrabold text-gray-600  flex flex-col items-center gap-3  p-6  bg-transparent  mt-20 ">

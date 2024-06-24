@@ -37,7 +37,7 @@ const Input: React.FC<InputProps> = ({
           className={`px-3 py-2 text-sm w-full border ${
             error ? "border-red-600" : " outline-my-blue border-my-blue"
           } rounded-md ${
-            className === undefined ? "bg-gray-200" : className
+            className === undefined ? "bg-gray-100" : className
           }`}
           disabled={disabled}
           value={value}

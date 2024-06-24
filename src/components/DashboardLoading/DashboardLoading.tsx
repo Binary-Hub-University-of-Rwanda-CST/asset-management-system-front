@@ -16,14 +16,14 @@ const DashboardLoading = () => {
             <div className="bg-gray-300 h-6 w-40 rounded-md mt-2 animate-pulse"></div>
           </div>
           <div className="flex flex-row gap-4 items-center">
-            <div className="flex flex-row bg-gray-200 px-4 py-2 rounded-lg h-fit items-center gap-2 w-40">
+            <div className="flex flex-row bg-gray-100 px-4 py-2 rounded-lg h-fit items-center gap-2 w-40">
               <div className="bg-gray-300 h-6 w-6 rounded-full animate-pulse"></div>
               <div className="flex flex-col gap-0">
                 <div className="bg-gray-300 h-4 w-16 rounded-md animate-pulse"></div>
                 <div className="bg-gray-300 h-4 w-8 rounded-md mt-1 animate-pulse"></div>
               </div>
             </div>
-            <div className="flex flex-row bg-gray-200 px-4 py-2 rounded-lg h-fit items-center gap-2 w-40">
+            <div className="flex flex-row bg-gray-100 px-4 py-2 rounded-lg h-fit items-center gap-2 w-40">
               <div className="bg-gray-300 h-6 w-6 rounded-full animate-pulse"></div>
               <div className="flex flex-col gap-0">
                 <div className="bg-gray-300 h-4 w-16 rounded-md animate-pulse"></div>
