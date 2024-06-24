@@ -147,10 +147,8 @@ console.log(" all assets:  " + assets);
                                 {stockItem.asset.map((asset, i) => (
                                     <li key={i}>
                                         <h4>Specifications:</h4>
-                                        <ul>
-                                            {asset.specification.map((spec, j) => (
-                                                <li key={j}>{spec.name}: {spec.value}</li>
-                                            ))}
+                                        <ul className=' ml-44 '> 
+                                            {} assets deisplayed here 
                                         </ul>
                                     </li>
                                 ))}

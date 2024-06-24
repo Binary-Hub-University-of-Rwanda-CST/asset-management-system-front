@@ -62,7 +62,7 @@ export interface AssetSpecification {
 }
 
 export interface Asset {
-    specification: AssetSpecification[];
+  [key: string]: string ; 
 }
 
 export interface Stock {

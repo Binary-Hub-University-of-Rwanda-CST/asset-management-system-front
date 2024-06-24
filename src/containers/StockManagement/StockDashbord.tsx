@@ -49,15 +49,17 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
       const category = assetsData.find(category => category.category.id === activeCategory);
       if (category) {
         const filteredStocks: StockInterface[] = category.stock.map(stockItem => ({
-          no: stockItem.id, // Assuming 'id' or another unique identifier for each stock
+          no: stockItem.id,
           stockName: stockItem.name,
           stockLocation: stockItem.location,
-          totalAsset: stockItem.asset.length, // Example: Calculate total assets for each stock item
+          totalAsset: stockItem.asset.length,
+          assets: stockItem.asset, // Include assets property here
         }));
         setActiveCategoryStockData(filteredStocks);
       }
     }
   }, [activeCategory, assetsData]);
+   
   
 
   if (assetLoading) {
@@ -79,11 +81,12 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
 
   const iamActive = (key: string) => setActiveCategory(key);
 
-  // Calculate the total number of stocks across all categories
-  const totalStocks = assetsData.reduce((total, category) => total + category.stock.length, 0);
-
   // Find the active category
   const activeCategoryData = assetsData.find((category) => category.category.id === activeCategory);
+
+  // Calculate the total number of stocks across all categories
+  const totalStocksInActiveCategory = activeCategoryData ? activeCategoryData.stock.length : 0; 
+
   const activeCategoryName = activeCategoryData ? activeCategoryData.category.name : 'Desktop - Assets';
   const activeCategoryTotalAssets = activeCategoryData ? activeCategoryData.stock.reduce((total, stockItem) => total + stockItem.asset.length, 0) : 0;
 
@@ -121,7 +124,7 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
           </div>
           <div className="flex flex-col justify-center align-center">
             <p className="text-gray-400">Total Stocks</p>
-            <h2 className="text-black font-bold text-2xl flex justify-center">{totalStocks}</h2>
+            <h2 className="text-black font-bold text-2xl flex justify-center">{totalStocksInActiveCategory}</h2> 
           </div>
         </div>
         <div>

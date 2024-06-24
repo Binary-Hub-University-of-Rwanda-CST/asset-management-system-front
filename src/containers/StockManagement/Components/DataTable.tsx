@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { stockData } from "../../../utils/StockLocation";
-import AppModal, { ModalSize, Themes, ModalMarginTop } from "../../../components/AppModal/AppModal";
 import TableModal from "../../../components/TableModal/TableModal";
-import FakeAssetsData from "../../../utils/FakeAssetsData";
-import FullAssets from "../../../utils/FullAssets";
 import { FaFileExcel } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 
@@ -12,10 +8,11 @@ export interface StockInterface {
   stockName: string;
   stockLocation: string;
   totalAsset: number;
+  assets: AssetInterface[];
 }
 
-interface AssetInterface {
-  [key: string]: any;
+export interface AssetInterface {
+  [key: string]: string;
 }
 
 interface StockTableProps {
@@ -24,27 +21,21 @@ interface StockTableProps {
 }
 
 const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCategory }) => {
-  const [viewTable, SetViewTable] = useState(false);
   const [selectedStock, setSelectedStock] = useState<StockInterface | null>(null);
-  const [selectedStockAssets, setSelectedStockAssets] = useState<AssetInterface[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(activeCategoryData);
 
   const handleRowClick = (stock: StockInterface) => {
     setSelectedStock(stock);
-    // Filter assets based on the selected stock
-    const stockAssets = FullAssets.filter(asset => asset.stock_id === stock.no);
-    setSelectedStockAssets(stockAssets);
-    setIsModalOpen(true); // Open the modal when a row is clicked
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setSelectedStock(null);
-    setSelectedStockAssets([]);
-    setIsModalOpen(false); // Close the modal
+    setIsModalOpen(false);
   };
-
+  
   useEffect(() => {
     const filtered = activeCategoryData.filter(stock =>
       Object.values(stock).some(value =>
@@ -55,17 +46,33 @@ const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCateg
   }, [searchTerm, activeCategoryData]);
 
   const exportToCSV = () => {
-    const csvContent = "data:text/csv;charset=utf-8," +
-      ["No", "Stock Name", "Stock Location", "Total Asset"].join(",") + "\n" +
-      filteredData.map(stock =>
-        [stock.no, stock.stockName, stock.stockLocation, stock.totalAsset].join(",")
-      ).join("\n");
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "stock_data.csv");
+    if (!selectedStock) return;
+
+    const csvData: string[] = [];
+    // Add headers to CSV data
+    csvData.push(Object.keys(selectedStock.assets[0]).join(','));
+
+    // Add each asset data to CSV data
+    selectedStock.assets.forEach(asset => {
+      const assetValues = Object.values(asset);
+      csvData.push(assetValues.join(','));
+    });
+
+    // Create CSV file content
+    const csvContent = csvData.join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+
+    // Create link for download
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `${selectedStock.stockName}_assets.csv`);
     document.body.appendChild(link);
     link.click();
+
+    // Cleanup
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
   };
 
   return (
@@ -94,7 +101,7 @@ const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCateg
               <th className="py-2 px-4">No</th>
               <th className="py-2 px-4">Stock Name</th>
               <th className="py-2 px-4">Stock Location</th>
-              <th className="py-2 px-4">{activeCategory} assets</th>
+              <th className="py-2 px-4">{activeCategory} Assets</th>
             </tr>
           </thead>
           <tbody>
@@ -107,23 +114,26 @@ const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCateg
                 <td className="py-2 px-4">{index + 1}</td>
                 <td className="py-2 px-4">{stock.stockName}</td>
                 <td className="py-2 px-4">{stock.stockLocation}</td>
-                <td className="py-2 px-4">{stock.totalAsset}</td>
+                <td className="py-2 px-4">{stock.assets.length}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div>
-        <TableModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          title="Asset Details"
-          tableHeaders={selectedStockAssets.length > 0 ? Object.keys(selectedStockAssets[0].specifications) : []}
-          tableData={selectedStockAssets}
-        />
+        {selectedStock && (
+          <TableModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            title={`Asset Details for ${selectedStock.stockName}`}
+            tableHeaders={selectedStock.assets.length > 0 ? Object.keys(selectedStock.assets[0]) : []}
+            tableData={selectedStock.assets || []}
+            tag={[activeCategory, selectedStock.stockName]}
+          />
+        )}
       </div>
     </>
   );
 };
 
-export default StockTable; 
+export default StockTable;
