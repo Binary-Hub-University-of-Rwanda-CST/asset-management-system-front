@@ -5,6 +5,8 @@ import { API_URL } from '../../utils/api';
 import LoadingCircle from '../Loading/LoadingCircle';
 import Successfully from '../Successfully/Successfully';
 import Alert, {AlertType} from '../Alert/Alert';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../app/store';
 
 interface StockLocation {
     name: string;
@@ -24,8 +26,10 @@ const CreateNewStockLocation: React.FC<CreateNewStockLocationProps> = ({ isOpen,
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     const [stockNameError, setStockNameError] = useState<string | null>(null);
-    const [stockLocationError, setStockLocationError] = useState<string | null>(null);
+    const [stockLocationError, setStockLocationError] = useState<string | null>(null); 
 
+
+    const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleStockNameChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -168,6 +168,16 @@ const UploadModal: React.FC<ModalProps> = (props) => {
             <Dropdown options={brandOptions} tag='Brand' style={style} />
           </div>
 
+          {selectedCategory && (
+            <div className="flex justify-end mt-4  mr-4  w-full"> 
+              <button
+                className="bg-my-blue hover:bg-opacity-80 text-white py-1  px-4 rounded-md text-sm font-medium " 
+                onClick={handleDownloadCsvTemplate}
+              >
+                <RiFileExcel2Line className="inline-block mr-2" /> Download CSV Template
+              </button>
+            </div> 
+          )}
           {selectedCategory ? (
             <div className='flex flex-col items-center bg-blue-white rounded-md w-full py-5 px-5 my-2 gap-1'>
               <h3 className='mb-2 font-bold'>Data Validation Table For {selectedCategory.name}</h3>
@@ -195,7 +205,7 @@ const UploadModal: React.FC<ModalProps> = (props) => {
           )}
 
           <div
-            className={`flex flex-col gap-1 cursor-pointer  w-full border-dashed border-2 border-my-gray text-gray-400 rounded-xl py-2 ${isDragging ? 'bg-gray-100' : ''}`}
+            className={`flex flex-col gap-1 cursor-pointer w-full border-dashed border-2 border-my-gray text-gray-400 rounded-xl py-2 ${isDragging ? 'bg-gray-100' : ''}`}
             onDragEnter={handleDragEnter}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -220,6 +230,8 @@ const UploadModal: React.FC<ModalProps> = (props) => {
               </div>
             )}
           </div>
+
+          
         </div>
       </Modal>
     </div>
@@ -227,4 +239,4 @@ const UploadModal: React.FC<ModalProps> = (props) => {
 };
 
 export default UploadModal;
-  
+ 
