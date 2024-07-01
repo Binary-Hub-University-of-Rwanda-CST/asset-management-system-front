@@ -2,12 +2,13 @@ import { IconType } from "react-icons";
 import { MdOutlineDashboard } from "react-icons/md";
 import { UserAccessList } from "./userAccess";
 import { BsDatabase } from "react-icons/bs";
-import { IoShareSocialOutline } from "react-icons/io5";
-import { RiQrScan2Line } from "react-icons/ri";
+// import { IoShareSocialOutline } from "react-icons/io5";
+// import { RiQrScan2Line } from "react-icons/ri";
 import { CiViewTable } from "react-icons/ci";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FiUser } from "react-icons/fi";
-import { BiGroup } from "react-icons/bi";
+// import { BiGroup } from "react-icons/bi";
+import { IoCloudUploadOutline } from "react-icons/io5";
 
 export enum MENU_TYPE {
   NONE = "NONE",
@@ -68,82 +69,100 @@ export const AUTHENTICATED_MENUS: SideNavigationInterface[] = [
     subMenus: [],
   },
   {
-    icon: BsDatabase,
-    title: "Assets Stock",
-    label: "Assets Stock",
-    url: "/assets-stock",
-    menu_type: MENU_TYPE.ACTIVITIES,
-    access: "all",
-    subMenus: [
-      {
-        title: "Stock",
-        label: "Stock",
-        url: "/assets-stock",
-        access: "all",
-      },
-      {
-        title: "Upload Stock",
-        label: "Upload Stock",
-        url: "/upload-stock",
-        access: "all",
-      },
-    ],
-  },
-  {
-    icon: IoShareSocialOutline,
-    title: "Assets Distribution",
-    label: "Assets Distribution",
-    url: "/assets-monitoring",
-    menu_type: MENU_TYPE.ACTIVITIES,
-    access: "all",
-    subMenus: [
-      {
-        title: "Monitoring",
-        label: "Monitoring",
-        url: "/assets-monitoring",
-        access: "all",
-      },
-      {
-        title: "My Requests",
-        label: "My Requests",
-        url: "/my-assets-requests",
-        access: "all",
-      },
-      {
-        title: "Requests Approval",
-        label: "Requests Approval",
-        url: "/assets-requests-approval",
-        access: "all",
-      },
-    ],
-  },
-  {
-    icon: RiQrScan2Line,
-    title: "Assets Tracking",
-    label: "Assets Tracking",
-    url: "/assets-tracking",
+    icon: BsDatabase, 
+    title: "Asset Monitoring",
+    label: "Asset monitoring", 
+    url: "/asset-monitoring",
     menu_type: MENU_TYPE.ACTIVITIES,
     access: "all",
     subMenus: [],
   },
   {
-    icon: BiGroup,
-    title: "Staff Management",
-    label: "Staff Management",
-    url: "/users-list",
-    menu_type: MENU_TYPE.ACTIVITIES,
-    access: "all",
-    subMenus: [],
-  },
-  {
-    icon: CiViewTable,
-    title: "Reports",
-    label: "Reports",
-    url: "/reports",
+    icon: IoCloudUploadOutline, 
+    title: "Upload Assets",
+    label: "Upload Assets",
+    url: "/upload-assets", 
     menu_type: MENU_TYPE.REPORTS,
     access: "all",
     subMenus: [],
   },
+  // {
+  //   icon: BsDatabase,
+  //   title: "Assets Stock",
+  //   label: "Assets Stock",
+  //   url: "/asset-monitoring",
+  //   menu_type: MENU_TYPE.ACTIVITIES,
+  //   access: "all",
+  //   subMenus: [
+  //     {
+  //       title: "Stock", 
+  //       label: "Stock",
+  //       url: "/asset-monitoring",
+  //       access: "all",
+  //     },
+  //     {
+  //       title: "Upload Stock",
+  //       label: "Upload Stock",
+  //       url: "/upload-assets",
+  //       access: "all",
+  //     },
+  //   ],
+  // }, 
+  // {
+  //   icon: IoShareSocialOutline,
+  //   title: "Assets Distribution",
+  //   label: "Assets Distribution",
+  //   url: "/assets-monitoring",
+  //   menu_type: MENU_TYPE.ACTIVITIES,
+  //   access: "all",
+  //   subMenus: [
+  //     {
+  //       title: "Monitoring",
+  //       label: "Monitoring",
+  //       url: "/assets-monitoring",
+  //       access: "all",
+  //     },
+  //     {
+  //       title: "My Requests",
+  //       label: "My Requests",
+  //       url: "/my-assets-requests",
+  //       access: "all",
+  //     },
+  //     {
+  //       title: "Requests Approval",
+  //       label: "Requests Approval",
+  //       url: "/assets-requests-approval",
+  //       access: "all",
+  //     },
+  //   ],
+  // },
+  // {
+  //   icon: RiQrScan2Line,
+  //   title: "Assets Tracking",
+  //   label: "Assets Tracking",
+  //   url: "/assets-tracking",
+  //   menu_type: MENU_TYPE.ACTIVITIES,
+  //   access: "all",
+  //   subMenus: [],
+  // },
+  // {
+  //   icon: BiGroup,
+  //   title: "Staff Management",
+  //   label: "Staff Management",
+  //   url: "/users-list",
+  //   menu_type: MENU_TYPE.ACTIVITIES,
+  //   access: "all",
+  //   subMenus: [],
+  // },
+  // {
+  //   icon: CiViewTable,
+  //   title: "Reports",
+  //   label: "Reports",
+  //   url: "/reports",
+  //   menu_type: MENU_TYPE.REPORTS,
+  //   access: "all",
+  //   subMenus: [],
+  // },
   {
     icon: FiUser,
     title: "My Profile",
@@ -163,6 +182,7 @@ export const AUTHENTICATED_MENUS: SideNavigationInterface[] = [
     access: "all",
     subMenus: [],
   },
+
  
 ];
 
@@ -171,10 +191,11 @@ export const menus_categories = (): { key: MENU_TYPE; title: string }[] => {
   for (const menu in MENU_TYPE) {
     response.push({
       key: menu as MENU_TYPE,
-      title: menu === MENU_TYPE.PROFILE ? "profile" : MENU_TYPE.ACTIVITIES ? "activities" : " ",
+      title: menu === MENU_TYPE.PROFILE ? "profile" : MENU_TYPE.ACTIVITIES ? "Activities" : " ", 
     });
   }
   return response.filter((element) =>
     response.find((itm) => itm.key === element.key)
   );
 };
+ 
