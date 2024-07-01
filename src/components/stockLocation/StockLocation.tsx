@@ -7,7 +7,6 @@ import Successfully from '../Successfully/Successfully';
 import Alert, {AlertType} from '../Alert/Alert';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../app/store';
-import { fetchAssets } from '../../actions';
 
 interface StockLocation {
     name: string;
@@ -49,7 +48,6 @@ const CreateNewStockLocation: React.FC<CreateNewStockLocationProps> = ({ isOpen,
         setSuccessMessage(null);
         setShowSuccessPopup(false);
         onClose();
-        dispatch(fetchAssets()); 
         navigate('/assets-stock'); // Navigate to the dashboard
     };
     const closeAlert = () => {
