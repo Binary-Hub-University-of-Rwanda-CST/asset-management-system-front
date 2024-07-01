@@ -8,11 +8,13 @@ export interface StockInterface {
   stockName: string;
   stockLocation: string;
   totalAsset: number;
+  totalValue: number; 
   assets: AssetInterface[];
 }
 
 export interface AssetInterface {
   [key: string]: string;
+  // value: number;
 }
 
 interface StockTableProps {
@@ -37,7 +39,8 @@ const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCateg
   };
   
   useEffect(() => {
-    const filtered = activeCategoryData.filter(stock =>
+    const filtered = activeCategoryData.filter(stock => 
+      stock.assets.length > 0 && 
       Object.values(stock).some(value =>
         String(value).toLowerCase().includes(searchTerm.toLowerCase())
       )
@@ -99,12 +102,12 @@ const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCateg
           <thead>
             <tr className="min-w-full bg-white border-b-2 border-gray-300">
               <th className="py-2 px-4">No</th>
-              <th className="py-2 px-4">Stock Name</th>
-              <th className="py-2 px-4">Stock Location</th>
-              <th className="py-2 px-4">{activeCategory} Assets</th>
+              <th className="py-2 px-4">Building Name</th>
+              <th className="py-2 px-4">Total Rooms</th>
+              <th className="py-2 px-4">Total {activeCategory}s</th> 
             </tr>
           </thead>
-          <tbody>
+          <tbody> 
             {filteredData.map((stock, index) => (
               <tr
                 key={stock.no}
@@ -125,7 +128,7 @@ const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCateg
           <TableModal
             isOpen={isModalOpen}
             onClose={handleCloseModal}
-            title={`${activeCategory}  Details for ${selectedStock.stockName}`}
+            title={`${activeCategory} Details for ${selectedStock.stockName}`}
             tableHeaders={selectedStock.assets.length > 0 ? Object.keys(selectedStock.assets[0]) : []}
             tableData={selectedStock.assets || []}
             tag={[activeCategory, selectedStock.stockName]}

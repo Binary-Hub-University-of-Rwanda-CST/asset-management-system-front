@@ -11,20 +11,25 @@ interface Stock {
 
 interface DataChartProps {
   activeCategoryData: Stock[];
-  categoryName: string; // New prop for category name
+  categoryName: string; 
 }
 
 const DataChart: React.FC<DataChartProps> = ({ activeCategoryData, categoryName }) => {
-  // Extract stock location names
-  const categories = activeCategoryData.map(stock => stock.stockLocation);
+  // Filter out buildings with zero assets
+  const filteredData = activeCategoryData.filter(stock => stock.totalAsset > 0);
 
-  // Extract total desktop values
-  const desktopValues = activeCategoryData.map(stock => stock.totalAsset);
+  // Extract stock location names and building names
+  const categories = filteredData.map(stock => `${stock.stockName} (${stock.stockLocation})`);
+  const desktopValues = filteredData.map(stock => stock.totalAsset);
+
+  // Calculate chart height
+  const minHeight = 130;
+  const dynamicHeight = Math.max(filteredData.length * 50, minHeight); 
 
   const options: ApexOptions = {
     chart: {
       type: 'bar',
-      height: 250,
+      height: dynamicHeight,
     },
     plotOptions: {
       bar: {
@@ -64,15 +69,15 @@ const DataChart: React.FC<DataChartProps> = ({ activeCategoryData, categoryName 
 
   const series = [
     {
-      name: categoryName, // Use categoryName prop dynamically
+      name: categoryName, 
       data: desktopValues,
     },
   ];
 
   return (
-    <div className="p-4 rounded-3xl m-2 shadow-xl border-1 border-[#bbbdc3] ">
-      <h1 className="text-lg ml-16 mb-1">{categoryName} stock summary in stock location</h1>
-      <h2 className='text-black ml-16  font-bold'> {desktopValues.reduce((total, value) => total + value, 0)}</h2>
+    <div className="p-4 rounded-3xl m-2 shadow-xl border-1 border-[#bbbdc3]">
+      <h1 className="text-lg ml-16 mb-1">{categoryName} summary in buildings location</h1>
+      <h2 className='text-black ml-16 font-bold'>Total {categoryName}: {desktopValues.reduce((total, value) => total + value, 0)}</h2>
       <ReactApexChart
         options={options}
         series={series}
@@ -84,3 +89,4 @@ const DataChart: React.FC<DataChartProps> = ({ activeCategoryData, categoryName 
 };
 
 export default DataChart;
+  

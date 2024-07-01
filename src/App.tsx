@@ -8,7 +8,7 @@ import { RootState, AppDispatch } from "./app/store";
 import { FC_Logout } from "./actions";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import NavBar from "./components/TopNavBar/NavBar";
-import { StockDashboard } from "./containers/StockManagement/StockDashbord";
+import  StockDashboard  from "./containers/StockManagement/StockDashbord"; 
 import UploadStock from "./containers/StockManagement/UploadStock/UploadStock";
 import Monitoring from "./containers/AssetDistribution/Monitoring/Monitoring";
 import MyRequests from "./containers/AssetDistribution/Request/MyRequests";
@@ -74,10 +74,10 @@ const App = () => {
                     element={<ChangePassword />}
                   />
                   {/* <Route path="/assets-stock" element={<StockDashboard />} />  */}
-                  <Route path="/assets-stock" element={<StockDashboard />} /> 
+                  <Route path="/asset-monitoring" element={<StockDashboard />} /> 
 
-                  <Route path="/upload-stock" element={<UploadStock />} />
-                  <Route
+                  <Route path="/upload-assets" element={<UploadStock />} />
+                  {/* <Route
                     path="/assets-monitoring"
                     element={<Monitoring />}
                   />
@@ -94,7 +94,7 @@ const App = () => {
                     element={<AssetTracking />}
                   />
                   <Route path="/reports" element={<Test />} /> 
-                  <Route path="/users-list" element={<DashboardLoading />} />
+                  <Route path="/users-list" element={<DashboardLoading />} /> */}
                   <Route path="/my-profile" element={<CoomingSoon />} />
                   <Route path="/" element={<Dashboard />} />
                   <Route path="*" element={<PageNotFound />} />

@@ -1,5 +1,4 @@
-// reducers.ts
-import { Assets } from '../actions/asset.action';
+import { Assets, AssetCategory, Building, Room, Asset } from '../actions/asset.action';  
 import { FETCH_ASSETS_REQUEST, FETCH_ASSETS_SUCCESS, FETCH_ASSETS_FAILURE } from '../actions/types';
 
 export interface AssetState {
@@ -38,6 +37,6 @@ const assetReducer = (state = initialState, action: any): AssetState => {
     default:
       return state;
   }
-}; 
+};
 
 export default assetReducer;

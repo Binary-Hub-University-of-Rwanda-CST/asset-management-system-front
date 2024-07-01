@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaArrowLeft, FaSearch, FaFileExcel } from "react-icons/fa";
-import { RiH1 } from "react-icons/ri";
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,9 +8,10 @@ interface ModalProps {
   tableHeaders: string[];
   tableData: Record<string, any>[];
   tag?: string[];
+  onRowClick?: (row: Record<string, any>) => void;
 }
 
-const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders, tableData, tag }) => {
+const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders, tableData, tag, onRowClick }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState<Record<string, any>[]>([]);
 
@@ -44,7 +44,7 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
     // Filter table data based on search term
     const filtered = tableData.filter(row =>
       tableHeaders.some(header => {
-        const value = row.specifications?.[header]; // Access nested value
+        const value = row[header]; // Access nested value
         return String(value).toLowerCase().includes(searchTerm.toLowerCase());
       })
     );
@@ -58,7 +58,7 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
     const csvContent = "data:text/csv;charset=utf-8," +
       tableHeaders.join(",") + "\n" +
       filteredData.map(row =>
-        tableHeaders.map(header => row.specifications?.[header]).join(",")
+        tableHeaders.map(header => row[header]).join(",")
       ).join("\n");
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
@@ -68,9 +68,6 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
     link.click();
   };
 
-  console.log('table data: '+ tableData); 
-  console.log('table header: '+ tableHeaders);   
-  
   return (
     <>
       {isOpen && (
@@ -120,7 +117,11 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
                     </thead>
                     <tbody>
                         {filteredData.map((row, rowIndex) => (
-                          <tr key={rowIndex} className="border-t py-1">
+                          <tr 
+                            key={rowIndex} 
+                            className="border-t py-1 cursor-pointer"
+                            onClick={() => onRowClick && onRowClick(row)}
+                          >
                             <td className="px-4 py-1 font-sm">{rowIndex + 1}</td>
                             {tableHeaders.map((header, cellIndex) => (
                               <td key={cellIndex} className="px-4 font-sm py-1">{row[header]}</td>
@@ -144,4 +145,3 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
 };
 
 export default TableModal;
- 

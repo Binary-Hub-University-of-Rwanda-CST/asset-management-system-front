@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-// import { StoreState } from "../../reducers";
-import DataChart from "./Components/DataChart";
-import { FC_SetError, FC_SetSuccess } from "../../actions";
+import { RootState } from "../../app/store";
 import { fetchAssets } from "../../actions/asset.action";
 import { GoDatabase } from "react-icons/go";
-// import { MdOutlineAddBusiness } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
 import { FaRegCheckCircle } from "react-icons/fa";
 import StockTable from "./Components/DataTable";
@@ -13,21 +10,24 @@ import StockLocation from "../../components/stockLocation/StockLocation";
 import Categories from "./Components/Categories";
 import { Link } from "react-router-dom";
 import CreateNewCategory from "./Components/CreateNewCategory";
-import { RootState } from "../../app/store";
-import { Assets } from "../../actions";
+import { Assets } from "../../actions/asset.action";
 import StockLoading from "../../components/StockLoading/StockLoading";
 import { StockInterface } from "./Components/DataTable";
+import DataChart from "./Components/DataChart";
+import { HiOutlineCurrencyDollar } from "react-icons/hi";
+import { IoStatsChart } from "react-icons/io5";
+import { FaTableList } from "react-icons/fa6";
+import { formatNumberWithCommas } from "../../utils/functions";
 
-interface stockProps {
+interface StockProps {
   assetsData: Assets[];
   assetLoading: boolean;
   assetError: string | null;
-  fetchAssets: () => void; 
+  fetchAssets: () => void;
 }
 
-const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetchAssets}) => {
-  
-   useEffect(() => {
+const StockDashboard: React.FC<StockProps> = ({ assetsData, assetLoading, assetError, fetchAssets }) => {
+  useEffect(() => {
     fetchAssets();
   }, [fetchAssets]);
 
@@ -37,7 +37,6 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeCategoryStockData, setActiveCategoryStockData] = useState<StockInterface[]>([]);
 
-
   useEffect(() => {
     if (assetsData.length > 0) {
       setActiveCategory(assetsData[0].category.id);
@@ -46,24 +45,35 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
 
   useEffect(() => {
     if (activeCategory && assetsData.length > 0) {
-      const category = assetsData.find(category => category.category.id === activeCategory);
+      const category = assetsData.find((category) => category.category.id === activeCategory);
       if (category) {
-        const filteredStocks: StockInterface[] = category.stock.map(stockItem => ({
-          no: stockItem.id,
-          stockName: stockItem.name,
-          stockLocation: stockItem.location,
-          totalAsset: stockItem.asset.length,
-          assets: stockItem.asset, // Include assets property here
-        }));
-        setActiveCategoryStockData(filteredStocks);
+        const filteredBuildings: StockInterface[] = category.buildings.flatMap((building) =>
+          building.rooms.flatMap((room) => ({
+            no: room.id,
+            stockName: room.name,
+            stockLocation: room.floor,
+            totalAsset: room.assets.length,
+            totalValue: room.assets.reduce((sum, asset) => sum + asset.value, 0),
+            assets: room.assets.map(asset => {
+              const assetDetails: any = {
+                value: asset.value,
+              };
+              Object.keys(asset).forEach(key => {
+                if (key !== 'id' && key !== 'name' && key !== 'value') {
+                  assetDetails[key] = asset[key];
+                }
+              });
+              return assetDetails;
+            }),
+          }))
+        );
+        setActiveCategoryStockData(filteredBuildings);
       }
     }
   }, [activeCategory, assetsData]);
-   
-  
 
   if (assetLoading) {
-    return <StockLoading />;
+    return <StockLoading />; 
   }
 
   if (assetError) {
@@ -79,29 +89,60 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
   const closeNewCategoryModal = () => setNewCategory(false);
   const createNewCategoryModal = () => setNewCategory(true);
 
-  const iamActive = (key: string) => setActiveCategory(key);
+  const setActiveCategoryHandler = (categoryId: string) => setActiveCategory(categoryId);
 
-  // Find the active category
-  const activeCategoryData = assetsData.find((category) => category.category.id === activeCategory);
+  const categoryData = assetsData.map((category) => {
+    const totalAssets = category.buildings.reduce((total, building) =>
+      total + building.rooms.reduce((roomTotal, room) => roomTotal + room.assets.length, 0), 0
+    );
 
-  // Calculate the total number of stocks across all categories
-  const totalStocksInActiveCategory = activeCategoryData ? activeCategoryData.stock.length : 0; 
-
-  const activeCategoryName = activeCategoryData ? activeCategoryData.category.name : 'Desktop - Assets';
-  const activeCategoryTotalAssets = activeCategoryData ? activeCategoryData.stock.reduce((total, stockItem) => total + stockItem.asset.length, 0) : 0;
-
-  const categoryData = assetsData.map((category) => (
-    <Categories
-      key={category.category.id}
-      id={category.category.id}
-      CategoryName={category.category.name}
-      totalAsset={category.stock.reduce((total, stockItem) => total + stockItem.asset.length, 0)}
-      handleActive={iamActive}
-      isActive={activeCategory === category.category.id}
-    />
-  ));
+    return (
+      <Categories
+        key={category.category.id}
+        id={category.category.id}
+        categoryName={category.category.name}
+        totalAssets={totalAssets}
+        handleActive={setActiveCategoryHandler}
+        isActive={activeCategory === category.category.id}
+      />
+    );
+  });
 
   const totalCategories = categoryData.length;
+
+  const activeCategoryData = assetsData.find((category) => category.category.id === activeCategory);
+
+  const activeCategoryName = activeCategoryData ? activeCategoryData.category.name : 'Desktop - Assets';
+  const activeCategoryTotalAssets = activeCategoryData ? activeCategoryData.buildings.reduce((total, building) =>
+    total + building.rooms.reduce((roomTotal, room) => roomTotal + room.assets.length, 0), 0
+  ) : 0;
+
+  const activeCategoryTotalValue = activeCategoryData
+    ? activeCategoryData.buildings.reduce(
+        (catTotal, building) =>
+          catTotal + building.rooms.reduce(
+            (roomTotal, room) =>
+              roomTotal + room.assets.reduce((assetTotal, asset) => assetTotal + asset.value, 0),
+            0
+          ),
+        0
+      )
+    : 0;
+
+  const totalAssetsValue = assetsData.reduce((total, category) => {
+    const categoryValue = category.buildings.reduce(
+      (catTotal, building) =>
+        catTotal + building.rooms.reduce(
+          (roomTotal, room) =>
+            roomTotal + room.assets.reduce((assetTotal, asset) => assetTotal + asset.value, 0),
+          0
+        ),
+      0
+    );
+    return total + categoryValue;
+  }, 0);
+
+  const totalBuildings = activeCategoryData ? activeCategoryData.buildings.length : 0;
 
   return (
     <div className="mr-4">
@@ -117,27 +158,35 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
         </div>
         <div className="flex flex-row gap-3">
           <div className="flex flex-col justify-center align-center">
-            <p className="text-gray-400 justify-center">Category</p>
+            <p className="text-gray-400 justify-center">Categories</p>
             <h2 className="text-black font-bold text-2xl flex justify-center">
               {totalCategories < 10 ? `0${totalCategories}` : `${totalCategories}`}
             </h2>
           </div>
           <div className="flex flex-col justify-center align-center">
-            <p className="text-gray-400">Total Stocks</p>
-            <h2 className="text-black font-bold text-2xl flex justify-center">{totalStocksInActiveCategory}</h2> 
+            <p className="text-gray-400">Total Buildings</p>
+            <h2 className="text-black font-bold text-2xl flex justify-center"> 
+              {totalBuildings}   
+            </h2>
+          </div>
+          <div className="flex flex-col justify-center align-center bg-blue-white rounded-md px-2 ">
+            <p className="text-black">Total Assets Value</p>
+            <h2 className="text-black font-bold text-2xl flex justify-center"> 
+              {formatNumberWithCommas(totalAssetsValue) } frws   
+            </h2>
           </div>
         </div>
         <div>
           <button onClick={openStockModal} className="p-1 px-3 bg-my-blue rounded-md text-white">
-            Create Stock Location
+            Create location 
           </button>
         </div>
       </div>
 
       <div className="flex flex-row gap-4">
-        <div className="relative w-1/3 px-4 rounded-lg bg-white py-10 pb-16 animate__animated animate__fast   min-h-96">
-          <div className="flex justify-center pb-2 ">
-            <h3 className="text-md font-bold text-black justify-center">{totalCategories>0? "Asset Categories" : " No Category current  "}</h3>
+        <div className="relative w-1/3 px-4 rounded-lg bg-white py-10 pb-16 animate__animated animate__fast min-h-96">
+          <div className="flex justify-center pb-2">
+            <h3 className="text-md font-bold text-black justify-center">{totalCategories > 0 ? "Asset Categories" : " No Category current  "}</h3>
           </div>
           <div className="flex justify-center flex-wrap gap-2 mt-2">
             {categoryData}
@@ -150,7 +199,7 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
           </button>
         </div>
 
-        <div className="w-2/3 h-full p-4 rounded-lg relative bg-white py-10 pb-16 animate__animate  animate__fast">
+        <div className="w-2/3 h-full p-4 rounded-lg relative bg-white py-10 pb-16 animate__animate animate__fast">
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center">
               <IoMdMenu className="text-xl text-gray-400" />
@@ -159,44 +208,46 @@ const App: React.FC<stockProps> = ({ assetsData, assetLoading, assetError, fetch
             <div className="flex flex-row items-center gap-2">
               <FaRegCheckCircle className="text-3xl font-bold text-confirm" />
               <div>
-                <h4>Total {activeCategoryName}</h4>
+                <h4>Total {activeCategoryName}s</h4>
                 <h3 className="font-bold text-xl">{activeCategoryTotalAssets}</h3>
+              </div>
+            </div>
+            <div className="flex flex-row items-center gap-2 bg-blue-white rounded-md px-2 ">
+              <HiOutlineCurrencyDollar className="text-3xl font-bold text-confirm" />
+              <div>
+                <h4>Total {activeCategoryName}s's value</h4> 
+                <h3 className="font-bold text-xl">
+                  {formatNumberWithCommas(activeCategoryTotalValue)}  frws</h3>  
               </div>
             </div>
           </div>
           <div>
-            <div className="flex flex-row justify-between border-b-2 border-blue-white mb-0 p-0">
+            <div className="flex flex-row justify-start   border-b-2 border-blue-white mb-0 p-0 gap-28  ">
               <div className="flex flex-row justify-between">
                 <button
-                  className={!showTable ? "text-black font-bold border-b-2 border-my-blue text-xl" : "text-black text-xl"}
+                  className={!showTable ? "text-black font-bold border-b-2 border-my-blue text-xl flex gap-1 items-center " : "text-black text-xl flex gap-1 items-center "}
                   onClick={displayDashboard}
                 >
-                  Dashboard
+                 <IoStatsChart />
+
+                  Graph 
                 </button>
               </div>
               <div>
                 <button
-                  className={showTable ? "text-black font-bold border-b-2 border-my-blue text-xl" : "text-black text-xl"}
+                  className={showTable ? "text-black font-bold border-b-2 border-my-blue text-xl flex gap-1 items-center " : "text-black text-xl flex gap-1 items-center "}
                   onClick={displayTable}
                 >
-                  List
+                  <FaTableList /> 
+                  Table
                 </button>
-              </div>
-              <div>
-                {/* {showTable && (
-                  <input
-                    type="text"
-                    placeholder="search..."
-                    className="bg-gray-100 py-1 px-16 rounded-lg text-black outline-none font-bold animate__animated animate__faster animate__zoomIn"
-                  />
-                )} */}
               </div>
             </div>
           </div>
           <div className="bg-white p-2">
             {!showTable ?
-             <DataChart categoryName={activeCategoryName} activeCategoryData={activeCategoryStockData} /> :
-              <StockTable activeCategoryData={activeCategoryStockData} activeCategory={activeCategoryName} />} 
+              <DataChart categoryName={activeCategoryName} activeCategoryData={activeCategoryStockData} /> :
+              <StockTable activeCategoryData={activeCategoryStockData} activeCategory={activeCategoryName} />}
           </div>
           <div>
             <Link
@@ -222,9 +273,7 @@ const mapStateToProps = (state: RootState) => ({
   assetError: state.asset.error,
 });
 
-export const StockDashboard = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   fetchAssets,
-  FC_SetSuccess,
-  FC_SetError,
-})(App);
+})(StockDashboard);
  

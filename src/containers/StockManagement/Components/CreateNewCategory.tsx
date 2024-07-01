@@ -72,7 +72,7 @@ const CreateNewCategory: React.FC<CreateNewCategoryProps> = ({ isOpen, onClose }
         setShowSuccessPopup(false);
         onClose();
         dispatch(fetchAssets());  
-        navigate('/assets-stock');
+        navigate('/asset-monitoring');
     };
 
     const createCategory = async (e: MouseEvent<HTMLButtonElement>) => {
