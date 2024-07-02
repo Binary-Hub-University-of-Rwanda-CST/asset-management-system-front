@@ -1,41 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { RootState } from "../../app/store";
-import { fetchAssets } from "../../actions/asset.action";
+import { fetchAssets, Asset } from "../../actions/asset.action";
 import { GoDatabase } from "react-icons/go";
 import { IoMdMenu } from "react-icons/io";
 import { FaRegCheckCircle } from "react-icons/fa";
-import StockTable from "./Components/DataTable";
+import StockTable, { buildingInterface } from "./Components/DataTable";
 import StockLocation from "../../components/stockLocation/StockLocation";
 import Categories from "./Components/Categories";
 import { Link } from "react-router-dom";
 import CreateNewCategory from "./Components/CreateNewCategory";
 import { Assets } from "../../actions/asset.action";
 import StockLoading from "../../components/StockLoading/StockLoading";
-import { StockInterface } from "./Components/DataTable";
 import DataChart from "./Components/DataChart";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
 import { IoStatsChart } from "react-icons/io5";
 import { FaTableList } from "react-icons/fa6";
 import { formatNumberWithCommas } from "../../utils/functions";
 
-interface StockProps {
+interface AssetProps {
   assetsData: Assets[];
   assetLoading: boolean;
   assetError: string | null;
   fetchAssets: () => void;
 }
 
-const StockDashboard: React.FC<StockProps> = ({ assetsData, assetLoading, assetError, fetchAssets }) => {
+const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetError, fetchAssets }) => {
   useEffect(() => {
     fetchAssets();
-  }, [fetchAssets]);
-
+  }, [fetchAssets]); 
+ 
   const [showTable, setShowTable] = useState(false);
-  const [isStockModalOpen, setIsStockModalOpen] = useState(false);
+  const [isBuildingModalOpen, setIsBuildingModalOpen] = useState(false); 
   const [newCategory, setNewCategory] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [activeCategoryStockData, setActiveCategoryStockData] = useState<StockInterface[]>([]);
+  const [activeCategoryBuildingData, setActiveCategoryBuildingData] = useState<buildingInterface[]>([]);
 
   useEffect(() => {
     if (assetsData.length > 0) {
@@ -47,30 +46,37 @@ const StockDashboard: React.FC<StockProps> = ({ assetsData, assetLoading, assetE
     if (activeCategory && assetsData.length > 0) {
       const category = assetsData.find((category) => category.category.id === activeCategory);
       if (category) {
-        const filteredBuildings: StockInterface[] = category.buildings.flatMap((building) =>
-          building.rooms.flatMap((room) => ({
-            no: room.id,
-            stockName: room.name,
-            stockLocation: room.floor,
-            totalAsset: room.assets.length,
-            totalValue: room.assets.reduce((sum, asset) => sum + asset.value, 0),
-            assets: room.assets.map(asset => {
-              const assetDetails: any = {
-                value: asset.value,
-              };
-              Object.keys(asset).forEach(key => {
-                if (key !== 'id' && key !== 'name' && key !== 'value') {
-                  assetDetails[key] = asset[key];
-                }
-              });
-              return assetDetails;
-            }),
-          }))
-        );
-        setActiveCategoryStockData(filteredBuildings);
+        const filteredBuildings: buildingInterface[] = category.buildings.map((building) => {
+          const totalAssets = building.rooms.reduce((sum, room) => sum + room.assets.length, 0);
+          const totalValue = building.rooms.reduce((sum, room) => sum + room.assets.reduce((roomSum, asset) => roomSum + asset.value, 0), 0);
+  
+          return {
+            no: building.id,
+            buildingName: building.name,
+            totalRooms: building.rooms.length,
+            totalAsset: totalAssets,
+            totalValue: totalValue,
+            assets: building.rooms.flatMap(room => room.assets.map(asset => ({
+              ...asset
+            }))),
+            rooms: building.rooms.map(room => ({
+              no: room.id,
+              roomName: room.name,
+              floor: room.floor,
+              totalAssets: room.assets.length,
+              assets: room.assets.map(asset => ({
+                ...asset
+              }))
+            }))
+          };
+        });
+  
+        setActiveCategoryBuildingData(filteredBuildings);
       }
     }
   }, [activeCategory, assetsData]);
+  
+
 
   if (assetLoading) {
     return <StockLoading />; 
@@ -80,8 +86,8 @@ const StockDashboard: React.FC<StockProps> = ({ assetsData, assetLoading, assetE
     return <div>Error: {assetError}</div>;
   }
 
-  const openStockModal = () => setIsStockModalOpen(true);
-  const closeStockModal = () => setIsStockModalOpen(false);
+  const openBuildingModal = () => setIsBuildingModalOpen(true);
+  const closeBuildingModal = () => setIsBuildingModalOpen(false);
 
   const displayTable = () => setShowTable(true);
   const displayDashboard = () => setShowTable(false);
@@ -177,7 +183,7 @@ const StockDashboard: React.FC<StockProps> = ({ assetsData, assetLoading, assetE
           </div>
         </div>
         <div>
-          <button onClick={openStockModal} className="p-1 px-3 bg-my-blue rounded-md text-white">
+          <button onClick={openBuildingModal} className="p-1 px-3 bg-my-blue rounded-md text-white">
             Create location 
           </button>
         </div>
@@ -203,7 +209,7 @@ const StockDashboard: React.FC<StockProps> = ({ assetsData, assetLoading, assetE
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center">
               <IoMdMenu className="text-xl text-gray-400" />
-              <h3 className="text-black font-bold">{activeCategoryName}</h3>
+              <h3 className="text-black font-bold">{activeCategoryName} - Assets</h3>
             </div>
             <div className="flex flex-row items-center gap-2">
               <FaRegCheckCircle className="text-3xl font-bold text-confirm" />
@@ -246,13 +252,13 @@ const StockDashboard: React.FC<StockProps> = ({ assetsData, assetLoading, assetE
           </div>
           <div className="bg-white p-2">
             {!showTable ?
-              <DataChart categoryName={activeCategoryName} activeCategoryData={activeCategoryStockData} /> :
-              <StockTable activeCategoryData={activeCategoryStockData} activeCategory={activeCategoryName} />}
+              <DataChart categoryName={activeCategoryName} activeCategoryData={activeCategoryBuildingData} /> :
+              <StockTable activeCategoryData={activeCategoryBuildingData} activeCategory={activeCategoryName} />}
           </div>
           <div>
             <Link
-              to="/upload-stock"
-              className="flex ml-20 p-2 bg-my-blue text-white rounded-lg w-3/4 bottom-2 absolute justify-center items-center"
+              to="/upload-assets"
+              className="flex ml-20 p-1 bg-my-blue text-white rounded-lg w-3/4 bottom-2 absolute justify-center items-center"
             >
               Upload- <span className="font-bold">{activeCategoryName}</span> - Stock
             </Link>
@@ -260,7 +266,7 @@ const StockDashboard: React.FC<StockProps> = ({ assetsData, assetLoading, assetE
         </div>
       </div>
 
-      {isStockModalOpen && <StockLocation isOpen={isStockModalOpen} onClose={closeStockModal} />}
+      {isBuildingModalOpen && <StockLocation isOpen={isBuildingModalOpen} onClose={closeBuildingModal} />}
 
       {newCategory && <CreateNewCategory isOpen={newCategory} onClose={closeNewCategoryModal} />}
     </div>

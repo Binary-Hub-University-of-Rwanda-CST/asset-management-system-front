@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaArrowLeft, FaSearch, FaFileExcel } from "react-icons/fa";
+import { RoomInterface } from "../../containers/StockManagement/Components/DataTable";
 
 interface ModalProps {
   isOpen: boolean;
@@ -8,7 +9,7 @@ interface ModalProps {
   tableHeaders: string[];
   tableData: Record<string, any>[];
   tag?: string[];
-  onRowClick?: (row: Record<string, any>) => void;
+  onRowClick?: (room: RoomInterface) => void;
 }
 
 const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders, tableData, tag, onRowClick }) => {
@@ -50,7 +51,6 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
     );
     setFilteredData(filtered);
   }, [searchTerm, tableData, tableHeaders]);
-   
 
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -106,21 +106,22 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
 
               <div className="overflow-x-auto mt-4">
                 <div style={{ maxHeight: "600px" }}>
-                 { tableData.length > 0 ?  <table className="min-w-full">
-                    <thead>
-                      <tr>
-                        <th className="px-4 py-2 text-left text-sm font-bold text-black uppercase">No</th>
-                        {tableHeaders.map(header => (
-                          <th key={header} className="px-4 py-3 text-left text-sm font-bold text-black uppercase">{header}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
+                  {filteredData.length > 0 ? (
+                    <table className="min-w-full">
+                      <thead>
+                        <tr>
+                          <th className="px-4 py-2 text-left text-sm font-bold text-black uppercase">No</th>
+                          {tableHeaders.map(header => (
+                            <th key={header} className="px-4 py-3 text-left text-sm font-bold text-black uppercase">{header}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
                         {filteredData.map((row, rowIndex) => (
-                          <tr 
-                            key={rowIndex} 
-                            className="border-t py-1 cursor-pointer"
-                            onClick={() => onRowClick && onRowClick(row)}
+                          <tr
+                            key={rowIndex}
+                            className="border-t py-1 cursor-pointer hover:bg-blue-white "
+                            onClick={() => onRowClick && onRowClick(row as RoomInterface)} // Ensure row is casted to RoomInterface
                           >
                             <td className="px-4 py-1 font-sm">{rowIndex + 1}</td>
                             {tableHeaders.map((header, cellIndex) => (
@@ -128,14 +129,13 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
                             ))}
                           </tr>
                         ))}
-                     </tbody> 
-
-                  </table> : 
-                  <h1 className=" text-center "> no data  found </h1>
-                  }
+                      </tbody>
+                    </table>
+                  ) : (
+                    <h1 className="text-center">No data found</h1>
+                  )}
                 </div>
               </div>
-
             </div>
           </div>
         </div>

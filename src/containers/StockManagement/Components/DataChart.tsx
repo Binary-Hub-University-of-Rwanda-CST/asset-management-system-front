@@ -2,15 +2,15 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 
-interface Stock {
+interface Bulding {
   no: string;
-  stockName: string;
-  stockLocation: string;
+  buildingName: string;
+  // stockLocation: string;
   totalAsset: number;
 }
 
 interface DataChartProps {
-  activeCategoryData: Stock[];
+  activeCategoryData: Bulding[];
   categoryName: string; 
 }
 
@@ -18,9 +18,9 @@ const DataChart: React.FC<DataChartProps> = ({ activeCategoryData, categoryName 
   // Filter out buildings with zero assets
   const filteredData = activeCategoryData.filter(stock => stock.totalAsset > 0);
 
-  // Extract stock location names and building names
-  const categories = filteredData.map(stock => `${stock.stockName} (${stock.stockLocation})`);
-  const desktopValues = filteredData.map(stock => stock.totalAsset);
+  // Extract bulding names and building names
+  const categories = filteredData.map(building => `${building.buildingName} `); 
+  const assets = filteredData.map(building => building.totalAsset);
 
   // Calculate chart height
   const minHeight = 130;
@@ -70,14 +70,14 @@ const DataChart: React.FC<DataChartProps> = ({ activeCategoryData, categoryName 
   const series = [
     {
       name: categoryName, 
-      data: desktopValues,
+      data: assets,
     },
   ];
 
   return (
     <div className="p-4 rounded-3xl m-2 shadow-xl border-1 border-[#bbbdc3]">
       <h1 className="text-lg ml-16 mb-1">{categoryName} summary in buildings location</h1>
-      <h2 className='text-black ml-16 font-bold'>Total {categoryName}: {desktopValues.reduce((total, value) => total + value, 0)}</h2>
+      <h2 className='text-black ml-16 font-bold'>Total {categoryName}: {assets.reduce((total, value) => total + value, 0)}</h2>
       <ReactApexChart
         options={options}
         series={series}

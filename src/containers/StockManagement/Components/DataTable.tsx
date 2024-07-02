@@ -3,44 +3,64 @@ import TableModal from "../../../components/TableModal/TableModal";
 import { FaFileExcel } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 
-export interface StockInterface {
+export interface buildingInterface {
   no: string;
-  stockName: string;
-  stockLocation: string;
+  buildingName: string;
+  totalRooms: number;
   totalAsset: number;
-  totalValue: number; 
-  assets: AssetInterface[];
+  totalValue: number;
+  rooms: RoomInterface[];
 }
 
 export interface AssetInterface {
-  [key: string]: string;
-  // value: number;
+  [key: string]: any;
+  value: number;
 }
 
-interface StockTableProps {
+export interface RoomInterface {
+  no: string;
+  roomName: string;
+  floor: string;
+  totalAssets: number;
+  assets: AssetInterface[];
+}
+
+interface buildingTableProps {
   activeCategory: string;
-  activeCategoryData: StockInterface[];
+  activeCategoryData: buildingInterface[];
 }
 
-const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCategory }) => {
-  const [selectedStock, setSelectedStock] = useState<StockInterface | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activeCategory }) => {
+  const [selectedBuilding, setSelectedBuilding] = useState<buildingInterface | null>(null);
+  const [selectedRoom, setSelectedRoom] = useState<RoomInterface | null>(null);
+  const [isBuildingModalOpen, setIsBuildingModalOpen] = useState(false);
+  const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(activeCategoryData);
 
-  const handleRowClick = (stock: StockInterface) => {
-    setSelectedStock(stock);
-    setIsModalOpen(true);
+  const handleBuildingRowClick = (building: buildingInterface) => {
+    setSelectedBuilding(building);
+    setIsBuildingModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setSelectedStock(null);
-    setIsModalOpen(false);
+  const handleRoomRowClick = (room: RoomInterface) => {
+    setSelectedRoom(room);
+    setIsRoomModalOpen(true);
   };
-  
+
+  const handleCloseBuildingModal = () => {
+    setSelectedBuilding(null);
+    setIsBuildingModalOpen(false);
+  };
+
+  const handleCloseRoomModal = () => {
+    setSelectedRoom(null);
+    setIsRoomModalOpen(false);
+  };
+
   useEffect(() => {
-    const filtered = activeCategoryData.filter(stock => 
-      stock.assets.length > 0 && 
+    const filtered = activeCategoryData.filter(stock =>
+      stock.rooms.length > 0 &&
       Object.values(stock).some(value =>
         String(value).toLowerCase().includes(searchTerm.toLowerCase())
       )
@@ -49,14 +69,16 @@ const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCateg
   }, [searchTerm, activeCategoryData]);
 
   const exportToCSV = () => {
-    if (!selectedStock) return;
+    const allAssets = activeCategoryData.flatMap(building => building.rooms.flatMap(room => room.assets));
+
+    if (allAssets.length === 0) return;
 
     const csvData: string[] = [];
     // Add headers to CSV data
-    csvData.push(Object.keys(selectedStock.assets[0]).join(','));
+    csvData.push(Object.keys(allAssets[0]).join(','));
 
     // Add each asset data to CSV data
-    selectedStock.assets.forEach(asset => {
+    allAssets.forEach(asset => {
       const assetValues = Object.values(asset);
       csvData.push(assetValues.join(','));
     });
@@ -69,7 +91,7 @@ const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCateg
     // Create link for download
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', `${selectedStock.stockName}_assets.csv`);
+    link.setAttribute('download', `all_buildings_assets.csv`);
     document.body.appendChild(link);
     link.click();
 
@@ -104,34 +126,46 @@ const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCateg
               <th className="py-2 px-4">No</th>
               <th className="py-2 px-4">Building Name</th>
               <th className="py-2 px-4">Total Rooms</th>
-              <th className="py-2 px-4">Total {activeCategory}s</th> 
+              <th className="py-2 px-4">Total {activeCategory} Assets</th>
+              {/* <th className="py-2 px-4">Total Value</th> */}
             </tr>
           </thead>
-          <tbody> 
+          <tbody>
             {filteredData.map((stock, index) => (
               <tr
                 key={stock.no}
-                className="min-w-full bg-white border-b border-gray-300 cursor-pointer hover:bg-blue-white hover:text-my-blue hover:font-bold hover:rounded-lg active:bg-blue-white"
-                onClick={() => handleRowClick(stock)}
+                className="min-w-full bg-white border-b border-gray-300 cursor-pointer  hover:bg-blue-white hover:text-my-blue hover:font-bold hover:rounded-lg active:bg-blue-white"
+                onClick={() => handleBuildingRowClick(stock)}
               >
                 <td className="py-2 px-4">{index + 1}</td>
-                <td className="py-2 px-4">{stock.stockName}</td>
-                <td className="py-2 px-4">{stock.stockLocation}</td>
-                <td className="py-2 px-4">{stock.assets.length}</td>
+                <td className="py-2 px-4">{stock.buildingName}</td>
+                <td className="py-2 px-4">{stock.totalRooms}</td>
+                <td className="py-2 px-4">{stock.totalAsset}</td>
+                {/* <td className="py-2 px-4">{stock.totalValue}</td> */}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div>
-        {selectedStock && (
+        {selectedBuilding && (
           <TableModal
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
-            title={`${activeCategory} Details for ${selectedStock.stockName}`}
-            tableHeaders={selectedStock.assets.length > 0 ? Object.keys(selectedStock.assets[0]) : []}
-            tableData={selectedStock.assets || []}
-            tag={[activeCategory, selectedStock.stockName]}
+            isOpen={isBuildingModalOpen}
+            onClose={handleCloseBuildingModal}
+            title={`${activeCategory} Rooms for ${selectedBuilding.buildingName}`}
+            tableHeaders={['roomName', 'floor', 'totalAssets']}
+            tableData={selectedBuilding.rooms || []}
+            tag={[activeCategory, selectedBuilding.buildingName]}
+            onRowClick={handleRoomRowClick}
+          />
+        )}
+        {selectedRoom && (
+          <TableModal
+            isOpen={isRoomModalOpen}
+            onClose={handleCloseRoomModal}
+            title={`Assets for Room ${selectedRoom.roomName}`}
+            tableHeaders={selectedRoom.assets.length > 0 ? Object.keys(selectedRoom.assets[0]) : []}
+            tableData={selectedRoom.assets || []}
           />
         )}
       </div>
@@ -139,4 +173,4 @@ const StockTable: React.FC<StockTableProps> = ({ activeCategoryData, activeCateg
   );
 };
 
-export default StockTable;
+export default BuildingTable;
