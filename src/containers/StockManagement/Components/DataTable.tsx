@@ -163,9 +163,10 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
           <TableModal
             isOpen={isRoomModalOpen}
             onClose={handleCloseRoomModal}
-            title={`Assets for Room ${selectedRoom.roomName}`}
+            title={`${activeCategory} for Room ${selectedRoom.roomName}`} 
             tableHeaders={selectedRoom.assets.length > 0 ? Object.keys(selectedRoom.assets[0]) : []}
             tableData={selectedRoom.assets || []}
+            tag={[activeCategory, selectedBuilding!!.buildingName, selectedRoom.roomName]}
           />
         )}
       </div>

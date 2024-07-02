@@ -12,7 +12,7 @@ function Categories(props: CategoriesProps) {
   
   return (
     <div
-     className={`${!props.isActive ? "border-2 border-blue-white" : "bg-blue-white"} rounded-lg p-1 px-2 justify-center items-center w-36 cursor-pointer text-dark-white`}
+     className={`${!props.isActive ? "border-2 border-blue-white" : "bg-blue-white"} w-32   flex-grow sm:flex-shrink md:flex-shrink rounded-lg p-1 px-2 justify-center items-center  cursor-pointer text-dark-white`}
      onClick={() => props.handleActive(props.id)}
     >
       <h3 className={`font-bold text-sm ${props.isActive ? 'text-blue' : 'text-black'}`}>

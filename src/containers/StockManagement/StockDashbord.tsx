@@ -189,8 +189,8 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
         </div>
       </div>
 
-      <div className="flex flex-row gap-4">
-        <div className="relative w-1/3 px-4 rounded-lg bg-white py-10 pb-16 animate__animated animate__fast min-h-96">
+      <div className="flex flex-row gap-2">
+        <div className="relative w-1/3 p-4 rounded-lg bg-white pb-16 animate__animated animate__fast min-h-96">
           <div className="flex justify-center pb-2">
             <h3 className="text-md font-bold text-black justify-center">{totalCategories > 0 ? "Asset Categories" : " No Category current  "}</h3>
           </div>
@@ -205,7 +205,7 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
           </button>
         </div>
 
-        <div className="w-2/3 h-full p-4 rounded-lg relative bg-white py-10 pb-16 animate__animate animate__fast">
+        <div className="w-2/3 h-full p-4 rounded-lg relative bg-white py-4 pb-16 animate__animate animate__fast">
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center">
               <IoMdMenu className="text-xl text-gray-400" />
