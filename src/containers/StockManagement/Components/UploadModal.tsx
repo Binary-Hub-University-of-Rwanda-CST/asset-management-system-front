@@ -62,7 +62,7 @@ const UploadModal: React.FC<ModalProps> = (props) => {
     link.click();
     document.body.removeChild(link);
     // Provide user feedback on download initiation
-    alert(`Downloading ${selectedCategory.name} CSV Template...`);
+    // alert(`Downloading ${selectedCategory.name} CSV Template...`);
   };
 
   const [isDragging, setIsDragging] = useState(false);
