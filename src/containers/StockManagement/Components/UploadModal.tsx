@@ -184,7 +184,7 @@ const UploadModal: React.FC<ModalProps> = (props) => {
                 categories.find(cat => cat.id === selectedCategoryId)?.specification.map((spec, index) => (
                   <div className="bg-white rounded-md py-1 w-full flex flex-row" key={index}>
                     <div className='w-2/5 flex justify-end mx-4 font-bold'>{spec.name}</div>
-                    <div className='pl-4 border-blue-white border-l-4 flex flex-row gap-2'>
+                    <div className='pl-4 border-blue-white border-l-4 flex flex-row gap-2 flex-wrap'> 
                       {spec.values.map((value, idx) => (
                         <span className='flex items-center rounded-md px-1 bg-blue-white text-my-blue' key={idx}>
                           {value}
