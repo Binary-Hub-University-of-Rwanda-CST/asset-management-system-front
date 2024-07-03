@@ -63,7 +63,7 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "table_data.csv");
+    link.setAttribute("download", `${title}.csv`); 
     document.body.appendChild(link);
     link.click();
   };

@@ -43,7 +43,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ assetsData }) => {
       enabled: true,
       y: {
         formatter: function (value: number) {
-          return `${value.toLocaleString()} frws`;
+          return `${value.toLocaleString()} FRW`;
         },
       },
     },
@@ -56,7 +56,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ assetsData }) => {
               show: true,
               label: 'Total Assets Value',
               formatter: function () {
-                return `${totalAssetsValue.toLocaleString()} frws`;
+                return `${totalAssetsValue.toLocaleString()} FRW`;
               },
             },
           },

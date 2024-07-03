@@ -180,7 +180,7 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
           <div className="flex flex-col justify-center align-center bg-blue-white rounded-md px-2 ">
             <p className="text-black">Total Assets Value</p>
             <h2 className="text-black font-bold text-2xl flex justify-center"> 
-              {formatNumberWithCommas(totalAssetsValue) } frws   
+              {formatNumberWithCommas(totalAssetsValue) } FRW   
             </h2>
           </div>
         </div>
@@ -225,7 +225,7 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
               <div>
                 <h4>Total {activeCategoryName}s's value</h4> 
                 <h3 className="font-bold text-xl">
-                  {formatNumberWithCommas(activeCategoryTotalValue)}  frws</h3>  
+                  {formatNumberWithCommas(activeCategoryTotalValue)}  FRW</h3>  
               </div>
             </div>
           </div>

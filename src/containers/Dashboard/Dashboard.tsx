@@ -54,7 +54,7 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
   );
 
   return (
-    <div className="mr-4 animate__animated animate__fadeInTopLeft animate__faster">
+    <div className="mr-4 animate__animated  animate__faster"> 
       <div className="flex flex-col bg-white rounded-lg p-2">
         <div className="flex flex-row justify-between items-center">
           <div className="flex flex-col gap-2 mb-2">
@@ -80,18 +80,18 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
               <TbDatabaseDollar className="text-3xl font-bold text-confirm" />
               <div className="flex flex-col gap-0">
                 <h5>Total Assets Value</h5>
-                <h3 className="text-md font-bold">{totalAssetsValue.toLocaleString()} frws</h3>
+                <h3 className="text-md font-bold">{totalAssetsValue.toLocaleString()} FRW</h3>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="rounded-lg py-4 flex flex-row gap-6 animate__animated animate__fadeInTopLeft">
+      <div className="rounded-lg py-4 flex flex-row gap-6 "> 
         <div className="flex flex-col gap-4 w-2/5">
           <div className="rounded-lg p-0 w-full bg-white flex justify-center items-center flex-col h-full">
-            <h3 className="text-xl">Assets Value Summary</h3>
-            {/* Include DonutChart here and pass assetsData as a prop */}
+            <h3 className="text-xl">Assets Value Summary  by category</h3>
+            {/* Include DonutChart here and pass assetsData as a prop */} 
             <DonutChart assetsData={assetsData} />
           </div>
         </div>
