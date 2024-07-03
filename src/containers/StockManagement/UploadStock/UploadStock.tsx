@@ -48,10 +48,10 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
           <GoDatabase className="text-4xl text-my-blue" />
           <div className="flex item-center flex-col">
             <div className="flex text-black text-xl font-bold px-2">
-              Upload Asset In Stock
+              Upload Assets 
             </div>
             <div className="px-2 rounded-md bg-primary-700 text-black w-max text-sm">
-              Manage Stock From Different Location In One College
+              Upload  Assets in Building room    
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
         <div className="flex items-center justify-center w-full">
           <h3 className="font-bold text-2xl text-black">No Asset Uploaded </h3>
         </div>
-        <div className="text-center text-md  text-gray-400 uppercase">
+        <div className="text-center text-md  text-gray-400">
           click  the following button to upload the Asset In Specific Room 
         </div>
         <div className="text-center  font-light text-black">

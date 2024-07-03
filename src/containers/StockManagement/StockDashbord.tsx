@@ -158,7 +158,7 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
         <div className="pl-1 flex gap-2 items-center">
           <GoDatabase className="text-3xl font-bold text-my-blue" />
           <div className="flex item-center flex-col">
-            <div className="flex text-black text-xl font-bold px-2">Stock Management</div>
+            <div className="flex text-black text-xl font-bold px-2">Asset  Management</div>
             <div className="px-2 rounded-md bg-primary-700 text-black w-max text-sm">
               Manage Assets From Different Location In One College
             </div>

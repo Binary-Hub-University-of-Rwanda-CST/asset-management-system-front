@@ -52,8 +52,6 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
     setFilteredData(filtered);
   }, [searchTerm, tableData, tableHeaders]);
 
-  const modalRef = useRef<HTMLDivElement | null>(null);
-
   const exportToCSV = () => {
     const csvContent = "data:text/csv;charset=utf-8," +
       tableHeaders.join(",") + "\n" +

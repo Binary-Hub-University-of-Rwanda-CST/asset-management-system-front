@@ -4,13 +4,8 @@ import Modal, { ModalSize } from '../../../components/modal/Modal';
 import Dropdown, { Option, dropdownStyle } from '../../../components/Fragments/DropDown';
 import { BsCloudUpload } from "react-icons/bs";
 import { RiFileExcel2Line } from "react-icons/ri";
-import { fetchStocks } from '../../../actions/stock.action';
-import { fetchCategories } from '../../../actions/category.action';
-import { fetchBrands } from '../../../actions/brand.action';
+import { fetchValidationData, ValidationData, Building, Room, Category } from '../../../actions/validationData.actions'; 
 import { StoreState } from '../../../reducers';
-import { Brand } from '../../../actions/brand.action';
-import { Category } from '../../../actions/category.action';
-import { Stock } from '../../../actions/stock.action';
 import { AppDispatch } from '../../../app/store';
 
 interface ModalProps {
@@ -22,52 +17,42 @@ const UploadModal: React.FC<ModalProps> = (props) => {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchStocks());
-    dispatch(fetchCategories());
-    dispatch(fetchBrands());
+    dispatch(fetchValidationData());
   }, [dispatch]);
 
-  const stocks = useSelector((state: StoreState) => state.stock.stocks);
-  const categories = useSelector((state: StoreState) => state.category.categories);
-  const brands = useSelector((state: StoreState) => state.brand.brands);
-
-  const categoryOptions: Option[] = categories.map((category: Category) => ({
-    OptionName: category.name
-  }));
-
-  const locationOptions: Option[] = stocks.map((stock: Stock) => ({
-    OptionName: stock.name
-  }));
-
-  const brandOptions: Option[] = brands.map((brand: Brand) => ({
-    OptionName: brand.name
-  }));
+  const validationData = useSelector((state: StoreState) => state.validation.validationData);
+  const buildings = validationData?.building || [];
+  const categories = validationData?.category || [];
 
   const style: dropdownStyle = {
     buttonStyle: 'flex items-center w-[600px] rounded-md bg-my-gray shadow-sm px-4 py-1 text-xl font-medium text-black hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500',
     optionStyle: 'flex w-80 mx-2 justify-between items-center'
   };
 
-  const [selectedCategoryOption, setSelectedCategoryOption] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [selectedBuildingId, setSelectedBuildingId] = useState<string | null>(null);
+  const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (categories.length > 0) {
-      setSelectedCategory(categories[0]);
-      setSelectedCategoryOption(categories[0].name);
-    }
-  }, [categories]);
+  const handleBuildingChange = (option: Option) => {
+    setSelectedBuildingId(option.value as string);
+    setSelectedRoomId(null);
+  };
 
-  const handleCategoryChange = (optionName: string) => {
-    const selected = categories.find(category => category.name === optionName);
-    setSelectedCategory(selected || null);
-    setSelectedCategoryOption(optionName);
+  const handleRoomChange = (option: Option) => {
+    setSelectedRoomId(option.value as string);
+  };
+
+  const handleCategoryChange = (option: Option) => {
+    setSelectedCategoryId(option.value as string);
   };
 
   const handleDownloadCsvTemplate = () => {
+    if (!selectedCategoryId) return;
+
+    const selectedCategory = categories.find(cat => cat.id === selectedCategoryId);
     if (!selectedCategory) return;
 
-    const headers = selectedCategory.specifications.map(spec => spec.name);
+    const headers = selectedCategory.specification.map(spec => spec.name);
     const csvContent = 'data:text/csv;charset=utf-8,' + headers.join(',') + '\n';
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
@@ -76,6 +61,8 @@ const UploadModal: React.FC<ModalProps> = (props) => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    // Provide user feedback on download initiation
+    alert(`Downloading ${selectedCategory.name} CSV Template...`);
   };
 
   const [isDragging, setIsDragging] = useState(false);
@@ -151,24 +138,36 @@ const UploadModal: React.FC<ModalProps> = (props) => {
         <div className='flex flex-col items-start p-5'>
           <div className='flex flex-col gap-1'>
             <div className='flex flex-col gap-1'>
-              <h3 className='text-md'>Choose Stock Location</h3>
-              <Dropdown options={locationOptions} tag='Stock' style={style} />
+              <h3 className='text-md'>Choose building</h3>
+              <Dropdown
+                options={buildings.map(building => ({ OptionName: building.name, value: building.id }))}
+                tag='Building'
+                style={style}
+                onChange={handleBuildingChange}
+              />
             </div>
-            <h3 className='text-md'>Choose Asset Category</h3>
-            <Dropdown
-              options={categoryOptions}
-              tag='Assets'
-              style={style}
-              onChange={handleCategoryChange}
-              value={selectedCategoryOption || ''} 
-            />
+            {selectedBuildingId && (
+              <div className='flex flex-col gap-1'>
+                <h3 className='text-md'>Choose room</h3>
+                <Dropdown
+                  options={buildings.find(building => building.id === selectedBuildingId)?.rooms.map(room => ({ OptionName: room.name })) || []}
+                  tag='Room'
+                  style={style}
+                  onChange={handleRoomChange}
+                />
+              </div>
+            )}
+            <div className='flex flex-col gap-1'>
+              <h3 className='text-md'>Choose Asset Category</h3>
+              <Dropdown
+                options={categories.map(category => ({ OptionName: category.name, value: category.id }))} 
+                tag='Category'
+                style={style}
+                onChange={handleCategoryChange}
+              />
+            </div>
           </div>
-          <div className='flex flex-col gap-1'>
-            <h3 className='text-md'>Choose Asset Brand</h3>
-            <Dropdown options={brandOptions} tag='Brand' style={style} />
-          </div>
-
-          {selectedCategory && (
+          {selectedCategoryId && ( 
             <div className="flex justify-end mt-4  mr-4  w-full"> 
               <button
                 className="bg-my-blue hover:bg-opacity-80 text-white py-1  px-4 rounded-md text-sm font-medium " 
@@ -178,15 +177,15 @@ const UploadModal: React.FC<ModalProps> = (props) => {
               </button>
             </div> 
           )}
-          {selectedCategory ? (
+          {selectedCategoryId ? (
             <div className='flex flex-col items-center bg-blue-white rounded-md w-full py-5 px-5 my-2 gap-1'>
-              <h3 className='mb-2 font-bold'>Data Validation Table For {selectedCategory.name}</h3>
-              {selectedCategory.specifications.length > 0 ? (
-                selectedCategory.specifications.map((spec, index) => (
+              <h3 className='mb-2 font-bold'>Data Validation Table For {categories.find(cat => cat.id === selectedCategoryId)?.name}</h3>
+              {categories.find(cat => cat.id === selectedCategoryId)!!.specification.length > 0 ? ( 
+                categories.find(cat => cat.id === selectedCategoryId)?.specification.map((spec, index) => (
                   <div className="bg-white rounded-md py-1 w-full flex flex-row" key={index}>
                     <div className='w-2/5 flex justify-end mx-4 font-bold'>{spec.name}</div>
                     <div className='pl-4 border-blue-white border-l-4 flex flex-row gap-2'>
-                      {spec.values.map((value : string, idx: string) => ( 
+                      {spec.values.map((value, idx) => (
                         <span className='flex items-center rounded-md px-1 bg-blue-white text-my-blue' key={idx}>
                           {value}
                         </span>
@@ -224,14 +223,11 @@ const UploadModal: React.FC<ModalProps> = (props) => {
               {isDragging ? 'Drop CSV file here' : 'Drag and drop or click to upload CSV file'}
             </span>
             {draggedFile && (
-              <div className="mt-2 text-center">
-                <p className="font-bold">{fileName}</p>
-                <p className="text-sm">{`${(fileSize / 1024).toFixed(2)} KB`}</p>
+              <div className="mt-2 text-sm">
+                <strong>File Selected:</strong> {fileName} ({(fileSize / 1024).toFixed(2)} KB)
               </div>
             )}
           </div>
-
-          
         </div>
       </Modal>
     </div>
@@ -239,4 +235,3 @@ const UploadModal: React.FC<ModalProps> = (props) => {
 };
 
 export default UploadModal;
- 

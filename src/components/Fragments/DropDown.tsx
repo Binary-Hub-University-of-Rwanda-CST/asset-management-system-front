@@ -16,8 +16,7 @@ export interface DropdownProps {
   options: Option[];
   style?: dropdownStyle;
   tag?: string;
-  onChange?: (optionName: string) => void;
-  value? : string  
+  onChange?: (option: Option) => void;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({ options, tag, style, onChange }) => {
@@ -35,13 +34,14 @@ const Dropdown: React.FC<DropdownProps> = ({ options, tag, style, onChange }) =>
     setSelectedOption(option);
     setIsOpen(false);
     if (onChange) {
-      onChange(option.OptionName);
+      onChange(option);
     }
   };
 
   const filteredOptions = options.filter((option) =>
     option.OptionName.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
 
   return (
     <div className="relative inline-block text-left">
@@ -93,9 +93,9 @@ const Dropdown: React.FC<DropdownProps> = ({ options, tag, style, onChange }) =>
                 >
                   <div className={style ? style.optionStyle : `flex w-80 mx-2 justify-between items-center`}>
                     <span className="mr-2 text-lg">{option.OptionName}</span>
-                    {option.value &&
+                    {/* {option.value &&
                       <span className='text-my-blue bg-blue-white rounded-lg px-2 py-1'>{option.value}</span>
-                    }
+                    } */}
                   </div>
                 </button>
               ))

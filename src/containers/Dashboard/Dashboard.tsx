@@ -66,6 +66,47 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
     allBuildings.concat(category.buildings), [] as Building[]
   );
 
+  if (state.loading) {
+    return (
+      <div className="mr-4 animate__animated animate__faster">
+        <div className="flex flex-col bg-white rounded-lg p-2">
+          <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-col gap-2 mb-2">
+              <div className="flex flex-row items-center gap-1">
+                <Skeleton width={40} height={30} />   
+                <Skeleton width={180} height={30} /> 
+              </div>
+            </div>
+            <div className="flex flex-row gap-4 items-center">
+              <div className="flex flex-row bg-blue-white px-4 py-2 rounded-lg h-fit items-center gap-2">
+                <Skeleton width={30} height={30} />
+                <Skeleton width={100} height={30} />
+              </div>
+              <div className="flex flex-row bg-[#dcf1e6] px-4 py-2 rounded-lg h-fit items-center gap-2">
+                <Skeleton width={30} height={30} />
+                <Skeleton width={100} height={30} /> 
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg py-4 flex flex-row gap-6">
+          <div className="flex flex-col gap-4 w-2/5">
+            <div className="rounded-lg p-0 w-full bg-white flex justify-center items-center flex-col h-full">
+              <Skeleton width={300}  />
+              <Skeleton height={200} width={200} circle /> 
+            </div>
+          </div>
+          <div className="flex bg-white w-3/5 justify-center items-center rounded-lg">
+            <Skeleton  width="100"  /> 
+            <Skeleton  width="200" />
+            <Skeleton height={400} width="300" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mr-4 animate__animated animate__faster">
       <div className="flex flex-col bg-white rounded-lg p-2">
@@ -86,45 +127,29 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
               <TbDatabase className="text-3xl font-bold text-my-blue" />
               <div className="flex flex-col gap-0">
                 <h5>Total Assets</h5>
-                {state.loading ? (
-                  <Skeleton width={50} height={20} />
-                ) : (
-                  <h3 className="text-sm font-bold">{totalAssets}</h3>
-                )}
+                <h3 className="text-sm font-bold">{totalAssets}</h3>
               </div>
             </div>
             <div className="flex flex-row bg-[#dcf1e6] px-4 py-2 rounded-lg h-fit items-center gap-2">
               <TbDatabaseDollar className="text-3xl font-bold text-confirm" />
               <div className="flex flex-col gap-0">
                 <h5>Total Assets Value</h5>
-                {state.loading ? (
-                  <Skeleton width={100} height={20} />
-                ) : (
-                  <h3 className="text-md font-bold">{totalAssetsValue.toLocaleString()} FRW</h3>
-                )}
+                <h3 className="text-md font-bold">{totalAssetsValue.toLocaleString()} FRW</h3>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="rounded-lg py-4 flex flex-row gap-6">
+      <div className="rounded-lg py-4 flex flex-row gap-6"> 
         <div className="flex flex-col gap-4 w-2/5">
           <div className="rounded-lg p-0 w-full bg-white flex justify-center items-center flex-col h-full">
-            <h3 className="text-md font-semibold m-2 ">Assets Value Summary by category</h3>
-            {state.loading ? (
-              <Skeleton height={200} width={200} />
-            ) : (
-              <DonutChart assetsData={assetsData} />
-            )}
+            <h3 className="text-md font-semibold m-2">Assets Value Summary by category</h3>
+            <DonutChart assetsData={assetsData} />
           </div>
         </div>
         <div className="flex bg-white w-3/5 justify-center items-center rounded-lg">
-          {state.loading ? (
-            <Skeleton height={400} width="100%" />
-          ) : (
-            <BuildingAssetsBarGraph buildings={buildings} />
-          )}
+          <BuildingAssetsBarGraph buildings={buildings}  />
         </div>
       </div>
     </div>
