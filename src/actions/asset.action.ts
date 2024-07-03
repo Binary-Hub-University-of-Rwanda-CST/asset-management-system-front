@@ -16,7 +16,7 @@ import { API_URL } from '../utils/api';
 export interface AssetCategory extends Identifiable {}
 
 export interface Asset {
-    value: number;
+    current_value: number;
     [specification: string]: string | number ; 
 }
 

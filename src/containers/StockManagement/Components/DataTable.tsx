@@ -14,7 +14,7 @@ export interface buildingInterface {
 
 export interface AssetInterface {
   [key: string]: any;
-  value: number;
+  current_value: number; 
 }
 
 export interface RoomInterface {

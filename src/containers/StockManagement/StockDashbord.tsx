@@ -27,8 +27,10 @@ interface AssetProps {
 
 const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetError, fetchAssets }) => {
   useEffect(() => {
-    fetchAssets();
-  }, [fetchAssets]); 
+    if (assetsData.length === 0) {
+      fetchAssets();
+    }
+  }, [fetchAssets, assetsData.length]); 
  
   const [showTable, setShowTable] = useState(false);
   const [isBuildingModalOpen, setIsBuildingModalOpen] = useState(false); 
@@ -48,7 +50,7 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
       if (category) {
         const filteredBuildings: buildingInterface[] = category.buildings.map((building) => {
           const totalAssets = building.rooms.reduce((sum, room) => sum + room.assets.length, 0);
-          const totalValue = building.rooms.reduce((sum, room) => sum + room.assets.reduce((roomSum, asset) => roomSum + asset.value, 0), 0);
+          const totalValue = building.rooms.reduce((sum, room) => sum + room.assets.reduce((roomSum, asset) => roomSum + asset.current_value, 0), 0);
   
           return {
             no: building.id,
@@ -128,7 +130,7 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
         (catTotal, building) =>
           catTotal + building.rooms.reduce(
             (roomTotal, room) =>
-              roomTotal + room.assets.reduce((assetTotal, asset) => assetTotal + asset.value, 0),
+              roomTotal + room.assets.reduce((assetTotal, asset) => assetTotal + asset.current_value, 0),
             0
           ),
         0
@@ -140,7 +142,7 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
       (catTotal, building) =>
         catTotal + building.rooms.reduce(
           (roomTotal, room) =>
-            roomTotal + room.assets.reduce((assetTotal, asset) => assetTotal + asset.value, 0),
+            roomTotal + room.assets.reduce((assetTotal, asset) => assetTotal + asset.current_value, 0),
           0
         ),
       0
