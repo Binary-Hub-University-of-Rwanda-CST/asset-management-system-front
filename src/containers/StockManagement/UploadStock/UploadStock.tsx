@@ -97,12 +97,12 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
           <h3 className="font-bold text-2xl text-black">No Asset Uploaded </h3>
         </div>
         <div className="text-center text-md  text-gray-400 uppercase">
-          click  the following button to upload the Asset In Specific Stock
+          click  the following button to upload the Asset In Specific Room 
         </div>
         <div className="text-center  font-light text-black">
          <button 
          onClick={CreateUploadData}
-         className=" bg-my-blue text-white rounded-lg py-2 px-6 text-xl">Upload Stock</button>
+         className=" bg-my-blue text-white rounded-lg py-2 px-6 text-xl">Upload Assets</button> 
         </div>
       </div>
     </div>

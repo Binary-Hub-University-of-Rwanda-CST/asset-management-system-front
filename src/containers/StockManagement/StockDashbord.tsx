@@ -160,7 +160,7 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
           <div className="flex item-center flex-col">
             <div className="flex text-black text-xl font-bold px-2">Stock Management</div>
             <div className="px-2 rounded-md bg-primary-700 text-black w-max text-sm">
-              Manage Stock From Different Location In One College
+              Manage Assets From Different Location In One College
             </div>
           </div>
         </div>
@@ -262,7 +262,7 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
               to="/upload-assets"
               className="flex ml-20 p-1 bg-my-blue text-white rounded-lg w-3/4 bottom-2 absolute justify-center items-center"
             >
-              Upload- <span className="font-bold">{activeCategoryName}</span> - Stock
+              Upload- <span className="font-bold">{activeCategoryName}</span> - Assets
             </Link>
           </div>
         </div>
