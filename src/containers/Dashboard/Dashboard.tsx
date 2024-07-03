@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { StoreState } from "../../reducers";
-import { Auth, FC_SetError, FC_SetSuccess, fetchAssets, Assets } from "../../actions";
+import { Auth, FC_SetError, FC_SetSuccess, fetchAssets, Assets, Building } from "../../actions";
 import { MdOutlineDashboard } from "react-icons/md";
-import { TbDatabase, TbDatabaseDollar } from "react-icons/tb"; 
+import { TbDatabase, TbDatabaseDollar } from "react-icons/tb";
 import DonutChart from "./DonutChart";
-
+import BuildingAssetsBarGraph from "./BuildingAssetsBarGraph"; 
 interface AppProps {
   auth: Auth;
   assetsData: Assets[];
   FC_SetSuccess: (msg: string) => void;
   FC_SetError: (msg: string) => void;
-  fetchAssets: () => void; // Ensure this matches your action creator signature
+  fetchAssets: () => void;
 }
 
 interface AppState {
@@ -33,28 +33,34 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
     }
   }, [fetchAssets, assetsData.length]); 
 
-  // Calculate total assets and total asset value dynamically
-  const totalAssets = assetsData.reduce((total, category) =>
-    total + category.buildings.reduce((catTotal, building) =>
-      catTotal + building.rooms.reduce((roomTotal, room) =>
-        roomTotal + room.assets.length, 0
-      ), 0
+  /// Calculate total assets and total asset value dynamically
+const totalAssets = assetsData.reduce((total, category) =>
+  total + category.buildings.reduce((catTotal, building) =>
+    catTotal + building.rooms.reduce((roomTotal, room) =>
+      roomTotal + room.assets.length, 0
     ), 0
-  );
+  ), 0
+);
 
-  const totalAssetsValue = assetsData.reduce((total, category) =>
-    total + category.buildings.reduce((catTotal, building) =>
-      catTotal + building.rooms.reduce((roomTotal, room) =>
-        roomTotal + room.assets.reduce((assetTotal, asset) => assetTotal + asset.current_value, 0),
-        0
-      ),
+const totalAssetsValue = assetsData.reduce((total, category) =>
+  total + category.buildings.reduce((catTotal, building) =>
+    catTotal + building.rooms.reduce((roomTotal, room) =>
+      roomTotal + room.assets.reduce((assetTotal, asset) => assetTotal + asset.current_value, 0),
       0
     ),
     0
-  );
+  ),
+  0
+);
+
+// Extract buildings data for BuildingAssetsBarGraph
+const buildings: Building[] = assetsData.reduce((allBuildings, category) =>
+  allBuildings.concat(category.buildings), [] as Building[]
+);
+
 
   return (
-    <div className="mr-4 animate__animated  animate__faster"> 
+    <div className="mr-4 animate__animated animate__faster"> 
       <div className="flex flex-col bg-white rounded-lg p-2">
         <div className="flex flex-row justify-between items-center">
           <div className="flex flex-col gap-2 mb-2">
@@ -90,13 +96,14 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
       <div className="rounded-lg py-4 flex flex-row gap-6 "> 
         <div className="flex flex-col gap-4 w-2/5">
           <div className="rounded-lg p-0 w-full bg-white flex justify-center items-center flex-col h-full">
-            <h3 className="text-xl">Assets Value Summary  by category</h3>
+            <h3 className="text-md font-semibold m-2 ">Assets Value Summary  by category</h3>
             {/* Include DonutChart here and pass assetsData as a prop */} 
             <DonutChart assetsData={assetsData} />
           </div>
         </div>
         <div className="flex bg-white w-3/5 justify-center items-center rounded-lg">
-          {/* <BuildingsChart/> */}
+          {/* Render BuildingAssetsBarGraph component and pass buildings data */}
+          <BuildingAssetsBarGraph buildings={buildings} />
         </div>
       </div>
     </div>
@@ -105,7 +112,7 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
 
 const mapStateToProps = (state: StoreState) => ({
   auth: state.auth,
-  assetsData: state.asset.assets, // Ensure this matches how you store assets data in your redux state
+  assetsData: state.asset.assets,
 });
 
 export default connect(mapStateToProps, {
@@ -113,4 +120,3 @@ export default connect(mapStateToProps, {
   FC_SetError,
   fetchAssets,
 })(Dashboard);
- 
