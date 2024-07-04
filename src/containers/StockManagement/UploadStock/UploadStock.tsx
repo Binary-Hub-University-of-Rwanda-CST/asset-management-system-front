@@ -5,12 +5,10 @@ import { Auth, FC_SetError, FC_SetSuccess } from "../../../actions";
 import Alert,{AlertType} from "../../../components/Alert/Alert";
 import { GoDatabase } from "react-icons/go";
 import UploadModal from "../Components/UploadModal";
-import { useDispatch } from "react-redux"; 
-import { fetchCategories } from "../../../actions/category.action";
-import { fetchStocks } from "../../../actions/stock.action";
-import { fetchBrands } from "../../../actions/brand.action";
+import { useDispatch } from "react-redux";
+import { fetchValidationData } from "../../../actions/validationData.actions";
 import { AppDispatch } from "../../../app/store";
-
+import UploadSummary from "./UploadSummary";
 
 interface AppProps {
   auth: Auth;
@@ -22,6 +20,7 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [showSummary, handleShowSummary] = useState(false);
    
   const [UploadData, setUploadData] = useState(false);
 
@@ -33,11 +32,10 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
     // alert(UploadData);
   }
   const dispatch: AppDispatch = useDispatch();
+  const activeLink =  'text-lg font-bold border-b-2 border-my-blue  py-1'; 
 
   useEffect(() => {
-    dispatch(fetchCategories());
-    dispatch(fetchStocks()); 
-    dispatch(fetchBrands()); 
+    dispatch(fetchValidationData());
   }, [dispatch]); 
 
   return (
@@ -70,9 +68,13 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
           </div>
         </div>
         </div>
-        <div className="flex flex-row gap-10 ml-10 text-lg">
-           <button type="button">Asset List</button>
-           <button className="text-lg font-bold border-b-2 border-my-blue px-2 py-1">Summary</button>
+        <div className="flex flex-row gap-10 ml-10 text-lg ">  
+           <button type="button"
+           className={` text-lg py-1 px-2   ${ !showSummary  && activeLink}`}
+            onClick={()=>handleShowSummary(false)}>Asset List</button> 
+           <button 
+           onClick={()=> handleShowSummary(true)} 
+           className={`text-lg  px-2 py-1 ml-10 ${showSummary && activeLink}`}>Summary</button> 
         </div>
         </div>
       
@@ -91,7 +93,8 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
           )}
         </div>
       )}
-      <div className="bg-white py-10 pb-16  rounded-lg animate__animated animate__zoomIn animate__fast ">
+      <div className="bg-white py-10 pb-16 p-2  rounded-lg animate__animated animate__zoomIn animate__fast ">
+      {showSummary ? <UploadSummary/>:
       <div className=" flex flex-col p-4 rounded-lg bg-my-gray mx-12 gap-2 mb-56 ">
         <div className="flex items-center justify-center w-full">
           <h3 className="font-bold text-2xl text-black">No Asset Uploaded </h3>
@@ -105,6 +108,7 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
          className=" bg-my-blue text-white rounded-lg py-2 px-6 text-xl">Upload Assets</button> 
         </div>
       </div>
+      }
     </div>
     {
       UploadData &&

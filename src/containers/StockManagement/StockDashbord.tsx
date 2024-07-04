@@ -37,8 +37,10 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
   const [newCategory, setNewCategory] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeCategoryBuildingData, setActiveCategoryBuildingData] = useState<buildingInterface[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  // const [activeCategory, setActiveCategory] = useState<number | string | null>(null);
 
-  useEffect(() => {
+  useEffect(() => { 
     if (assetsData.length > 0) {
       setActiveCategory(assetsData[0].category.id);
     }
@@ -99,7 +101,15 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
 
   const setActiveCategoryHandler = (categoryId: string) => setActiveCategory(categoryId);
 
-  const categoryData = assetsData.map((category) => {
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredAssetsData = assetsData.filter(category =>
+    category.category.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const categoryData = filteredAssetsData.map((category) => {
     const totalAssets = category.buildings.reduce((total, building) =>
       total + building.rooms.reduce((roomTotal, room) => roomTotal + room.assets.length, 0), 0
     );
@@ -158,7 +168,7 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
         <div className="pl-1 flex gap-2 items-center">
           <GoDatabase className="text-3xl font-bold text-my-blue" />
           <div className="flex item-center flex-col">
-            <div className="flex text-black text-xl font-bold px-2">Asset  Management</div>
+            <div className="flex text-black text-2xl font-bold px-2">Asset  Management</div>
             <div className="px-2 rounded-md bg-primary-700 text-black w-max text-sm">
               Manage Assets From Different Location In One College
             </div>
@@ -192,12 +202,19 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
       </div>
 
       <div className="flex flex-row gap-2">
-        <div className="relative w-1/3 p-4 rounded-lg bg-white pb-16 animate__animated animate__fast min-h-96">
+        <div className="relative  w-1/3 p-4 rounded-lg bg-white pb-16 animate__animated animate__fast ">
           <div className="flex justify-center pb-2">
-            <h3 className="text-md font-bold text-black justify-center">{totalCategories > 0 ? "Asset Categories" : " No Category current  "}</h3>
+            <h3 className="text-md font-bold text-black justify-start  text-xl ">{totalCategories > 0 ? "Asset Categories" : " No Category current  "}</h3>
           </div>
-          <div className="flex justify-center flex-wrap gap-2 mt-2">
-            {categoryData}
+                <input
+              type="text"
+              placeholder="Search categories"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="mb-4 p-2 py-1  border border-x-blue-white outline-my-blue  rounded w-full" 
+                  />
+          <div className="flex justify-center flex-wrap gap-2 mt-2 overflow-y-auto">  
+            {categoryData} 
           </div>
           <button
             onClick={createNewCategoryModal}
@@ -211,7 +228,7 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center">
               <IoMdMenu className="text-xl text-gray-400" />
-              <h3 className="text-black font-bold">{activeCategoryName} - Assets</h3>
+              <h3 className="text-black font-bold text-xl ">{activeCategoryName} - Assets</h3>
             </div>
             <div className="flex flex-row items-center gap-2">
               <FaRegCheckCircle className="text-3xl font-bold text-confirm" />

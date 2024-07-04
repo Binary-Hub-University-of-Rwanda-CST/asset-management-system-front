@@ -7,6 +7,7 @@ import { RiFileExcel2Line } from "react-icons/ri";
 import { fetchValidationData, ValidationData, Building, Room, Category } from '../../../actions/validationData.actions'; 
 import { StoreState } from '../../../reducers';
 import { AppDispatch } from '../../../app/store';
+import TableModal from '../../../components/TableModal/TableModal';
 
 interface ModalProps {
   close: () => void;
@@ -14,11 +15,15 @@ interface ModalProps {
 
 const UploadModal: React.FC<ModalProps> = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const dispatch: AppDispatch = useDispatch();
+  const [isTableModalOpen, setIsTableModalOpen] = useState(false); // State to control TableModal
+  const [tableData, setTableData] = useState<Record<string, any>[]>([]); // State to store table data
+  const [tableHeaders, setTableHeaders] = useState<string[]>([]); // State to store table headers
 
-  useEffect(() => {
-    dispatch(fetchValidationData());
-  }, [dispatch]);
+  // const dispatch: AppDispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchValidationData());
+  // }, [dispatch]);
 
   const validationData = useSelector((state: StoreState) => state.validation.validationData);
   const buildings = validationData?.building || [];
@@ -61,8 +66,6 @@ const UploadModal: React.FC<ModalProps> = (props) => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    // Provide user feedback on download initiation
-    // alert(`Downloading ${selectedCategory.name} CSV Template...`);
   };
 
   const [isDragging, setIsDragging] = useState(false);
@@ -101,12 +104,18 @@ const UploadModal: React.FC<ModalProps> = (props) => {
   const handleFileUpload = (file: File) => {
     setFileName(file.name);
     setFileSize(file.size);
-    // Example: Read file content or process the file
     const reader = new FileReader();
     reader.onload = (event) => {
       const content = event.target?.result as string;
-      console.log('Uploaded file content:', content);
-      // Additional processing can be done here
+      const rows = content.split('\n').filter(Boolean);
+      const headers = rows[0].split(',').map(header => header.trim());
+      const data = rows.slice(1).map(row => {
+        const values = row.split(',').map(value => value.trim());
+        return headers.reduce((obj, header, index) => ({ ...obj, [header]: values[index] }), {});
+      });
+      setTableHeaders(headers);
+      setTableData(data);
+      setIsTableModalOpen(true); // Open the TableModal with parsed data
     };
     reader.readAsText(file);
   };
@@ -150,7 +159,7 @@ const UploadModal: React.FC<ModalProps> = (props) => {
               <div className='flex flex-col gap-1'>
                 <h3 className='text-md'>Choose room</h3>
                 <Dropdown
-                  options={buildings.find(building => building.id === selectedBuildingId)?.rooms.map(room => ({ OptionName: room.name })) || []}
+                  options={buildings.find(building => building.id === selectedBuildingId)?.rooms.map(room => ({ OptionName: room.name, value: room.id })) || []}
                   tag='Room'
                   style={style}
                   onChange={handleRoomChange}
@@ -180,7 +189,7 @@ const UploadModal: React.FC<ModalProps> = (props) => {
           {selectedCategoryId ? (
             <div className='flex flex-col items-center bg-blue-white rounded-md w-full py-5 px-5 my-2 gap-1'>
               <h3 className='mb-2 font-bold'>Data Validation Table For {categories.find(cat => cat.id === selectedCategoryId)?.name}</h3>
-              {categories.find(cat => cat.id === selectedCategoryId)!!.specification.length > 0 ? ( 
+              {categories.find(cat => cat.id === selectedCategoryId)!!.specification?.length > 0 ? ( 
                 categories.find(cat => cat.id === selectedCategoryId)?.specification.map((spec, index) => (
                   <div className="bg-white rounded-md py-1 w-full flex flex-row" key={index}>
                     <div className='w-2/5 flex justify-end mx-4 font-bold'>{spec.name}</div>
@@ -194,42 +203,40 @@ const UploadModal: React.FC<ModalProps> = (props) => {
                   </div>
                 ))
               ) : (
-                <div className="text-gray-500">No specifications available for this category</div>
+                <p className='mt-1'>No specifications available.</p>
               )}
             </div>
-          ) : (
-            <div className='flex flex-col items-center bg-blue-white rounded-md w-full py-5 px-5 my-2 gap-1'>
-              <h3 className='mb-2 font-bold'>Select a category to see specifications</h3>
-            </div>
-          )}
-
+          ) : null}
           <div
-            className={`flex flex-col gap-1 cursor-pointer w-full border-dashed border-2 border-my-gray text-gray-400 rounded-xl py-2 ${isDragging ? 'bg-gray-100' : ''}`}
+            className={`flex flex-col items-center justify-center bg-blue-white border-2 border-dashed rounded-md w-full py-4  px-10 mt-5 cursor-pointer ${isDragging ? 'border-blue-600' : 'border-blue-400'}`}
             onDragEnter={handleDragEnter}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            onClick={handleUploadClick} // Allow clicking to upload
+            onClick={handleUploadClick}
           >
             <input
+              ref={fileInputRef}
               type="file"
               accept=".csv"
-              ref={fileInputRef}
-              style={{ display: 'none' }}
               onChange={handleFileInputChange}
+              className="hidden"
             />
-            <BsCloudUpload className='font-bold text-2xl mx-auto' />
-            <span className='font-bold text-sm text-center'>
-              {isDragging ? 'Drop CSV file here' : 'Drag and drop or click to upload CSV file'}
-            </span>
-            {draggedFile && (
-              <div className="mt-2 text-sm">
-                <strong>File Selected:</strong> {fileName} ({(fileSize / 1024).toFixed(2)} KB)
-              </div>
-            )}
+            <BsCloudUpload className="text-6xl text-blue-400 mb-4" />
+            <p className="text-blue-400">{fileName ? `File: ${fileName} (${(fileSize / 1024).toFixed(2)} KB)` : 'Drag and drop your CSV file here or click to upload'}</p>
           </div>
         </div>
       </Modal>
+
+      {isTableModalOpen && (
+        <TableModal
+        title='validation result'
+          isOpen={isTableModalOpen}
+          onClose={() => setIsTableModalOpen(false)}
+          tableHeaders={tableHeaders}
+          tableData={tableData}
+        />
+      )}
     </div>
   );
 };
