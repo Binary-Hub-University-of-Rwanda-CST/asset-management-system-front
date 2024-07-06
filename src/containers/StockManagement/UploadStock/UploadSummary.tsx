@@ -15,7 +15,7 @@ function UploadSummary() {
        </div>
       </div>
       <div className='flex p-2 bg-blue-white w-full justify-between rounded-md items-center   '>
-        <span className='font-bold text-sm '>1.PROJECT  </span>
+        <span className='font-bold text-sm '>2.PROJECT  </span>
        <div className='flex gap-4 '>
        <span className=' bg-white border-2 border-my-blue rounded-full py-0  px-6  flex items-center'>Agaciro building</span>
        <span className=' font-bold text-success'>75</span>  
