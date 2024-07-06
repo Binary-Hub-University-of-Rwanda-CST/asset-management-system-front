@@ -32,7 +32,7 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
     // alert(UploadData);
   }
   const dispatch: AppDispatch = useDispatch();
-  const activeLink =  'text-lg font-bold border-b-2 border-my-blue  py-1'; 
+  const activeLink =  'text-lg font-bold border-b-2 border-my-blue  py-1 pb-0 '; 
 
   useEffect(() => {
     dispatch(fetchValidationData());
@@ -40,7 +40,7 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
 
   return (
     <div className="mr-4  ">
-     <div className="flex flex-col  gap-5 mb-2 bg-white rounded-lg p-3  justify-between">
+     <div className="flex flex-col  gap-1   bg-white rounded-lg p-2 pb-0   justify-between">
        <div className="flex flex-row justify-between">
         <div className="pl-1 flex gap-2 items-center ">
           <GoDatabase className="text-4xl text-my-blue" />
@@ -68,13 +68,13 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
           </div>
         </div>
         </div>
-        <div className="flex flex-row gap-10 ml-10 text-lg ">  
+        <div className="flex flex-row gap-10 ml-10 text-lg ">   
            <button type="button"
-           className={` text-lg py-1 px-2   ${ !showSummary  && activeLink}`}
+           className={` text-lg py-1  pb-0 px-2   ${ !showSummary  && activeLink}`}
             onClick={()=>handleShowSummary(false)}>Asset List</button> 
            <button 
            onClick={()=> handleShowSummary(true)} 
-           className={`text-lg  px-2 py-1 ml-10 ${showSummary && activeLink}`}>Summary</button> 
+           className={`text-lg  px-2 py-1 pb-0  ml-10 ${showSummary && activeLink}`}>Summary</button> 
         </div>
         </div>
       
