@@ -7,7 +7,7 @@ import { RiFileExcel2Line } from "react-icons/ri";
 import { fetchValidationData, ValidationData, Building, Room, Category } from '../../../actions/validationData.actions'; 
 import { StoreState } from '../../../reducers';
 import { AppDispatch } from '../../../app/store';
-import TableModal from '../../../components/TableModal/TableModal';
+import ValidationModal from '../UploadStock/ValidationModal';
 
 interface ModalProps {
   close: () => void;
@@ -18,12 +18,6 @@ const UploadModal: React.FC<ModalProps> = (props) => {
   const [isTableModalOpen, setIsTableModalOpen] = useState(false); // State to control TableModal
   const [tableData, setTableData] = useState<Record<string, any>[]>([]); // State to store table data
   const [tableHeaders, setTableHeaders] = useState<string[]>([]); // State to store table headers
-
-  // const dispatch: AppDispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchValidationData());
-  // }, [dispatch]);
 
   const validationData = useSelector((state: StoreState) => state.validation.validationData);
   const buildings = validationData?.building || [];
@@ -105,22 +99,33 @@ const UploadModal: React.FC<ModalProps> = (props) => {
     setFileName(file.name);
     setFileSize(file.size);
     const reader = new FileReader();
+
     reader.onload = (event) => {
-      const content = event.target?.result as string;
-      const rows = content.split('\n').filter(Boolean);
-      const headers = rows[0].split(',').map(header => header.trim());
-      const data = rows.slice(1).map(row => {
-        const values = row.split(',').map(value => value.trim());
-        return headers.reduce((obj, header, index) => ({ ...obj, [header]: values[index] }), {});
-      });
-      setTableHeaders(headers);
-      setTableData(data);
-      setIsTableModalOpen(true); // Open the TableModal with parsed data
+      if (event.target?.result) {
+        const csvData = event.target.result as string;
+        const csvRows = csvData.split('\n').map(row => row.split(','));
+        const headers = csvRows[0];
+        const data = csvRows.slice(1).map(row => {
+          const rowData: Record<string, any> = {};
+          headers.forEach((header, index) => {
+            rowData[header.trim()] = row[index].trim();
+          });
+          return rowData;
+        });
+        setTableHeaders(headers);
+        setTableData(data);
+        setIsTableModalOpen(true);
+      }
     };
+
     reader.readAsText(file);
   };
 
   const handleUploadClick = () => {
+    if (!selectedCategoryId) {
+      alert('Please select a category before uploading.');
+      return;
+    }
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -128,6 +133,10 @@ const UploadModal: React.FC<ModalProps> = (props) => {
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    if (!selectedCategoryId) {
+      alert('Please select a category before uploading.');
+      return;
+    }
     if (file && file.type === 'text/csv') {
       setDraggedFile(file);
       handleFileUpload(file);
@@ -213,28 +222,30 @@ const UploadModal: React.FC<ModalProps> = (props) => {
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            onClick={handleUploadClick}
           >
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".csv"
-              onChange={handleFileInputChange}
-              className="hidden"
-            />
-            <BsCloudUpload className="text-6xl text-blue-400 mb-4" />
-            <p className="text-blue-400">{fileName ? `File: ${fileName} (${(fileSize / 1024).toFixed(2)} KB)` : 'Drag and drop your CSV file here or click to upload'}</p>
+            {!isTableModalOpen && (
+              <>
+                <BsCloudUpload className="inline-block text-5xl text-my-blue" />
+                <p className='mt-2 text-sm text-my-blue'>Drag & Drop or <span className='cursor-pointer underline text-my-blue' onClick={handleUploadClick}>Click to Upload</span> CSV File</p>
+                <input
+                  type="file"
+                  accept=".csv"
+                  ref={fileInputRef}
+                  className="hidden"
+                  onChange={handleFileInputChange}
+                />
+              </>
+            )}
           </div>
         </div>
       </Modal>
-
       {isTableModalOpen && (
-        <TableModal
-        title='validation result'
+        <ValidationModal
+        title='upload validation '
           isOpen={isTableModalOpen}
           onClose={() => setIsTableModalOpen(false)}
-          tableHeaders={tableHeaders}
           tableData={tableData}
+          tableHeaders={tableHeaders}
         />
       )}
     </div>
