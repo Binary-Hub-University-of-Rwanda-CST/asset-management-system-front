@@ -7,9 +7,8 @@ import { RiFileExcel2Line } from "react-icons/ri";
 import { fetchValidationData, ValidationData, Building, Room, Category } from '../../../actions/validationData.actions'; 
 import { StoreState } from '../../../reducers';
 import { AppDispatch } from '../../../app/store';
-import ValidationModal from '../UploadStock/ValidationModal';
-
-interface ModalProps {
+import ValidationModal from '../UploadAssets/ValidationModal';
+interface ModalProps { 
   close: () => void;
 }
 

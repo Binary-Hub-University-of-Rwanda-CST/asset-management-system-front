@@ -9,7 +9,7 @@ import { FC_Logout } from "./actions";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import NavBar from "./components/TopNavBar/NavBar";
 import  StockDashboard  from "./containers/StockManagement/StockDashbord"; 
-import UploadStock from "./containers/StockManagement/UploadStock/UploadStock";
+import UploadStock from "./containers/StockManagement/UploadAssets/UploadAssets";
 import Monitoring from "./containers/AssetDistribution/Monitoring/Monitoring";
 import MyRequests from "./containers/AssetDistribution/Request/MyRequests";
 import RequestApproval from "./containers/AssetDistribution/Request/RequestApproval";

@@ -105,7 +105,7 @@ const ValidationModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHe
                       <thead>
                         <tr>
                           {showRemove && <th className="px-4 py-2 text-left text-sm font-bold text-black uppercase"></th>}
-                           <th className="px-4 py-2 text-left text-sm font-bold text-black uppercase">No</th>
+                           <th className="px-4 py-2 text-left text-sm font-bold text-black uppercase">#</th>
                           {tableHeaders.map(header => (
                             <th key={header} className="px-4 py-3 text-left text-sm font-bold text-black uppercase">{header}</th>
                           ))}
@@ -115,11 +115,12 @@ const ValidationModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHe
                         {filteredData.map((row, rowIndex) => ( 
                           <tr
                             key={rowIndex}
-                            className="border-t py-1 cursor-pointer hover:bg-blue-white "
+                            className="border-t py-1  "
                           >
-                            {showRemove && <td className="px-4 py-1 font-sm"><button className=" px-2 py-1 rounded-md border bg-danger border-red-500"> 
+                            {showRemove && <td className="px-4 py-1 font-sm">
+                              <button className=" px-4  py-1 rounded-md  border hover:bg-danger border-red-500"> 
                                 <FaTrashAlt className=" text-red-700"/></button></td>}
-                            <td className="px-4 py-1 font-sm">{rowIndex + 1}</td>
+                            <td className="px-4  py-1 font-sm">{rowIndex + 1}</td>
 
                             {tableHeaders.map((header, cellIndex) => (
                               <td key={`${rowIndex}-${cellIndex}`} className="px-4 font-sm py-1">{row[header]}</td>

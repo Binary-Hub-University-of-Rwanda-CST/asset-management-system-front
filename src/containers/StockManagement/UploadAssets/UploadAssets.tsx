@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { fetchValidationData } from "../../../actions/validationData.actions";
 import { AppDispatch } from "../../../app/store";
 import UploadSummary from "./UploadSummary";
+import UploadedAssetList from "./UploadedAssetList";
 
 interface AppProps {
   auth: Auth;
@@ -107,7 +108,8 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
          onClick={CreateUploadData}
          className=" bg-my-blue text-white rounded-lg py-2 px-6 text-xl">Upload Assets</button> 
         </div>
-      </div>
+      </div> 
+      // <UploadedAssetList/> 
       }
     </div>
     {
