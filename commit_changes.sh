@@ -1,44 +1,33 @@
 #!/bin/bash
 
+# Function to check if a command is successful
+check_success() {
+    if [ $? -ne 0 ]; then
+        echo "Error encountered. Exiting."
+        exit 1
+    fi
+}
+
 # List of modified files
 files=(
-    "package-lock.json"
-    "package.json"
-    "src/actions/types.ts"
-    "src/components/Fragments/DropDown.tsx"
-    "src/components/modal/Modal.tsx"
+    # "commit_changes.sh"
+    "src/actions/saveUploaded.action.ts"
     "src/containers/StockManagement/Components/UploadModal.tsx"
     "src/containers/StockManagement/UploadAssets/UploadAssets.tsx"
+    "src/containers/StockManagement/UploadAssets/UploadedAssetList.tsx"
     "src/containers/StockManagement/UploadAssets/ValidationModal.tsx"
-    "src/reducers/index.ts"
 )
 
-# Loop through each file and stage and commit
-for file in "${files[@]}"
-do
-    # Stage the file
+# Loop through each file and commit separately
+for file in "${files[@]}"; do
     git add "$file"
-
-    # Commit the file
-    git commit -m "Auto-commit: Staged $file"
+    check_success
+    git commit -m "Committing changes for $file"
+    check_success
 done
 
-# List of untracked files
-untracked_files=(
-    "src/actions/uploadpecification.action.ts"
-    "src/containers/StockManagement/UploadAssets/DropDown.tsx"
-    "src/reducers/specification.reducer.ts"
-    "src/utils/uploadSpecification.ts"
-)
+# Push changes to the repository
+git push
+check_success
 
-# Loop through each untracked file and stage and commit
-for file in "${untracked_files[@]}"
-do
-    # Stage the file
-    git add "$file"
-
-    # Commit the file
-    git commit -m "Auto-commit: Staged untracked file $file"
-done
-
-echo "All changes committed successfully!"
+echo "All changes committed and pushed successfully."
