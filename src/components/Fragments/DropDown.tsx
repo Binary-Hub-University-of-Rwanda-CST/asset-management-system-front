@@ -1,4 +1,5 @@
 // src/components/Fragments/DropDown.tsx
+import { icon } from '@fortawesome/fontawesome-svg-core';
 import React, { useState } from 'react';
 import { FaCheckCircle, FaAngleDown } from "react-icons/fa";
 
@@ -17,6 +18,7 @@ export interface DropdownProps {
   style?: dropdownStyle;
   tag?: string;
   onChange?: (option: Option) => void;
+  icon?: boolean;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({ options, tag, style, onChange }) => {
@@ -57,7 +59,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options, tag, style, onChange }) =>
           {selectedOption ? (
             <div className='flex flex-row justify-between items-center w-full'>
               <div className='flex flex-row items-center gap-2'>
-                <FaCheckCircle className='font-bold text-my-blue mr-2' />
+                 <FaCheckCircle className='font-bold text-my-blue mr-2' />
                 <span className="mr-3 font-bold">{selectedOption.OptionName}</span>
                 <span>{tag && `- ${tag}`}</span>
               </div>
