@@ -6,7 +6,7 @@ import Alert,{AlertType} from "../../../components/Alert/Alert";
 import { GoDatabase } from "react-icons/go";
 import UploadModal from "../Components/UploadModal";
 import { useDispatch } from "react-redux";
-import { fetchValidationData } from "../../../actions/validationData.actions";
+import { fetchSpecifications } from "../../../actions/uploadpecification.action";
 import { AppDispatch } from "../../../app/store";
 import UploadSummary from "./UploadSummary";
 import UploadedAssetList from "./UploadedAssetList";
@@ -36,7 +36,7 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
   const activeLink =  'text-lg font-bold border-b-2 border-my-blue  py-1 pb-0 '; 
 
   useEffect(() => {
-    dispatch(fetchValidationData());
+    dispatch(fetchSpecifications()); 
   }, [dispatch]); 
 
   return (
@@ -109,10 +109,10 @@ const UploadStock: React.FC<AppProps> = ({ auth, FC_SetSuccess, FC_SetError }) =
          className=" bg-my-blue text-white rounded-lg py-2 px-6 text-xl">Upload Assets</button> 
         </div>
       </div> 
-      // <UploadedAssetList/> 
+      // <UploadedAssetList/>  
       }
     </div>
-    {
+    { 
       UploadData &&
       <UploadModal close={closeUploadDataModal}/>
     }
