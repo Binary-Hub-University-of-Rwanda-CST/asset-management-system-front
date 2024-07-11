@@ -72,7 +72,7 @@ const Modal: React.FC<ModalProps> = (props) => {
         className={`z-50 fixed items-center py-4 justify-items-center ${marginTop} left-0 right-0 bottom-0 bg-white rounded-md shadow-xl self-center ${widthSizeClass} animate__animated ${marginTop !== ModalMarginTop.none ? "animate__fadeInUp" : "animate__zoomIn"} animate__faster`}
         style={{
           width: "100%",
-          maxHeight: "99vh",
+          maxHeight: "99vh",  
           height: `${widthSizeClass === ModalSize.maxWidth ? (marginTop === ModalMarginTop.none ? "100%" : "unset") : "fit-content"}`,
           overflowY: "auto",
           margin: "auto",
