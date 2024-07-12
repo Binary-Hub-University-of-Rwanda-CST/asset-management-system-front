@@ -39,7 +39,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
     for (let i = 0; i < numTemplateRows; i++) {
       const rowData: string[] = [];
       headers.forEach((header) => {
-        rowData.push(`${header + i}`); // Add empty string for each specification
+        rowData.push(''); // Add empty string for each specification
       });
       rows.push(rowData); 
     }
@@ -52,7 +52,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.setAttribute('href', url);
-    link.setAttribute('download', 'upoload_Assets_spec_template.csv');
+    link.setAttribute('download', 'Assets_template.csv'); 
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -87,52 +87,56 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
     }
   };
 
-const handleFileUpload = (file: File) => {
-  const reader = new FileReader();
-
-  reader.onload = (event) => {
-    if (event.target?.result) {
-      const csvData = event.target.result as string;
-      const lines = csvData.split('\n');
-      
-      // Check if there are any lines of data (excluding header line)
-      if (lines.length <= 1) {
-        setUploadError("Uploaded CSV file has no data."); 
-        return;
-      }
-
-      const headers = lines[0].split(',');
-      
-      // Check if headers match specifications
-      const specHeaders = specification.map(spec => spec.name);
-      const isValid = specHeaders.every(header => headers.includes(header));
-
-      if (!isValid) {
-        // Find missing headers
-        const missingHeaders = specHeaders.filter(header => !headers.includes(header));
-        const errorMessage = `Uploaded CSV file is missing columns: ${missingHeaders.join(', ')}.`;
-        setUploadError(errorMessage);
-      } else {
-        setUploadError(null);
-        const data = lines.slice(1).map((line) => {
-          const values = line.split(',');
-          const rowData: Record<string, any> = {};
-          headers.forEach((header, index) => {
-            rowData[header] = values[index];
+  const handleFileUpload = (file: File) => {
+    const reader = new FileReader();
+  
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        let csvData = event.target.result as string;
+  
+        // Normalize line endings to '\n'
+        csvData = csvData.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  
+        const lines = csvData.split('\n').filter(line => line.trim() !== '');
+        
+        // Check if there are any lines of data (excluding header line)
+        if (lines.length <= 1) {
+          setUploadError("Uploaded CSV file has no data."); 
+          return;
+        }
+  
+        const headers = lines[0].split(',').map(header => header.trim());
+        
+        // Check if headers match specifications
+        const specHeaders = specification.map(spec => spec.name);
+        const isValid = specHeaders.every(header => headers.includes(header));
+  
+        if (!isValid) {
+          // Find missing headers
+          const missingHeaders = specHeaders.filter(header => !headers.includes(header));
+          const errorMessage = `Uploaded CSV file is missing columns: ${missingHeaders.join(', ')}.`;
+          setUploadError(errorMessage);
+        } else {
+          setUploadError(null);
+          const data = lines.slice(1).map((line) => {
+            const values = line.split(',').map(value => value.trim());
+            const rowData: Record<string, any> = {};
+            headers.forEach((header, index) => {
+              rowData[header] = values[index];
+            });
+            return rowData;
           });
-          return rowData;
-        });
-
-        setTableHeaders(headers);
-        setTableData(data);
-        setIsTableModalOpen(true);
+  
+          setTableHeaders(headers);
+          setTableData(data);
+          setIsTableModalOpen(true);
+        }
       }
-    }
+    };
+  
+    reader.readAsText(file, 'UTF-8');
   };
-
-  reader.readAsText(file);
-};
-
+  
 
   const handleUploadClick = () => {
     if (fileInputRef.current) {
