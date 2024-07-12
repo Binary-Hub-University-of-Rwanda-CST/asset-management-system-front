@@ -4,12 +4,15 @@ export interface AssetSpecification {
     name: string;
     type: string;
     required: boolean;
-    allowedValues?: string[];
+    unique?: boolean;
+    allowedValues?: string[]; 
+
+
 }
 
 const assetSpecifications: AssetSpecification[] = [
-    { name: "asset_code", type: "string", required: true },
-    { name: "serial_number", type: "string", required: true },
+    { name: "asset_code", type: "string", required: true, unique: true },
+    { name: "serial_number", type: "string", required: true , unique: true}, 
     { name: "asset_name", type: "string", required: true },
     { name: "asset_description", type: "string", required: true },
     { name: "asset_category", type: "string", required: true, allowedValues: ["Laptop", "Printer", "Monitor"] },
