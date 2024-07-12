@@ -41,6 +41,16 @@ const ValidationModal: React.FC<ModalProps> = ({
   }, [tableData]);
 
   const validateData = () => {
+    // Create an object to keep track of unique values for each column
+    const uniqueValuesTracker: Record<string, Set<any>> = {};
+
+    // Initialize the tracker with empty sets for each column that requires unique values
+    assetSpecifications.forEach((spec) => {
+      if (spec.unique) {
+        uniqueValuesTracker[spec.name] = new Set();
+      }
+    });
+
     const validatedData = tableData.map((row) => {
       const validatedRow: Record<string, any> = {};
       let hasErrors = false;
@@ -61,12 +71,17 @@ const ValidationModal: React.FC<ModalProps> = ({
             spec.allowedValues &&
             !spec.allowedValues.includes(cellValue)
           ) {
-            // Validate allowed values
+            // Truncate the error message if it has too many allowed values
+            const allowedValuesToShow = spec.allowedValues
+              .slice(0, 2)
+              .join(", ");
+            const allowedValuesMessage =
+              spec.allowedValues.length > 2
+                ? `${allowedValuesToShow}, ...`
+                : allowedValuesToShow;
             validatedRow[header] = {
               value: cellValue,
-              error: `Invalid value. Expected: ${spec.allowedValues.join(
-                ", "
-              )}`,
+              error: `Invalid value. Expected: ${allowedValuesMessage}`,
             };
             hasErrors = true;
           } else if (spec.type === "string" && typeof cellValue !== "string") {
@@ -83,10 +98,25 @@ const ValidationModal: React.FC<ModalProps> = ({
               error: "Must be a number",
             };
             hasErrors = true;
+          } else if (
+            spec.unique &&
+            uniqueValuesTracker[header]?.has(cellValue)
+          ) {
+            // Validate unique values
+            validatedRow[header] = {
+              value: cellValue,
+              error: "Duplicate value found",
+            };
+            hasErrors = true;
           } else {
             validatedRow[header] = {
               value: cellValue,
             };
+
+            // Add the value to the unique values tracker if needed
+            if (spec.unique) {
+              uniqueValuesTracker[header].add(cellValue);
+            }
           }
         } else {
           validatedRow[header] = {
@@ -133,16 +163,48 @@ const ValidationModal: React.FC<ModalProps> = ({
     setFilteredData(updatedData);
   };
 
-  const handleCategoryChange = (option: Option) => {
-    setSelectedCategory(option.value as string);
-  };
-
+ 
   const handleRemove = () => setShowRemove(!showRemove);
 
   const handleCellEdit = (newValue: any, rowIndex: number, header: string) => {
     const updatedData = [...filteredData];
-    updatedData[rowIndex][header] = newValue;
-    setFilteredData(updatedData);
+    const spec = assetSpecifications.find((spec) => spec.name === header);
+    if (spec) {
+      let error = "";
+      // Validate required fields
+      if (spec.required && (!newValue || newValue === "")) {
+        error = "Required field";
+      } else if (spec.allowedValues && !spec.allowedValues.includes(newValue)) {
+        // Truncate the error message if it has too many allowed values
+        const allowedValuesToShow = spec.allowedValues.slice(0, 2).join(", ");
+        const allowedValuesMessage =
+          spec.allowedValues.length > 2
+            ? `${allowedValuesToShow}, ...`
+            : allowedValuesToShow;
+        error = `Invalid value. Expected: ${allowedValuesMessage}`;
+      } else if (spec.type === "string" && typeof newValue !== "string") {
+        // Validate string type
+        error = "Expected a string value";
+      } else if (spec.type === "number" && isNaN(parseFloat(newValue))) {
+        // Validate number type
+        error = "Must be a number";
+      } else if (
+        spec.unique &&
+        filteredData.some(
+          (row, index) => index !== rowIndex && row[header].value === newValue
+        )
+      ) {
+        // Validate unique values
+        error = "Duplicate value found";
+      }
+
+      updatedData[rowIndex][header] = {
+        value: newValue,
+        error: error || null,
+      };
+
+      setFilteredData(updatedData);
+    }
   };
 
   return (
@@ -253,7 +315,7 @@ const ValidationModal: React.FC<ModalProps> = ({
                               return (
                                 <td
                                   key={`${rowIndex}-${cellIndex}`}
-                                  className={`px-1 font-sm`} 
+                                  className={`px-1 font-sm`}
                                 >
                                   {spec && spec.allowedValues ? (
                                     <>
@@ -270,7 +332,7 @@ const ValidationModal: React.FC<ModalProps> = ({
                                             rowIndex,
                                             header
                                           )
-                                        } 
+                                        }
                                       >
                                         <option value="" disabled>
                                           Select an option
