@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Modal, { ModalSize, ModalMarginTop } from '../../../components/modal/Modal';
 import { BsCloudUpload } from 'react-icons/bs';
 import { RiFileExcel2Line } from 'react-icons/ri';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { StoreState } from '../../../reducers';
 import ValidationModal from '../UploadAssets/ValidationModal';
 
@@ -39,7 +39,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
     for (let i = 0; i < numTemplateRows; i++) {
       const rowData: string[] = [];
       headers.forEach((header) => {
-        rowData.push('hhhh'); // Add empty string for each specification
+        rowData.push(`${header + i}`); // Add empty string for each specification
       });
       rows.push(rowData); 
     }
@@ -158,13 +158,13 @@ const handleFileUpload = (file: File) => {
         isOpen={true} // Always open for this example
         onClose={close}
         title="Upload Assets Data"
-        marginTop={ModalMarginTop.small} 
+        // marginTop={ModalMarginTop.small} 
       >
-        <div className="flex flex-col items-start p-5">
+        <div className="flex flex-col items-start p-3  max-h-[500px]">  
           {specification && (
-            <div className="flex justify-end mt-4 mr-4 w-full">
+            <div className="flex justify-end  mr-4 w-full">
               <button
-                className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded-md text-sm font-medium"
+                className="bg-blue-500 hover:bg-blue-600 text-my-blue  underline  font-bold  py-1 px-4 rounded-md text-sm "
                 onClick={handleDownloadCsvTemplate}
               >
                 <RiFileExcel2Line className="inline-block mr-2" /> Download CSV Template
@@ -172,37 +172,39 @@ const handleFileUpload = (file: File) => {
             </div>
           )}
           {specification && (
-            <div className="flex flex-col items-center bg-blue-white rounded-md w-full py-5 px-5 my-2 gap-1">
+            <div className="flex flex-col items-center bg-blue-white rounded-md w-full py-5 px-5 my-2 gap-1 overflow-auto"> 
               <h3 className="mb-2 font-bold">Data Validation Table For Uploaded Assets</h3>
               {specification.map((spec, index) => (
                 <div className="bg-white rounded-md py-1 w-full flex flex-row" key={index}>
                   <div className="w-2/5 flex justify-end mx-4 font-bold">{spec.name}</div>
                   <div className="pl-4 border-blue-500 border-l-4 flex flex-row gap-2 flex-wrap">
                     {spec.allowedValues?.map((value, idx) => (
-                      <span className="flex items-center rounded-md px-1 bg-blue-200 text-blue-800" key={idx}>
+                      <span className="flex items-center rounded-md px-1  bg-blue-white  text-my-blue " key={idx}>
                         {value}
                       </span>
                     ))}
+                    {/* {!spec.allowedValues && <span className=' flex ite px-3  bg-warning rounded-md '> {spec.type}</span>} */}
                   </div>
                 </div>
               ))}
             </div>
           )}
           <div
-            className={`flex flex-col items-center justify-center bg-blue-white border-2 border-dashed rounded-md w-full py-4 px-10 mt-5 cursor-pointer ${
+            className={`flex flex-col items-center justify-center   border-2 border-dashed rounded-md w-full py-2   px-10 mt-5 cursor-pointer ${
               isDragging ? 'border-blue-600' : 'border-blue-400'
             } ${uploadError ? 'border-red-500' : ''}`} // Conditional red border for error
             onDragEnter={handleDragEnter}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
+            onClick={handleUploadClick} 
           >
             {!isTableModalOpen && (
               <>
-                <BsCloudUpload className="inline-block text-5xl text-blue-500" />
-                <p className="mt-2 text-sm text-blue-500">
+                <BsCloudUpload className="inline-block text-3xl text-blue-500" />
+                <p className="mt-2 text-sm  font-bold text-blue-500">
                   Drag & Drop or{' '}
-                  <span className="cursor-pointer underline" onClick={handleUploadClick}>
+                  <span className="cursor-pointer u">
                     Click to Upload
                   </span>{' '}
                   CSV File

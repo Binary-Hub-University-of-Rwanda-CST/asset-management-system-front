@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FaArrowLeft, FaTrashAlt, FaRegCheckCircle } from "react-icons/fa";
 import { TiArrowBack } from "react-icons/ti";
-import Dropdown, { Option, dropdownStyle } from "../../../components/Fragments/DropDown"; // Import Dropdown component
+import Dropdown, {
+  Option,
+  dropdownStyle,
+} from "../../../components/Fragments/DropDown"; // Import Dropdown component
 import assetSpecifications from "../../../utils/uploadSpecification";
 
 interface ModalProps {
@@ -14,8 +17,9 @@ interface ModalProps {
 }
 
 const style: dropdownStyle = {
-  buttonStyle: 'flex items-center rounded-md bg-my-gray shadow-sm px-4 py-1 text-xl font-medium text-black hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500',
-  optionStyle: 'flex w-80 mx-2 justify-between items-center'
+  buttonStyle:
+    "flex items-center rounded-md bg-my-gray shadow-sm px-4 py-1 text-xl font-medium text-black hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500",
+  optionStyle: "flex w-80 mx-2 justify-between items-center",
 };
 
 const ValidationModal: React.FC<ModalProps> = ({
@@ -33,6 +37,7 @@ const ValidationModal: React.FC<ModalProps> = ({
   useEffect(() => {
     // Initially, set filteredData to tableData
     setFilteredData(tableData);
+    // console.log(tableData);
   }, [tableData]);
 
   const validateData = () => {
@@ -41,52 +46,49 @@ const ValidationModal: React.FC<ModalProps> = ({
       let hasErrors = false;
 
       tableHeaders.forEach((header) => {
-        validatedRow[header] = row[header]; // Copy original data
-
-        // Validate each cell based on assetSpecifications
         const spec = assetSpecifications.find((spec) => spec.name === header);
         if (spec) {
-          // Check required fields
-          if (spec.required && (!row[header] || row[header] === "")) {
+          const cellValue = row[header];
+
+          // Validate required fields
+          if (spec.required && (!cellValue || cellValue === "")) {
             validatedRow[header] = {
-              value: row[header],
+              value: cellValue,
               error: "Required field",
             };
             hasErrors = true;
-          }
-
-          // Check allowed values for dropdowns
-          if (
+          } else if (
             spec.allowedValues &&
-            !spec.allowedValues.includes(row[header])
+            !spec.allowedValues.includes(cellValue)
           ) {
+            // Validate allowed values
             validatedRow[header] = {
-              value: row[header],
+              value: cellValue,
               error: `Invalid value. Expected: ${spec.allowedValues.join(
                 ", "
               )}`,
             };
             hasErrors = true;
-          }
-
-          // Additional checks based on type specification
-          if (spec.type === "string" && typeof row[header] !== "string") {
+          } else if (spec.type === "string" && typeof cellValue !== "string") {
+            // Validate string type
             validatedRow[header] = {
-              value: row[header],
+              value: cellValue,
               error: "Expected a string value",
             };
             hasErrors = true;
-          }
-
-          if (spec.type === "number" && isNaN(parseFloat(row[header]))) {
+          } else if (spec.type === "number" && isNaN(parseFloat(cellValue))) {
+            // Validate number type
             validatedRow[header] = {
-              value: row[header],
+              value: cellValue,
               error: "Must be a number",
             };
             hasErrors = true;
+          } else {
+            validatedRow[header] = {
+              value: cellValue,
+            };
           }
         } else {
-          // Handle undefined specification case
           validatedRow[header] = {
             value: row[header],
             error: "Specification not found",
@@ -95,14 +97,16 @@ const ValidationModal: React.FC<ModalProps> = ({
         }
       });
 
-      // Set row error status
       validatedRow.hasErrors = hasErrors;
-
       return validatedRow;
     });
 
     setFilteredData(validatedData);
   };
+
+  useEffect(() => {
+    validateData();
+  }, [tableData]);
 
   const handleOverlayClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -122,6 +126,11 @@ const ValidationModal: React.FC<ModalProps> = ({
     // Handle saving validated data
     console.log("Saving data:", filteredData);
     onClose();
+  };
+
+  const handleDeleteRow = (rowIndex: number) => {
+    const updatedData = filteredData.filter((_, index) => index !== rowIndex);
+    setFilteredData(updatedData);
   };
 
   const handleCategoryChange = (option: Option) => {
@@ -208,7 +217,9 @@ const ValidationModal: React.FC<ModalProps> = ({
                           {showRemove && (
                             <th className="px-4 py-2 text-left text-sm font-bold text-black uppercase"></th>
                           )}
-                          <th className="px-4 py-2 text-left text-sm font-bold text-black uppercase">#</th>
+                          <th className="px-4 py-2 text-left text-sm font-bold text-black uppercase">
+                            #
+                          </th>
                           {tableHeaders.map((header) => (
                             <th
                               key={header}
@@ -221,76 +232,89 @@ const ValidationModal: React.FC<ModalProps> = ({
                       </thead>
                       <tbody>
                         {filteredData.map((row, rowIndex) => (
-                          <tr
-                            key={rowIndex}
-                            className={`${row.hasErrors ? "bg-red-100" : ""}`} // Highlight row if it has errors
-                          >
+                          <tr key={rowIndex}>
                             {showRemove && (
                               <td className="px-4 py-1 font-sm">
-                                <button className=" px-4  py-1 rounded-md  border hover:bg-danger border-red-500">
-                                  <FaTrashAlt className=" text-red-700" />
+                                <button
+                                  className="px-4 py-1 rounded-md border hover:bg-danger border-red-500"
+                                  onClick={() => handleDeleteRow(rowIndex)}
+                                >
+                                  <FaTrashAlt className="text-red-700" />
                                 </button>
                               </td>
                             )}
-                            <td className="px-2  py-1 font-sm">
+                            <td className="px-2 py-1 font-sm">
                               {rowIndex + 1}
                             </td>
-
-                            {tableHeaders.map((header, cellIndex) => (
-                              <td
-                                key={`${rowIndex}-${cellIndex}`}
-                                className="px-1 font-sm"
-                              >
-                                {row[header].error ? (
-                                  <div className="relative">
-                                    <div className="bg-red-200 px-2 py-1 rounded-md">
-                                      {row[header].error}
-                                    </div>
-                                    <div className="absolute inset-0 bg-red-200 opacity-25 rounded-md"></div>
-                                    <div className="absolute inset-0">
-                                      {row[header].value}
-                                    </div>
-                                  </div>
-                                ) : assetSpecifications.find(
-                                    (spec) =>
-                                      spec.name === header &&
-                                      spec.allowedValues
-                                  ) ? (
-                                  <Dropdown
-                                  // style={style}  
-                                    options={(assetSpecifications.find(
-                                      (spec) => spec.name === header
-                                    )?.allowedValues || []).map((value) => ({
-                                      // label: value,
-                                      OptionName: value,
-                                      value,
-                                      
-                                    }))}
-                                    onChange={(option) => {
-                                      // Handle dropdown change
-                                      // Update filteredData with new value
-                                      const updatedData = [...filteredData];
-                                      updatedData[rowIndex][header] =
-                                        option.value;
-                                      setFilteredData(updatedData);
-                                    }}
-                                  />
-                                ) : (
-                                  <input
-                                  className=" px-2 py-1  border border-blue-white rounded-md outline-my-blue "
-                                    type="text"
-                                    value={row[header].value}
-                                    onChange={(e) =>
-                                      handleCellEdit(
-                                        e.target.value,
-                                        rowIndex,
-                                        header
-                                      )
-                                    }
-                                  />
-                                )}
-                              </td>
-                            ))}
+                            {tableHeaders.map((header, cellIndex) => {
+                              const spec = assetSpecifications.find(
+                                (spec) => spec.name === header
+                              );
+                              return (
+                                <td
+                                  key={`${rowIndex}-${cellIndex}`}
+                                  className={`px-1 font-sm`} 
+                                >
+                                  {spec && spec.allowedValues ? (
+                                    <>
+                                      <select
+                                        className={`px-2 py-1 border ${
+                                          row[header].error
+                                            ? "border-red-600"
+                                            : "border-blue-white"
+                                        } rounded-md outline-my-blue`}
+                                        value={row[header].value}
+                                        onChange={(e) =>
+                                          handleCellEdit(
+                                            e.target.value,
+                                            rowIndex,
+                                            header
+                                          )
+                                        } 
+                                      >
+                                        <option value="" disabled>
+                                          Select an option
+                                        </option>
+                                        {spec.allowedValues.map((value) => (
+                                          <option key={value} value={value}>
+                                            {value}
+                                          </option>
+                                        ))}
+                                      </select>
+                                      {row[header].error && (
+                                        <div className="text-red-600 text-sm mt-1">
+                                          {row[header].error}
+                                        </div>
+                                      )}
+                                    </>
+                                  ) : (
+                                    <>
+                                      <input
+                                        className={`px-2 py-1 border ${
+                                          row[header].error
+                                            ? "border-red-600"
+                                            : "border-blue-white"
+                                        } rounded-md outline-my-blue`}
+                                        type="text"
+                                        value={row[header].value}
+                                        onChange={(e) =>
+                                          handleCellEdit(
+                                            e.target.value,
+                                            rowIndex,
+                                            header
+                                          )
+                                        }
+                                      />
+                                      {row[header].error && (
+                                        <div className="text-red-600 text-sm mt-1">
+                                          {row[header].error}
+                                        </div>
+                                      )}
+                                    </>
+                                  )}
+                                </td>
+                              );
+                            })}
                           </tr>
                         ))}
                       </tbody>
