@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FaArrowLeft, FaTrashAlt, FaRegCheckCircle } from "react-icons/fa";
 import { TiArrowBack } from "react-icons/ti";
-import Dropdown, {
-  Option,
-  dropdownStyle,
-} from "../../../components/Fragments/DropDown"; // Import Dropdown component
 import assetSpecifications from "../../../utils/uploadSpecification";
+import { saveValidatedData } from "../../../actions/saveUploaded.action";
+import { AppDispatch } from "../../../app/store";
+import { useDispatch } from "react-redux";
 
 interface ModalProps {
   isOpen: boolean;
@@ -15,12 +14,6 @@ interface ModalProps {
   tableData: Record<string, any>[];
   tag?: string[];
 }
-
-const style: dropdownStyle = {
-  buttonStyle:
-    "flex items-center rounded-md bg-my-gray shadow-sm px-4 py-1 text-xl font-medium text-black hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500",
-  optionStyle: "flex w-80 mx-2 justify-between items-center",
-};
 
 const ValidationModal: React.FC<ModalProps> = ({
   isOpen,
@@ -37,8 +30,9 @@ const ValidationModal: React.FC<ModalProps> = ({
   useEffect(() => {
     // Initially, set filteredData to tableData
     setFilteredData(tableData);
-    // console.log(tableData);
+    console.log(tableData); 
   }, [tableData]);
+  const dispatch: AppDispatch = useDispatch();
 
   const validateData = () => {
     // Create an object to keep track of unique values for each column
@@ -118,13 +112,14 @@ const ValidationModal: React.FC<ModalProps> = ({
               uniqueValuesTracker[header].add(cellValue);
             }
           }
-        } else {
+        }
+         else {
           validatedRow[header] = {
             value: row[header],
             error: "Specification not found",
           };
           hasErrors = true;
-        }
+        } 
       });
 
       validatedRow.hasErrors = hasErrors;
@@ -153,15 +148,28 @@ const ValidationModal: React.FC<ModalProps> = ({
   };
 
   const handleSaveData = () => {
-    // Handle saving validated data
-    console.log("Saving data:", filteredData);
-    onClose();
+    // Final validation before saving
+    const isValid = filteredData.every(row => !row.hasErrors);
+  
+    if (isValid) {
+      // Perform save actions
+      dispatch(saveValidatedData(filteredData));
+      localStorage.setItem("validatedAssetsData", JSON.stringify(filteredData));
+      // dispatch(sendValidatedData(filteredData)); // Dispatch the thunk action to send data to the backend
+      onClose();
+    } else {
+      // Handle case where there are still errors
+      console.error("Cannot save data. Please fix validation errors.");
+      // Optionally, show a message or log an error indicating validation issues
+    }
   };
+  
+  
 
   const handleDeleteRow = (rowIndex: number) => {
     const updatedData = filteredData.filter((_, index) => index !== rowIndex);
     setFilteredData(updatedData);
-  };
+  }; 
 
  
   const handleRemove = () => setShowRemove(!showRemove);
@@ -253,18 +261,16 @@ const ValidationModal: React.FC<ModalProps> = ({
                   </button>
                 )}
                 {!showRemove && (
-                  <button
-                    className={`flex items-center gap-2 bg-my-blue text-white rounded-md py-1  p-2 ${
-                      !selectedCategory
-                        ? "opacity-50 cursor-not-allowed"
-                        : "hover:bg-opacity-80"
-                    }`}
-                    onClick={handleSaveData}
-                    disabled={!selectedCategory}
-                  >
-                    <FaRegCheckCircle />
-                    Save Assets Data
-                  </button>
+                <button
+                className={`flex items-center gap-2 bg-my-blue text-white rounded-md py-1 p-2 `}
+                onClick={handleSaveData}
+                // disabled={filteredData.some(row => row.hasErrors)}    
+              >
+                <FaRegCheckCircle />
+                Save Assets Data
+              </button> 
+              
+                
                 )}
               </div>
             </div>
