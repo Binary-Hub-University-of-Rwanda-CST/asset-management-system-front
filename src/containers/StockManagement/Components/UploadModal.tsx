@@ -5,6 +5,7 @@ import { RiFileExcel2Line } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import { StoreState } from '../../../reducers';
 import ValidationModal from '../UploadAssets/ValidationModal';
+import LoadingCircle from '../../../components/Loading/LoadingCircle';
 
 interface UploadModalProps {
   close: () => void;
@@ -52,7 +53,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.setAttribute('href', url);
-    link.setAttribute('download', 'Assets_template.csv'); 
+    link.setAttribute('download', 'Assets_template_from_david.csv'); 
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
