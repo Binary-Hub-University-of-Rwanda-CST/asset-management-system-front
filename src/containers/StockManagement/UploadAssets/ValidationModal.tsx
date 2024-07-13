@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { UseSelector } from "react-redux/es/hooks/useSelector";
 import { FaArrowLeft, FaTrashAlt, FaRegCheckCircle } from "react-icons/fa";
 import { TiArrowBack } from "react-icons/ti";
-import assetSpecifications from "../../../utils/uploadSpecification";
+// import assetSpecifications from "../../../utils/uploadSpecification";
 import { saveValidatedData } from "../../../actions/saveUploaded.action";
 import { AppDispatch } from "../../../app/store";
 import { useDispatch } from "react-redux";
+import Alert, {AlertType} from "../../../components/Alert/Alert";
+import { useNavigate } from 'react-router-dom'; 
+import { useSelector } from "react-redux";
+import { StoreState } from "../../../reducers";
 
 interface ModalProps {
   isOpen: boolean;
@@ -24,114 +29,82 @@ const ValidationModal: React.FC<ModalProps> = ({
   tag,
 }) => {
   const [filteredData, setFilteredData] = useState<Record<string, any>[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [saveError, setSaveError] = useState<string|null>(null);
   const [showRemove, setShowRemove] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Initially, set filteredData to tableData
     setFilteredData(tableData);
     console.log(tableData); 
   }, [tableData]);
+
+  const uploadSpecification = useSelector((state: StoreState) => state.uploadSpecificaiton.specifications);  
+  useEffect(() => {
+    setFilteredData(validateData(tableData));
+  }, [tableData, uploadSpecification, tableHeaders]);
   const dispatch: AppDispatch = useDispatch();
+  
+  
 
-  const validateData = () => {
-    // Create an object to keep track of unique values for each column
+
+  const validateData = (data: Record<string, any>[]) => {
     const uniqueValuesTracker: Record<string, Set<any>> = {};
-
-    // Initialize the tracker with empty sets for each column that requires unique values
-    assetSpecifications.forEach((spec) => {
+    uploadSpecification.forEach((spec) => {
       if (spec.unique) {
         uniqueValuesTracker[spec.name] = new Set();
       }
     });
-
-    const validatedData = tableData.map((row) => {
+  
+    const validatedData = data.map((row) => {
       const validatedRow: Record<string, any> = {};
       let hasErrors = false;
-
+  
       tableHeaders.forEach((header) => {
-        const spec = assetSpecifications.find((spec) => spec.name === header);
+        const spec = uploadSpecification.find((spec) => spec.name === header);
         if (spec) {
           const cellValue = row[header];
-
-          // Validate required fields
+  
           if (spec.required && (!cellValue || cellValue === "")) {
-            validatedRow[header] = {
-              value: cellValue,
-              error: "Required field",
-            };
+            validatedRow[header] = { value: cellValue, error: "Required field" };
             hasErrors = true;
-          } else if (
-            spec.allowedValues &&
-            !spec.allowedValues.includes(cellValue)
-          ) {
-            // Truncate the error message if it has too many allowed values
-            const allowedValuesToShow = spec.allowedValues
-              .slice(0, 2)
-              .join(", ");
-            const allowedValuesMessage =
-              spec.allowedValues.length > 2
-                ? `${allowedValuesToShow}, ...`
-                : allowedValuesToShow;
-            validatedRow[header] = {
-              value: cellValue,
-              error: `Invalid value. Expected: ${allowedValuesMessage}`,
-            };
+          } else if (spec.allowedValues && !spec.allowedValues.includes(cellValue)) {
+            const allowedValuesToShow = spec.allowedValues.slice(0, 2).join(", ");
+            const allowedValuesMessage = spec.allowedValues.length > 2 ? `${allowedValuesToShow}, ...` : allowedValuesToShow;
+            validatedRow[header] = { value: cellValue, error: `Invalid value. Expected: ${allowedValuesMessage}` };
             hasErrors = true;
           } else if (spec.type === "string" && typeof cellValue !== "string") {
-            // Validate string type
-            validatedRow[header] = {
-              value: cellValue,
-              error: "Expected a string value",
-            };
+            validatedRow[header] = { value: cellValue, error: "Expected a string value" };
             hasErrors = true;
           } else if (spec.type === "number" && isNaN(parseFloat(cellValue))) {
-            // Validate number type
-            validatedRow[header] = {
-              value: cellValue,
-              error: "Must be a number",
-            };
+            validatedRow[header] = { value: cellValue, error: "Must be a number" };
             hasErrors = true;
-          } else if (
-            spec.unique &&
-            uniqueValuesTracker[header]?.has(cellValue)
-          ) {
-            // Validate unique values
-            validatedRow[header] = {
-              value: cellValue,
-              error: "Duplicate value found",
-            };
+          } else if (spec.unique && uniqueValuesTracker[header]?.has(cellValue)) {
+            validatedRow[header] = { value: cellValue, error: "Duplicate value found" };
             hasErrors = true;
           } else {
-            validatedRow[header] = {
-              value: cellValue,
-            };
-
-            // Add the value to the unique values tracker if needed
+            validatedRow[header] = { value: cellValue };
             if (spec.unique) {
               uniqueValuesTracker[header].add(cellValue);
             }
           }
-        }
-         else {
-          validatedRow[header] = {
-            value: row[header],
-            error: "Specification not found",
-          };
+        } else {
+          validatedRow[header] = { value: row[header], error: "Specification not found" };
           hasErrors = true;
-        } 
+        }
       });
-
+  
       validatedRow.hasErrors = hasErrors;
       return validatedRow;
     });
-
-    setFilteredData(validatedData);
+  
+    return validatedData;
   };
+  
 
-  useEffect(() => {
-    validateData();
-  }, [tableData]);
+  // useEffect(() => {
+  //   validateData();
+  // }, [tableData]);
 
   const handleOverlayClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -147,22 +120,56 @@ const ValidationModal: React.FC<ModalProps> = ({
     }
   };
 
-  const handleSaveData = () => {
-    // Final validation before saving
-    const isValid = filteredData.every(row => !row.hasErrors);
-  
-    if (isValid) {
-      // Perform save actions
-      dispatch(saveValidatedData(filteredData));
-      localStorage.setItem("validatedAssetsData", JSON.stringify(filteredData));
-      // dispatch(sendValidatedData(filteredData)); // Dispatch the thunk action to send data to the backend
-      onClose();
-    } else {
-      // Handle case where there are still errors
-      console.error("Cannot save data. Please fix validation errors.");
-      // Optionally, show a message or log an error indicating validation issues
-    }
+  const transformDataForUpload = (data: any[]) => {
+    return data.map((row) => {
+      const transformedRow: { [key: string]: any } = {};
+      for (const key in row) {
+        if (row.hasOwnProperty(key)) {
+          transformedRow[key] = row[key].value;
+        }
+      }
+      return transformedRow;
+    });
   };
+  
+  // Example usage
+  const transformedData = transformDataForUpload(filteredData);
+  console.log(transformedData); // This will show the transformed data ready for upload
+  
+
+ const handleSaveData = () => {
+  // Transform the data to remove value and error properties
+  const transformDataForUpload = (data: any[]) => {
+    return data.map((row) => {
+      const transformedRow: { [key: string]: any } = {};
+      for (const key in row) {
+        if (row.hasOwnProperty(key)) {
+          transformedRow[key] = row[key].value;
+        }
+      }
+      return transformedRow;
+    });
+  };
+
+  // Final validation before saving
+  const isValid = filteredData.every(row => !row.hasErrors);
+
+  if (isValid) {
+    const transformedData = transformDataForUpload(filteredData);
+
+    // Perform save actions
+    dispatch(saveValidatedData(transformedData));
+    localStorage.setItem("validatedAssetsData", JSON.stringify(transformedData));
+    // dispatch(sendValidatedData(transformedData)); // Dispatch the thunk action to send data to the backend
+    onClose();
+    navigate('/upload-assets');   
+  } else {
+    // Handle case where there are still errors
+    console.error("Cannot save data. Please fix validation errors.");
+    setSaveError('Cannot save data. Please fix validation errors.');
+  }
+};
+ 
   
   
 
@@ -176,7 +183,8 @@ const ValidationModal: React.FC<ModalProps> = ({
 
   const handleCellEdit = (newValue: any, rowIndex: number, header: string) => {
     const updatedData = [...filteredData];
-    const spec = assetSpecifications.find((spec) => spec.name === header);
+    const spec = uploadSpecification.find((spec) => spec.name === header);
+    
     if (spec) {
       let error = "";
       // Validate required fields
@@ -198,22 +206,27 @@ const ValidationModal: React.FC<ModalProps> = ({
         error = "Must be a number";
       } else if (
         spec.unique &&
-        filteredData.some(
+        updatedData.some(
           (row, index) => index !== rowIndex && row[header].value === newValue
         )
       ) {
         // Validate unique values
         error = "Duplicate value found";
       }
-
-      updatedData[rowIndex][header] = {
-        value: newValue,
-        error: error || null,
+  
+      // Update the value and error directly in the filteredData state
+      updatedData[rowIndex] = {
+        ...updatedData[rowIndex],
+        [header]: {
+          value: newValue,
+          error: error || null,
+        },
       };
-
+  
       setFilteredData(updatedData);
     }
   };
+   
 
   return (
     <>
@@ -241,6 +254,12 @@ const ValidationModal: React.FC<ModalProps> = ({
                       {tag}
                     </span>
                   ))}
+              </div>
+              <div>
+                {saveError && 
+                <Alert
+                // className="border border-danger text-red-700 rounded-md px-2  " 
+                alertType={AlertType.DANGER} title={saveError}  close={()=>{setSaveError(null)} } timeOut={5000}/>  }    
               </div>
               <div className="flex gap-2  ">
                 {!showRemove ? (
@@ -315,7 +334,7 @@ const ValidationModal: React.FC<ModalProps> = ({
                               {rowIndex + 1}
                             </td>
                             {tableHeaders.map((header, cellIndex) => {
-                              const spec = assetSpecifications.find(
+                              const spec = uploadSpecification.find(
                                 (spec) => spec.name === header
                               );
                               return (
@@ -338,7 +357,7 @@ const ValidationModal: React.FC<ModalProps> = ({
                                             rowIndex,
                                             header
                                           )
-                                        }
+                                        }  
                                       >
                                         <option value="" disabled>
                                           Select an option
@@ -399,5 +418,5 @@ const ValidationModal: React.FC<ModalProps> = ({
     </>
   );
 };
-
+ 
 export default ValidationModal;

@@ -28,17 +28,17 @@ export const fetchSpecifications = () => {
             let data: AssetSpecification[] = []; 
 
             // Use local specifications first
-            data = assetSpecifications;
+            // data = assetSpecifications;
 
             // Simulate API delay (remove this in production)
             await new Promise(resolve => setTimeout(resolve, 1000));
 
             // Optionally, fetch from API if needed
-            // const response = await fetch(`${API_URL}/asset/validationData`);
-            // if (!response.ok) {
-            //     throw new Error('Failed to fetch specifications');
-            // }
-            // data = await response.json();  
+            const response = await fetch(`${API_URL}/asset/validationData`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch specifications');
+            }
+            data = await response.json();  
 
             dispatch({ type: FETCH_UPLOAD_SPECIFICATION_SUCCESS, payload: data });
         } catch (error) {

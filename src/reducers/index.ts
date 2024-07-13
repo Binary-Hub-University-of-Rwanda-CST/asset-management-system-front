@@ -5,6 +5,7 @@ import { systemReducer } from "./system.reducer";
 import assetReducer, { AssetState } from "./asset.reducer";
   import validationDataReducer,{ValidationDataState} from "./validationDataReducer";
   import specificationReducer, {SpecificationState} from "./specification.reducer";
+  import validatedDataReducer, {ValidatedDataState} from "./saveUpload.reducer";
 
 // define the entire state into the entire side
 export interface StoreState {
@@ -13,6 +14,7 @@ export interface StoreState {
   asset:AssetState;
   uploadSpecificaiton: SpecificationState
   validation: ValidationDataState
+  validatedData: ValidatedDataState
   
 }
 
@@ -21,5 +23,6 @@ export const rootReducers = combineReducers<StoreState>({
   system: systemReducer,
   asset: assetReducer,
   uploadSpecificaiton: specificationReducer,
-  validation: validationDataReducer
+  validation: validationDataReducer,
+  validatedData: validatedDataReducer 
 });
