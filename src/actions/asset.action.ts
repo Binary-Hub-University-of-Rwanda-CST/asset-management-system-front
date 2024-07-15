@@ -34,7 +34,7 @@ export interface Assets {
     buildings: Building[];
 }
 
-
+ 
 //  asset actions.ts
 
 export const fetchAssets = () => async (dispatch: Dispatch) => {
