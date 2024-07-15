@@ -1,5 +1,6 @@
 // Input.tsx
 import React, { ReactNode } from "react";
+import Alert, {AlertType} from "../Alert/Alert";
 
 interface InputProps {
   title?: string;
@@ -53,12 +54,16 @@ const Input: React.FC<InputProps> = ({
       </div>
       {error && (
         <div className="text-red-600 mt-1">
-          {error}
+          {onCloseError &&
+           <Alert
+           className="bg-danger" 
+           alertType={AlertType.DANGER} title={error} close={onCloseError}/>} 
+          {/* {error}
           {onCloseError && (
             <button className="ml-2 text-sm" onClick={onCloseError}>
               Close
             </button>
-          )}
+          )} */}  
         </div>
       )}
     </div>
