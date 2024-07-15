@@ -99,7 +99,7 @@ const CreateNewCategory: React.FC<CreateNewCategoryProps> = ({ isOpen, onClose }
         setShowSuccessPopup(false);
 
         try {
-            const response = await fetch(`${API_URL}/asset/category/add`, {
+            const response = await fetch(`${API_URL}/assets/category/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
