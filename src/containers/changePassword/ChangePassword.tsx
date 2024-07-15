@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Input from "../../components/Fragments/Input_backup";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
+import Alert, {AlertType} from "../../components/Alert/Alert";
 
 const ChangePassword: React.FC = () => {
 
