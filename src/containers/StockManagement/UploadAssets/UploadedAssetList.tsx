@@ -1,57 +1,67 @@
+ 
+ 
 import React from 'react';
-import { FaDatabase, FaPlus, FaTrashAlt } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { saveValidatedData } from '../../../actions/saveUploaded.action';
 
-interface Props {   
-  validatedData: Record<string, any>[];
+interface DynamicTableProps {
+  data: Record<string, string | number>[];
 }
 
-const UploadedAssetList: React.FC<Props> = ({ validatedData }) => {
-  if (validatedData.length === 0) {
-    return <div>No data to display</div>;
+const DynamicTable: React.FC<DynamicTableProps> = ({ data }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = (index: number) => {
+    const newData = data.filter((_, i) => i !== index);
+    dispatch(saveValidatedData(newData));
+  };
+
+  if (data.length === 0) {
+    return <p>No data available</p>;
   }
 
-  // Assuming keys are consistent across all objects in validatedData
-  const assetKeys = Object.keys(validatedData[0]);
+  const headers = Object.keys(data[0]);
 
   return (
-    <div className='flex flex-col gap-2 justify-start w-full px-4'>
-      <div className="flex justify-start gap-2 items-center capitalize font-bold">
-        <FaDatabase />
-        desktops
-      </div>
-      <div className="flex w-full">
-        <table className='w-full border'>
-          <thead className='text-left text-sm border'>
-            <tr>
-              {assetKeys.map((key) => (
-                <th key={key} className='border p-1 px-2'>{key}</th>
-              ))}
-              <th className='border p-1 px-2'>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {validatedData.map((asset, index) => (
-              <tr key={index} className='border'>
-                {assetKeys.map((key) => (
-                  <td key={key} className='border px-2 py-1'>{asset[key]}</td>
-                ))}
-                <td className='border'>
-                  <div className='flex p-1 py-1 border border-danger rounded-md justify-center'>
-                    <FaTrashAlt className='text-red-700' />
-                  </div>
-                </td>
-              </tr>
+    <div className="overflow-auto ">
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gray-50">
+          <tr>
+            {headers.map((header) => (
+              <th
+                key={header}
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {header.replace(/_/g, ' ')}
+              </th>
             ))}
-          </tbody>
-        </table>
-      </div>
-      <button className="flex gap-2 bg-blue-white rounded-md font-bold text-sm p-2 items-center">
-        <FaPlus className='text-my-blue' />
-        add other assets collection
-      </button>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {data.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {Object.values(row).map((value, cellIndex) => (
+                <td key={cellIndex} className="px-6 py-4 whitespace-nowrap">
+                  {value}
+                </td>
+              ))}
+              <td className="px-6 py-4 whitespace-nowrap">
+                <button
+                  onClick={() => handleDelete(rowIndex)}
+                  className="text-red-600 hover:text-red-900"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-}
+};
 
-export default UploadedAssetList;  
- 
+export default DynamicTable;
