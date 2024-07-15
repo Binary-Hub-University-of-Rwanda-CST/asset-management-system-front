@@ -24,4 +24,4 @@ const LoadingCircle = (props: { className?: string; title?: string; subTitle?:st
   );
 };
 
-export default LoadingCircle;
+export default LoadingCircle; 
