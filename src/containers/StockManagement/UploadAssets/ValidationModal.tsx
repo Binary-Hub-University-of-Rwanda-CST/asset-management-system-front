@@ -36,7 +36,7 @@ const ValidationModal: React.FC<ModalProps> = ({
   useEffect(() => {
     // Initially, set filteredData to tableData
     setFilteredData(tableData);
-    console.log(tableData); 
+    // console.log(tableData); 
   }, [tableData]);
 
   const uploadSpecification = useSelector((state: StoreState) => state.uploadSpecificaiton.specifications);  
@@ -122,10 +122,11 @@ const ValidationModal: React.FC<ModalProps> = ({
 
   const transformDataForUpload = (data: any[]) => {
     return data.map((row) => {
+      
       const transformedRow: { [key: string]: any } = {};
       for (const key in row) {
         if (row.hasOwnProperty(key)) {
-          transformedRow[key] = row[key].value;
+          transformedRow[key] = row[key].value; 
         }
       }
       return transformedRow;
