@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { UseSelector } from "react-redux/es/hooks/useSelector";
 import { FaArrowLeft, FaTrashAlt, FaRegCheckCircle } from "react-icons/fa";
 import { TiArrowBack } from "react-icons/ti";
 // import assetSpecifications from "../../../utils/uploadSpecification";
@@ -64,30 +63,29 @@ const ValidationModal: React.FC<ModalProps> = ({
         const spec = uploadSpecification.find((spec) => spec.name === header);
         if (spec) {
           const cellValue = row[header];
+          let error = null;
   
+          // Validation checks...
           if (spec.required && (!cellValue || cellValue === "")) {
-            validatedRow[header] = { value: cellValue, error: "Required field" };
-            hasErrors = true;
+            error = "Required field";
           } else if (spec.allowedValues && !spec.allowedValues.includes(cellValue)) {
             const allowedValuesToShow = spec.allowedValues.slice(0, 2).join(", ");
-            const allowedValuesMessage = spec.allowedValues.length > 2 ? `${allowedValuesToShow}, ...` : allowedValuesToShow;
-            validatedRow[header] = { value: cellValue, error: `Invalid value. Expected: ${allowedValuesMessage}` };
-            hasErrors = true;
+            const allowedValuesMessage =
+              spec.allowedValues.length > 2 ? `${allowedValuesToShow}, ...` : allowedValuesToShow;
+            error = `Invalid value. Expected: ${allowedValuesMessage}`;
           } else if (spec.type === "string" && typeof cellValue !== "string") {
-            validatedRow[header] = { value: cellValue, error: "Expected a string value" };
-            hasErrors = true;
+            error = "Expected a string value";
           } else if (spec.type === "number" && isNaN(parseFloat(cellValue))) {
-            validatedRow[header] = { value: cellValue, error: "Must be a number" };
-            hasErrors = true;
+            error = "Must be a number";
           } else if (spec.unique && uniqueValuesTracker[header]?.has(cellValue)) {
-            validatedRow[header] = { value: cellValue, error: "Duplicate value found" };
-            hasErrors = true;
-          } else {
-            validatedRow[header] = { value: cellValue };
-            if (spec.unique) {
-              uniqueValuesTracker[header].add(cellValue);
-            }
+            error = "Duplicate value found";
           }
+  
+          if (error) {
+            hasErrors = true;
+          }
+  
+          validatedRow[header] = { value: cellValue, error };
         } else {
           validatedRow[header] = { value: row[header], error: "Specification not found" };
           hasErrors = true;
@@ -100,11 +98,17 @@ const ValidationModal: React.FC<ModalProps> = ({
   
     return validatedData;
   };
+  // Helper function to check if any errors exist in the row
+  const hasAnyErrors = (row: Record<string, any>) => {
+    for (const header in row) {
+      if (header !== 'hasErrors' && row[header]?.error !== null) {
+        return true; // Found an error in the row
+      }
+    }
+    return false; // No errors found in the row
+  };
   
-
-  // useEffect(() => {
-  //   validateData();
-  // }, [tableData]);
+  
 
   const handleOverlayClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -126,51 +130,30 @@ const ValidationModal: React.FC<ModalProps> = ({
       const transformedRow: { [key: string]: any } = {};
       for (const key in row) {
         if (row.hasOwnProperty(key)) {
-          transformedRow[key] = row[key].value; 
-        }
-      }
-      return transformedRow;
-    });
-  };
-  
-  // Example usage
-  const transformedData = transformDataForUpload(filteredData);
-  console.log(transformedData); // This will show the transformed data ready for upload
-  
-
- const handleSaveData = () => {
-  // Transform the data to remove value and error properties
-  const transformDataForUpload = (data: any[]) => {
-    return data.map((row) => {
-      const transformedRow: { [key: string]: any } = {};
-      for (const key in row) {
-        if (row.hasOwnProperty(key)) {
           transformedRow[key] = row[key].value;
         }
       }
       return transformedRow;
     });
   };
-
-  // Final validation before saving
-  const isValid = filteredData.every(row => !row.hasErrors);
-
-  if (isValid) {
-    const transformedData = transformDataForUpload(filteredData);
-
-    // Perform save actions
-    dispatch(saveValidatedData(transformedData));
-    localStorage.setItem("validatedAssetsData", JSON.stringify(transformedData));
-    // dispatch(sendValidatedData(transformedData)); // Dispatch the thunk action to send data to the backend
-    onClose();
-    navigate('/upload-assets');   
-  } else {
-    // Handle case where there are still errors
-    console.error("Cannot save data. Please fix validation errors.");
-    setSaveError('Cannot save data. Please fix validation errors.');
-  }
-};
- 
+  
+  
+  const handleSaveData = () => {
+    const isValid = filteredData.every(row => !row.hasErrors);
+  
+    if (isValid) {
+      const transformedData = transformDataForUpload(filteredData);
+  
+      dispatch(saveValidatedData(transformedData));
+      localStorage.setItem("validatedAssetsData", JSON.stringify(transformedData));
+      onClose();
+      navigate('/upload-assets');
+    } else {
+      console.error("Cannot save data. Please fix validation errors.");
+      setSaveError('Cannot save data. Please fix validation errors.');
+    }
+  };
+   
   
   
 
@@ -185,25 +168,18 @@ const ValidationModal: React.FC<ModalProps> = ({
   const handleCellEdit = (newValue: any, rowIndex: number, header: string) => {
     const updatedData = [...filteredData];
     const spec = uploadSpecification.find((spec) => spec.name === header);
-    
+  
     if (spec) {
-      let error = "";
-      // Validate required fields
+      let error = null;
       if (spec.required && (!newValue || newValue === "")) {
         error = "Required field";
       } else if (spec.allowedValues && !spec.allowedValues.includes(newValue)) {
-        // Truncate the error message if it has too many allowed values
         const allowedValuesToShow = spec.allowedValues.slice(0, 2).join(", ");
-        const allowedValuesMessage =
-          spec.allowedValues.length > 2
-            ? `${allowedValuesToShow}, ...`
-            : allowedValuesToShow;
+        const allowedValuesMessage = spec.allowedValues.length > 2 ? `${allowedValuesToShow}, ...` : allowedValuesToShow;
         error = `Invalid value. Expected: ${allowedValuesMessage}`;
       } else if (spec.type === "string" && typeof newValue !== "string") {
-        // Validate string type
         error = "Expected a string value";
       } else if (spec.type === "number" && isNaN(parseFloat(newValue))) {
-        // Validate number type
         error = "Must be a number";
       } else if (
         spec.unique &&
@@ -211,18 +187,21 @@ const ValidationModal: React.FC<ModalProps> = ({
           (row, index) => index !== rowIndex && row[header].value === newValue
         )
       ) {
-        // Validate unique values
         error = "Duplicate value found";
       }
   
-      // Update the value and error directly in the filteredData state
       updatedData[rowIndex] = {
         ...updatedData[rowIndex],
         [header]: {
           value: newValue,
-          error: error || null,
+          error: error,
         },
       };
+  
+      // Recalculate hasErrors for the entire row
+      updatedData[rowIndex].hasErrors = Object.keys(updatedData[rowIndex]).some(
+        key => key !== 'hasErrors' && updatedData[rowIndex][key].error !== null
+      );
   
       setFilteredData(updatedData);
     }
@@ -282,13 +261,14 @@ const ValidationModal: React.FC<ModalProps> = ({
                 )}
                 {!showRemove && (
                 <button
-                className={`flex items-center gap-2 bg-my-blue text-white rounded-md py-1 p-2 `}
+                className={`flex items-center gap-2 bg-my-blue text-white rounded-md py-1 p-2 ${filteredData.some(row => row.hasErrors) ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onClick={handleSaveData}
-                // disabled={filteredData.some(row => row.hasErrors)}    
+                disabled={filteredData.some(row => row.hasErrors)} 
               >
                 <FaRegCheckCircle />
                 Save Assets Data
-              </button> 
+              </button>
+              
               
                 
                 )}
