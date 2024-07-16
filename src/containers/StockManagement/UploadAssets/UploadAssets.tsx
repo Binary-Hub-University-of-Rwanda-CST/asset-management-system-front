@@ -141,7 +141,7 @@ const UploadStock: React.FC<AppProps> = ({
         <div className="w-full my-3">
           <Alert
             alertType={AlertType.DANGER}
-            title={"Error"}
+            title={"error"} 
             description={error}
             close={handleDismissError}
             className={"border-2 border-white bg-danger"}
