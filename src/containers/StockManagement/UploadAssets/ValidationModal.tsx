@@ -5,7 +5,7 @@ import { TiArrowBack } from "react-icons/ti";
 import { saveValidatedData } from "../../../actions/saveUploaded.action";
 import { AppDispatch } from "../../../app/store";
 import { useDispatch } from "react-redux";
-import Alert, {AlertType} from "../../../components/Alert/Alert";
+import Alert, {AlertType} from "../../../components/Alert/Alert"; 
 import { useNavigate } from 'react-router-dom'; 
 import { useSelector } from "react-redux";
 import { StoreState } from "../../../reducers";
@@ -358,7 +358,7 @@ const transformDataForUpload = (data: any[]) => {
                               </td>
                             )}
                             <td className={`px-2 py-1 font-sm ${hasAnyErrors(row) ? 'bg-red-400 font-bold text-sm ': ''}`}>
-
+                              {rowIndex + 1}
                             </td>
                             {tableHeaders.map((header, cellIndex) => {
                               const spec = uploadSpecification.find(

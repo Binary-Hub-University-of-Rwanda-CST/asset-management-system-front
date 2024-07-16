@@ -144,7 +144,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
     }
   };
 
-  const MAX_DISPLAYED_VALUES = 5;
+  const MAX_DISPLAYED_VALUES = 5; 
 
   return (
     <div>
@@ -235,7 +235,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
               />
             </>
           )}
-          {uploadError && (
+          {uploadError && ( 
             <div className="mt-2 text-sm text-red-500">{uploadError}</div>
           )}
         </div>
@@ -248,7 +248,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
         onClose={() => setIsTableModalOpen(false)}
         tableData={tableData}
         tableHeaders={tableHeaders}
-        tag={[`${tableData.length} assets`]} 
+        tag={[`${tableData.length} ass`]}
       />
     )}
   </div>
