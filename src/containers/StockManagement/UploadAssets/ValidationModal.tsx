@@ -99,6 +99,7 @@ const ValidationModal: React.FC<ModalProps> = ({
           } else if (spec.type === "boolean" && !['true', 'false', true, false].includes(cellValue)) {
             error = "Must be a boolean value";
           } else if (spec.type === "date" && cellValue !==""  && isNaN(Date.parse(cellValue))) {
+
             error = "Must be a valid date";
           } else if (spec.unique && uniqueValuesTracker[header]?.has(cellValue)) {
             error = "Duplicate value found"; 
@@ -357,7 +358,7 @@ const transformDataForUpload = (data: any[]) => {
                               </td>
                             )}
                             <td className={`px-2 py-1 font-sm ${hasAnyErrors(row) ? 'bg-red-400 font-bold text-sm ': ''}`}>
-                              {rowIndex + 1}
+
                             </td>
                             {tableHeaders.map((header, cellIndex) => {
                               const spec = uploadSpecification.find(
