@@ -1,0 +1,4407 @@
+{
+  "countries": [
+    {
+      "country_code": "ABW",
+      "country_name": "Aruba",
+      "code": "AW"
+    },
+    {
+      "country_code": "AFG",
+      "country_name": "Afghanistan",
+      "code": "AF"
+    },
+    {
+      "country_code": "AGO",
+      "country_name": "Angola",
+      "code": "AO"
+    },
+    {
+      "country_code": "AIA",
+      "country_name": "Anguilla",
+      "code": "AI"
+    },
+    {
+      "country_code": "ALA",
+      "country_name": "Åland",
+      "code": "AX"
+    },
+    {
+      "country_code": "ALB",
+      "country_name": "Albania",
+      "code": "AL"
+    },
+    {
+      "country_code": "AND",
+      "country_name": "Andorra",
+      "code": "AD"
+    },
+    {
+      "country_code": "ARE",
+      "country_name": "United Arab Emirates",
+      "code": "AE"
+    },
+    {
+      "country_code": "ARG",
+      "country_name": "Argentina",
+      "code": "AR"
+    },
+    {
+      "country_code": "ARM",
+      "country_name": "Armenia",
+      "code": "AM"
+    },
+    {
+      "country_code": "ASM",
+      "country_name": "American Samoa",
+      "code": "AS"
+    },
+    {
+      "country_code": "ATA",
+      "country_name": "Antarctica",
+      "code": "AQ"
+    },
+    {
+      "country_code": "ATF",
+      "country_name": "French Southern Territories",
+      "code": "TF"
+    },
+    {
+      "country_code": "ATG",
+      "country_name": "Antigua and Barbuda",
+      "code": "AG"
+    },
+    {
+      "country_code": "AUS",
+      "country_name": "Australia",
+      "code": "AU"
+    },
+    {
+      "country_code": "AUT",
+      "country_name": "Austria",
+      "code": "AT"
+    },
+    {
+      "country_code": "AZE",
+      "country_name": "Azerbaijan",
+      "code": "AZ"
+    },
+    {
+      "country_code": "BDI",
+      "country_name": "Burundi",
+      "code": "BI"
+    },
+    {
+      "country_code": "BEL",
+      "country_name": "Belgium",
+      "code": "BE"
+    },
+    {
+      "country_code": "BEN",
+      "country_name": "Benin",
+      "code": "BJ"
+    },
+    {
+      "country_code": "BES",
+      "country_name": "Bonaire",
+      "code": "BQ"
+    },
+    {
+      "country_code": "BFA",
+      "country_name": "Burkina Faso",
+      "code": "BF"
+    },
+    {
+      "country_code": "BGD",
+      "country_name": "Bangladesh",
+      "code": "BD"
+    },
+    {
+      "country_code": "BGR",
+      "country_name": "Bulgaria",
+      "code": "BG"
+    },
+    {
+      "country_code": "BHR",
+      "country_name": "Bahrain",
+      "code": "BH"
+    },
+    {
+      "country_code": "BHS",
+      "country_name": "Bahamas",
+      "code": "BS"
+    },
+    {
+      "country_code": "BIH",
+      "country_name": "Bosnia and Herzegovina",
+      "code": "BA"
+    },
+    {
+      "country_code": "BLM",
+      "country_name": "Saint Barthélemy",
+      "code": "BL"
+    },
+    {
+      "country_code": "BLR",
+      "country_name": "Belarus",
+      "code": "BY"
+    },
+    {
+      "country_code": "BLZ",
+      "country_name": "Belize",
+      "code": "BZ"
+    },
+    {
+      "country_code": "BMU",
+      "country_name": "Bermuda",
+      "code": "BM"
+    },
+    {
+      "country_code": "BOL",
+      "country_name": "Bolivia",
+      "code": "BO"
+    },
+    {
+      "country_code": "BRA",
+      "country_name": "Brazil",
+      "code": "BR"
+    },
+    {
+      "country_code": "BRB",
+      "country_name": "Barbados",
+      "code": "BB"
+    },
+    {
+      "country_code": "BRN",
+      "country_name": "Brunei",
+      "code": "BN"
+    },
+    {
+      "country_code": "BTN",
+      "country_name": "Bhutan",
+      "code": "BT"
+    },
+    {
+      "country_code": "BVT",
+      "country_name": "Bouvet Island",
+      "code": "BV"
+    },
+    {
+      "country_code": "BWA",
+      "country_name": "Botswana",
+      "code": "BW"
+    },
+    {
+      "country_code": "CAF",
+      "country_name": "Central African Republic",
+      "code": "CF"
+    },
+    {
+      "country_code": "CAN",
+      "country_name": "Canada",
+      "code": "CA"
+    },
+    {
+      "country_code": "CCK",
+      "country_name": "Cocos [Keeling] Islands",
+      "code": "CC"
+    },
+    {
+      "country_code": "CHE",
+      "country_name": "Switzerland",
+      "code": "CH"
+    },
+    {
+      "country_code": "CHL",
+      "country_name": "Chile",
+      "code": "CL"
+    },
+    {
+      "country_code": "CHN",
+      "country_name": "China",
+      "code": "CN"
+    },
+    {
+      "country_code": "CIV",
+      "country_name": "Ivory Coast",
+      "code": "CI"
+    },
+    {
+      "country_code": "CMR",
+      "country_name": "Cameroon",
+      "code": "CM"
+    },
+    {
+      "country_code": "COD",
+      "country_name": "Democratic Republic of the Congo",
+      "code": "CD"
+    },
+    {
+      "country_code": "COG",
+      "country_name": "Republic of the Congo",
+      "code": "CG"
+    },
+    {
+      "country_code": "COK",
+      "country_name": "Cook Islands",
+      "code": "CK"
+    },
+    {
+      "country_code": "COL",
+      "country_name": "Colombia",
+      "code": "CO"
+    },
+    {
+      "country_code": "COM",
+      "country_name": "Comoros",
+      "code": "KM"
+    },
+    {
+      "country_code": "CPV",
+      "country_name": "Cape Verde",
+      "code": "CV"
+    },
+    {
+      "country_code": "CRI",
+      "country_name": "Costa Rica",
+      "code": "CR"
+    },
+    {
+      "country_code": "CUB",
+      "country_name": "Cuba",
+      "code": "CU"
+    },
+    {
+      "country_code": "CUW",
+      "country_name": "Curacao",
+      "code": "CW"
+    },
+    {
+      "country_code": "CXR",
+      "country_name": "Christmas Island",
+      "code": "CX"
+    },
+    {
+      "country_code": "CYM",
+      "country_name": "Cayman Islands",
+      "code": "KY"
+    },
+    {
+      "country_code": "CYP",
+      "country_name": "Cyprus",
+      "code": "CY"
+    },
+    {
+      "country_code": "CZE",
+      "country_name": "Czech Republic",
+      "code": "CZ"
+    },
+    {
+      "country_code": "DEU",
+      "country_name": "Germany",
+      "code": "DE"
+    },
+    {
+      "country_code": "DJI",
+      "country_name": "Djibouti",
+      "code": "DJ"
+    },
+    {
+      "country_code": "DMA",
+      "country_name": "Dominica",
+      "code": "DM"
+    },
+    {
+      "country_code": "DNK",
+      "country_name": "Denmark",
+      "code": "DK"
+    },
+    {
+      "country_code": "DOM",
+      "country_name": "Dominican Republic",
+      "code": "DO"
+    },
+    {
+      "country_code": "DZA",
+      "country_name": "Algeria",
+      "code": "DZ"
+    },
+    {
+      "country_code": "ECU",
+      "country_name": "Ecuador",
+      "code": "EC"
+    },
+    {
+      "country_code": "EGY",
+      "country_name": "Egypt",
+      "code": "EG"
+    },
+    {
+      "country_code": "ERI",
+      "country_name": "Eritrea",
+      "code": "ER"
+    },
+    {
+      "country_code": "ESH",
+      "country_name": "Western Sahara",
+      "code": "EH"
+    },
+    {
+      "country_code": "ESP",
+      "country_name": "Spain",
+      "code": "ES"
+    },
+    {
+      "country_code": "EST",
+      "country_name": "Estonia",
+      "code": "EE"
+    },
+    {
+      "country_code": "ETH",
+      "country_name": "Ethiopia",
+      "code": "ET"
+    },
+    {
+      "country_code": "FIN",
+      "country_name": "Finland",
+      "code": "FI"
+    },
+    {
+      "country_code": "FJI",
+      "country_name": "Fiji",
+      "code": "FJ"
+    },
+    {
+      "country_code": "FLK",
+      "country_name": "Falkland Islands",
+      "code": "FK"
+    },
+    {
+      "country_code": "FRA",
+      "country_name": "France",
+      "code": "FR"
+    },
+    {
+      "country_code": "FRO",
+      "country_name": "Faroe Islands",
+      "code": "FO"
+    },
+    {
+      "country_code": "FSM",
+      "country_name": "Micronesia",
+      "code": "FM"
+    },
+    {
+      "country_code": "GAB",
+      "country_name": "Gabon",
+      "code": "GA"
+    },
+    {
+      "country_code": "GBR",
+      "country_name": "United Kingdom",
+      "code": "GB"
+    },
+    {
+      "country_code": "GEO",
+      "country_name": "Georgia",
+      "code": "GE"
+    },
+    {
+      "country_code": "GGY",
+      "country_name": "Guernsey",
+      "code": "GG"
+    },
+    {
+      "country_code": "GHA",
+      "country_name": "Ghana",
+      "code": "GH"
+    },
+    {
+      "country_code": "GIB",
+      "country_name": "Gibraltar",
+      "code": "GI"
+    },
+    {
+      "country_code": "GIN",
+      "country_name": "Guinea",
+      "code": "GN"
+    },
+    {
+      "country_code": "GLP",
+      "country_name": "Guadeloupe",
+      "code": "GP"
+    },
+    {
+      "country_code": "GMB",
+      "country_name": "Gambia",
+      "code": "GM"
+    },
+    {
+      "country_code": "GNB",
+      "country_name": "Guinea-Bissau",
+      "code": "GW"
+    },
+    {
+      "country_code": "GNQ",
+      "country_name": "Equatorial Guinea",
+      "code": "GQ"
+    },
+    {
+      "country_code": "GRC",
+      "country_name": "Greece",
+      "code": "GR"
+    },
+    {
+      "country_code": "GRD",
+      "country_name": "Grenada",
+      "code": "GD"
+    },
+    {
+      "country_code": "GRL",
+      "country_name": "Greenland",
+      "code": "GL"
+    },
+    {
+      "country_code": "GTM",
+      "country_name": "Guatemala",
+      "code": "GT"
+    },
+    {
+      "country_code": "GUF",
+      "country_name": "French Guiana",
+      "code": "GF"
+    },
+    {
+      "country_code": "GUM",
+      "country_name": "Guam",
+      "code": "GU"
+    },
+    {
+      "country_code": "GUY",
+      "country_name": "Guyana",
+      "code": "GY"
+    },
+    {
+      "country_code": "HKG",
+      "country_name": "Hong Kong",
+      "code": "HK"
+    },
+    {
+      "country_code": "HMD",
+      "country_name": "Heard Island and McDonald Islands",
+      "code": "HM"
+    },
+    {
+      "country_code": "HND",
+      "country_name": "Honduras",
+      "code": "HN"
+    },
+    {
+      "country_code": "HRV",
+      "country_name": "Croatia",
+      "code": "HR"
+    },
+    {
+      "country_code": "HTI",
+      "country_name": "Haiti",
+      "code": "HT"
+    },
+    {
+      "country_code": "HUN",
+      "country_name": "Hungary",
+      "code": "HU"
+    },
+    {
+      "country_code": "IDN",
+      "country_name": "Indonesia",
+      "code": "ID"
+    },
+    {
+      "country_code": "IMN",
+      "country_name": "Isle of Man",
+      "code": "IM"
+    },
+    {
+      "country_code": "IND",
+      "country_name": "India",
+      "code": "IN"
+    },
+    {
+      "country_code": "IOT",
+      "country_name": "British Indian Ocean Territory",
+      "code": "IO"
+    },
+    {
+      "country_code": "IRL",
+      "country_name": "Ireland",
+      "code": "IE"
+    },
+    {
+      "country_code": "IRN",
+      "country_name": "Iran",
+      "code": "IR"
+    },
+    {
+      "country_code": "IRQ",
+      "country_name": "Iraq",
+      "code": "IQ"
+    },
+    {
+      "country_code": "ISL",
+      "country_name": "Iceland",
+      "code": "IS"
+    },
+    {
+      "country_code": "ISR",
+      "country_name": "Israel",
+      "code": "IL"
+    },
+    {
+      "country_code": "ITA",
+      "country_name": "Italy",
+      "code": "IT"
+    },
+    {
+      "country_code": "JAM",
+      "country_name": "Jamaica",
+      "code": "JM"
+    },
+    {
+      "country_code": "JEY",
+      "country_name": "Jersey",
+      "code": "JE"
+    },
+    {
+      "country_code": "JOR",
+      "country_name": "Jordan",
+      "code": "JO"
+    },
+    {
+      "country_code": "JPN",
+      "country_name": "Japan",
+      "code": "JP"
+    },
+    {
+      "country_code": "KAZ",
+      "country_name": "Kazakhstan",
+      "code": "KZ"
+    },
+    {
+      "country_code": "KEN",
+      "country_name": "Kenya",
+      "code": "KE"
+    },
+    {
+      "country_code": "KGZ",
+      "country_name": "Kyrgyzstan",
+      "code": "KG"
+    },
+    {
+      "country_code": "KHM",
+      "country_name": "Cambodia",
+      "code": "KH"
+    },
+    {
+      "country_code": "KIR",
+      "country_name": "Kiribati",
+      "code": "KI"
+    },
+    {
+      "country_code": "KNA",
+      "country_name": "Saint Kitts and Nevis",
+      "code": "KN"
+    },
+    {
+      "country_code": "KOR",
+      "country_name": "South Korea",
+      "code": "KR"
+    },
+    {
+      "country_code": "KWT",
+      "country_name": "Kuwait",
+      "code": "KW"
+    },
+    {
+      "country_code": "LAO",
+      "country_name": "Laos",
+      "code": "LA"
+    },
+    {
+      "country_code": "LBN",
+      "country_name": "Lebanon",
+      "code": "LB"
+    },
+    {
+      "country_code": "LBR",
+      "country_name": "Liberia",
+      "code": "LR"
+    },
+    {
+      "country_code": "LBY",
+      "country_name": "Libya",
+      "code": "LY"
+    },
+    {
+      "country_code": "LCA",
+      "country_name": "Saint Lucia",
+      "code": "LC"
+    },
+    {
+      "country_code": "LIE",
+      "country_name": "Liechtenstein",
+      "code": "LI"
+    },
+    {
+      "country_code": "LKA",
+      "country_name": "Sri Lanka",
+      "code": "LK"
+    },
+    {
+      "country_code": "LSO",
+      "country_name": "Lesotho",
+      "code": "LS"
+    },
+    {
+      "country_code": "LTU",
+      "country_name": "Lithuania",
+      "code": "LT"
+    },
+    {
+      "country_code": "LUX",
+      "country_name": "Luxembourg",
+      "code": "LU"
+    },
+    {
+      "country_code": "LVA",
+      "country_name": "Latvia",
+      "code": "LV"
+    },
+    {
+      "country_code": "MAC",
+      "country_name": "Macao",
+      "code": "MO"
+    },
+    {
+      "country_code": "MAF",
+      "country_name": "Saint Martin",
+      "code": "MF"
+    },
+    {
+      "country_code": "MAR",
+      "country_name": "Morocco",
+      "code": "MA"
+    },
+    {
+      "country_code": "MCO",
+      "country_name": "Monaco",
+      "code": "MC"
+    },
+    {
+      "country_code": "MDA",
+      "country_name": "Moldova",
+      "code": "MD"
+    },
+    {
+      "country_code": "MDG",
+      "country_name": "Madagascar",
+      "code": "MG"
+    },
+    {
+      "country_code": "MDV",
+      "country_name": "Maldives",
+      "code": "MV"
+    },
+    {
+      "country_code": "MEX",
+      "country_name": "Mexico",
+      "code": "MX"
+    },
+    {
+      "country_code": "MHL",
+      "country_name": "Marshall Islands",
+      "code": "MH"
+    },
+    {
+      "country_code": "MKD",
+      "country_name": "Macedonia",
+      "code": "MK"
+    },
+    {
+      "country_code": "MLI",
+      "country_name": "Mali",
+      "code": "ML"
+    },
+    {
+      "country_code": "MLT",
+      "country_name": "Malta",
+      "code": "MT"
+    },
+    {
+      "country_code": "MMR",
+      "country_name": "Myanmar [Burma]",
+      "code": "MM"
+    },
+    {
+      "country_code": "MNE",
+      "country_name": "Montenegro",
+      "code": "ME"
+    },
+    {
+      "country_code": "MNG",
+      "country_name": "Mongolia",
+      "code": "MN"
+    },
+    {
+      "country_code": "MNP",
+      "country_name": "Northern Mariana Islands",
+      "code": "MP"
+    },
+    {
+      "country_code": "MOZ",
+      "country_name": "Mozambique",
+      "code": "MZ"
+    },
+    {
+      "country_code": "MRT",
+      "country_name": "Mauritania",
+      "code": "MR"
+    },
+    {
+      "country_code": "MSR",
+      "country_name": "Montserrat",
+      "code": "MS"
+    },
+    {
+      "country_code": "MTQ",
+      "country_name": "Martinique",
+      "code": "MQ"
+    },
+    {
+      "country_code": "MUS",
+      "country_name": "Mauritius",
+      "code": "MU"
+    },
+    {
+      "country_code": "MWI",
+      "country_name": "Malawi",
+      "code": "MW"
+    },
+    {
+      "country_code": "MYS",
+      "country_name": "Malaysia",
+      "code": "MY"
+    },
+    {
+      "country_code": "MYT",
+      "country_name": "Mayotte",
+      "code": "YT"
+    },
+    {
+      "country_code": "NAM",
+      "country_name": "Namibia",
+      "code": "NA"
+    },
+    {
+      "country_code": "NCL",
+      "country_name": "New Caledonia",
+      "code": "NC"
+    },
+    {
+      "country_code": "NER",
+      "country_name": "Niger",
+      "code": "NE"
+    },
+    {
+      "country_code": "NFK",
+      "country_name": "Norfolk Island",
+      "code": "NF"
+    },
+    {
+      "country_code": "NGA",
+      "country_name": "Nigeria",
+      "code": "NG"
+    },
+    {
+      "country_code": "NIC",
+      "country_name": "Nicaragua",
+      "code": "NI"
+    },
+    {
+      "country_code": "NIU",
+      "country_name": "Niue",
+      "code": "NU"
+    },
+    {
+      "country_code": "NLD",
+      "country_name": "Netherlands",
+      "code": "NL"
+    },
+    {
+      "country_code": "NOR",
+      "country_name": "Norway",
+      "code": "NO"
+    },
+    {
+      "country_code": "NPL",
+      "country_name": "Nepal",
+      "code": "NP"
+    },
+    {
+      "country_code": "NRU",
+      "country_name": "Nauru",
+      "code": "NR"
+    },
+    {
+      "country_code": "NZL",
+      "country_name": "New Zealand",
+      "code": "NZ"
+    },
+    {
+      "country_code": "OMN",
+      "country_name": "Oman",
+      "code": "OM"
+    },
+    {
+      "country_code": "PAK",
+      "country_name": "Pakistan",
+      "code": "PK"
+    },
+    {
+      "country_code": "PAN",
+      "country_name": "Panama",
+      "code": "PA"
+    },
+    {
+      "country_code": "PCN",
+      "country_name": "Pitcairn Islands",
+      "code": "PN"
+    },
+    {
+      "country_code": "PER",
+      "country_name": "Peru",
+      "code": "PE"
+    },
+    {
+      "country_code": "PHL",
+      "country_name": "Philippines",
+      "code": "PH"
+    },
+    {
+      "country_code": "PLW",
+      "country_name": "Palau",
+      "code": "PW"
+    },
+    {
+      "country_code": "PNG",
+      "country_name": "Papua New Guinea",
+      "code": "PG"
+    },
+    {
+      "country_code": "POL",
+      "country_name": "Poland",
+      "code": "PL"
+    },
+    {
+      "country_code": "PRI",
+      "country_name": "Puerto Rico",
+      "code": "PR"
+    },
+    {
+      "country_code": "PRK",
+      "country_name": "North Korea",
+      "code": "KP"
+    },
+    {
+      "country_code": "PRT",
+      "country_name": "Portugal",
+      "code": "PT"
+    },
+    {
+      "country_code": "PRY",
+      "country_name": "Paraguay",
+      "code": "PY"
+    },
+    {
+      "country_code": "PSE",
+      "country_name": "Palestine",
+      "code": "PS"
+    },
+    {
+      "country_code": "PYF",
+      "country_name": "French Polynesia",
+      "code": "PF"
+    },
+    {
+      "country_code": "QAT",
+      "country_name": "Qatar",
+      "code": "QA"
+    },
+    {
+      "country_code": "REU",
+      "country_name": "Réunion",
+      "code": "RE"
+    },
+    {
+      "country_code": "ROU",
+      "country_name": "Romania",
+      "code": "RO"
+    },
+    {
+      "country_code": "RUS",
+      "country_name": "Russia",
+      "code": "RU"
+    },
+    {
+      "country_code": "RWA",
+      "country_name": "Rwanda",
+      "code": "RW"
+    },
+    {
+      "country_code": "SAU",
+      "country_name": "Saudi Arabia",
+      "code": "SA"
+    },
+    {
+      "country_code": "SDN",
+      "country_name": "Sudan",
+      "code": "SD"
+    },
+    {
+      "country_code": "SEN",
+      "country_name": "Senegal",
+      "code": "SN"
+    },
+    {
+      "country_code": "SGP",
+      "country_name": "Singapore",
+      "code": "SG"
+    },
+    {
+      "country_code": "SGS",
+      "country_name": "South Georgia and the South Sandwich Islands",
+      "code": "GS"
+    },
+    {
+      "country_code": "SHN",
+      "country_name": "Saint Helena",
+      "code": "SH"
+    },
+    {
+      "country_code": "SJM",
+      "country_name": "Svalbard and Jan Mayen",
+      "code": "SJ"
+    },
+    {
+      "country_code": "SLB",
+      "country_name": "Solomon Islands",
+      "code": "SB"
+    },
+    {
+      "country_code": "SLE",
+      "country_name": "Sierra Leone",
+      "code": "SL"
+    },
+    {
+      "country_code": "SLV",
+      "country_name": "El Salvador",
+      "code": "SV"
+    },
+    {
+      "country_code": "SMR",
+      "country_name": "San Marino",
+      "code": "SM"
+    },
+    {
+      "country_code": "SOM",
+      "country_name": "Somalia",
+      "code": "SO"
+    },
+    {
+      "country_code": "SPM",
+      "country_name": "Saint Pierre and Miquelon",
+      "code": "PM"
+    },
+    {
+      "country_code": "SRB",
+      "country_name": "Serbia",
+      "code": "RS"
+    },
+    {
+      "country_code": "SSD",
+      "country_name": "South Sudan",
+      "code": "SS"
+    },
+    {
+      "country_code": "STP",
+      "country_name": "São Tomé and Príncipe",
+      "code": "ST"
+    },
+    {
+      "country_code": "SUR",
+      "country_name": "Suriname",
+      "code": "SR"
+    },
+    {
+      "country_code": "SVK",
+      "country_name": "Slovakia",
+      "code": "SK"
+    },
+    {
+      "country_code": "SVN",
+      "country_name": "Slovenia",
+      "code": "SI"
+    },
+    {
+      "country_code": "SWE",
+      "country_name": "Sweden",
+      "code": "SE"
+    },
+    {
+      "country_code": "SWZ",
+      "country_name": "Swaziland",
+      "code": "SZ"
+    },
+    {
+      "country_code": "SXM",
+      "country_name": "Sint Maarten",
+      "code": "SX"
+    },
+    {
+      "country_code": "SYC",
+      "country_name": "Seychelles",
+      "code": "SC"
+    },
+    {
+      "country_code": "SYR",
+      "country_name": "Syria",
+      "code": "SY"
+    },
+    {
+      "country_code": "TCA",
+      "country_name": "Turks and Caicos Islands",
+      "code": "TC"
+    },
+    {
+      "country_code": "TCD",
+      "country_name": "Chad",
+      "code": "TD"
+    },
+    {
+      "country_code": "TGO",
+      "country_name": "Togo",
+      "code": "TG"
+    },
+    {
+      "country_code": "THA",
+      "country_name": "Thailand",
+      "code": "TH"
+    },
+    {
+      "country_code": "TJK",
+      "country_name": "Tajikistan",
+      "code": "TJ"
+    },
+    {
+      "country_code": "TKL",
+      "country_name": "Tokelau",
+      "code": "TK"
+    },
+    {
+      "country_code": "TKM",
+      "country_name": "Turkmenistan",
+      "code": "TM"
+    },
+    {
+      "country_code": "TLS",
+      "country_name": "East Timor",
+      "code": "TL"
+    },
+    {
+      "country_code": "TON",
+      "country_name": "Tonga",
+      "code": "TO"
+    },
+    {
+      "country_code": "TTO",
+      "country_name": "Trinidad and Tobago",
+      "code": "TT"
+    },
+    {
+      "country_code": "TUN",
+      "country_name": "Tunisia",
+      "code": "TN"
+    },
+    {
+      "country_code": "TUR",
+      "country_name": "Turkey",
+      "code": "TR"
+    },
+    {
+      "country_code": "TUV",
+      "country_name": "Tuvalu",
+      "code": "TV"
+    },
+    {
+      "country_code": "TWN",
+      "country_name": "Taiwan",
+      "code": "TW"
+    },
+    {
+      "country_code": "TZA",
+      "country_name": "Tanzania",
+      "code": "TZ"
+    },
+    {
+      "country_code": "UGA",
+      "country_name": "Uganda",
+      "code": "UG"
+    },
+    {
+      "country_code": "UKR",
+      "country_name": "Ukraine",
+      "code": "UA"
+    },
+    {
+      "country_code": "UMI",
+      "country_name": "U.S. Minor Outlying Islands",
+      "code": "UM"
+    },
+    {
+      "country_code": "URY",
+      "country_name": "Uruguay",
+      "code": "UY"
+    },
+    {
+      "country_code": "USA",
+      "country_name": "United States",
+      "code": "US"
+    },
+    {
+      "country_code": "UZB",
+      "country_name": "Uzbekistan",
+      "code": "UZ"
+    },
+    {
+      "country_code": "VAT",
+      "country_name": "Vatican City",
+      "code": "VA"
+    },
+    {
+      "country_code": "VCT",
+      "country_name": "Saint Vincent and the Grenadines",
+      "code": "VC"
+    },
+    {
+      "country_code": "VEN",
+      "country_name": "Venezuela",
+      "code": "VE"
+    },
+    {
+      "country_code": "VGB",
+      "country_name": "British Virgin Islands",
+      "code": "VG"
+    },
+    {
+      "country_code": "VIR",
+      "country_name": "U.S. Virgin Islands",
+      "code": "VI"
+    },
+    {
+      "country_code": "VNM",
+      "country_name": "Vietnam",
+      "code": "VN"
+    },
+    {
+      "country_code": "VUT",
+      "country_name": "Vanuatu",
+      "code": "VU"
+    },
+    {
+      "country_code": "WLF",
+      "country_name": "Wallis and Futuna",
+      "code": "WF"
+    },
+    {
+      "country_code": "WSM",
+      "country_name": "Samoa",
+      "code": "WS"
+    },
+    {
+      "country_code": "XKX",
+      "country_name": "Kosovo",
+      "code": "XK"
+    },
+    {
+      "country_code": "YEM",
+      "country_name": "Yemen",
+      "code": "YE"
+    },
+    {
+      "country_code": "ZAF",
+      "country_name": "South Africa",
+      "code": "ZA"
+    },
+    {
+      "country_code": "ZMB",
+      "country_name": "Zambia",
+      "code": "ZM"
+    },
+    {
+      "country_code": "ZWE",
+      "country_name": "Zimbabwe",
+      "code": "ZW"
+    }
+  ],
+  "provinces": [
+    {
+      "_id": "61d561ae90ed1db0cbf9ffd7",
+      "province_name": "Kigali",
+      "province_code": "1"
+    },
+    {
+      "_id": "61d561ae90ed1db0cbf9ffda",
+      "province_name": "South",
+      "province_code": "2"
+    },
+    {
+      "_id": "61d561ae90ed1db0cbf9ffdd",
+      "province_name": "West",
+      "province_code": "3"
+    },
+    {
+      "_id": "61d561ae90ed1db0cbf9ffe0",
+      "province_name": "North",
+      "province_code": "4"
+    },
+    {
+      "_id": "61d561ae90ed1db0cbf9ffe3",
+      "province_name": "East",
+      "province_code": "5"
+    }
+  ],
+  "districts": [
+    {
+      "_id": "61d561e190ed1db0cbf9ffe7",
+      "district_name": "Nyarugenge",
+      "district_code": "11",
+      "province_code": "1",
+      "province_id": "61d561ae90ed1db0cbf9ffd7"
+    },
+    {
+      "_id": "61d561e190ed1db0cbf9ffeb",
+      "district_name": "Gasabo",
+      "district_code": "12",
+      "province_code": "1",
+      "province_id": "61d561ae90ed1db0cbf9ffd7"
+    },
+    {
+      "_id": "61d561e190ed1db0cbf9ffef",
+      "district_name": "Kicukiro",
+      "district_code": "13",
+      "province_code": "1",
+      "province_id": "61d561ae90ed1db0cbf9ffd7"
+    },
+    {
+      "_id": "61d561e190ed1db0cbf9fff3",
+      "district_name": "Nyanza",
+      "district_code": "21",
+      "province_code": "2",
+      "province_id": "61d561ae90ed1db0cbf9ffda"
+    },
+    {
+      "_id": "61d561e190ed1db0cbf9fff7",
+      "district_name": "Gisagara",
+      "district_code": "22",
+      "province_code": "2",
+      "province_id": "61d561ae90ed1db0cbf9ffda"
+    },
+    {
+      "_id": "61d561e190ed1db0cbf9fffb",
+      "district_name": "Nyaruguru",
+      "district_code": "23",
+      "province_code": "2",
+      "province_id": "61d561ae90ed1db0cbf9ffda"
+    },
+    {
+      "_id": "61d561e190ed1db0cbf9ffff",
+      "district_name": "Huye",
+      "district_code": "24",
+      "province_code": "2",
+      "province_id": "61d561ae90ed1db0cbf9ffda"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0003",
+      "district_name": "Nyamagabe",
+      "district_code": "25",
+      "province_code": "2",
+      "province_id": "61d561ae90ed1db0cbf9ffda"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0007",
+      "district_name": "Ruhango",
+      "district_code": "26",
+      "province_code": "2",
+      "province_id": "61d561ae90ed1db0cbf9ffda"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa000b",
+      "district_name": "Muhanga",
+      "district_code": "27",
+      "province_code": "2",
+      "province_id": "61d561ae90ed1db0cbf9ffda"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa000f",
+      "district_name": "Kamonyi",
+      "district_code": "28",
+      "province_code": "2",
+      "province_id": "61d561ae90ed1db0cbf9ffda"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0013",
+      "district_name": "Karongi",
+      "district_code": "31",
+      "province_code": "3",
+      "province_id": "61d561ae90ed1db0cbf9ffdd"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0017",
+      "district_name": "Rutsiro",
+      "district_code": "32",
+      "province_code": "3",
+      "province_id": "61d561ae90ed1db0cbf9ffdd"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa001b",
+      "district_name": "Rubavu",
+      "district_code": "33",
+      "province_code": "3",
+      "province_id": "61d561ae90ed1db0cbf9ffdd"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa001f",
+      "district_name": "Nyabihu",
+      "district_code": "34",
+      "province_code": "3",
+      "province_id": "61d561ae90ed1db0cbf9ffdd"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0023",
+      "district_name": "Ngororero",
+      "district_code": "35",
+      "province_code": "3",
+      "province_id": "61d561ae90ed1db0cbf9ffdd"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0027",
+      "district_name": "Rusizi",
+      "district_code": "36",
+      "province_code": "3",
+      "province_id": "61d561ae90ed1db0cbf9ffdd"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa002b",
+      "district_name": "Nyamasheke",
+      "district_code": "37",
+      "province_code": "3",
+      "province_id": "61d561ae90ed1db0cbf9ffdd"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa002f",
+      "district_name": "Rulindo",
+      "district_code": "41",
+      "province_code": "4",
+      "province_id": "61d561ae90ed1db0cbf9ffe0"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0033",
+      "district_name": "Gakenke",
+      "district_code": "42",
+      "province_code": "4",
+      "province_id": "61d561ae90ed1db0cbf9ffe0"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0037",
+      "district_name": "Musanze",
+      "district_code": "43",
+      "province_code": "4",
+      "province_id": "61d561ae90ed1db0cbf9ffe0"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa003b",
+      "district_name": "Burera",
+      "district_code": "44",
+      "province_code": "4",
+      "province_id": "61d561ae90ed1db0cbf9ffe0"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa003f",
+      "district_name": "Gicumbi",
+      "district_code": "45",
+      "province_code": "4",
+      "province_id": "61d561ae90ed1db0cbf9ffe0"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0043",
+      "district_name": "Rwamagana",
+      "district_code": "51",
+      "province_code": "5",
+      "province_id": "61d561ae90ed1db0cbf9ffe3"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0047",
+      "district_name": "Nyagatare",
+      "district_code": "52",
+      "province_code": "5",
+      "province_id": "61d561ae90ed1db0cbf9ffe3"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa004b",
+      "district_name": "Gatsibo",
+      "district_code": "53",
+      "province_code": "5",
+      "province_id": "61d561ae90ed1db0cbf9ffe3"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa004f",
+      "district_name": "Kayonza",
+      "district_code": "54",
+      "province_code": "5",
+      "province_id": "61d561ae90ed1db0cbf9ffe3"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0053",
+      "district_name": "Kirehe",
+      "district_code": "55",
+      "province_code": "5",
+      "province_id": "61d561ae90ed1db0cbf9ffe3"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa0057",
+      "district_name": "Ngoma",
+      "district_code": "56",
+      "province_code": "5",
+      "province_id": "61d561ae90ed1db0cbf9ffe3"
+    },
+    {
+      "_id": "61d561e190ed1db0cbfa005b",
+      "district_name": "Bugesera",
+      "district_code": "57",
+      "province_code": "5",
+      "province_id": "61d561ae90ed1db0cbf9ffe3"
+    }
+  ],
+  "sectors": [
+    {
+      "_id": "61d561f090ed1db0cbfa005f",
+      "sector_name": "Gitega",
+      "sector_code": "1101",
+      "district_code": "11",
+      "district_id": "61d561e190ed1db0cbf9ffe7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0063",
+      "sector_name": "Kanyinya",
+      "sector_code": "1102",
+      "district_code": "11",
+      "district_id": "61d561e190ed1db0cbf9ffe7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0067",
+      "sector_name": "Kigali",
+      "sector_code": "1103",
+      "district_code": "11",
+      "district_id": "61d561e190ed1db0cbf9ffe7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa006b",
+      "sector_name": "Kimisagara",
+      "sector_code": "1104",
+      "district_code": "11",
+      "district_id": "61d561e190ed1db0cbf9ffe7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa006f",
+      "sector_name": "Mageregere",
+      "sector_code": "1105",
+      "district_code": "11",
+      "district_id": "61d561e190ed1db0cbf9ffe7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0073",
+      "sector_name": "Muhima",
+      "sector_code": "1106",
+      "district_code": "11",
+      "district_id": "61d561e190ed1db0cbf9ffe7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0077",
+      "sector_name": "Nyakabanda",
+      "sector_code": "1107",
+      "district_code": "11",
+      "district_id": "61d561e190ed1db0cbf9ffe7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa007b",
+      "sector_name": "Nyamirambo",
+      "sector_code": "1108",
+      "district_code": "11",
+      "district_id": "61d561e190ed1db0cbf9ffe7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa007f",
+      "sector_name": "Nyarugenge",
+      "sector_code": "1109",
+      "district_code": "11",
+      "district_id": "61d561e190ed1db0cbf9ffe7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0083",
+      "sector_name": "Rwezameny",
+      "sector_code": "1110",
+      "district_code": "11",
+      "district_id": "61d561e190ed1db0cbf9ffe7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0087",
+      "sector_name": "Bumbogo",
+      "sector_code": "1201",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa008b",
+      "sector_name": "Gatsata",
+      "sector_code": "1202",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa008f",
+      "sector_name": "Gikomero",
+      "sector_code": "1203",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0093",
+      "sector_name": "Gisozi",
+      "sector_code": "1204",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0097",
+      "sector_name": "Jabana",
+      "sector_code": "1205",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa009b",
+      "sector_name": "Jali",
+      "sector_code": "1206",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa009f",
+      "sector_name": "Kacyiru",
+      "sector_code": "1207",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00a3",
+      "sector_name": "Kimihurura",
+      "sector_code": "1208",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00a7",
+      "sector_name": "Kimironko",
+      "sector_code": "1209",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00ab",
+      "sector_name": "Kinyinya",
+      "sector_code": "1210",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00af",
+      "sector_name": "Ndera",
+      "sector_code": "1211",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00b3",
+      "sector_name": "Nduba",
+      "sector_code": "1212",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00b7",
+      "sector_name": "Remera",
+      "sector_code": "1213",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00bb",
+      "sector_name": "Rusororo",
+      "sector_code": "1214",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00bf",
+      "sector_name": "Rutunga",
+      "sector_code": "1215",
+      "district_code": "12",
+      "district_id": "61d561e190ed1db0cbf9ffeb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00c3",
+      "sector_name": "Gahanga",
+      "sector_code": "1301",
+      "district_code": "13",
+      "district_id": "61d561e190ed1db0cbf9ffef"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00c7",
+      "sector_name": "Gatenga",
+      "sector_code": "1302",
+      "district_code": "13",
+      "district_id": "61d561e190ed1db0cbf9ffef"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00cb",
+      "sector_name": "Gikondo",
+      "sector_code": "1303",
+      "district_code": "13",
+      "district_id": "61d561e190ed1db0cbf9ffef"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00cf",
+      "sector_name": "Kagarama",
+      "sector_code": "1304",
+      "district_code": "13",
+      "district_id": "61d561e190ed1db0cbf9ffef"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00d3",
+      "sector_name": "Kanombe",
+      "sector_code": "1305",
+      "district_code": "13",
+      "district_id": "61d561e190ed1db0cbf9ffef"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00d7",
+      "sector_name": "Kicukiro",
+      "sector_code": "1306",
+      "district_code": "13",
+      "district_id": "61d561e190ed1db0cbf9ffef"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00db",
+      "sector_name": "Kigarama",
+      "sector_code": "1307",
+      "district_code": "13",
+      "district_id": "61d561e190ed1db0cbf9ffef"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00df",
+      "sector_name": "Masaka",
+      "sector_code": "1308",
+      "district_code": "13",
+      "district_id": "61d561e190ed1db0cbf9ffef"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00e3",
+      "sector_name": "Niboye",
+      "sector_code": "1309",
+      "district_code": "13",
+      "district_id": "61d561e190ed1db0cbf9ffef"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00e7",
+      "sector_name": "Nyarugunga",
+      "sector_code": "1310",
+      "district_code": "13",
+      "district_id": "61d561e190ed1db0cbf9ffef"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00eb",
+      "sector_name": "Busasamana",
+      "sector_code": "2101",
+      "district_code": "21",
+      "district_id": "61d561e190ed1db0cbf9fff3"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00ef",
+      "sector_name": "Busoro",
+      "sector_code": "2102",
+      "district_code": "21",
+      "district_id": "61d561e190ed1db0cbf9fff3"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00f3",
+      "sector_name": "Cyabakamyi",
+      "sector_code": "2103",
+      "district_code": "21",
+      "district_id": "61d561e190ed1db0cbf9fff3"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00f7",
+      "sector_name": "Kibilizi",
+      "sector_code": "2104",
+      "district_code": "21",
+      "district_id": "61d561e190ed1db0cbf9fff3"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00fb",
+      "sector_name": "Kigoma",
+      "sector_code": "2105",
+      "district_code": "21",
+      "district_id": "61d561e190ed1db0cbf9fff3"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa00ff",
+      "sector_name": "Mukingo",
+      "sector_code": "2106",
+      "district_code": "21",
+      "district_id": "61d561e190ed1db0cbf9fff3"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0103",
+      "sector_name": "Muyira",
+      "sector_code": "2107",
+      "district_code": "21",
+      "district_id": "61d561e190ed1db0cbf9fff3"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0107",
+      "sector_name": "Ntyazo",
+      "sector_code": "2108",
+      "district_code": "21",
+      "district_id": "61d561e190ed1db0cbf9fff3"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa010b",
+      "sector_name": "Nyagisozi",
+      "sector_code": "2109",
+      "district_code": "21",
+      "district_id": "61d561e190ed1db0cbf9fff3"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa010f",
+      "sector_name": "Rwabicuma",
+      "sector_code": "2110",
+      "district_code": "21",
+      "district_id": "61d561e190ed1db0cbf9fff3"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0113",
+      "sector_name": "Gikonko",
+      "sector_code": "2201",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0117",
+      "sector_name": "Gishubi",
+      "sector_code": "2202",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa011b",
+      "sector_name": "Kansi",
+      "sector_code": "2203",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa011f",
+      "sector_name": "Kibirizi",
+      "sector_code": "2204",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0123",
+      "sector_name": "Kigembe",
+      "sector_code": "2205",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0127",
+      "sector_name": "Mamba",
+      "sector_code": "2206",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa012b",
+      "sector_name": "Muganza",
+      "sector_code": "2207",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa012f",
+      "sector_name": "Mugombwa",
+      "sector_code": "2208",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0133",
+      "sector_name": "Mukindo",
+      "sector_code": "2209",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0137",
+      "sector_name": "Musha",
+      "sector_code": "2210",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa013b",
+      "sector_name": "Ndora",
+      "sector_code": "2211",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa013f",
+      "sector_name": "Nyanza",
+      "sector_code": "2212",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0143",
+      "sector_name": "Save",
+      "sector_code": "2213",
+      "district_code": "22",
+      "district_id": "61d561e190ed1db0cbf9fff7"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0147",
+      "sector_name": "Busanze",
+      "sector_code": "2301",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa014b",
+      "sector_name": "Cyahinda",
+      "sector_code": "2302",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa014f",
+      "sector_name": "Kibeho",
+      "sector_code": "2303",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0153",
+      "sector_name": "Kivu",
+      "sector_code": "2304",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0157",
+      "sector_name": "Mata",
+      "sector_code": "2305",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa015b",
+      "sector_name": "Muganza",
+      "sector_code": "2306",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa015f",
+      "sector_name": "Munini",
+      "sector_code": "2307",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0163",
+      "sector_name": "Ngera",
+      "sector_code": "2308",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0167",
+      "sector_name": "Ngoma",
+      "sector_code": "2309",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa016b",
+      "sector_name": "Nyabimata",
+      "sector_code": "2310",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa016f",
+      "sector_name": "Nyagisozi",
+      "sector_code": "2311",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0173",
+      "sector_name": "Ruheru",
+      "sector_code": "2312",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0177",
+      "sector_name": "Ruramba",
+      "sector_code": "2313",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa017b",
+      "sector_name": "Rusenge",
+      "sector_code": "2314",
+      "district_code": "23",
+      "district_id": "61d561e190ed1db0cbf9fffb"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa017f",
+      "sector_name": "Gishamvu",
+      "sector_code": "2401",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0183",
+      "sector_name": "Huye",
+      "sector_code": "2402",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0187",
+      "sector_name": "Karama",
+      "sector_code": "2403",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa018b",
+      "sector_name": "Kigoma",
+      "sector_code": "2404",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa018f",
+      "sector_name": "Kinazi",
+      "sector_code": "2405",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0193",
+      "sector_name": "Maraba",
+      "sector_code": "2406",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0197",
+      "sector_name": "Mbazi",
+      "sector_code": "2407",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa019b",
+      "sector_name": "Mukura",
+      "sector_code": "2408",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa019f",
+      "sector_name": "Ngoma",
+      "sector_code": "2409",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01a3",
+      "sector_name": "Ruhashya",
+      "sector_code": "2410",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01a7",
+      "sector_name": "Rusatira",
+      "sector_code": "2411",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01ab",
+      "sector_name": "Rwaniro",
+      "sector_code": "2412",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01af",
+      "sector_name": "Simbi",
+      "sector_code": "2413",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01b3",
+      "sector_name": "Tumba",
+      "sector_code": "2414",
+      "district_code": "24",
+      "district_id": "61d561e190ed1db0cbf9ffff"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01b7",
+      "sector_name": "Buruhukiro",
+      "sector_code": "2501",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01bb",
+      "sector_name": "Cyanika",
+      "sector_code": "2502",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01bf",
+      "sector_name": "Gasaka",
+      "sector_code": "2503",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01c3",
+      "sector_name": "Gatare",
+      "sector_code": "2504",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01c7",
+      "sector_name": "Kaduha",
+      "sector_code": "2505",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01cb",
+      "sector_name": "Kamegeri",
+      "sector_code": "2506",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01cf",
+      "sector_name": "Kibirizi",
+      "sector_code": "2507",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01d3",
+      "sector_name": "Kibumbwe",
+      "sector_code": "2508",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01d7",
+      "sector_name": "Kitabi",
+      "sector_code": "2509",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01db",
+      "sector_name": "Mbazi",
+      "sector_code": "2510",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01df",
+      "sector_name": "Mugano",
+      "sector_code": "2511",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01e3",
+      "sector_name": "Musange",
+      "sector_code": "2512",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01e7",
+      "sector_name": "Musebeya",
+      "sector_code": "2513",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01eb",
+      "sector_name": "Mushubi",
+      "sector_code": "2514",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01ef",
+      "sector_name": "Nkomane",
+      "sector_code": "2515",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01f3",
+      "sector_name": "Tare",
+      "sector_code": "2516",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01f7",
+      "sector_name": "Uwinkingi",
+      "sector_code": "2517",
+      "district_code": "25",
+      "district_id": "61d561e190ed1db0cbfa0003"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01fb",
+      "sector_name": "Bweramana",
+      "sector_code": "2601",
+      "district_code": "26",
+      "district_id": "61d561e190ed1db0cbfa0007"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa01ff",
+      "sector_name": "Byimana",
+      "sector_code": "2602",
+      "district_code": "26",
+      "district_id": "61d561e190ed1db0cbfa0007"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0203",
+      "sector_name": "Kabagali",
+      "sector_code": "2603",
+      "district_code": "26",
+      "district_id": "61d561e190ed1db0cbfa0007"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0207",
+      "sector_name": "Kinazi",
+      "sector_code": "2604",
+      "district_code": "26",
+      "district_id": "61d561e190ed1db0cbfa0007"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa020b",
+      "sector_name": "Kinihira",
+      "sector_code": "2605",
+      "district_code": "26",
+      "district_id": "61d561e190ed1db0cbfa0007"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa020f",
+      "sector_name": "Mbuye",
+      "sector_code": "2606",
+      "district_code": "26",
+      "district_id": "61d561e190ed1db0cbfa0007"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0213",
+      "sector_name": "Mwendo",
+      "sector_code": "2607",
+      "district_code": "26",
+      "district_id": "61d561e190ed1db0cbfa0007"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0217",
+      "sector_name": "Ntongwe",
+      "sector_code": "2608",
+      "district_code": "26",
+      "district_id": "61d561e190ed1db0cbfa0007"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa021b",
+      "sector_name": "Ruhango",
+      "sector_code": "2609",
+      "district_code": "26",
+      "district_id": "61d561e190ed1db0cbfa0007"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa021f",
+      "sector_name": "Cyeza",
+      "sector_code": "2701",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0223",
+      "sector_name": "Kabacuzi",
+      "sector_code": "2702",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0227",
+      "sector_name": "Kiyumba",
+      "sector_code": "2704",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa022b",
+      "sector_name": "Muhanga",
+      "sector_code": "2705",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa022f",
+      "sector_name": "Mushishiro",
+      "sector_code": "2706",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0233",
+      "sector_name": "Nyabinoni",
+      "sector_code": "2707",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0237",
+      "sector_name": "Nyamabuye",
+      "sector_code": "2708",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa023b",
+      "sector_name": "Nyarusange",
+      "sector_code": "2709",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa023f",
+      "sector_name": "Rongi",
+      "sector_code": "2710",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0243",
+      "sector_name": "Rugendabari",
+      "sector_code": "2711",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0247",
+      "sector_name": "Shyogwe",
+      "sector_code": "2712",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa024b",
+      "sector_name": "Gacurabwen",
+      "sector_code": "2801",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa024f",
+      "sector_name": "Karama",
+      "sector_code": "2802",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0253",
+      "sector_name": "Kayenzi",
+      "sector_code": "2803",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0257",
+      "sector_name": "Kayumbu",
+      "sector_code": "2804",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa025b",
+      "sector_name": "Mugina",
+      "sector_code": "2805",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa025f",
+      "sector_name": "Musambira",
+      "sector_code": "2806",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0263",
+      "sector_name": "Ngamba",
+      "sector_code": "2807",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0267",
+      "sector_name": "Nyamiyaga",
+      "sector_code": "2808",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa026b",
+      "sector_name": "Nyarubaka",
+      "sector_code": "2809",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa026f",
+      "sector_name": "Rugarika",
+      "sector_code": "2810",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0273",
+      "sector_name": "Rukoma",
+      "sector_code": "2811",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0277",
+      "sector_name": "Runda",
+      "sector_code": "2812",
+      "district_code": "28",
+      "district_id": "61d561e190ed1db0cbfa000f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa027b",
+      "sector_name": "Bwishyura",
+      "sector_code": "3101",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa027f",
+      "sector_name": "Gashari",
+      "sector_code": "3102",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0283",
+      "sector_name": "Gishyita",
+      "sector_code": "3103",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0287",
+      "sector_name": "Gitesi",
+      "sector_code": "3104",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa028b",
+      "sector_name": "Mubuga",
+      "sector_code": "3105",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa028f",
+      "sector_name": "Murambi",
+      "sector_code": "3106",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0293",
+      "sector_name": "Murundi",
+      "sector_code": "3107",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0297",
+      "sector_name": "Mutuntu",
+      "sector_code": "3108",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa029b",
+      "sector_name": "Rubengera",
+      "sector_code": "3109",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa029f",
+      "sector_name": "Rugabano",
+      "sector_code": "3110",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02a3",
+      "sector_name": "Ruganda",
+      "sector_code": "3111",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02a7",
+      "sector_name": "Rwankuba",
+      "sector_code": "3112",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02ab",
+      "sector_name": "Twumba",
+      "sector_code": "3113",
+      "district_code": "31",
+      "district_id": "61d561e190ed1db0cbfa0013"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02af",
+      "sector_name": "Boneza",
+      "sector_code": "3201",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02b3",
+      "sector_name": "Gihango",
+      "sector_code": "3202",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02b7",
+      "sector_name": "Kigeyo",
+      "sector_code": "3203",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02bb",
+      "sector_name": "Kivumu",
+      "sector_code": "3204",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02bf",
+      "sector_name": "Manihira",
+      "sector_code": "3205",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02c3",
+      "sector_name": "Mukura",
+      "sector_code": "3206",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02c7",
+      "sector_name": "Murunda",
+      "sector_code": "3207",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02cb",
+      "sector_name": "Musasa",
+      "sector_code": "3208",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02cf",
+      "sector_name": "Mushonyi",
+      "sector_code": "3209",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02d3",
+      "sector_name": "Mushubati",
+      "sector_code": "3210",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02d7",
+      "sector_name": "Nyabirasi",
+      "sector_code": "3211",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02db",
+      "sector_name": "Ruhango",
+      "sector_code": "3212",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02df",
+      "sector_name": "Rusebeya",
+      "sector_code": "3213",
+      "district_code": "32",
+      "district_id": "61d561e190ed1db0cbfa0017"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02e3",
+      "sector_name": "Bugeshi",
+      "sector_code": "3301",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02e7",
+      "sector_name": "Busasamana",
+      "sector_code": "3302",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02eb",
+      "sector_name": "Cyanzarwe",
+      "sector_code": "3303",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02ef",
+      "sector_name": "Gisenyi",
+      "sector_code": "3304",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02f3",
+      "sector_name": "Kanama",
+      "sector_code": "3305",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02f7",
+      "sector_name": "Kanzenze",
+      "sector_code": "3306",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02fb",
+      "sector_name": "Mudende",
+      "sector_code": "3307",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa02ff",
+      "sector_name": "Nyakiriba",
+      "sector_code": "3308",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0303",
+      "sector_name": "Nyamyumba",
+      "sector_code": "3309",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0307",
+      "sector_name": "Nyundo",
+      "sector_code": "3310",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa030b",
+      "sector_name": "Rubavu",
+      "sector_code": "3311",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa030f",
+      "sector_name": "Rugerero",
+      "sector_code": "3312",
+      "district_code": "33",
+      "district_id": "61d561e190ed1db0cbfa001b"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0313",
+      "sector_name": "Bigogwe",
+      "sector_code": "3401",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0317",
+      "sector_name": "Jenda",
+      "sector_code": "3402",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa031b",
+      "sector_name": "Jomba",
+      "sector_code": "3403",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa031f",
+      "sector_name": "Kabatwa",
+      "sector_code": "3404",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0323",
+      "sector_name": "Karago",
+      "sector_code": "3405",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0327",
+      "sector_name": "Kintobo",
+      "sector_code": "3406",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa032b",
+      "sector_name": "Mukamira",
+      "sector_code": "3407",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa032f",
+      "sector_name": "Muringa",
+      "sector_code": "3408",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0333",
+      "sector_name": "Rambura",
+      "sector_code": "3409",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0337",
+      "sector_name": "Rugera",
+      "sector_code": "3410",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa033b",
+      "sector_name": "Rurembo",
+      "sector_code": "3411",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa033f",
+      "sector_name": "Shyira",
+      "sector_code": "3412",
+      "district_code": "34",
+      "district_id": "61d561e190ed1db0cbfa001f"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0343",
+      "sector_name": "BWIRA",
+      "sector_code": "3501",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa0347",
+      "sector_name": "GATUMBA",
+      "sector_code": "3502",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f090ed1db0cbfa034b",
+      "sector_name": "HINDIRO",
+      "sector_code": "3503",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa034f",
+      "sector_name": "KABAYA",
+      "sector_code": "3504",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0353",
+      "sector_name": "KAGEYO",
+      "sector_code": "3505",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0357",
+      "sector_name": "KAVUMU",
+      "sector_code": "3506",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa035b",
+      "sector_name": "MATYAZO",
+      "sector_code": "3507",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa035f",
+      "sector_name": "MUHANDA",
+      "sector_code": "3508",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0363",
+      "sector_name": "MUHOROR",
+      "sector_code": "3509",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0367",
+      "sector_name": "NDARO",
+      "sector_code": "3510",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa036b",
+      "sector_name": "NGORORE",
+      "sector_code": "3511",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa036f",
+      "sector_name": "NYANGE",
+      "sector_code": "3512",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0373",
+      "sector_name": "SOVU",
+      "sector_code": "3513",
+      "district_code": "35",
+      "district_id": "61d561e190ed1db0cbfa0023"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0377",
+      "sector_name": "Bugarama",
+      "sector_code": "3601",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa037b",
+      "sector_name": "Butare",
+      "sector_code": "3602",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa037f",
+      "sector_name": "Bweyeye",
+      "sector_code": "3603",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0383",
+      "sector_name": "Gashonga",
+      "sector_code": "3604",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0387",
+      "sector_name": "Giheke",
+      "sector_code": "3605",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa038b",
+      "sector_name": "Gihundwe",
+      "sector_code": "3606",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa038f",
+      "sector_name": "Gikundamvu",
+      "sector_code": "3607",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0393",
+      "sector_name": "Gitambi",
+      "sector_code": "3608",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0397",
+      "sector_name": "Kamembe",
+      "sector_code": "3609",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa039b",
+      "sector_name": "Muganza",
+      "sector_code": "3610",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa039f",
+      "sector_name": "Mururu",
+      "sector_code": "3611",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03a3",
+      "sector_name": "Nkanka",
+      "sector_code": "3612",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03a7",
+      "sector_name": "Nkombo",
+      "sector_code": "3613",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03ab",
+      "sector_name": "Nkungu",
+      "sector_code": "3614",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03af",
+      "sector_name": "Nyakabuye",
+      "sector_code": "3615",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03b3",
+      "sector_name": "Nyakarenzo",
+      "sector_code": "3616",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03b7",
+      "sector_name": "Nzahaha",
+      "sector_code": "3617",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03bb",
+      "sector_name": "Rwimbogo",
+      "sector_code": "3618",
+      "district_code": "36",
+      "district_id": "61d561e190ed1db0cbfa0027"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03bf",
+      "sector_name": "Bushekeri",
+      "sector_code": "3701",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03c3",
+      "sector_name": "Bushenge",
+      "sector_code": "3702",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03c7",
+      "sector_name": "Cyato",
+      "sector_code": "3703",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03cb",
+      "sector_name": "Gihombo",
+      "sector_code": "3704",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03cf",
+      "sector_name": "Kagano",
+      "sector_code": "3705",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03d3",
+      "sector_name": "Kanjongo",
+      "sector_code": "3706",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03d7",
+      "sector_name": "Karambi",
+      "sector_code": "3707",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03db",
+      "sector_name": "Karengera",
+      "sector_code": "3708",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03df",
+      "sector_name": "Kirimbi",
+      "sector_code": "3709",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03e3",
+      "sector_name": "Macuba",
+      "sector_code": "3710",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03e7",
+      "sector_name": "Mahembe",
+      "sector_code": "3711",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03eb",
+      "sector_name": "Nyabitekeri",
+      "sector_code": "3712",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03ef",
+      "sector_name": "Rangiro",
+      "sector_code": "3713",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03f3",
+      "sector_name": "Ruharambug",
+      "sector_code": "3714",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03f7",
+      "sector_name": "Shangi",
+      "sector_code": "3715",
+      "district_code": "37",
+      "district_id": "61d561e190ed1db0cbfa002b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03fb",
+      "sector_name": "BASE",
+      "sector_code": "4101",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa03ff",
+      "sector_name": "BUREGA",
+      "sector_code": "4102",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0403",
+      "sector_name": "BUSHOKI",
+      "sector_code": "4103",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0407",
+      "sector_name": "BUYOGA",
+      "sector_code": "4104",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa040b",
+      "sector_name": "CYINZUZI",
+      "sector_code": "4105",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa040f",
+      "sector_name": "CYUNGO",
+      "sector_code": "4106",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0413",
+      "sector_name": "KINIHIRA",
+      "sector_code": "4107",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0417",
+      "sector_name": "KISARO",
+      "sector_code": "4108",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa041b",
+      "sector_name": "MASORO",
+      "sector_code": "4109",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa041f",
+      "sector_name": "MBOGO",
+      "sector_code": "4110",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0423",
+      "sector_name": "MURAMBI",
+      "sector_code": "4111",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0427",
+      "sector_name": "NGOMA",
+      "sector_code": "4112",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa042b",
+      "sector_name": "NTARABA",
+      "sector_code": "4113",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa042f",
+      "sector_name": "RUKOZO",
+      "sector_code": "4114",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0433",
+      "sector_name": "RUSIGA",
+      "sector_code": "4115",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0437",
+      "sector_name": "SHYORON",
+      "sector_code": "4116",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa043b",
+      "sector_name": "TUMBA",
+      "sector_code": "4117",
+      "district_code": "41",
+      "district_id": "61d561e190ed1db0cbfa002f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa043f",
+      "sector_name": "Busengo",
+      "sector_code": "4201",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0443",
+      "sector_name": "Coko",
+      "sector_code": "4202",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0447",
+      "sector_name": "Cyabingo",
+      "sector_code": "4203",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa044b",
+      "sector_name": "Gakenke",
+      "sector_code": "4204",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa044f",
+      "sector_name": "Gashenyi",
+      "sector_code": "4205",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0453",
+      "sector_name": "Janja",
+      "sector_code": "4206",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0457",
+      "sector_name": "Kamubuga",
+      "sector_code": "4207",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa045b",
+      "sector_name": "Karambo",
+      "sector_code": "4208",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa045f",
+      "sector_name": "Kivuruga",
+      "sector_code": "4209",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0463",
+      "sector_name": "Mataba",
+      "sector_code": "4210",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0467",
+      "sector_name": "Minazi",
+      "sector_code": "4211",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa046b",
+      "sector_name": "Mugunga",
+      "sector_code": "4212",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa046f",
+      "sector_name": "Muhondo",
+      "sector_code": "4213",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0473",
+      "sector_name": "Muyongwe",
+      "sector_code": "4214",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0477",
+      "sector_name": "Muzo",
+      "sector_code": "4215",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa047b",
+      "sector_name": "Nemba",
+      "sector_code": "4216",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa047f",
+      "sector_name": "Ruli",
+      "sector_code": "4217",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0483",
+      "sector_name": "Rusasa",
+      "sector_code": "4218",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0487",
+      "sector_name": "Rushashi",
+      "sector_code": "4219",
+      "district_code": "42",
+      "district_id": "61d561e190ed1db0cbfa0033"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa048b",
+      "sector_name": "Busogo",
+      "sector_code": "4301",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa048f",
+      "sector_name": "Cyuve",
+      "sector_code": "4302",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0493",
+      "sector_name": "Gacaca",
+      "sector_code": "4303",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0497",
+      "sector_name": "Gashaki",
+      "sector_code": "4304",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa049b",
+      "sector_name": "Gataraga",
+      "sector_code": "4305",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa049f",
+      "sector_name": "Kimonyi",
+      "sector_code": "4306",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04a3",
+      "sector_name": "Kinigi",
+      "sector_code": "4307",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04a7",
+      "sector_name": "Muhoza",
+      "sector_code": "4308",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04ab",
+      "sector_name": "Muko",
+      "sector_code": "4309",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04af",
+      "sector_name": "Musanze",
+      "sector_code": "4310",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04b3",
+      "sector_name": "Nkotsi",
+      "sector_code": "4311",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04b7",
+      "sector_name": "Nyange",
+      "sector_code": "4312",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04bb",
+      "sector_name": "Remera",
+      "sector_code": "4313",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04bf",
+      "sector_name": "Rwaza",
+      "sector_code": "4314",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04c3",
+      "sector_name": "Shingiro",
+      "sector_code": "4315",
+      "district_code": "43",
+      "district_id": "61d561e190ed1db0cbfa0037"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04c7",
+      "sector_name": "Bungwe",
+      "sector_code": "4401",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04cb",
+      "sector_name": "Butaro",
+      "sector_code": "4402",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04cf",
+      "sector_name": "Cyanika",
+      "sector_code": "4403",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04d3",
+      "sector_name": "Cyeru",
+      "sector_code": "4404",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04d7",
+      "sector_name": "Gahunga",
+      "sector_code": "4405",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04db",
+      "sector_name": "Gatebe",
+      "sector_code": "4406",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04df",
+      "sector_name": "Gitovu",
+      "sector_code": "4407",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04e3",
+      "sector_name": "Kagogo",
+      "sector_code": "4408",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04e7",
+      "sector_name": "Kinoni",
+      "sector_code": "4409",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04eb",
+      "sector_name": "Kinyababa",
+      "sector_code": "4410",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04ef",
+      "sector_name": "Kivuye",
+      "sector_code": "4411",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04f3",
+      "sector_name": "Nemba",
+      "sector_code": "4412",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04f7",
+      "sector_name": "Rugarama",
+      "sector_code": "4413",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04fb",
+      "sector_name": "Rugengabari",
+      "sector_code": "4414",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa04ff",
+      "sector_name": "Ruhunde",
+      "sector_code": "4415",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0503",
+      "sector_name": "Rusarabuye",
+      "sector_code": "4416",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0507",
+      "sector_name": "Rwerere",
+      "sector_code": "4417",
+      "district_code": "44",
+      "district_id": "61d561e190ed1db0cbfa003b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa050b",
+      "sector_name": "Bukure",
+      "sector_code": "4501",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa050f",
+      "sector_name": "Bwisige",
+      "sector_code": "4502",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0513",
+      "sector_name": "Byumba",
+      "sector_code": "4503",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0517",
+      "sector_name": "Cyumba",
+      "sector_code": "4504",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa051b",
+      "sector_name": "Giti",
+      "sector_code": "4505",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa051f",
+      "sector_name": "Kageyo",
+      "sector_code": "4506",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0523",
+      "sector_name": "Kaniga",
+      "sector_code": "4507",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0527",
+      "sector_name": "Manyagiro",
+      "sector_code": "4508",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa052b",
+      "sector_name": "Miyove",
+      "sector_code": "4509",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa052f",
+      "sector_name": "Mukarange",
+      "sector_code": "4510",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0533",
+      "sector_name": "Muko",
+      "sector_code": "4511",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0537",
+      "sector_name": "Mutete",
+      "sector_code": "4512",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa053b",
+      "sector_name": "Nyamiyaga",
+      "sector_code": "4513",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa053f",
+      "sector_name": "Nyankenke",
+      "sector_code": "4514",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0543",
+      "sector_name": "Rubaya",
+      "sector_code": "4515",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0547",
+      "sector_name": "Rukomo",
+      "sector_code": "4516",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa054b",
+      "sector_name": "Rushaki",
+      "sector_code": "4517",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa054f",
+      "sector_name": "Rutare",
+      "sector_code": "4518",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0553",
+      "sector_name": "Ruvune",
+      "sector_code": "4519",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0557",
+      "sector_name": "Rwamiko",
+      "sector_code": "4520",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa055b",
+      "sector_name": "Shangasha",
+      "sector_code": "4521",
+      "district_code": "45",
+      "district_id": "61d561e190ed1db0cbfa003f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa055f",
+      "sector_name": "Fumbwe",
+      "sector_code": "5101",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0563",
+      "sector_name": "Gahengeri",
+      "sector_code": "5102",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0567",
+      "sector_name": "Gishali",
+      "sector_code": "5103",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa056b",
+      "sector_name": "Karenge",
+      "sector_code": "5104",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa056f",
+      "sector_name": "Kigabiro",
+      "sector_code": "5105",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0573",
+      "sector_name": "Muhazi",
+      "sector_code": "5106",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0577",
+      "sector_name": "Munyaga",
+      "sector_code": "5107",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa057b",
+      "sector_name": "Munyiginya",
+      "sector_code": "5108",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa057f",
+      "sector_name": "Musha",
+      "sector_code": "5109",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0583",
+      "sector_name": "Muyumbu",
+      "sector_code": "5110",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0587",
+      "sector_name": "Mwulire",
+      "sector_code": "5111",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa058b",
+      "sector_name": "Nyakaliro",
+      "sector_code": "5112",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa058f",
+      "sector_name": "Nzige",
+      "sector_code": "5113",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0593",
+      "sector_name": "Rubona",
+      "sector_code": "5114",
+      "district_code": "51",
+      "district_id": "61d561e190ed1db0cbfa0043"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0597",
+      "sector_name": "GATUNDA",
+      "sector_code": "5201",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa059b",
+      "sector_name": "KARAMA",
+      "sector_code": "5202",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa059f",
+      "sector_name": "KARANGA",
+      "sector_code": "5203",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05a3",
+      "sector_name": "KATABAG",
+      "sector_code": "5204",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05a7",
+      "sector_name": "KIYOMBE",
+      "sector_code": "5205",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05ab",
+      "sector_name": "MATIMBA",
+      "sector_code": "5206",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05af",
+      "sector_name": "MIMURI",
+      "sector_code": "5207",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05b3",
+      "sector_name": "MUKAMA",
+      "sector_code": "5208",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05b7",
+      "sector_name": "MUSHERI",
+      "sector_code": "5209",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05bb",
+      "sector_name": "NYAGATA",
+      "sector_code": "5210",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05bf",
+      "sector_name": "RUKOMO",
+      "sector_code": "5211",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05c3",
+      "sector_name": "RWEMPAS",
+      "sector_code": "5212",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05c7",
+      "sector_name": "RWIMIYAG",
+      "sector_code": "5213",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05cb",
+      "sector_name": "TABAGWE",
+      "sector_code": "5214",
+      "district_code": "52",
+      "district_id": "61d561e190ed1db0cbfa0047"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05cf",
+      "sector_name": "Gasange",
+      "sector_code": "5301",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05d3",
+      "sector_name": "Gatsibo",
+      "sector_code": "5302",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05d7",
+      "sector_name": "Gitoki",
+      "sector_code": "5303",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05db",
+      "sector_name": "Kabarore",
+      "sector_code": "5304",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05df",
+      "sector_name": "Kageyo",
+      "sector_code": "5305",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05e3",
+      "sector_name": "Kiramuruzi",
+      "sector_code": "5306",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05e7",
+      "sector_name": "Kiziguro",
+      "sector_code": "5307",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05eb",
+      "sector_name": "Muhura",
+      "sector_code": "5308",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05ef",
+      "sector_name": "Murambi",
+      "sector_code": "5309",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05f3",
+      "sector_name": "Ngarama",
+      "sector_code": "5310",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05f7",
+      "sector_name": "Nyagihanga",
+      "sector_code": "5311",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05fb",
+      "sector_name": "Remera",
+      "sector_code": "5312",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa05ff",
+      "sector_name": "Rugarama",
+      "sector_code": "5313",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0603",
+      "sector_name": "Rwimbogo",
+      "sector_code": "5314",
+      "district_code": "53",
+      "district_id": "61d561e190ed1db0cbfa004b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0607",
+      "sector_name": "Gahini",
+      "sector_code": "5401",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa060b",
+      "sector_name": "Kabare",
+      "sector_code": "5402",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa060f",
+      "sector_name": "Kabarondo",
+      "sector_code": "5403",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0613",
+      "sector_name": "Mukarange",
+      "sector_code": "5404",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0617",
+      "sector_name": "Murama",
+      "sector_code": "5405",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa061b",
+      "sector_name": "Murundi",
+      "sector_code": "5406",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa061f",
+      "sector_name": "Mwiri",
+      "sector_code": "5407",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0623",
+      "sector_name": "Ndego",
+      "sector_code": "5408",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0627",
+      "sector_name": "Nyamirama",
+      "sector_code": "5409",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa062b",
+      "sector_name": "Rukara",
+      "sector_code": "5410",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa062f",
+      "sector_name": "Ruramira",
+      "sector_code": "5411",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0633",
+      "sector_name": "Rwinkwavu",
+      "sector_code": "5412",
+      "district_code": "54",
+      "district_id": "61d561e190ed1db0cbfa004f"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0637",
+      "sector_name": "Gahara",
+      "sector_code": "5501",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa063b",
+      "sector_name": "Gatore",
+      "sector_code": "5502",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa063f",
+      "sector_name": "Kigarama",
+      "sector_code": "5503",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0643",
+      "sector_name": "Kigina",
+      "sector_code": "5504",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0647",
+      "sector_name": "Kirehe",
+      "sector_code": "5505",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa064b",
+      "sector_name": "Mahama",
+      "sector_code": "5506",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa064f",
+      "sector_name": "Mpanga",
+      "sector_code": "5507",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0653",
+      "sector_name": "Musaza",
+      "sector_code": "5508",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0657",
+      "sector_name": "Mushikiri",
+      "sector_code": "5509",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa065b",
+      "sector_name": "Nasho",
+      "sector_code": "5510",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa065f",
+      "sector_name": "Nyamugari",
+      "sector_code": "5511",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0663",
+      "sector_name": "Nyarubuye",
+      "sector_code": "5512",
+      "district_code": "55",
+      "district_id": "61d561e190ed1db0cbfa0053"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0667",
+      "sector_name": "Gashanda",
+      "sector_code": "5601",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa066b",
+      "sector_name": "Jarama",
+      "sector_code": "5602",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa066f",
+      "sector_name": "Karembo",
+      "sector_code": "5603",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0673",
+      "sector_name": "Kazo",
+      "sector_code": "5604",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0677",
+      "sector_name": "Kibungo",
+      "sector_code": "5605",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa067b",
+      "sector_name": "Mugesera",
+      "sector_code": "5606",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa067f",
+      "sector_name": "Murama",
+      "sector_code": "5607",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0683",
+      "sector_name": "Mutenderi",
+      "sector_code": "5608",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0687",
+      "sector_name": "Remera",
+      "sector_code": "5609",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa068b",
+      "sector_name": "Rukira",
+      "sector_code": "5610",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa068f",
+      "sector_name": "Rukumberi",
+      "sector_code": "5611",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0693",
+      "sector_name": "Rurenge",
+      "sector_code": "5612",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa0697",
+      "sector_name": "Sake",
+      "sector_code": "5613",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa069b",
+      "sector_name": "Zaza",
+      "sector_code": "5614",
+      "district_code": "56",
+      "district_id": "61d561e190ed1db0cbfa0057"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa069f",
+      "sector_name": "Gashora",
+      "sector_code": "5701",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06a3",
+      "sector_name": "Juru",
+      "sector_code": "5702",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06a7",
+      "sector_name": "Kamabuye",
+      "sector_code": "5703",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06ab",
+      "sector_name": "Mareba",
+      "sector_code": "5704",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06af",
+      "sector_name": "Mayange",
+      "sector_code": "5705",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06b3",
+      "sector_name": "Musenyi",
+      "sector_code": "5706",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06b7",
+      "sector_name": "Mwogo",
+      "sector_code": "5707",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06bb",
+      "sector_name": "Ngeruka",
+      "sector_code": "5708",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06bf",
+      "sector_name": "Ntarama",
+      "sector_code": "5709",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06c3",
+      "sector_name": "Nyamata",
+      "sector_code": "5710",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06c7",
+      "sector_name": "Nyarugenge",
+      "sector_code": "5711",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06cb",
+      "sector_name": "Rilima",
+      "sector_code": "5712",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06cf",
+      "sector_name": "Ruhuha",
+      "sector_code": "5713",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06d3",
+      "sector_name": "Rweru",
+      "sector_code": "5714",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06d7",
+      "sector_name": "Shyara",
+      "sector_code": "5715",
+      "district_code": "57",
+      "district_id": "61d561e190ed1db0cbfa005b"
+    },
+    {
+      "_id": "61d561f190ed1db0cbfa06db",
+      "sector_name": "Kibangu",
+      "sector_code": "2703",
+      "district_code": "27",
+      "district_id": "61d561e190ed1db0cbfa000b"
+    }
+  ]
+}
