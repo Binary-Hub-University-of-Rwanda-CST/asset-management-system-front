@@ -44,26 +44,7 @@ const ValidationModal: React.FC<ModalProps> = ({
   }, [tableData, uploadSpecification, tableHeaders]);
   const dispatch: AppDispatch = useDispatch();
   
-  // helper to hadle number 
-  const parseNumber = (value: string): number | null => {
-    if (typeof value === 'number') return value;
-    if (typeof value !== 'string') return null;
   
-    // Remove commas and percentage signs
-    let cleanedValue = value.replace(/,/g, '').replace(/%$/, '');
-  
-    // Try parsing the cleaned value
-    let parsedValue = parseFloat(cleanedValue);
-  
-    if (isNaN(parsedValue)) return null;
-  
-    // If it was a percentage, divide by 100
-    if (value.endsWith('%')) {
-      parsedValue /= 100;
-    }
-  
-    return parsedValue;
-  };
 
 
   const validateData = (data: Record<string, any>[]) => {
@@ -94,20 +75,14 @@ const ValidationModal: React.FC<ModalProps> = ({
             error = `Invalid value. Expected: ${allowedValuesMessage}`;
           } else if (spec.type === "string" && typeof cellValue !== "string") {
             error = "Expected a string value";
-          } else if (spec.type === "number" && parseNumber(cellValue) === null) {
-            error = "Must be a valid number";
-          } else if (spec.type === "boolean" && !['true', 'false', true, false].includes(cellValue)) {
-            error = "Must be a boolean value";
-          } else if (spec.type === "date" && isNaN(Date.parse(cellValue))) {
-            error = "Must be a valid date";
+          } else if (spec.type === "number" && isNaN(parseFloat(cellValue))) {
+            error = "Must be a number";
           } else if (spec.unique && uniqueValuesTracker[header]?.has(cellValue)) {
             error = "Duplicate value found";
           }
   
           if (error) {
             hasErrors = true;
-          } else if (spec.unique) {
-            uniqueValuesTracker[header].add(cellValue);
           }
   
           validatedRow[header] = { value: cellValue, error };
@@ -149,35 +124,18 @@ const ValidationModal: React.FC<ModalProps> = ({
     }
   };
 
-const transformDataForUpload = (data: any[]) => {
-  return data.map((row) => {
-    const transformedRow: { [key: string]: any } = {};
-    for (const key in row) {
-      if (row.hasOwnProperty(key) && key !== 'hasErrors') {
-        const spec = uploadSpecification.find((s) => s.name === key);
-        if (spec) {
-          switch (spec.type) {
-            case 'number':
-              const parsedNumber = parseNumber(row[key].value);
-              transformedRow[key] = parsedNumber !== null ? parsedNumber : 0;
-              break;
-            case 'boolean':
-              transformedRow[key] = row[key].value === 'true' || row[key].value === true;
-              break;
-            case 'date':
-              transformedRow[key] = new Date(row[key].value).toISOString();
-              break;
-            default:
-              transformedRow[key] = row[key].value;
-          }
-        } else {
+  const transformDataForUpload = (data: any[]) => {
+    return data.map((row) => {
+      
+      const transformedRow: { [key: string]: any } = {};
+      for (const key in row) {
+        if (row.hasOwnProperty(key)) {
           transformedRow[key] = row[key].value;
         }
       }
-    }
-    return transformedRow;
-  });
-};
+      return transformedRow;
+    });
+  };
   
   
   const handleSaveData = () => {
@@ -195,6 +153,7 @@ const transformDataForUpload = (data: any[]) => {
       setSaveError('Cannot save data. Please fix validation errors.');
     }
   };
+   
   
   
 
@@ -220,12 +179,8 @@ const transformDataForUpload = (data: any[]) => {
         error = `Invalid value. Expected: ${allowedValuesMessage}`;
       } else if (spec.type === "string" && typeof newValue !== "string") {
         error = "Expected a string value";
-      } else if (spec.type === "number" && parseNumber(newValue) === null) {
-        error = "Must be a valid number";
-      } else if (spec.type === "boolean" && !['true', 'false', true, false].includes(newValue)) {
-        error = "Must be a boolean value";
-      } else if (spec.type === "date" && isNaN(Date.parse(newValue))) {
-        error = "Must be a valid date";
+      } else if (spec.type === "number" && isNaN(parseFloat(newValue))) {
+        error = "Must be a number";
       } else if (
         spec.unique &&
         updatedData.some(
@@ -250,7 +205,7 @@ const transformDataForUpload = (data: any[]) => {
   
       setFilteredData(updatedData);
     }
-  }; 
+  };
    
 
   return (
@@ -338,14 +293,14 @@ const transformDataForUpload = (data: any[]) => {
                               key={header}
                               className="px-4 py-3 text-left text-sm font-bold text-black uppercase"
                             >
-                              {header.replace(/_/g, ' ')} 
+                              {header}
                             </th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
                         {filteredData.map((row, rowIndex) => (
-                          <tr key={rowIndex} className={` `}>  
+                          <tr key={rowIndex}>
                             {showRemove && (
                               <td className="px-4 py-1 font-sm">
                                 <button
@@ -356,7 +311,7 @@ const transformDataForUpload = (data: any[]) => {
                                 </button>
                               </td>
                             )}
-                            <td className={`px-2 py-1 font-sm ${hasAnyErrors(row) ? 'bg-red-500 font-bold text-sm ': ''}`}>
+                            <td className="px-2 py-1 font-sm">
                               {rowIndex + 1}
                             </td>
                             {tableHeaders.map((header, cellIndex) => {
@@ -385,11 +340,6 @@ const transformDataForUpload = (data: any[]) => {
                                           )
                                         }  
                                       >
-                                        {row[header].error && (
-                                          <option value={row[header].value} className="bg-red-200  overline text-red-600">
-                                            {row[header].value} (Invalid)
-                                          </option>
-                                        )}
                                         <option value="" disabled>
                                           Select an option
                                         </option>
@@ -399,7 +349,6 @@ const transformDataForUpload = (data: any[]) => {
                                           </option>
                                         ))}
                                       </select>
- 
                                       {row[header].error && (
                                         <div className="text-red-600 text-sm mt-1">
                                           {row[header].error}
