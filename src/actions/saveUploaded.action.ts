@@ -16,7 +16,6 @@ export const saveValidatedData = (data: Record<string, any>[]) => {
   };
 };
 
-
 export const sendValidatedData = (data: Record<string, any>[]) => async (dispatch: Dispatch) => {
   dispatch({ type: SEND_VALIDATED_DATA_REQUEST });
 
@@ -29,17 +28,33 @@ export const sendValidatedData = (data: Record<string, any>[]) => async (dispatc
       body: JSON.stringify(data),
     });
 
+    const result = await response.json();
+
     if (!response.ok) {
-      throw new Error("Failed to save data to backend");
+      // The server returned an error status
+      let errorMessage = "An error occurred while saving data to the backend";
+      
+      // Check if the server sent a specific error message
+      if (result && result.message) {
+        errorMessage = result.message;
+      } else if (result && result.error) {
+        errorMessage = result.error;
+      }
+      
+      throw new Error(errorMessage);
     }
 
-    const result = await response.json();
     dispatch({ type: SEND_VALIDATED_DATA_SUCCESS, payload: result });
-      // Remove validated data from local storage upon success
-      localStorage.removeItem("validatedAssetsData"); 
+    // Remove validated data from local storage upon success
+    localStorage.removeItem("validatedAssetsData"); 
   } catch (error: unknown) {
-    dispatch({ type: SEND_VALIDATED_DATA_FAILURE, payload: (error as Error).message });
+    let errorMessage = "An unexpected error occurred";
+    
+    if (error instanceof Error) {
+      errorMessage = error.message; 
+    }
+    
+    dispatch({ type: SEND_VALIDATED_DATA_FAILURE, payload: errorMessage });
     throw error; // Ensure the error is re-thrown to be caught in the component
   }
-};
- 
+}; 
