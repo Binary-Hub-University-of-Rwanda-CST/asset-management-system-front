@@ -26,26 +26,26 @@ const DynamicTable: React.FC<DynamicTableProps> = ({ data }) => {
 
   return (
     <div className="overflow-auto ">
-      <div className=' flex items-center  gap-2 font-bold  capitalize '>
+      <div className=' flex items-center  gap-2 font-bold  capitalize text-lg  '>
         <FaCube className='text-my-blue '/>
        uploaded assets 
       </div>
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-          <th className="px-4 py-2 text-left text-sm font-bold text-black uppercase">
+          <th className="px-4 py-1 text-left text-sm  font-bold text-black uppercase">
                             #
                           </th>
             {headers.map((header) => (
               
               <th
                 key={header}
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                className="px-6 py-1 text-left text-sm  font-bold  text-gray-500 uppercase tracking-wider"
               >
                 {header.replace(/_/g, ' ')}
               </th>
             ))}
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-1 text-left text-sm  font-bold  text-gray-500 uppercase tracking-wider">
               Actions
             </th>
           </tr>
@@ -58,11 +58,11 @@ const DynamicTable: React.FC<DynamicTableProps> = ({ data }) => {
                               {rowIndex + 1}
                             </td>
               {Object.values(row).map((value, cellIndex) => (
-                <td key={cellIndex} className="px-6 py-4 whitespace-nowrap">
+                <td key={cellIndex} className="px-6 py-1 whitespace-nowrap">
                   {value}
                 </td>
               ))}
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="px-6 py-1 whitespace-nowrap">
                 <button
                   onClick={() => handleDelete(rowIndex)}
                   className="text-red-600 hover:text-red-900 border border-danger  px-4  py-1 rounded-md  hover:bg-danger "
