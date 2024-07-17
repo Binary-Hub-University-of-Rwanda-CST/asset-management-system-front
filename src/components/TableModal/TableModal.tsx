@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaArrowLeft, FaSearch, FaFileExcel } from "react-icons/fa";
 import { RoomInterface } from "../../containers/StockManagement/Components/DataTable";
+import { formatHeaderName } from "../../utils/functions";
+import Papa from "papaparse"; 
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,7 +14,15 @@ interface ModalProps {
   onRowClick?: (room: RoomInterface) => void;
 }
 
-const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders, tableData, tag, onRowClick }) => {
+const TableModal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  tableHeaders,
+  tableData,
+  tag,
+  onRowClick,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState<Record<string, any>[]>([]);
 
@@ -43,8 +53,8 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
 
   useEffect(() => {
     // Filter table data based on search term
-    const filtered = tableData.filter(row =>
-      tableHeaders.some(header => {
+    const filtered = tableData.filter((row) =>
+      tableHeaders.some((header) => {
         const value = row[header]; // Access nested value
         return String(value).toLowerCase().includes(searchTerm.toLowerCase());
       })
@@ -53,23 +63,28 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
   }, [searchTerm, tableData, tableHeaders]);
 
   const exportToCSV = () => {
-    const csvContent = "data:text/csv;charset=utf-8," +
-      tableHeaders.join(",") + "\n" +
-      filteredData.map(row =>
-        tableHeaders.map(header => row[header]).join(",")
-      ).join("\n");
-    const encodedUri = encodeURI(csvContent);
+    const formattedHeaders = tableHeaders.map(formatHeaderName);
+    const csvData = [formattedHeaders, ...filteredData.map(row => tableHeaders.map(header => row[header]))];
+
+    const csv = Papa.unparse(csvData);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `${title}.csv`); 
+    const url = URL.createObjectURL(blob);
+
+    link.setAttribute("href", url);
+    link.setAttribute("download", `${title}.csv`);
     document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
 
   return (
     <>
       {isOpen && (
-        <div className="fixed top-0 left-0 w-screen h-full flex items-center justify-center bg-black bg-opacity-50 pt-20 px-4 z-50" onClick={handleOverlayClick}>
+        <div
+          className="fixed top-0 left-0 w-screen h-full flex items-center justify-center bg-black bg-opacity-50 pt-20 px-4 z-50"
+          onClick={handleOverlayClick}
+        >
           <div className="bg-white w-full h-full py-4 rounded-t-xl animate__animated animate__fadeInUp animate__faster">
             <div className="flex flex-row gap-3 items-center bold border-blue-white border-b-2 pb-2 mx-0 px-5">
               <button
@@ -79,7 +94,15 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
                 <FaArrowLeft /> Back to list
               </button>
               <h4 className="font-bold text-md pr-5">{title}</h4>
-              {tag && tag.map(tag => <span key={tag} className="bg-blue-white text-my-blue font-bold text-sm rounded-md px-2 py-1">{tag}</span>)}
+              {tag &&
+                tag.map((tag) => (
+                  <span
+                    key={tag}
+                    className="bg-blue-white text-my-blue font-bold text-sm rounded-md px-2 py-1"
+                  >
+                    {tag}
+                  </span>
+                ))}
             </div>
 
             <div className="flex flex-col px-6 py-2">
@@ -97,7 +120,10 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
                   <FaSearch />
                 </span>
 
-                <button className="flex items-center justify-center rounded-md px-8 bg-green-600 w-1/12 ml-4 text-white text-sm" onClick={exportToCSV}>
+                <button
+                  className="flex items-center justify-center rounded-md px-8 bg-green-600 w-1/12 ml-4 text-white text-sm"
+                  onClick={exportToCSV}
+                >
                   <FaFileExcel className="" /> Export
                 </button>
               </div>
@@ -108,9 +134,16 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
                     <table className="min-w-full">
                       <thead>
                         <tr>
-                          <th className="px-4 py-2 text-left text-sm font-bold text-black uppercase">No</th>
-                          {tableHeaders.map(header => (
-                            <th key={header} className="px-4 py-3 text-left text-sm font-bold text-black uppercase">{header}</th>
+                          <th className="px-4 py-2 text-left text-sm font-md  text-black uppercase">
+                            #
+                          </th>
+                          {tableHeaders.map((header) => (
+                            <th
+                              key={header}
+                              className="px-4 py-3 text-left text-sm font-md  text-black uppercase"
+                            >
+                              {formatHeaderName(header)}
+                            </th>
                           ))}
                         </tr>
                       </thead>
@@ -119,11 +152,17 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
                           <tr
                             key={rowIndex}
                             className="border-t py-1 cursor-pointer hover:bg-blue-white "
-                            onClick={() => onRowClick && onRowClick(row as RoomInterface)} // Ensure row is casted to RoomInterface
+                            onClick={() =>
+                              onRowClick && onRowClick(row as RoomInterface)
+                            } // Ensure row is casted to RoomInterface
                           >
-                            <td className="px-4 py-1 font-sm">{rowIndex + 1}</td>
+                            <td className="px-4 py-1 text-sm">
+                              {rowIndex + 1}
+                            </td>
                             {tableHeaders.map((header, cellIndex) => (
-                              <td key={cellIndex} className="px-4 font-sm py-1">{row[header]}</td>
+                              <td key={cellIndex} className="px-4 text-sm py-1">
+                                {row[header]}
+                              </td>
                             ))}
                           </tr>
                         ))}
@@ -142,4 +181,4 @@ const TableModal: React.FC<ModalProps> = ({ isOpen, onClose, title, tableHeaders
   );
 };
 
-export default TableModal; 
+export default TableModal;
