@@ -109,7 +109,7 @@ const UploadStock: React.FC<AppProps> = ({
             </div>
           </div>
         </div>
-        <div className="flex justify-between">
+        {ValidatedData.length >0 && <div className="flex justify-between">
           <div className="flex-row gap-10 ml-10 text-lg">
             <button
               type="button"
@@ -134,7 +134,7 @@ const UploadStock: React.FC<AppProps> = ({
               Save Assets in the Stock
             </button>
           )}
-        </div>
+        </div>}
       </div>
 
       {error && (
