@@ -4,7 +4,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { saveValidatedData } from '../../../actions/saveUploaded.action';
 import { BiTrash } from 'react-icons/bi';
-import { FaCube } from 'react-icons/fa';
+import { FaCube, FaCubes } from 'react-icons/fa';
 
 interface DynamicTableProps {
   data: Record<string, string | number>[];
@@ -27,7 +27,7 @@ const DynamicTable: React.FC<DynamicTableProps> = ({ data }) => {
   return (
     <div className="overflow-auto ">
       <div className=' flex items-center  gap-2 font-bold  capitalize text-lg  '>
-        <FaCube className='text-my-blue '/>
+        <FaCubes className='text-my-blue  text-2xl '/>
        uploaded assets 
       </div>
       <table className="min-w-full divide-y divide-gray-200">
