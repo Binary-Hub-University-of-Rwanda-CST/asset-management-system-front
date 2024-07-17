@@ -4,7 +4,6 @@ import React, { useState, lazy } from 'react';
 import ChangePassword from './containers/changePassword/ChangePassword';
 import Login from './containers/authantication/Login';
 import DashboardLoading from './components/CoomingSoon/CoomingSoon';
-import AssetListing from './containers/StockManagement/AssetListing/AssetListing';
 import AssetStatusChart from './containers/Dashboard/AssetStatusDonut';
 import CreateNewCategory from './containers/StockManagement/Components/CreateNewCategory';
 import Alert, { AlertType } from './components/Alert/Alert';
