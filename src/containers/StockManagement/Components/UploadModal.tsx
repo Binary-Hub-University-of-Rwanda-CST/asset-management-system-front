@@ -22,6 +22,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [isFileValid, setIsFileValid] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const uploadSpecification = useSelector(
     (state: StoreState) => state.uploadSpecificaiton
@@ -81,26 +82,30 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
   };
 
   const handleFileUpload = (file: File) => {
+    setIsLoading(true);  // Start loading
+    setUploadError(null);  // Clear any previous errors
+  
     Papa.parse(file, {
       complete: (result) => {
         if (result.data.length <= 1) {
           setUploadError("Uploaded CSV file has no data.");
+          setIsLoading(false);  // Stop loading
           return;
         }
-
+  
         const headers = (result.data[0] as string[]).map((header: string) => 
           header.trim().toLowerCase().replace(/ /g, '_')
         );
         
         const specHeaders = specification.map(spec => spec.name.toLowerCase());
         const isValid = specHeaders.every(header => headers.includes(header));
-
+  
         if (!isValid) {
           const missingHeaders = specHeaders.filter(header => !headers.includes(header));
           const errorMessage = `Uploaded CSV file is missing columns: ${missingHeaders.join(', ')}.`;
           setUploadError(errorMessage);
+          setIsLoading(false);  // Stop loading
         } else {
-          setUploadError(null);
           const data = (result.data as string[][]).slice(1).map((row: string[]) => {
             const rowData: Record<string, any> = {};
             headers.forEach((header, index) => {
@@ -109,18 +114,20 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
             });
             return rowData;
           });
-
+  
           const originalHeaders = headers.map(header => 
             specification.find(spec => spec.name.toLowerCase() === header)?.name || header
           );
-
+  
           setTableHeaders(originalHeaders);
           setTableData(data);
           setIsTableModalOpen(true);
+          setIsLoading(false);  // Stop loading after all processing is done
         }
       },
       error: (error) => {
         setUploadError(`Error parsing CSV: ${error.message}`);
+        setIsLoading(false);  // Stop loading
       },
       header: false,
       skipEmptyLines: true
@@ -249,6 +256,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
         tableData={tableData}
         tableHeaders={tableHeaders}
         tag={[`${tableData.length} ass`]}
+        isLoading={isLoading}
       />
     )}
   </div>
