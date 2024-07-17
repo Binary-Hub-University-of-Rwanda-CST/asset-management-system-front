@@ -7,8 +7,19 @@ interface DonutChartProps {
 }
 
 const DonutChart: React.FC<DonutChartProps> = ({ assetsData }) => {
-  // Calculate the total value for each category
-  const series = assetsData.map((category) =>
+  // Calculate the total value for each category and filter out categories with no assets
+  const filteredData = assetsData.filter((category) => 
+    category.buildings.reduce((catTotal, building) =>
+      catTotal +
+      building.rooms.reduce((roomTotal, room) =>
+        roomTotal + room.assets.reduce((assetTotal, asset) => assetTotal + asset.current_value, 0),
+        0
+      ),
+      0
+    ) > 0
+  );
+
+  const series = filteredData.map((category) =>
     category.buildings.reduce((catTotal, building) =>
       catTotal +
       building.rooms.reduce((roomTotal, room) =>
@@ -25,7 +36,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ assetsData }) => {
     chart: {
       type: 'donut' as 'donut',
     },
-    labels: assetsData.map((category) => category.category.name),
+    labels: filteredData.map((category) => category.category.name),
     responsive: [
       {
         breakpoint: 380,
@@ -73,4 +84,3 @@ const DonutChart: React.FC<DonutChartProps> = ({ assetsData }) => {
 };
 
 export default DonutChart;
- 
