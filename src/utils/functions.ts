@@ -530,3 +530,10 @@ export const languageValue = (
 export const  formatNumberWithCommas =(num: number): string =>  {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+// format table headers 
+export const formatHeaderName = (header: string): string => {
+  return header
+    .split('_')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
