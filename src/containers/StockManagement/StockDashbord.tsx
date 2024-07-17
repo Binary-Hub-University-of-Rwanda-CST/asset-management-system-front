@@ -39,12 +39,19 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
   const [activeCategoryBuildingData, setActiveCategoryBuildingData] = useState<buildingInterface[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   // const [activeCategory, setActiveCategory] = useState<number | string | null>(null);
+  
+  const filteredAssetsData = assetsData.filter(category => {
+   const totalAssets = category.buildings.reduce((total, building) =>
+     total + building.rooms.reduce((roomTotal, room) => roomTotal + room.assets.length, 0), 0
+   );
+   return totalAssets > 0 && category.category.name.toLowerCase().includes(searchQuery.toLowerCase());
+ }); 
 
-  useEffect(() => { 
-    if (assetsData.length > 0) {
-      setActiveCategory(assetsData[0].category.id);
-    }
-  }, [assetsData]);
+ useEffect(() => { 
+  if (assetsData.length > 0 && !activeCategory) {
+    setActiveCategory(filteredAssetsData[0].category.id); 
+  }
+}, [assetsData, activeCategory]); 
 
   useEffect(() => {
     if (activeCategory && assetsData.length > 0) {
@@ -99,34 +106,32 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
   const closeNewCategoryModal = () => setNewCategory(false);
   const createNewCategoryModal = () => setNewCategory(true);
 
-  const setActiveCategoryHandler = (categoryId: string) => setActiveCategory(categoryId);
+ const setActiveCategoryHandler = (categoryId: string) => setActiveCategory(categoryId);
 
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
 
-  const filteredAssetsData = assetsData.filter(category =>
-    category.category.name.toLowerCase().includes(searchQuery.toLowerCase())
+
+const categoryData = filteredAssetsData.map((category) => {
+  const totalAssets = category.buildings.reduce((total, building) =>
+    total + building.rooms.reduce((roomTotal, room) => roomTotal + room.assets.length, 0), 0
   );
-  const categoryData = filteredAssetsData.map((category) => {
-    const totalAssets = category.buildings.reduce((total, building) =>
-      total + building.rooms.reduce((roomTotal, room) => roomTotal + room.assets.length, 0), 0
-    );
 
-    return (
-      <Categories
-        key={category.category.id}
-        id={category.category.id}
-        categoryName={category.category.name}
-        totalAssets={totalAssets}
-        handleActive={setActiveCategoryHandler}
-        isActive={activeCategory === category.category.id}
-      />
-    );
-  });
+  return (
+    <Categories
+      key={category.category.id}
+      id={category.category.id}
+      categoryName={category.category.name}
+      totalAssets={totalAssets}
+      handleActive={setActiveCategoryHandler}
+      isActive={activeCategory === category.category.id}
+    />
+  );
+});
 
-  const totalCategories = categoryData.length;
+ const totalCategories = filteredAssetsData.length; 
 
   const activeCategoryData = assetsData.find((category) => category.category.id === activeCategory);
 
