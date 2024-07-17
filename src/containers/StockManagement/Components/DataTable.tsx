@@ -39,9 +39,10 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
   const [filteredData, setFilteredData] = useState(activeCategoryData);
 
   const handleBuildingRowClick = (building: buildingInterface) => {
-    setSelectedBuilding(building);
+    const filteredRooms = building.rooms.filter(room => room.totalAssets > 0);
+    setSelectedBuilding({...building, rooms: filteredRooms});
     setIsBuildingModalOpen(true);
-  };
+  }; 
 
   const handleRoomRowClick = (room: RoomInterface) => {
     setSelectedRoom(room);
@@ -57,11 +58,11 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
     setSelectedRoom(null);
     setIsRoomModalOpen(false);
   };
-
   useEffect(() => {
-    const filtered = activeCategoryData.filter(stock =>
-      stock.rooms.length > 0 &&
-      Object.values(stock).some(value =>
+    const filtered = activeCategoryData.filter(building =>
+      building.totalAsset > 0 && // Add this condition
+      building.rooms.length > 0 &&
+      Object.values(building).some(value =>
         String(value).toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
@@ -122,7 +123,7 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
         </div>
         <table className="min-w-full bg-white">
           <thead>
-            <tr className="min-w-full bg-white border-b-2 border-gray-300">
+            <tr className="min-w-full bg-white border-b-2 border-gray-300 text-left">
               <th className="py-2 px-4">No</th>
               <th className="py-2 px-4">Building Name</th>
               <th className="py-2 px-4">Total Rooms</th>
@@ -153,7 +154,7 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
             isOpen={isBuildingModalOpen}
             onClose={handleCloseBuildingModal}
             title={`${activeCategory} Rooms for ${selectedBuilding.buildingName}`}
-            tableHeaders={['roomName', 'floor', 'totalAssets']}
+            tableHeaders={['roomName', 'floor', 'totalAssets']} 
             tableData={selectedBuilding.rooms || []}
             tag={[activeCategory, selectedBuilding.buildingName]}
             onRowClick={handleRoomRowClick}
