@@ -21,6 +21,7 @@ interface ModalProps {
   tableData: Record<string, any>[];
   tag?: string[];
   isLoading: boolean;
+  onDataValidated: () => void;
 }
 
 const ValidationModal: React.FC<ModalProps> = ({
@@ -31,6 +32,7 @@ const ValidationModal: React.FC<ModalProps> = ({
   tableData,
   tag,
   isLoading,
+  onDataValidated,
 }) => {
   const [filteredData, setFilteredData] = useState<Record<string, any>[]>([]);
   const [saveError, setSaveError] = useState<string | null>(null);
@@ -244,7 +246,8 @@ const ValidationModal: React.FC<ModalProps> = ({
         JSON.stringify(transformedData)
       );
       onClose();
-      navigate("/upload-assets");
+      // navigate("/upload-assets");
+      onDataValidated();
     } else {
       console.error("Cannot save data. Please fix validation errors.");
       setSaveError("Cannot save data. Please fix validation errors.");

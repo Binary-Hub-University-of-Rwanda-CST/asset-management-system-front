@@ -48,7 +48,7 @@ const UploadStock: React.FC<AppProps> = ({
   const handleSaveAssets = async () => {
     setLoading(true);
     try {
-      await dispatch(sendValidatedData(ValidatedData));
+      await dispatch(sendValidatedData(ValidatedData)); 
       setShowSuccess(true);
       setError(""); // Clear any previous errors
       handleDeleteAllAssets();
@@ -66,7 +66,9 @@ const UploadStock: React.FC<AppProps> = ({
   const closeUploadDataModal = () => {
     setUploadDataModalOpen(false);
   };
-
+  const handleDataValidated = () => {
+    closeUploadDataModal();
+  };
   const createUploadData = () => {
     setUploadDataModalOpen(true);
   };
@@ -127,7 +129,7 @@ const UploadStock: React.FC<AppProps> = ({
           </div>
           {ValidatedData.length > 0 && (
             <button
-              className="bg-success rounded-md text-white px-2 flex gap-2 items-center"
+              className="bg-success rounded-md text-white px-2 flex gap-2 items-center animate__animated animate__fadeInTopRight "
               onClick={handleSaveAssets}
             >
               <FaRegCheckCircle />
@@ -189,7 +191,8 @@ const UploadStock: React.FC<AppProps> = ({
         )}
       </div>
 
-      {uploadDataModalOpen && <UploadModal close={closeUploadDataModal} />}
+      {uploadDataModalOpen &&
+       <UploadModal close={closeUploadDataModal}  onDataValidated={handleDataValidated}/>}
       {loading && <LoadingCircle title="Saving Assets" subTitle="Please wait..." />}
       {showSuccess && !error && (
         <Successfully

@@ -6,13 +6,15 @@ import { RiFileExcel2Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { StoreState } from "../../../reducers";
 import ValidationModal from "../UploadAssets/ValidationModal";
+import { formatHeaderName } from "../../../utils/functions";
 import Papa from 'papaparse';
 
 interface UploadModalProps {
   close: () => void;
+  onDataValidated: () => void; 
 }
 
-const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
+const UploadModal: React.FC<UploadModalProps> = ({ close, onDataValidated  }) => {
   const [isTableModalOpen, setIsTableModalOpen] = useState(false);
   const [tableData, setTableData] = useState<Record<string, any>[]>([]);
   const [tableHeaders, setTableHeaders] = useState<string[]>([]);
@@ -184,7 +186,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
                 key={index}
               >
                 <div className="w-2/5 flex justify-end mx-4 font-bold">
-                  {spec.name.replace(/_/g, " ")}
+                  {formatHeaderName(spec.name)} 
                 </div>
                 <div className="pl-4 border-blue-500 border-l-4 flex flex-row gap-2 flex-wrap">
                   {spec.allowedValues && spec.allowedValues.length > 0 ? (
@@ -257,6 +259,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ close }) => {
         tableHeaders={tableHeaders}
         tag={[`${tableData.length} ass`]}
         isLoading={isLoading}
+        onDataValidated={onDataValidated}
       />
     )}
   </div>
