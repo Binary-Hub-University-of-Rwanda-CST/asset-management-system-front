@@ -12,6 +12,7 @@ import { StoreState } from "../../../reducers";
 import LoadingCircle from "../../../components/Loading/LoadingCircle";
 import { MdOutlineDangerous } from "react-icons/md";
 import { HiOutlineCheck } from "react-icons/hi";
+import Loader from "../../../components/Loading/Loader";
 
 interface ModalProps {
   isOpen: boolean;
@@ -553,7 +554,7 @@ const ValidationModal: React.FC<ModalProps> = ({
                       </tbody>
                     </table>
                   ) : (
-                    <h1 className="text-center">No data found</h1>
+                    <h1 className="text-center font-bold text-warning ">Loading ...</h1>
                   )}
                 </div>
               </div>
