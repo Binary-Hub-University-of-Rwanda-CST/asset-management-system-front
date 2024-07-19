@@ -46,7 +46,7 @@ const NavBar: React.FC<NavBarProps> = ({
                 <div className="">
                   <div className="flex flex-row items-center gap-2 text-lg rounded-full w-max pr-3 cursor-pointer group">
                     <span className="text-gray-700 font-bold">
-                      ASSET MANAGEMENT SYSTEM
+                      ASSET MANAGEMENT SYSTEM / NYARUGENGE CAMPUS 
                     </span>
                   </div>
                 </div>
