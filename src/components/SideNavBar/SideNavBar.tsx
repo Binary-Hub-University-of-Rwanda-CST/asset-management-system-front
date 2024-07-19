@@ -3,7 +3,7 @@
 
 import React, { Component, Fragment } from "react";
 import { MdClose } from "react-icons/md";
-import UR_ICON from "../../assets/images/UR_logo.png";
+import UR_ICON from "../../assets/images/ishemapp10.png"; 
 import {AUTHENTICATED_MENUS, MENU_TYPE,menus_categories,} from "../../config/AppNavigations";
 import NavItem from "./NavItem";
 import { isAccessAuthorized } from "../../config/userAccess";
@@ -47,7 +47,7 @@ export class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
             <img
               src={UR_ICON}
               alt="ASSET MANAGEMENT SYSTEM -UR" 
-              className="hidden md:block w-32"
+              className="hidden md:block w-full" 
             />
           </div>
           <div className="flex md:hidden flex-row items-center justify-between gap-2 mx-2">

@@ -13,7 +13,6 @@ export interface StoreState {
   system: System;
   asset:AssetState;
   uploadSpecificaiton: SpecificationState
-  validation: ValidationDataState
   validatedData: ValidatedDataState
   
 }
@@ -22,7 +21,6 @@ export const rootReducers = combineReducers<StoreState>({
   auth: authReducer,
   system: systemReducer,
   asset: assetReducer,
-  uploadSpecificaiton: specificationReducer,
-  validation: validationDataReducer,
+  uploadSpecificaiton: specificationReducer, 
   validatedData: validatedDataReducer 
 });

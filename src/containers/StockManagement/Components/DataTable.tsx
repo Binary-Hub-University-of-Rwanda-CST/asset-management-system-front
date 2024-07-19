@@ -60,7 +60,7 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
   };
   useEffect(() => {
     const filtered = activeCategoryData.filter(building =>
-      building.totalAsset > 0 && // Add this condition
+      building.totalAsset > 0 && 
       building.rooms.length > 0 &&
       Object.values(building).some(value =>
         String(value).toLowerCase().includes(searchTerm.toLowerCase())
@@ -92,7 +92,7 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
     // Create link for download
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', `all_buildings_assets.csv`);
+    link.setAttribute('download', `Campus_assets.csv`); 
     document.body.appendChild(link);
     link.click();
 
