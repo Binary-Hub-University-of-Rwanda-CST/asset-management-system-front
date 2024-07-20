@@ -3,7 +3,6 @@ import { Auth, System } from "../actions";
 import { authReducer } from "./auth.reducer";
 import { systemReducer } from "./system.reducer";
 import assetReducer, { AssetState } from "./asset.reducer";
-  import validationDataReducer,{ValidationDataState} from "./validationDataReducer";
   import specificationReducer, {SpecificationState} from "./specification.reducer";
   import validatedDataReducer, {ValidatedDataState} from "./saveUpload.reducer";
 
