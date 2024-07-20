@@ -35,6 +35,7 @@ const Login = () => {
   };
 
   const [user, setUser] =useState(defaultState.isAuthenticated);
+
   const handleLoginUser = async () => {
     if (!validateCredentials()) return;
 
@@ -45,36 +46,16 @@ const Login = () => {
 
     setLoggingIn(true);
 
-    try {
-      const response = await axios.post('https://ur-assets-management-system-backend.onrender.com/api/v1/auth/login', loginData);
-
+    dispatch(FC_Login(loginData, (success: boolean, errorMessage: string) => {
       setLoggingIn(false);
-
-      if (response.data.message === 'Login Successful') {
-        const token = response.data.data.token.access.token;
-        const userData = response.data.data.user;
-
-        // Save token and user data to localStorage
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(userData));
-        setUser(true); 
-        
-
-        // Alternatively, you can dispatch an action to store token and user data in Redux store
-        // dispatch(setToken(token));
-        // dispatch(setUser(userData));
-
-        console.log('Login successful!');
+      if (success) {
+        // Login successful, you can redirect or show a success message
+        console.log("Login successful");
       } else {
-        setLoginError('Login failed. Please check your credentials.');
-        console.error('Login failed:', response.data.message);
+        setLoginError(errorMessage);
       }
-    } catch (error) {
-      setLoggingIn(false);
-      setLoginError('An error occurred during login. Please try again.');
-      console.error('Login error:', error);
-    }
-  };
+    }));
+  }; 
 
   const validateCredentials = (): boolean => {
     if (username.trim() === '') {
