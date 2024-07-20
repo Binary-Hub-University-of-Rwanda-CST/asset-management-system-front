@@ -5,6 +5,8 @@ import { IoIosArrowDown, IoMdLogIn } from "react-icons/io";
 import { TbArrowsDiagonalMinimize2 } from "react-icons/tb";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { Auth } from "../../actions";
+import { useDispatch } from 'react-redux'; 
+import { FC_Logout } from "../../actions";
 
 interface NavBarProps {
   auth: Auth;
@@ -12,17 +14,19 @@ interface NavBarProps {
   setOpenVav: (status: boolean) => void;
   sideNavbarStatus: boolean;
 }
-
 const NavBar: React.FC<NavBarProps> = ({
+ 
   auth,
-  FC_Logout,
+  FC_Logout ,
   setOpenVav,
   sideNavbarStatus,
 }) => {
   const [viewUser, setViewUser] = useState(false);
+  
 
   useEffect(() => {
     // componentDidMount logic can go here
+    
   }, []);
   
 
@@ -46,7 +50,7 @@ const NavBar: React.FC<NavBarProps> = ({
                 <div className="">
                   <div className="flex flex-row items-center gap-2 text-lg rounded-full w-max pr-3 cursor-pointer group">
                     <span className="text-gray-700 font-bold">
-                      ASSET MANAGEMENT SYSTEM / NYARUGENGE CAMPUS 
+                      ASSET MANAGEMENT SYSTEM / NYARUGENGE CAMPUS
                     </span>
                   </div>
                 </div>
@@ -67,7 +71,7 @@ const NavBar: React.FC<NavBarProps> = ({
                   </div>
                   <div className="text-sm pr-3 group-hover:text-primary-800">
                     {auth?.user?.names || "User"}
-                  </div> 
+                  </div>
 
                   <div className="ml-1">
                     <IoIosArrowDown className="text-xl text-my-blue group-hover:text-primary-800" />
@@ -89,17 +93,13 @@ const NavBar: React.FC<NavBarProps> = ({
                             </div>
                           </div>
                           <div className="font-bold text-center text-gray-500 mt-2">
-                            <span>
-                              {auth?.user?.names || "User"}
-                            </span>
+                            <span>{auth?.user?.names}</span>
                           </div>
                           <div className="font-bold text-left text-sm flex flex-row items-center gap-2">
                             <div>
                               <IoMdLogIn className="text-xl text-primary-800" />
                             </div>
-                            <span>
-                              {auth?.user?.phone || "N/A"}
-                            </span>
+                            <span>{auth?.user?.phone || "N/A"}</span>
                           </div>
                           <div className="font-bold text-center mb-4 text-white bg-primary-700 rounded-md px-2 text-xs">
                             <span className="font-normal">
@@ -122,7 +122,7 @@ const NavBar: React.FC<NavBarProps> = ({
                             <RiLockPasswordLine className="text-xl text-red-700 group-hover:text-my-blue" />
                             <div>Change password</div>
                           </div>
- 
+
                           <div
                             onClick={() => {
                               setViewUser(false);
