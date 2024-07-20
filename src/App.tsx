@@ -8,29 +8,24 @@ import { RootState, AppDispatch } from "./app/store";
 import { FC_Logout } from "./actions";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import NavBar from "./components/TopNavBar/NavBar";
-import  StockDashboard  from "./containers/StockManagement/StockDashbord"; 
+import StockDashboard from "./containers/StockManagement/StockDashbord";
 import UploadStock from "./containers/StockManagement/UploadAssets/UploadAssets";
-import Monitoring from "./containers/AssetDistribution/Monitoring/Monitoring";
-import MyRequests from "./containers/AssetDistribution/Request/MyRequests";
-import RequestApproval from "./containers/AssetDistribution/Request/RequestApproval";
-import AssetTracking from "./containers/AssetTracking/AssetTracking";
-import DashboardLoading from "./components/DashboardLoading/DashboardLoading";
 import CoomingSoon from "./components/CoomingSoon/CoomingSoon";
-import Test from "./App.Test";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import RequestValidation from "./containers/AssetDistribution/Request/Components/RequestValidation";
 import StockLoading from "./components/StockLoading/StockLoading";
-import { fetchAssets } from "./actions";
+import UserProfile from "./components/profile/UserProfile";
 
 const App = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(true);
 
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-    
-    const authData = useSelector((state: RootState) => state.auth);
-    console.log(authData); 
-    
-  
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+
+  const authData = useSelector((state: RootState) => state.auth);
+  console.log(authData);
+
   return (
     <>
       {!isAuthenticated ? (
@@ -39,7 +34,7 @@ const App = () => {
         <div className="h-screen flex flex-col">
           <div>
             <NavBar
-            auth={authData}
+              auth={authData}
               setOpenVav={setSideNavbarStatus}
               sideNavbarStatus={sideNavbarStatus}
               FC_Logout={FC_Logout}
@@ -69,12 +64,12 @@ const App = () => {
                 {/*  main Routes */}
                 <Routes>
                   <Route path="/login" element={<Login />} />
-                  <Route
-                    path="/change-password"
-                    element={<ChangePassword />}
-                  />
+                  <Route path="/change-password" element={<ChangePassword />} />
                   {/* <Route path="/assets-stock" element={<StockDashboard />} />  */}
-                  <Route path="/asset-monitoring" element={<StockDashboard />} /> 
+                  <Route
+                    path="/asset-monitoring"
+                    element={<StockDashboard />}
+                  />
 
                   <Route path="/upload-assets" element={<UploadStock />} />
                   {/* <Route
@@ -95,14 +90,14 @@ const App = () => {
                   />
                   <Route path="/reports" element={<Test />} /> 
                   <Route path="/users-list" element={<DashboardLoading />} /> */}
-                  <Route path="/my-profile" element={<CoomingSoon />} />
+                  <Route path="/my-profile" element={<UserProfile />} />   
                   <Route path="/" element={<Dashboard />} />
                   <Route path="*" element={<PageNotFound />} />
                   <Route path="/fake" element={<RequestValidation />} />
-                  <Route path="/stockloading" element={<StockLoading />} />         
+                  <Route path="/stockloading" element={<StockLoading />} />
                 </Routes>
               </div>
-            </div>
+            </div> 
           )}
         </div>
       )}
