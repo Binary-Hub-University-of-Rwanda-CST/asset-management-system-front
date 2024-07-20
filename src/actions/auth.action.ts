@@ -90,13 +90,17 @@ name:string
 access:any
 }
 export interface UserInterface {
-token: TokenInterface;
- user: UserItemInterface;
-  role: userRoleInterface | undefined ;
+  token: TokenInterface;
+  user: UserItemInterface;
+  role?: userRoleInterface;
 }
-export interface TokenInterface{
-  access: Access
-}
+
+export interface TokenInterface {
+  access?: {
+    token: string;
+    expires: Date;
+  }
+} 
 export interface Access{
   token: string;
   expires: Date;
@@ -125,7 +129,7 @@ export interface LoginSuccessDetails {
 
 export interface LogoutUser {
   type: ActionTypes.LOGOUT;
-}
+} 
  
 /**
  * * ****************************** AUTH  ACTIONS *****************************
@@ -143,32 +147,24 @@ export interface LogoutUser {
 export const FC_Login = (data: { email: string; password: string }, callback: Function) => {
   return async (dispatch: Dispatch) => {
     try {
-      const res = await axios.post<UserInterface>(`${API_URL}/auth/login`, data);
-      console.log("Login Response:", res.data); // Log the response data
+      const res = await axios.post<{ message: string; data: UserInterface }>(`${API_URL}/auth/login`, data);
+      console.log("Login Response:", res.data);
 
       dispatch<LoginSuccessDetails>({
         type: ActionTypes.USER_LOGIN_SUCCESS_DATA,
-        payload: {
-          data: {
-            token: res.data.token,
-            user: res.data.user,
-            role: res.data.role === undefined ? undefined : {
-              access: res.data.role.access?.toString().split(",") as UserAccessList[],
-              id: res.data.role?.id,
-              name: res.data.role.name,
-            },
-          },
-        },
+        payload: {data: res.data.data} 
       });
+
+      // Store token in localStorage (adjust this based on the actual token structure)
+      localStorage.setItem(APP_TOKEN_NAME, res.data.data.token.access?.token || '');
 
       callback(true, "");
     } catch (error: any) {
-      console.error("Login Error:", error); // Log the error for debugging
+      console.error("Login Error:", error);
       callback(false, errorToText(error));
     }
   };
-};
-
+}; 
 
 /**
  * @description Check if the user is logged in based on the logged in account
@@ -225,9 +221,8 @@ export const FC_CheckLoggedIn = (callBack: (status: boolean) => void) => {
  */
 export const FC_Logout = () => {
   return (dispatch: Dispatch) => {
-    dispatch<LogoutUser>({
-      type: ActionTypes.LOGOUT,
-    });
+    localStorage.removeItem(APP_TOKEN_NAME);  // Clear the token from localStorage
+    dispatch({ type: ActionTypes.LOGOUT });
   };
-};
+}; 
 
