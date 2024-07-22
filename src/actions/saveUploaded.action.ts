@@ -23,7 +23,7 @@ export const sendValidatedData = (data: Record<string, any>[]) => async (dispatc
     const response = await fetch(`${API_URL}/asset/add`, { 
       method: "POST", 
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json",  
       },
       body: JSON.stringify(data),
     });
