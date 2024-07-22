@@ -1,11 +1,43 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "../../components/Fragments/Input_backup";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
 import Alert, {AlertType} from "../../components/Alert/Alert";
+import { useDispatch, useSelector } from "react-redux"; 
+import { changePassword} from "../../actions/changePassword.action";
+import { RootState } from "../../app/store";
+import Successfully from "../../components/Successfully/Successfully";
+import LoadingCircle from "../../components/Loading/LoadingCircle";
 
 const ChangePassword: React.FC = () => {
+
+  const dispatch = useDispatch();
+  const { loading, success, error } = useSelector((state: RootState) => state.changePassword);
+
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+
+  // Resert form after changing password 
+
+  const resetForm = () => {
+    setPasswordStates({
+      currentPassword: { value: "", showPassword: false, error: "" },
+      newPassword: { value: "", showPassword: false, error: "" },
+      confirmPassword: { value: "", showPassword: false, error: "" },
+    });
+  };
+
+  useEffect(() => {
+    if (success) {
+      setShowSuccessAlert(true);
+      resetForm(); 
+    }
+    if (error) {
+      setShowErrorAlert(true);
+    }
+  }, [success, error]);
+
 
 
   const [passwordStates, setPasswordStates] = useState({
@@ -135,28 +167,17 @@ const ChangePassword: React.FC = () => {
     
     
 
-    // logic for changing the password
-    // Call API or function for changing the password
-    // Reset the form and clear any errors
-    
-    setPasswordStates({
-      currentPassword: {
-        value: "",
-        showPassword: false,
-        error: "",
-      },
-      newPassword: {
-        value: "",
-        showPassword: false,
-        error: "",
-      },
-      confirmPassword: {
-        value: "",
-        showPassword: false,
-        error: "",
-      },
-    });
+    dispatch(changePassword(currentPassword.value, newPassword.value) as any); 
   };
+
+  const closeSuccessAlert = () => {
+    setShowSuccessAlert(false);
+    // Reset form or navigate away if needed
+  };
+
+  const closeErrorAlert = () => {
+    setShowErrorAlert(false);
+  }; 
 
   const toggleShowPassword = (field: keyof typeof passwordStates, event: React.MouseEvent) => {
     event.stopPropagation();
@@ -168,6 +189,17 @@ const ChangePassword: React.FC = () => {
       },
     }));
   };
+
+  // const handleInputChange = (field: keyof typeof passwordStates, value: string) => {
+  //   setPasswordStates((prevState) => ({
+  //     ...prevState,
+  //     [field]: {
+  //       ...prevState[field],
+  //       value: value,
+  //       error: "", // Clear error when input changes
+  //     },
+  //   }));
+  // }; 
 
   const inputTitles = ["Current Password", "New Password", "Confirm Password"];
 
@@ -222,6 +254,15 @@ return (
             }
           />
         ))}
+
+        {showErrorAlert && (
+        <Alert
+          alertType={AlertType.DANGER}
+          title={error || "An error occurred"}
+          close={closeErrorAlert}
+          className=" bg-danger" 
+        />
+      )}
         <button
           onClick={handleChangePassword}
           className="bg-[#2d90d2] p-2 justify-center items-center text-white rounded-lg px-4 text-xl"
@@ -229,9 +270,19 @@ return (
           Change Password
         </button>
       </div>
-    {/* </Modal> */}
+      {loading && <LoadingCircle title="changing password "/>} 
+   {/* Success Alert */}
+   {showSuccessAlert && (
+        <Successfully
+          title="Password changed successfully!"
+          onClose={closeSuccessAlert}
+        />
+      )}
+
+      {/* Error Alert */}
+        
   </div>
 );
 };
 
-export default ChangePassword;
+export default ChangePassword; 
