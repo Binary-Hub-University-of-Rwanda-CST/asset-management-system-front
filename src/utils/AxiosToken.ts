@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const APP_TOKEN_NAME = "ams_ur_binary_hub";
+export const APP_TOKEN_NAME = "ishema_up"; 
 
 export const setAxiosToken = () => {
   if (localStorage[APP_TOKEN_NAME]) {
