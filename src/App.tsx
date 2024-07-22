@@ -14,7 +14,7 @@ import CoomingSoon from "./components/CoomingSoon/CoomingSoon";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import RequestValidation from "./containers/AssetDistribution/Request/Components/RequestValidation";
 import StockLoading from "./components/StockLoading/StockLoading";
-import UserProfile from "./components/profile/UserProfile";
+import UserProfile from "./containers/profile/UserProfile";
 
 const App = () => {
   const [sideNavbarStatus, setSideNavbarStatus] = useState(true);
