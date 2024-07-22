@@ -9,6 +9,7 @@ import { changePassword} from "../../actions/changePassword.action";
 import { RootState } from "../../app/store";
 import Successfully from "../../components/Successfully/Successfully";
 import LoadingCircle from "../../components/Loading/LoadingCircle";
+import { resetChangePasswordState } from "../../actions/changePassword.action"; 
 
 const ChangePassword: React.FC = () => {
 
@@ -30,12 +31,16 @@ const ChangePassword: React.FC = () => {
 
   useEffect(() => {
     if (success) {
-      setShowSuccessAlert(true);
+      setShowSuccessAlert(true); 
       resetForm(); 
     }
     if (error) {
       setShowErrorAlert(true);
     }
+     // Clean up function to reset state when component unmounts
+     return () => {
+      dispatch(resetChangePasswordState());
+    };
   }, [success, error]);
 
 

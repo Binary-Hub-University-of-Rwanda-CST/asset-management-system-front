@@ -1,7 +1,7 @@
 import axios  from 'axios';
 import { Dispatch } from 'redux';
 import axiosInstance from "../utils/axiosInstance";
-import { CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAILURE, CHANGE_PASSWORD_REQUEST } from './types';
+import { CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAILURE, CHANGE_PASSWORD_REQUEST, RESET_CHANGE_PASSWORD_STATE } from './types';
 
 export const changePasswordRequest = () => ({ type: CHANGE_PASSWORD_REQUEST });
 export const changePasswordSuccess = (message: string) => ({ type: CHANGE_PASSWORD_SUCCESS, payload: message });
@@ -28,3 +28,7 @@ export const changePassword = (oldPassword: string, newPassword: string) => {
     }
   };
 };
+
+export const resetChangePasswordState = () => ({
+  type: RESET_CHANGE_PASSWORD_STATE
+});
