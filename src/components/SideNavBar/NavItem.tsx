@@ -6,6 +6,7 @@ import { SideNavigationInterface } from "../../config/AppNavigations";
 import { isAccessAuthorized } from "../../config/userAccess";
 import { Auth } from "../../actions";
 
+
 interface NavItemProps {
   nav: SideNavigationInterface;
   selectedMenuLink: string;
@@ -13,21 +14,7 @@ interface NavItemProps {
   auth: Auth;
   updateSelectedMenu: (selectedMenuLink: string) => void;
 }
-// function activelink(props:NavItemProps, link:string){
-// props.updateSelectedMenu(link);
-// }
-// interface Auth{ 
-//   isAuthenticated?: boolean;
-//   user:{
-//     user_info:{
-//       full_name: string;
-//       phone_numbers?: string;
-//     };
-//     role:{
-//       role:string;
-//     }
-//   }
-// }
+
 
 
 const NavItem: React.FC<NavItemProps> = (props) => {
