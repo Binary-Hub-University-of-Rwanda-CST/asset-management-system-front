@@ -1,7 +1,7 @@
 
 
 
-import React, { Component, Fragment } from "react";
+import { Component, Fragment } from "react";
 import { MdClose } from "react-icons/md";
 import UR_ICON from "../../assets/images/ishemapp10.png"; 
 import {AUTHENTICATED_MENUS, MENU_TYPE,menus_categories,} from "../../config/AppNavigations";
@@ -17,18 +17,6 @@ interface SideNavBarProps {
 interface SideNavBarState {
   selectedMenuLink: string;
 }
-// interface Auth{ 
-//   isAuthenticated?: boolean;
-//   user:{
-//     user_info:{
-//       full_name: string;
-//       phone_numbers?: string;
-//   };
-//   role:{
-//     role:string;
-//   }
-// }
-// }
 
 
 export class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
