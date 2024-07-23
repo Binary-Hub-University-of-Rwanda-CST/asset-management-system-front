@@ -10,7 +10,6 @@ import Dashboard from "./containers/Dashboard/Dashboard";
 import NavBar from "./components/TopNavBar/NavBar";
 import StockDashboard from "./containers/StockManagement/StockDashbord";
 import UploadStock from "./containers/StockManagement/UploadAssets/UploadAssets";
-import CoomingSoon from "./components/CoomingSoon/CoomingSoon";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import RequestValidation from "./containers/AssetDistribution/Request/Components/RequestValidation";
 import StockLoading from "./components/StockLoading/StockLoading";
@@ -24,7 +23,6 @@ const App = () => {
   );
 
   const authData = useSelector((state: RootState) => state.auth);
-  console.log(authData);
 
   return (
     <>
@@ -37,7 +35,7 @@ const App = () => {
               auth={authData}
               setOpenVav={setSideNavbarStatus}
               sideNavbarStatus={sideNavbarStatus}
-              FC_Logout={FC_Logout}
+              // FC_Logout={FC_Logout} 
             />
           </div>
 
