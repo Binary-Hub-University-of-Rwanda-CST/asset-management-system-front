@@ -5,6 +5,7 @@ import { API_URL } from "../utils/api";
 import { APP_TOKEN_NAME, setAxiosToken } from "../utils/AxiosToken";
 import { errorToText } from "../utils/functions";
 import { UserAccessList } from "../config/userAccess";
+import { AnyAction } from "redux"; 
 
 /**
  * * ******************************  AUTH INTERFACES *****************************
@@ -216,13 +217,10 @@ export const FC_CheckLoggedIn = (callBack: (status: boolean) => void) => {
 };
 
 /**
- * @description Logout the user into the system
+ * @description Logout the user from the system
  * @returns null
  */
-export const FC_Logout = () => {
-  return (dispatch: Dispatch) => {
-    localStorage.removeItem(APP_TOKEN_NAME);  // Clear the token from localStorage
-    dispatch({ type: ActionTypes.LOGOUT });
-  };
-}; 
-
+export const FC_Logout = (): AnyAction => {
+  localStorage.removeItem(APP_TOKEN_NAME);
+  return { type: ActionTypes.LOGOUT };
+};
