@@ -1,13 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
-import { BiUser } from 'react-icons/bi';
+import { RootState } from '../../app/store'; 
 import { FaCircle, FaUser, FaUserCircle } from 'react-icons/fa';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { AiOutlineLogout } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import { FC_Logout } from '../../actions';
+import { useDispatch } from 'react-redux';
+
+
 
 const UserProfile: React.FC = () => {
   const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(FC_Logout());
+  };
 
   return (
     <div className="mr-4 animate__animated animate__faster">
@@ -42,11 +51,13 @@ const UserProfile: React.FC = () => {
        <div className=' flex rounded-full border border-green-300 text-green-600 font-bold w-fit pr-3 gap-2  items-center  '>
         <FaCircle className='text-2xl text-green-400 animate__animated  animate__bounceIn animate__infinite  animate__fast'/> 
          Active</div>
-         <div className='flex gap-3 font-bold  p-1 '>
+         <Link to='/change-password' className='flex gap-3 font-bold  p-1 hover:text-my-blue cursor-pointer '>    
           <RiLockPasswordLine className='text-2xl '/> 
           My Password 
-         </div>
-         <div className='flex gap-3 font-bold  p-1  bg-warning rounded-md  '> 
+         </Link> 
+         <div 
+         onClick={handleLogout} 
+         className='flex gap-3 font-bold  p-1  bg-warning rounded-md  hover:text-my-blue cursor-pointer '> 
           <AiOutlineLogout className='text-2xl '/>   
           Logout
          </div>
