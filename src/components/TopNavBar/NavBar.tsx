@@ -4,24 +4,32 @@ import { FaUserCircle } from "react-icons/fa";
 import { IoIosArrowDown, IoMdLogIn } from "react-icons/io";
 import { TbArrowsDiagonalMinimize2 } from "react-icons/tb";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { Auth } from "../../actions";
-import { useDispatch } from 'react-redux'; 
+import { Auth } from "../../actions"; 
 import { FC_Logout } from "../../actions";
-
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 interface NavBarProps {
   auth: Auth;
-  FC_Logout: () => void;
+  // FC_Logout: () => void;
   setOpenVav: (status: boolean) => void;
   sideNavbarStatus: boolean;
 }
 const NavBar: React.FC<NavBarProps> = ({
  
   auth,
-  FC_Logout ,
+  // FC_Logout ,
   setOpenVav,
   sideNavbarStatus,
 }) => {
   const [viewUser, setViewUser] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    setViewUser(false);
+    dispatch(FC_Logout());
+  };
+
   
 
   useEffect(() => {
@@ -113,21 +121,18 @@ const NavBar: React.FC<NavBarProps> = ({
                             ACTION MENU
                           </div>
 
-                          <div className="flex gap-2 items-center mb-2 bg-gray-50 rounded-md px-2 py-1 cursor-pointer hover:bg-primary-700 hover:text-my-blue hover:bg-blue-white group">
+                          <Link to='/my-profile' className="flex gap-2 items-center mb-2 bg-gray-50 rounded-md px-2 py-1 cursor-pointer hover:bg-primary-700 hover:text-my-blue hover:bg-blue-white group">
                             <FaUserCircle className="text-xl text-primary-700 group hover:text-my-blue" />
                             <div>User Profile</div>
-                          </div>
+                          </Link> 
 
-                          <div className=" flex gap-2 mb-2 items-center  flex-row  bg-gray-50 rounded-md px-2 py-1 cursor-pointer hover:bg-primary-700 hover:text-my-blue group">
+                          <Link to='/change-password' className=" flex gap-2 mb-2 items-center  flex-row  bg-gray-50 rounded-md px-2 py-1 cursor-pointer hover:bg-primary-700 hover:text-my-blue group">
                             <RiLockPasswordLine className="text-xl text-red-700 group-hover:text-my-blue" />
                             <div>Change password</div>
-                          </div>
+                          </Link> 
 
                           <div
-                            onClick={() => {
-                              setViewUser(false);
-                              FC_Logout();
-                            }}
+                            onClick={handleLogout} 
                             className="flex flex-row items-center gap-2 border border-yellow-700 rounded-md px-2 py-1 cursor-pointer hover:bg-yellow-700 hover:text-white group mt-2"
                           >
                             <div>
