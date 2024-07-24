@@ -20,7 +20,7 @@ export const authReducer = (state: Auth = defaultState, action: Action): Auth =>
       return {
         ...state,
         user: action.payload.data.user,
-        token: action.payload.data.token.access?.token || '',
+        token: action.payload.data.token?.access?.token || '',
         loading: false,
         isAuthenticated: true,
       };

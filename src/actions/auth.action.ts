@@ -6,6 +6,9 @@ import { APP_TOKEN_NAME, setAxiosToken } from "../utils/AxiosToken";
 import { errorToText } from "../utils/functions";
 import { UserAccessList } from "../config/userAccess";
 import { AnyAction } from "redux"; 
+import axiosInstance from "../utils/axiosInstance";
+import { ThunkAction } from "@reduxjs/toolkit";
+import { RootState } from "../app/store";
 
 /**
  * * ******************************  AUTH INTERFACES *****************************
@@ -168,54 +171,47 @@ export const FC_Login = (data: { email: string; password: string }, callback: Fu
 }; 
 
 /**
- * @description Check if the user is logged in based on the logged in account
- * @param account
- * @param MsgHandler return the error from the API
- * @returns
+ * @description Check if the user is logged in based on the token stored in local storage
+ * @param callBack Callback function to handle authentication status
+ * @returns ThunkAction for Redux
  */
-export const FC_CheckLoggedIn = (callBack: (status: boolean) => void) => {
-  callBack(false);
+export const FC_CheckLoggedIn = (callBack: (status: boolean) => void): ThunkAction<void, RootState, unknown, any> => {
   return async (dispatch: Dispatch) => {
-    if (token === null) {
+    const token = localStorage.getItem(APP_TOKEN_NAME);
+
+    if (!token) {
       dispatch<LogoutUser>({
         type: ActionTypes.LOGOUT,
       });
-      callBack(true);
-      return false;
+      callBack(false);
+      return;
     }
+
     try {
-      setAxiosToken();
-      const res = await axios.get<UserInterface>(
-        `${API_URL}/auth/login`
-      );
+      setAxiosToken(); // Set the Authorization header for axios
+      const res = await axiosInstance.post<UserInterface>(`${API_URL}/auth/current`); // Adjust the endpoint based on your API
       console.log({ logged_user_details: res.data });
+
       dispatch<LoginSuccessDetails>({
         type: ActionTypes.USER_LOGIN_SUCCESS_DATA,
         payload: {
           data: {
             token: res.data.token,
-            role: res.data.role?.name === undefined
-              ? undefined
-              : {
-                  access: res.data.role.access?.toString().split(",") as UserAccessList[],
-                  id: res.data.role?.id,
-                  name: res.data.role.name,
-                },
+            role: res.data.role,
             user: res.data.user,
           },
         },
       });
       callBack(true);
     } catch (error: any) {
-      callBack(true);
-      console.log("User not: ", { ...error });
+      console.log("User not logged in: ", error);
       dispatch<LogoutUser>({
         type: ActionTypes.LOGOUT,
       });
+      callBack(false);
     }
   };
 };
-
 /**
  * @description Logout the user from the system
  * @returns null
