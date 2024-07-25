@@ -12,7 +12,7 @@ export enum AlertType {
   WARNING = "WARNING",
 }
 
-interface AlertProps {
+ export interface AlertProps {
   alertType: AlertType;
   title: string;
   description?: string;
