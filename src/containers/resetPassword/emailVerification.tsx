@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { requestResetCode } from "../../actions/passwordReset.actions";
 import { Button } from "../../components/reusables/reusable";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Input from "../../components/Fragments/Input_backup";
 import { isValidEmail } from "../../utils/AxiosToken";
-import { toast } from "react-toastify";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+import Alert, { AlertType, AlertProps } from "../../components/Alert/Alert";
 
 export default function EmailVerification() {
   const dispatch = useDispatch();
@@ -14,6 +14,12 @@ export default function EmailVerification() {
   const [email, setEmail] = useState("");
   const [isPending, setIsPending] = useState<boolean>(false);
   const [emailError, setEmailError] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertProps, setAlertProps] = useState<Omit<AlertProps, "close">>({
+    alertType: AlertType.DEFAULT,
+    title: "",
+    description: "",
+  });
 
   const handleEmailSent = async (): Promise<void> => {
     setEmailError("");
@@ -22,21 +28,27 @@ export default function EmailVerification() {
       try {
         const response = await dispatch(requestResetCode(email) as any);
         setIsPending(false);
-        // Check if the response contains a success message
         if (response && response.message) {
-          toast.success(response.message);
-          navigate(`/reset-password?email=${email}`); 
+          setAlertProps({
+            alertType: AlertType.SUCCESS,
+            title: "Success",
+            description: response.message,
+          });
+          setShowAlert(true);
+          setTimeout(() => {
+            navigate(`/reset-password?email=${email}`);
+          }, 3000);  // 2 seconds delay
         }
       } catch (err: any) {
         setIsPending(false);
-        // Display error message from the server response
-        if (err.response && err.response.data && err.response.data.message) {
-          setEmailError(err.response.data.message);
-          toast.error(err.response.data.message);
-        } else {
-          setEmailError("An error occurred. Please try again.");
-          toast.error("An error occurred. Please try again.");
-        }
+        const errorMessage = err.response?.data?.message || "An error occurred. Please try again.";
+        setAlertProps({
+          alertType: AlertType.DANGER,
+          title: "Error",
+          description: errorMessage,
+        });
+        setShowAlert(true);
+        setEmailError(errorMessage);
       }
     } else {
       setEmailError("Invalid email");
@@ -46,31 +58,32 @@ export default function EmailVerification() {
   const handleOnInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
     setEmail(value);
-    // Clear error when user starts typing
     if (emailError) setEmailError("");
   };
 
   const closeAlert = () => {
     setEmailError('');
+    setShowAlert(false);
   }
 
   const handleBack = () => {
-    navigate(-1); // Go back to the previous page
+    navigate('/login');   
   };
 
   return (
-    <div className="bg-greyBackground min-h-screen min-w-full flex items-center justify-center">
-      <div className="reset-cont bg-white w-full md:w-1/2 p-5 rounded-xl mt-[-10%]">
+    <div className="bg-greyBackground min-h-screen min-w-full flex items-center justify-center p-4 ">
+      <div className="reset-cont bg-white w-full md:w-1/2 p-5 rounded-xl  flex  flex-col  gap-2   ">
         <div className="upper flex items-center mb-5 md:gap-40 sm:gap-10 gap-4">
           <button 
-            className="bg-lightBlue px-4 py-2 rounded text-blue"
+            className="bg-lightBlue px-4 py-1 font-bold  rounded text-blue  flex gap-2 items-center "
             onClick={handleBack}
           >
-            <FontAwesomeIcon icon="arrow-left" className="me-2" />
+            <FaArrowAltCircleLeft   className="me-2" />
             Back
           </button>
-          <h1 className="text-2xl font-bold">Reset Password</h1>
+          <h1 className="text-md  font-bold">Reset Password</h1>
         </div>
+        <p className=" text-sm  text-black font-medium  ">Enter the email address  associated  with your account and we will send you a  code to  reset  your password  </p>
         <Input
           title={"Email"}
           type={"Email"}
@@ -82,14 +95,21 @@ export default function EmailVerification() {
         />
         <div className="flex justify-center">
           <Button
-            text="Send Email"
+            text="Continue With Email "
             color="blue"
             size="64"
             loading_state={isPending}
             onClick={handleEmailSent}
           />
         </div>
+        {showAlert && (
+          <Alert
+            {...alertProps}
+            close={closeAlert}
+            timeOut={5000}
+          />
+        )}
       </div>
     </div>
   );
-}
+} 
