@@ -9,7 +9,7 @@ import Alert, { AlertType } from '../../components/Alert/Alert';
 import { FC_Login } from '../../actions';
 import { RootState, AppDispatch } from '../../app/store';
 import LoadingCircle from '../../components/Loading/LoadingCircle';
-import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import { defaultState } from '../../reducers/auth.reducer';
 
 const Login = () => {
@@ -22,6 +22,7 @@ const Login = () => {
   const [loggingIn, setLoggingIn] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
   const toggleShowPassword = () => {
@@ -136,10 +137,10 @@ const Login = () => {
                   />
                 )}
                 <div className="flex flex-row justify-between">
-                  <h3 className="flex gap-1 items-center font-light hover:text-primary-800 hover:underline cursor-pointer text-sm">
+                  <Link to='/email-verification'   className="flex gap-1 items-center font-light hover:text-primary-800 hover:underline cursor-pointer text-sm">
                     <AiFillQuestionCircle className="text-my-blue" />
                     Forgot Password
-                  </h3>
+                  </Link>
                   <button
                     type="submit"
                     className="flex flex-row gap-1 items-center bg-my-blue text-white px-5 py-2 rounded-md hover:bg-blue-600"
