@@ -1,5 +1,7 @@
 
 import logo from '../../assets/images/UR_logo.png'
+import isemupLogo from '../../assets/images/ishemapp10.png'
+
 import { AiOutlineLogin } from "react-icons/ai";
 
 function LoginTopNav() {
@@ -10,7 +12,8 @@ function LoginTopNav() {
           <img src={logo} alt="Logo" className=" w-12 mr-2" />
           <span className="text-lg font-bold">ASSET MANAGEMENT SYSTEM </span>
         </div>
-        <button className=" flex flex-row items-center bg-my-blue text-white px-2 gap-1 py-2 rounded-lg hover:bg-blue-600 w-32 justify-center h-10"> <AiOutlineLogin />Sign In</button>
+        <img src={isemupLogo} alt=" ISHEMUPP  LOGO"  className=' h-12  ' /> 
+        {/* <button className=" flex flex-row items-center bg-my-blue text-white px-2 gap-1 py-2 rounded-lg hover:bg-blue-600 w-32 justify-center h-10"> <AiOutlineLogin />Sign In</button> */}
       </div>
     );
   };
