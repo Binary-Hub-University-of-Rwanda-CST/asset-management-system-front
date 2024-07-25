@@ -1,12 +1,15 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, PasswordField } from "../../components/reusables/reusable";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useResetPassword } from "./hooks";
-import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { validationSchema } from "./Schema/validationSchema";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { verifyResetCode } from "../../actions/passwordReset.actions";
+import { AppDispatch } from "../../app/store";
+import Alert, { AlertType, AlertProps } from "../../components/Alert/Alert";
 
 function ResetPasswordForm() {
   let currentOTPIndex: number = 0;
@@ -21,9 +24,14 @@ function ResetPasswordForm() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { handleReset,updatePassword } = useResetPassword();
+  const { handleReset, updatePassword } = useResetPassword();
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertProps, setAlertProps] = useState<Omit<AlertProps, "close">>({
+    alertType: AlertType.DEFAULT,
+    title: "",
+    description: "",
+  });
 
-  // handle backspace
   const handleOnKeyDown = (
     { key }: React.KeyboardEvent<HTMLInputElement>,
     index: number
@@ -36,40 +44,110 @@ function ResetPasswordForm() {
       setactiveOTPIndex(currentOTPIndex - 1);
     }
   };
-  // code verify
-  const handleOnReset = async (e: React.MouseEvent): Promise<void> => {
-    e.preventDefault();
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleOnReset = async (): Promise<void> => {
     setisPending(true);
     const concatenatedNumber = otp.join("");
+
+    if (!verificationEmail) {
+      setAlertProps({
+        alertType: AlertType.WARNING,
+        title: "Missing Email",
+        description: "Email is missing. Please try again.",
+      });
+      setShowAlert(true);
+      setisPending(false);
+      return;
+    }
+
     try {
-      const response = await handleReset(concatenatedNumber, verificationEmail);
+      const response = await dispatch(
+        verifyResetCode(verificationEmail, concatenatedNumber)
+      );
       setisPending(false);
       setunVerified(false);
-      toast.success(response.data.message);
-      setToken(response.data.token)
+      setAlertProps({
+        alertType: AlertType.SUCCESS,
+        title: "Verification Successful",
+        description:
+          response.data.message || "Your code has been verified successfully.",
+      });
+      setShowAlert(true);
+      setToken(response.data.token);
+      console.log('Token being used:', token); 
+      
     } catch (err: any) {
       setisPending(false);
-      toast.error(err.response.data.message);
+      let errorMessage = "An unexpected error occurred. Please try again.";
+      let errorTitle = "Error";
+      if (err.response) {
+        errorMessage = err.response.data.message || err.response.statusText;
+        errorTitle = `Error ${err.response.status}`;
+        console.error("Error response:", err.response);
+      } else if (err.request) {
+        errorMessage = "No response received from server. Please try again.";
+        errorTitle = "Network Error";
+        console.error("Error request:", err.request);
+      } else {
+        errorMessage = err.message;
+        console.error("Error message:", err.message);
+      }
+      setAlertProps({
+        alertType: AlertType.DANGER,
+        title: errorTitle,
+        description: errorMessage,
+      });
+      setShowAlert(true);
     }
   };
 
-  // password update
-  const handleOnUpdate = async(values: {
+  const handleOnUpdate = async (values: {
     newPassword: string;
     confirmPassword: string;
   }) => {
+    console.log('Token being used:', token);
+    console.log('values  being used:', values);
     setisPending(true);
-    try {
-      const response = await updatePassword(values,token)
+     try {
+    const response = await updatePassword(values, token); 
+    setisPending(false);
+    setAlertProps({
+      alertType: AlertType.SUCCESS,
+      title: "Password Updated",
+      description: response.data.message || "Your password has been successfully updated.",
+    });
+    setShowAlert(true);
+    // Optionally, redirect after a short delay
+    setTimeout(() => {
+      navigate('/login');  // or wherever you want to redirect
+    }, 2000);
+  } catch (err: any) {
       setisPending(false);
-      toast.success(response.data.message)
-    } catch (err:any) {
-      setisPending(false);
-      if (err.response) toast.error(err.response.data.message);
-      else toast.error(err.message);
+      let errorMessage = "An unexpected error occurred. Please try again.";
+      let errorTitle = "Error";
+      if (err.response) {
+        errorMessage = err.response.data.message || err.response.statusText;
+        errorTitle = `Error ${err.response.status}`;
+        console.error('Error response:', err.response);
+      } else if (err.request) {
+        errorMessage = "No response received from server. Please try again.";
+        errorTitle = "Network Error";
+        console.error('Error request:', err.request);
+      } else {
+        errorMessage = err.message;
+        console.error('Error message:', err.message);
+      }
+      setAlertProps({
+        alertType: AlertType.DANGER,
+        title: errorTitle,
+        description: errorMessage,
+      });
+      setShowAlert(true);
     }
-  };
-  // on codefield change
+  }; 
+
   const handleOnChange = (
     { target }: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -78,11 +156,15 @@ function ResetPasswordForm() {
     const newOTP: string[] = [...otp];
     currentOTPIndex = index;
     newOTP[currentOTPIndex] = value.substring(value.length - 1);
-    if (value) setactiveOTPIndex(currentOTPIndex + 1);
     setOtp(newOTP);
-  };
 
-  // formik validations
+    if (value) {
+      
+        setactiveOTPIndex(currentOTPIndex + 1);
+      }
+    
+  }; 
+
   const formik = useFormik({
     initialValues: {
       newPassword: "",
@@ -90,18 +172,25 @@ function ResetPasswordForm() {
     },
     validationSchema,
     onSubmit: (values: { newPassword: string; confirmPassword: string }) => {
-      handleOnUpdate(values);
-    },
+      handleOnUpdate(values).catch((err) => {
+        setAlertProps({
+          alertType: AlertType.DANGER,
+          title: "Error",
+          description: "Failed to update password. Please try again.",
+        });
+        setShowAlert(true);
+        console.error(err);
+      });
+    }, 
   });
 
-  // on fieldchange
   const handleFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
     formik.setFieldTouched(event.target.name, true, false);
     formik.handleChange(event);
   };
-  // back button
+
   const handleBack = (): void => {
-    navigate("/resetpassword/email");
+    navigate("/email-verification"); 
   };
 
   useEffect(() => {
@@ -109,33 +198,49 @@ function ResetPasswordForm() {
     const queryParams = new URLSearchParams(location.search);
     const myParam = queryParams.get("email") || null;
     setverificationEmail(myParam);
-  }, [activeOTPIndex,location.search]);
+  }, [activeOTPIndex, location.search]);
+
+  const isOTPComplete = otp.every((digit) => digit !== "");
 
   return (
-    <div className="bg-greyBackground min-h-screen min-w-full flex items-center justify-center">
-      <div className="bg-white w-full md:w-1/2 p-5 rounded-xl">
-        <div className="upper flex items-center md:gap-40 sm:gap-10 gap-4 mb-10">
+    <div className="bg-greyBackground min-h-screen min-w-full flex items-center justify-center p-4 "> 
+      <div className="bg-white w-full md:w-1/2 p-5  rounded-xl flex flex-col gap-2 m-2  ">
+          <div className="upper flex items-center md:gap-40 sm:gap-10 gap-4  border-b border-blue-white pb-1 ">
           <button
-            className="bg-lightBlue px-4 py-2 rounded text-blue"
+            className="bg-lightBlue px-2  py-1  rounded text-blue flex gap-2 items-center"
             onClick={handleBack}
           >
-            <FontAwesomeIcon icon="arrow-left" className="me-2" />
+            <FaArrowAltCircleLeft className="me-2" />
             Back
           </button>
-          <h1 className="grow text-2xl font-bold">Reset Password</h1>
+          <h1 className="grow text-xl font-bold ">Reset Password</h1>
+        </div> 
+        {unVerified && 
+        <div>
+        <div className=" flex flex-col  w-full  ">
+          {/* <h3 className=" font-md font-bold  capitalize mb-2 ">check your email </h3> */}
+          <p className=" text-sm text-gray-700 ">
+            {" "}
+            We've sent you verfication code <br />
+            Please check your inbox at{" "}
+            <span className="text-sm font-semibold ">
+              {" "}
+              {verificationEmail}{" "}
+            </span>
+          </p>
         </div>
-        <p>Verification Code</p>
-        <div className=" flex items-center space-x-2 mt-2 mb-8">
-          {otp.map((_, index) => {
-            return (
+        <div>
+          <p className=" text-md  font-bold ">Enter Verification Code</p>
+          <div className="flex items-center space-x-2 mt-2 mb-8">
+            {otp.map((_, index) => (
               <React.Fragment key={index}>
                 <input
                   ref={index === activeOTPIndex ? inputRef : null}
                   type="number"
-                  className="w-1/2 h-12 border-blue border-2 rounded bg-transparent
-               outline-none text-center font-semibold text-xl
-                spin-button-none focus:border-gray-700
-                 text-gray-900 transition"
+                  className="w-1/2 h-10  border-blue   border-2 rounded bg-transparent
+                 outline-none text-center font-semibold text-xl
+                  spin-button-none focus:border-my-blue 
+                   text-gray-900 transition disabled:bg-slate-400"
                   onChange={(e) => handleOnChange(e, index)}
                   onKeyDown={(e) => handleOnKeyDown(e, index)}
                   value={otp[index]}
@@ -145,9 +250,20 @@ function ResetPasswordForm() {
                   <span className="w-2 py-0.5 bg-gray-400" />
                 )}
               </React.Fragment>
-            );
-          })}
+            ))}
+          </div>
         </div>
+        
+        </div>
+        }  
+        {showAlert && (
+          <Alert
+            {...alertProps}
+            close={() => setShowAlert(false)}
+            timeOut={5000}
+            // className={`${alertProps.alertType == AlertType.DANGER && 'border border-red-700 bg-dangeR  '}}   
+          />
+        )}
         {unVerified && (
           <div className="flex justify-center">
             <Button
@@ -155,48 +271,49 @@ function ResetPasswordForm() {
               color="blue"
               size="64"
               loading_state={isPending}
-              onClick={(e: React.MouseEvent) => handleOnReset(e)}
+              onClick={handleOnReset}
+              disabled={!isOTPComplete || isPending}
             />
           </div>
         )}
+
         <form onSubmit={formik.handleSubmit}>
           {!unVerified && (
-          <div className="password">
-            <div className="mb-8">
-              <label htmlFor="email">New Password</label>
-              <PasswordField
-                id="newPassword"
-                name="newPassword"
-                password={formik.values.newPassword}
-                onChange={handleFieldChange}
-                disabled={unVerified}
-                error={formik.errors.newPassword}
-                touched= {formik.touched.newPassword}
-              />
+            <div className="password">
+              <div className="mb-8">
+                <label htmlFor="email">New Password</label>
+                <PasswordField
+                  id="newPassword"
+                  name="newPassword"
+                  password={formik.values.newPassword}
+                  onChange={handleFieldChange}
+                  disabled={unVerified}
+                  error={formik.errors.newPassword}
+                  touched={formik.touched.newPassword}
+                />
+              </div>
+              <div className="mb-8">
+                <label>Re-enter New Password</label>
+                <PasswordField
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  password={formik.values.confirmPassword}
+                  onChange={handleFieldChange}
+                  error={formik.errors.confirmPassword}
+                  touched={formik.touched.confirmPassword}
+                  disabled={unVerified}
+                />
+              </div> 
+              <div className="flex justify-center">
+                <Button
+                  text="Reset Password"
+                  color="blue"
+                  size="64"
+                  type="submit"
+                  loading_state={isPending}
+                />
+              </div>
             </div>
-            <div className="mb-8">
-              <label>Re-enter New Password</label>
-              <PasswordField
-                id="confirmPassword"
-                name="confirmPassword"
-                password={formik.values.confirmPassword}
-                onChange={handleFieldChange}
-                error={formik.errors.confirmPassword}
-                touched= {formik.touched.confirmPassword}
-                disabled={unVerified}
-              />
-            </div>
-
-            <div className="flex justify-center">
-              <Button
-                text="Reset Password"
-                color="blue"
-                size="64"
-                type="submit"
-                loading_state={isPending}
-              />
-            </div>
-          </div>
           )}
         </form>
       </div>
