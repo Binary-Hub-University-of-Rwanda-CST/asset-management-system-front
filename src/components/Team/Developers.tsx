@@ -91,7 +91,7 @@ const Developers: React.FC = () => {
     {
       name: "Habibu",
       role: "Analysit",
-      description: "Habibu  leads our Project efforts, architecting scalable and secure server-side solutions. He specializes in optimizing database performance and implementing complex business logic.",
+      description: "Habibu  leads our Project efforts, architecting scalable and secure communication solutions. He ensures our team delivers high-quality solutions that meet client needs.",
       imageUrl: habibu,  
       socialLinks: [
         { url: "#", icon: <FaLinkedin className="w-5 h-5" /> },
