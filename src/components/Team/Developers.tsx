@@ -16,7 +16,7 @@ const Developers: React.FC = () => {
   const teamMembers = [
     {
       name: "Mr. Celestin MBONABUCYA",
-      role: "CORDINATOR & Senior Analyst",
+      role: "Academic Staff, Coordinator of Binary HUB & Senior Systems Analyst.",
       description: "Celestin oversees project execution, conducts advanced data analysis, and ensures our team delivers high-quality solutions that meet client needs.",
       imageUrl: celestin,
       socialLinks: [
@@ -102,7 +102,8 @@ const Developers: React.FC = () => {
 
   return (
     <Team
-      title="Meet Our Talented Team"
+      title="Meet Our Talented Team "
+      organisation=' BINARY HUB / SCHOOL OF ICT / COLLEGE OF SCIENCE AND TECHNOLOGY / UNIVERSITY OF RWANDA'
       description="We are a diverse group of professionals dedicated to delivering innovative solutions across the full stack of web development."
       members={teamMembers}
     />
