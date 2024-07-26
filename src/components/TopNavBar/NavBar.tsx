@@ -8,6 +8,7 @@ import { Auth } from "../../actions";
 import { FC_Logout } from "../../actions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import logo from '../../assets/images/UR_logo.png';
 interface NavBarProps {
   auth: Auth;
   // FC_Logout: () => void;
@@ -57,6 +58,7 @@ const NavBar: React.FC<NavBarProps> = ({
                 </div>
                 <div className="">
                   <div className="flex flex-row items-center gap-2 text-lg rounded-full w-max pr-3 cursor-pointer group">
+                    <img src={logo} alt="UR LOGO w" className=" w-12"/>     
                     <span className="text-gray-700 font-bold">
                       ASSET MANAGEMENT SYSTEM / NYARUGENGE CAMPUS
                     </span>
