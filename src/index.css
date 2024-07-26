@@ -43,3 +43,6 @@
 ::-webkit-scrollbar-thumb:hover {
   background:#0085ff ;
 }
+*{
+  box-sizing: border-box;
+}
