@@ -104,7 +104,7 @@ const Developers: React.FC = () => {
     <Team
       title="Meet Our Talented Team "
       organisation=' BINARY HUB / SCHOOL OF ICT / COLLEGE OF SCIENCE AND TECHNOLOGY / UNIVERSITY OF RWANDA'
-      description="We are a diverse group of professionals dedicated to delivering innovative solutions across the full stack of web development."
+      description="We are a diverse group of professionals dedicated to delivering innovative solutions across the Technology." 
       members={teamMembers}
     />
   );
