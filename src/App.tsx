@@ -8,6 +8,7 @@ import SideNavBar from "./components/SideNavBar/SideNavBar";
 import NavBar from "./components/TopNavBar/NavBar";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import StockLoading from "./components/StockLoading/StockLoading";
+import Footer from "./components/Footer/Footer";
 
 // Containers
 import Login from "./containers/authantication/Login";
@@ -19,6 +20,7 @@ import RequestValidation from "./containers/AssetDistribution/Request/Components
 import UserProfile from "./containers/profile/UserProfile";
 import EmailVerification from "./containers/resetPassword/emailVerification";
 import ResetPasswordForm from "./containers/resetPassword/resetPassword";
+import Developers from "./components/Team/Developers";
 
 const App: React.FC = () => {
   const isAuthenticated = useSelector(
@@ -34,6 +36,7 @@ const App: React.FC = () => {
       } />
       <Route path="/email-verification" element={<EmailVerification />} />
       <Route path="/reset-password" element={<ResetPasswordForm />} />
+      <Route path="/meet-developers" element={<Developers />} /> 
 
       <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
         <Route element={<AuthenticatedLayout />}>
@@ -100,11 +103,13 @@ const AuthenticatedLayout: React.FC = () => {
         <div
           className={
             !sideNavbarStatus
-              ? "flex flex-col overflow-y-auto mt-20 w-full ml-4"
-              : "flex flex-col overflow-y-auto mt-20 ml-[270px] w-full"
+              ? "flex flex-col overflow-y-auto mt-20  w-full ml-4"
+              : "flex flex-col overflow-y-auto mt-20  ml-[270px] w-full"
           }
         >
           <Outlet />
+      
+        <Footer/>  
         </div>
       </div>
     </div>
