@@ -1,38 +1,31 @@
-#!/bin/sh
-
-# Function to add, commit, and push a file
-commit_file() {
-  git add "$1"
-  git commit -m "Modify $1"
-  git push origin2 main
-}
+#!/bin/bash
 
 # List of modified files
 modified_files=(
+  "commit.sh"
   "src/App.tsx"
-  "src/actions/saveUploaded.action.ts"
-  "src/actions/types.ts"
-  "src/containers/changePassword/ChangePassword.tsx"
-  "src/reducers/index.ts"
-  "src/utils/AxiosToken.ts"
+  "src/index.css"
 )
 
-# List of untracked files
-untracked_files=(
-  "src/actions/changePassword.action.ts"
-  "src/containers/profile/"
-  "src/reducers/changePassword.reducer.ts"
-  "src/utils/axiosInstance.ts"
+# List of untracked directories
+untracked_directories=(
+  "src/assets/images/team/"
+  "src/components/Card/"
+  "src/components/Footer/"
+  "src/components/Team/"
 )
 
-# Commit modified files
-for file in "${modified_files[@]}"
-do
-  commit_file "$file"
+# Commit each modified file individually
+for file in "${modified_files[@]}"; do
+  git add "$file"
+  git commit -m "Commit modified file: $file"
 done
 
-# Commit untracked files
-for file in "${untracked_files[@]}"
-do
-  commit_file "$file"
+# Commit each untracked directory individually
+for dir in "${untracked_directories[@]}"; do
+  git add "$dir"
+  git commit -m "Commit untracked directory: $dir"
 done
+
+# Push the changes
+# git push origin main
