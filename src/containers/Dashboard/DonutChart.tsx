@@ -78,7 +78,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ assetsData }) => {
 
   return (
     <div className="donut">
-      <Chart options={options} series={series} type="donut" width="500" />
+      <Chart options={options} series={series} type="donut" width="450" />
     </div>
   );
 };

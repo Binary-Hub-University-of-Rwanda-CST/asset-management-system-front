@@ -25,7 +25,7 @@ interface AppState {
 
 const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_SetError, fetchAssets }) => {
   const [state, setState] = useState<AppState>({
-    loading: true, // Initial loading state
+    loading: true,
     success: "",
     error: "",
   });
@@ -41,7 +41,6 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
     loadData();
   }, [fetchAssets, assetsData.length]);
 
-  /// Calculate total assets and total asset value dynamically
   const totalAssets = assetsData.reduce((total, category) =>
     total + category.buildings.reduce((catTotal, building) =>
       catTotal + building.rooms.reduce((roomTotal, room) =>
@@ -61,7 +60,6 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
     0
   );
 
-  // Extract buildings data for BuildingAssetsBarGraph
   const buildings: Building[] = assetsData.reduce((allBuildings, category) =>
     allBuildings.concat(category.buildings), [] as Building[]
   );
@@ -69,20 +67,20 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
   if (state.loading) {
     return (
       <div className="mr-4 animate__animated animate__faster">
-        <div className="flex flex-col bg-white rounded-lg p-2">
-          <div className="flex flex-row justify-between items-center">
-            <div className="flex flex-col gap-2 mb-2">
+        <div className="flex flex-col bg-white rounded-lg p-2 md:p-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex flex-col gap-2 mb-2 md:mb-0">
               <div className="flex flex-row items-center gap-1">
                 <Skeleton width={40} height={30} />   
                 <Skeleton width={180} height={30} /> 
               </div>
             </div>
-            <div className="flex flex-row gap-4 items-center">
-              <div className="flex flex-row bg-blue-white px-4 py-2 rounded-lg h-fit items-center gap-2">
+            <div className="flex flex-col md:flex-row gap-4 items-center mt-4 md:mt-0">
+              <div className="flex flex-row bg-blue-white px-4 py-2 rounded-lg h-fit items-center gap-2 w-full md:w-auto">
                 <Skeleton width={30} height={30} />
                 <Skeleton width={100} height={30} />
               </div>
-              <div className="flex flex-row bg-[#dcf1e6] px-4 py-2 rounded-lg h-fit items-center gap-2">
+              <div className="flex flex-row bg-[#dcf1e6] px-4 py-2 rounded-lg h-fit items-center gap-2 w-full md:w-auto mt-2 md:mt-0">
                 <Skeleton width={30} height={30} />
                 <Skeleton width={100} height={30} /> 
               </div>
@@ -90,17 +88,15 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
           </div>
         </div>
 
-        <div className="rounded-lg py-4 flex flex-row gap-6">
-          <div className="flex flex-col gap-4 w-2/5">
+        <div className="rounded-lg py-4 flex flex-col md:flex-row gap-6">
+          <div className="flex flex-col gap-4 w-full md:w-2/5">
             <div className="rounded-lg p-0 w-full bg-white flex justify-center items-center flex-col h-full">
-              <Skeleton width={300}  />
-              <Skeleton height={200} width={200} circle /> 
+              <Skeleton width="80%" />
+              <Skeleton height={200} width="80%" circle /> 
             </div>
           </div>
-          <div className="flex bg-white w-3/5 justify-center items-center rounded-lg">
-            <Skeleton  width="100"  /> 
-            <Skeleton  width="200" />
-            <Skeleton height={400} width="300" />
+          <div className="flex bg-white w-full md:w-3/5 justify-center items-center rounded-lg mt-4 md:mt-0">
+            <Skeleton width="80%" height={400} />
           </div>
         </div>
       </div>
@@ -109,47 +105,47 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
 
   return (
     <div className="mr-4 animate__animated animate__faster">
-      <div className="flex flex-col bg-white rounded-lg p-2">
-        <div className="flex flex-row justify-between items-center">
-          <div className="flex flex-col gap-2 mb-2">
+      <div className="flex flex-col bg-white rounded-lg p-2 md:p-4">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col gap-2 mb-2 md:mb-0">
             <div className="flex flex-row items-center gap-1">
               <MdOutlineDashboard className="text-2xl text-my-blue" />
               <div className="flex item-center flex-col">
-                <div className="flex text-black text-xl font-bold px-2">Dashboard</div>
-                <div className="px-2 rounded-md bg-primary-700 text-black w-max text-sm">
+                <div className="flex text-black text-lg md:text-xl font-bold px-2">Dashboard</div>
+                <div className="px-2 rounded-md bg-primary-700 text-black w-max text-xs md:text-sm">
                   Get Overview of All Assets
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex flex-row gap-4 items-center">
-            <div className="flex flex-row bg-blue-white px-4 py-2 rounded-lg h-fit items-center gap-2">
-              <TbDatabase className="text-3xl font-bold text-my-blue" />
+          <div className="flex flex-col md:flex-row gap-4 items-center mt-4 md:mt-0">
+            <div className="flex flex-row bg-blue-white px-4 py-2 rounded-lg h-fit items-center gap-2 w-full md:w-auto">
+              <TbDatabase className="text-2xl md:text-3xl font-bold text-my-blue" />
               <div className="flex flex-col gap-0">
-                <h5>Total Assets</h5>
-                <h3 className="text-sm font-bold">{totalAssets}</h3>
+                <h5 className="text-sm md:text-base">Total Assets</h5>
+                <h3 className="text-sm md:text-base font-bold">{totalAssets}</h3>
               </div>
             </div>
-            <div className="flex flex-row bg-[#dcf1e6] px-4 py-2 rounded-lg h-fit items-center gap-2">
-              <TbDatabaseDollar className="text-3xl font-bold text-confirm" />
+            <div className="flex flex-row bg-[#dcf1e6] px-4 py-2 rounded-lg h-fit items-center gap-2 w-full md:w-auto mt-2 md:mt-0">
+              <TbDatabaseDollar className="text-2xl md:text-3xl font-bold text-confirm" />
               <div className="flex flex-col gap-0">
-                <h5>Total Assets Value</h5>
-                <h3 className="text-md font-bold">{totalAssetsValue.toLocaleString()} FRW</h3>
+                <h5 className="text-sm md:text-base">Total Assets Value</h5>
+                <h3 className="text-sm md:text-lg font-bold">{totalAssetsValue.toLocaleString()} FRW</h3>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="rounded-lg py-4 flex flex-row gap-6"> 
-        <div className="flex flex-col gap-4 w-2/5">
+      <div className="rounded-lg py-4 flex flex-col md:flex-row gap-6"> 
+        <div className="flex flex-col gap-4 w-full md:w-2/5">
           <div className="rounded-lg p-0 w-full bg-white flex justify-center items-center flex-col h-full">
-            <h3 className="text-md font-semibold m-2">Assets Value Summary by category</h3>
+            <h3 className="text-sm md:text-md font-semibold m-2">Assets Value Summary by category</h3>
             <DonutChart assetsData={assetsData} />
           </div>
         </div>
-        <div className="flex bg-white w-3/5 justify-center items-center rounded-lg">
-          <BuildingAssetsBarGraph buildings={buildings}  />
+        <div className="flex bg-white w-full md:w-3/5 justify-center items-center rounded-lg mt-4 md:mt-0">
+          <BuildingAssetsBarGraph buildings={buildings} />
         </div>
       </div>
     </div>
@@ -165,5 +161,4 @@ export default connect(mapStateToProps, {
   FC_SetSuccess,
   FC_SetError,
   fetchAssets,
-})(Dashboard);
- 
+})(Dashboard); 

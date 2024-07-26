@@ -162,6 +162,9 @@ export const FC_Login = (data: { email: string; password: string }, callback: Fu
       // Store token in localStorage (adjust this based on the actual token structure)
       localStorage.setItem(APP_TOKEN_NAME, res.data.data.token.access?.token || '');
 
+        // Store user data in localStorage
+        localStorage.setItem('ams_userData', JSON.stringify(res.data.data)); 
+
       callback(true, "");
     } catch (error: any) {
       console.error("Login Error:", error);
@@ -218,5 +221,6 @@ export const FC_CheckLoggedIn = (callBack: (status: boolean) => void): ThunkActi
  */
 export const FC_Logout = (): AnyAction => {
   localStorage.removeItem(APP_TOKEN_NAME);
+  localStorage.removeItem('ams_userData'); 
   return { type: ActionTypes.LOGOUT };
 };
