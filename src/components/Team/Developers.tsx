@@ -6,7 +6,7 @@ import { TbWorldWww } from 'react-icons/tb';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
 import { BsTelephoneFill } from 'react-icons/bs';
 import edison from '../../assets/images/team/edsn.jpg'; 
-import emyy from '../../assets/images/team/emmanuel.png';
+import emyy from '../../assets/images/team/emmy.jpg'; 
 import david from '../../assets/images/team/datch.png';
 import celestin from '../../assets/images/team/cordinator.jpg';
 import joseph from '../../assets/images/team/joseph.jpg';
@@ -20,9 +20,11 @@ const Developers: React.FC = () => {
       description: "Celestin oversees project execution, conducts advanced data analysis, and ensures our team delivers high-quality solutions that meet client needs.",
       imageUrl: celestin,
       socialLinks: [
-        { url: "#", icon: <FaLinkedin className="w-5 h-5" /> },
-        { url: "#", icon: <FaTwitter className="w-5 h-5" /> },
-        { url: "#", icon: <FaGithub className="w-5 h-5" /> },
+        { url: "cembonace@gmail.com", icon: <SiGmail className="w-5 h-5" /> },
+        { url: "https://x.com/cmbonabucya", icon: <FaTwitter className="w-5 h-5" /> },
+        { url: "https://www.linkedin.com/in/cmbonabucya/ ", icon: <FaLinkedin className="w-5 h-5" /> },
+        
+        { url: "tel:+25 0788695862", icon: <FaWhatsapp className="w-5 h-5" /> } 
       ],
     },
     {
