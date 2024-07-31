@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { StoreState } from '../../../reducers';
 import Input from '../../../components/Fragments/Input_backup';
 import { AssetInterface } from './DataTable';
+import { updateAsset } from '../../../actions/updateAssets.action';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { RootState } from '../../../app/store'; 
+
 
 interface AssetUpdateFormProps {
   asset: AssetInterface;
@@ -21,6 +26,8 @@ interface AssetSpecification {
 const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({ asset, onUpdate, onCancel }) => {
   const [formData, setFormData] = useState<AssetInterface>(asset);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
+
 
   const assetSpecifications = useSelector(
     (state: StoreState) => state.uploadSpecificaiton.specifications
@@ -56,6 +63,8 @@ const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({ asset, onUpdate, onCa
     return ''; // Return empty string instead of null
   };
 
+
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prevData => ({ ...prevData, [name]: value }));
@@ -67,6 +76,7 @@ const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({ asset, onUpdate, onCa
     }));
   }; 
 
+ 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -84,10 +94,34 @@ const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({ asset, onUpdate, onCa
     setErrors(newErrors);
 
     if (!hasErrors) {
-      onUpdate(formData);
+      const formattedData = [{
+        id: asset.id,
+        asset_code: formData.asset_code,
+        serial_number: formData.serial_number,
+        asset_name: formData.asset_name,
+        asset_description: formData.asset_description,
+        asset_category: formData.asset_category,
+        building_code: formData.building_code,
+        room_code: formData.room_code,
+        department: formData.department,
+        source_of_fund: formData.source_of_fund,
+        asset_acquisition_date: formData.asset_acquisition_date,
+        acquisition_cost: Number(formData.acquisition_cost),
+        useful_life: Number(formData.useful_life),
+        date_of_disposal: formData.date_of_disposal,
+        condition_status: formData.condition_status,
+        valuation_date: formData.valuation_date,
+        replacement_cost: Number(formData.replacement_cost),
+        actual_depreciation_rate: Number(formData.actual_depreciation_rate),
+        remarks: formData.remarks
+      }]; 
+      
+      dispatch(updateAsset(formattedData));
+      onUpdate(formData); 
     }
   };
-
+   
+   
   return (
     <form onSubmit={handleSubmit} className="p-4">
       {assetSpecifications.map((spec: AssetSpecification) => (
@@ -103,7 +137,7 @@ const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({ asset, onUpdate, onCa
                       : "border-my-blue"
                   } rounded-md outline-my-blue`}
               >
-                <option value="">Select an option</option>
+                <option value="" >Select an option</option>
                 {spec.allowedValues.map(value => (
                   <option key={value} value={value}>{value}</option>
                 ))}
@@ -114,7 +148,6 @@ const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({ asset, onUpdate, onCa
             type={spec.type === 'number' ? 'number' : 'text'}
             value={formData[spec.name]?.toString() || ''}
             onChange={handleInputChange}
-            disabled={true} 
             error={errors[spec.name]}
             onCloseError={() => setErrors(prev => ({ ...prev, [spec.name]: '' }))} 
             className="bg-white"
@@ -131,7 +164,7 @@ const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({ asset, onUpdate, onCa
         </button>
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" 
+          className="px-4 py-2 bg-my-blue text-white rounded-md hover:text-black " 
         >
           Update
         </button>

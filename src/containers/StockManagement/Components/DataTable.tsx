@@ -4,7 +4,9 @@ import { FaFileExcel } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import Modal,{ModalMarginTop, ModalSize} from "../../../components/modal/Modal";
 import AssetUpdateForm from "./AssetUpdateForm";
-
+import { fetchSpecifications } from "../../../actions/uploadpecification.action";
+import { AppDispatch } from "../../../app/store";
+import { useDispatch } from "react-redux";
 export interface buildingInterface {
   no: string;
   buildingName: string;
@@ -41,6 +43,7 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
   const [filteredData, setFilteredData] = useState(activeCategoryData);
   const [selectedAsset, setSelectedAsset] = useState<AssetInterface | null>(null);
   const [isAssetModalOpen, setIsAssetModalOpen] = useState(false);  
+  const dispatch: AppDispatch = useDispatch();
 
   const handleBuildingRowClick = (building: buildingInterface) => {
     const filteredRooms = building.rooms.filter(room => room.totalAssets > 0);
@@ -72,6 +75,10 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
     );
     setFilteredData(filtered);
   }, [searchTerm, activeCategoryData]);
+
+  useEffect(() => {
+    dispatch(fetchSpecifications());
+  }, [dispatch]);
 
   const exportToCSV = () => {
     const allAssets = activeCategoryData.flatMap(building => building.rooms.flatMap(room => room.assets));

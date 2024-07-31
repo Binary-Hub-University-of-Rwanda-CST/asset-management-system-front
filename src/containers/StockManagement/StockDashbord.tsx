@@ -17,6 +17,7 @@ import { HiOutlineCurrencyDollar } from "react-icons/hi";
 import { IoStatsChart } from "react-icons/io5";
 import { FaTableList } from "react-icons/fa6";
 import { formatNumberWithCommas } from "../../utils/functions";
+import { fetchSpecifications } from "../../actions/uploadpecification.action";
 
 interface AssetProps {
   assetsData: Assets[];
@@ -30,7 +31,10 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
     if (assetsData.length === 0) {
       fetchAssets();
     }
-  }, [fetchAssets, assetsData.length]); 
+    fetchSpecifications();
+  }, [fetchAssets, assetsData.length, fetchSpecifications]);  
+
+
  
   const [showTable, setShowTable] = useState(false);
   const [isBuildingModalOpen, setIsBuildingModalOpen] = useState(false); 

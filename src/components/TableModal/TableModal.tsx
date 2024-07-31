@@ -160,7 +160,7 @@ const TableModal: React.FC<ModalProps> = ({
                             onClick={() =>
                               onRowClick && onRowClick(row as RoomInterface)
                             }
-                            onDoubleClick={() =>
+                            onDoubleClick={() => 
                               onRowDoubleClick && onRowDoubleClick(row as AssetInterface) 
                             } // Add this line
                           >

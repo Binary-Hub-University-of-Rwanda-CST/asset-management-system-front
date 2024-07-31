@@ -7,7 +7,7 @@ interface InputProps {
   min?: string;
   max?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  disabled: boolean;
+  disabled?: boolean;
   value?: string;
   error?: string | null;
   onCloseError?: () => void;
