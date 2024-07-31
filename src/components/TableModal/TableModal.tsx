@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaArrowLeft, FaSearch, FaFileExcel } from "react-icons/fa";
-import { RoomInterface } from "../../containers/StockManagement/Components/DataTable";
+import { RoomInterface, AssetInterface } from "../../containers/StockManagement/Components/DataTable";
 import { formatHeaderName } from "../../utils/functions";
-import Papa from "papaparse"; 
+import Papa from "papaparse";
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,6 +12,7 @@ interface ModalProps {
   tableData: Record<string, any>[];
   tag?: string[];
   onRowClick?: (room: RoomInterface) => void;
+  onRowDoubleClick?: (asset: AssetInterface) => void; 
 }
 
 const TableModal: React.FC<ModalProps> = ({
@@ -22,6 +23,7 @@ const TableModal: React.FC<ModalProps> = ({
   tableData,
   tag,
   onRowClick,
+  onRowDoubleClick,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState<Record<string, any>[]>([]);
@@ -64,7 +66,10 @@ const TableModal: React.FC<ModalProps> = ({
 
   const exportToCSV = () => {
     const formattedHeaders = tableHeaders.map(formatHeaderName);
-    const csvData = [formattedHeaders, ...filteredData.map(row => tableHeaders.map(header => row[header]))];
+    const csvData = [
+      formattedHeaders,
+      ...filteredData.map((row) => tableHeaders.map((header) => row[header])),
+    ];
 
     const csv = Papa.unparse(csvData);
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
@@ -154,7 +159,10 @@ const TableModal: React.FC<ModalProps> = ({
                             className="border-t py-1 cursor-pointer hover:bg-blue-white "
                             onClick={() =>
                               onRowClick && onRowClick(row as RoomInterface)
-                            } // Ensure row is casted to RoomInterface
+                            }
+                            onDoubleClick={() =>
+                              onRowDoubleClick && onRowDoubleClick(row as AssetInterface) 
+                            } // Add this line
                           >
                             <td className="px-4 py-1 text-sm">
                               {rowIndex + 1}

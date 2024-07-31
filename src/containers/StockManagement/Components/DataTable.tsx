@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import TableModal from "../../../components/TableModal/TableModal";
 import { FaFileExcel } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+import Modal,{ModalMarginTop, ModalSize} from "../../../components/modal/Modal";
+import AssetUpdateForm from "./AssetUpdateForm";
 
 export interface buildingInterface {
   no: string;
@@ -37,6 +39,8 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(activeCategoryData);
+  const [selectedAsset, setSelectedAsset] = useState<AssetInterface | null>(null);
+  const [isAssetModalOpen, setIsAssetModalOpen] = useState(false);  
 
   const handleBuildingRowClick = (building: buildingInterface) => {
     const filteredRooms = building.rooms.filter(room => room.totalAssets > 0);
@@ -100,6 +104,24 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
     document.body.removeChild(link);
     window.URL.revokeObjectURL(url);
   };
+
+  const handleAssetDoubleClick = (asset: AssetInterface) => {
+    setSelectedAsset(asset);
+    setIsAssetModalOpen(true);
+  };
+
+  const handleCloseAssetModal = () => {
+    setSelectedAsset(null);
+    setIsAssetModalOpen(false);
+  };
+
+  const handleAssetUpdate = (updatedAsset: AssetInterface) => {
+    // Implement the logic to update the asset in your data structure
+    // This might involve updating the state and possibly making an API call
+    console.log("Updated asset:", updatedAsset);
+    handleCloseAssetModal();
+  };
+
 
   return (
     <>
@@ -168,7 +190,23 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
             tableHeaders={selectedRoom.assets.length > 0 ? Object.keys(selectedRoom.assets[0]) : []}
             tableData={selectedRoom.assets || []}
             tag={[activeCategory, selectedBuilding!!.buildingName, selectedRoom.roomName]}
+            onRowDoubleClick={handleAssetDoubleClick}
           />
+        )}
+        {selectedAsset && (
+          <Modal
+            isOpen={isAssetModalOpen}
+            onClose={handleCloseAssetModal}
+            title={`Update Asset`}
+            widthSizeClass={ModalSize.extraLarge}  
+            marginTop={ModalMarginTop.none} 
+          >
+            <AssetUpdateForm
+              asset={selectedAsset}
+              onUpdate={handleAssetUpdate}
+              onCancel={handleCloseAssetModal}
+            />
+          </Modal>
         )}
       </div>
     </>

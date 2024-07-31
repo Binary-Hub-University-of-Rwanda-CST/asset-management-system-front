@@ -69,7 +69,7 @@ const Modal: React.FC<ModalProps> = (props) => {
     >
       <div
         ref={modalRef}
-        className={`z-50 fixed items-center py-4 justify-items-center ${marginTop} left-0 right-0 bottom-0 bg-white rounded-md shadow-xl self-center ${widthSizeClass} animate__animated ${marginTop !== ModalMarginTop.none ? "animate__fadeInUp" : "animate__zoomIn"} animate__faster`}
+        className={`z-50 fixed items-center py-4 pt-0  justify-items-center ${marginTop} left-0 right-0 bottom-0 bg-white rounded-md shadow-xl self-center ${widthSizeClass} animate__animated ${marginTop !== ModalMarginTop.none ? "animate__fadeInUp" : "animate__zoomIn"} animate__faster` }  
         style={{
           width: "100%",
           maxHeight: "99vh",  
@@ -79,7 +79,7 @@ const Modal: React.FC<ModalProps> = (props) => {
           // zIndex: 99999999,
         }}
       >
-        <div className="flex flex-row gap-4 items-center bold border-blue-white border-b-2 pb-2 mx-0">
+        <div className=" pt-4 sticky top-0 z-10  bg-white flex flex-row gap-4 items-center bold border-blue-white border-b-2 pb-2 mx-0">  
           <button
             className="flex gap-1 ml-5 items-center text-[#2a82d2] bg-[#e1f3ff] rounded-lg py-1 px-2 top-2 left-2 hover:text-gray-800"
             onClick={onClose}
@@ -90,7 +90,7 @@ const Modal: React.FC<ModalProps> = (props) => {
           <h2 className="font-bold text-md pr-5">{title}</h2>
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col">   
           {children}
         </div>
       </div>
