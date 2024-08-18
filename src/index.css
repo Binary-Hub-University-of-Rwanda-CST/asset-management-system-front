@@ -20,12 +20,15 @@
     appearance: none;
   }
 
-  /*
-        * custom scrollbar 
-  */
-  /* width */
+  
+/*
+ * Custom scrollbar 
+ */
+
+/* width */
 ::-webkit-scrollbar {
-  width: 7px;   
+  width: 7px;
+  height: 5px; /* Set height for horizontal scrollbar */
 }
 
 /* Track */
@@ -37,12 +40,15 @@
 ::-webkit-scrollbar-thumb {
   background: #0084fff2;
   border-radius: 5px;
+  height: 5px; /* Set height for the scrollbar thumb */
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background:#0085ff ;
+  background: #0085ff;
 }
-*{
+
+* {
   box-sizing: border-box;
 }
+  
