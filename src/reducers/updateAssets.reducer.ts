@@ -5,22 +5,22 @@ import {
   UpdateAssetActionTypes 
 } from '../actions/updateAssets.action';
 
-interface AssetState {
+export interface UpdateAssetState {
   loading: boolean;
   error: string | null;
   asset: any | null;
 }
 
-const initialState: AssetState = {
+const initialState: UpdateAssetState = {
   loading: false,
   error: null,
   asset: null,
 };
 
-export const assetReducer = (
+export  const updateAssetReducer = (
   state = initialState, 
   action: UpdateAssetActionTypes
-): AssetState => {
+): UpdateAssetState => {
   switch (action.type) {
     case UPDATE_ASSET_REQUEST:
       return { ...state, loading: true };
