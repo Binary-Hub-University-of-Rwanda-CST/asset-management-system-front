@@ -11,6 +11,7 @@ import changePasswordReducer, {
   ChangePasswrdState,
 } from "./changePassword.reducer";
 import passwordResetReducer, {PasswordResertState} from "./passwordReset.reducer";
+import { updateAssetReducer,UpdateAssetState  } from "./updateAssets.reducer";
 
 // define the entire state into the entire side
 export interface StoreState {
@@ -21,6 +22,7 @@ export interface StoreState {
   validatedData: ValidatedDataState;
   changePassword: ChangePasswrdState;
   passwordReset: PasswordResertState;
+  updateAsset: UpdateAssetState
 }
 
 export const rootReducers = combineReducers<StoreState>({
@@ -30,6 +32,6 @@ export const rootReducers = combineReducers<StoreState>({
   uploadSpecificaiton: specificationReducer,
   validatedData: validatedDataReducer,
   changePassword: changePasswordReducer,
-  passwordReset: passwordResetReducer
+  passwordReset: passwordResetReducer,
+  updateAsset : updateAssetReducer
 }); 
- 
