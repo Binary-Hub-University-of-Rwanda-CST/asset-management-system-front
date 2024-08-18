@@ -7,6 +7,8 @@ import AssetUpdateForm from "./AssetUpdateForm";
 import { fetchSpecifications } from "../../../actions/uploadpecification.action";
 import { AppDispatch } from "../../../app/store";
 import { useDispatch } from "react-redux";
+import { updateAsset } from "../../../actions/updateAssets.action";
+
 export interface buildingInterface {
   no: string;
   buildingName: string;
@@ -123,11 +125,9 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
   };
 
   const handleAssetUpdate = (updatedAsset: AssetInterface) => {
-    // Implement the logic to update the asset in your data structure
-    // This might involve updating the state and possibly making an API call
-    console.log("Updated asset:", updatedAsset);
-    handleCloseAssetModal();
-  };
+    dispatch(updateAsset([updatedAsset]));
+    // handleCloseAssetModal();
+  }; 
 
 
   return (
