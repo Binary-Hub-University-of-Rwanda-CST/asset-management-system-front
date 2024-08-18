@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { Dispatch, Action } from 'redux';
+import { API_URL } from '../utils/api';
+import axiosInstance from '../utils/axiosInstance';
+import { AssetInterface } from '../containers/StockManagement/Components/DataTable';
 
 export const UPDATE_ASSET_REQUEST = 'UPDATE_ASSET_REQUEST';
 export const UPDATE_ASSET_SUCCESS = 'UPDATE_ASSET_SUCCESS';
@@ -38,13 +41,13 @@ export type UpdateAssetActionTypes =
   | UpdateAssetSuccessAction
   | UpdateAssetFailureAction;
 
-export const updateAsset = (assetData: Record<string, any>) => {
+export const updateAsset = (assets: AssetInterface[]) => {
   return async (dispatch: Dispatch<UpdateAssetActionTypes>) => {
     dispatch(updateAssetRequest());
     try {
-      const response = await axios.put(
-        'https://ur-assets-management-system-backend.onrender.com/api/v1/asset/update',
-        assetData
+      const response = await axiosInstance.put(
+        `${API_URL}/asset/update`,
+        assets // Send array of AssetInterface objects
       );
       dispatch(updateAssetSuccess(response.data));
     } catch (error) {
@@ -52,3 +55,4 @@ export const updateAsset = (assetData: Record<string, any>) => {
     }
   };
 }; 
+ 
