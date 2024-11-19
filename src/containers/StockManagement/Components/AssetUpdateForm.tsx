@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StoreState } from '../../../reducers'; 
 import { AssetInterface } from './DataTable'; 
-import { updateAsset } from '../../../actions/updateAssets.action'; 
+import { ApiError, updateAsset } from '../../../actions/updateAssets.action'; 
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { RootState } from '../../../app/store'; 
 import LoadingCircle from '../../../components/Loading/LoadingCircle';
-import Alert, {AlertProps, AlertType} from '../../../components/Alert/Alert';
+import Alert, { AlertType } from '../../../components/Alert/Alert';
 
 interface AssetUpdateFormProps {
   asset: AssetInterface;
@@ -23,6 +23,28 @@ interface AssetSpecification {
   allowedValues?: string[];
 }
 
+export interface UpdateAssetInterface {
+  id: string;
+  asset_code: string;
+  serial_number: string;
+  asset_name: string;
+  asset_description: string;
+  asset_category: string;
+  building_code: string;
+  room_code: string;
+  department: string;
+  source_of_fund: string;
+  asset_acquisition_date: string;
+  acquisition_cost: number;
+  useful_life: number;
+  date_of_disposal: string;
+  condition_status: string;
+  valuation_date: string;
+  replacement_cost: number;
+  actual_depreciation_rate: number;
+  remarks: string;
+}
+
 const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({
   asset,
   onUpdate,
@@ -31,6 +53,7 @@ const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({
   const [formData, setFormData] = useState<AssetInterface>(asset);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [alertMessage, setAlertMessage] = useState<string>('');
   const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
 
   const assetSpecifications = useSelector(
@@ -44,21 +67,25 @@ const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({
     })
   );
 
-  const parseNumber = (value: string | number): number | null => {
+  const parseNumber = (value: string | number): number => {
     if (typeof value === 'number') return value;
-    if (typeof value !== 'string') return null;
+    if (typeof value !== 'string') return 0;
 
     let cleanedValue = value.replace(/,/g, '').replace(/%$/, '');
     let parsedValue = parseFloat(cleanedValue);
 
-    if (isNaN(parsedValue)) return null;
-
-    if (value.endsWith('%')) {
-      parsedValue /= 100;
-    }
-
-    return parsedValue;
+    return isNaN(parsedValue) ? 0 : parsedValue;
   };
+
+  const formatDate = (date: string): string => {
+    try {
+      return new Date(date).toISOString();
+    } catch (error) {
+      return new Date().toISOString();
+    }
+  };
+
+
 
   const validateField = (name: string, value: any): string => {
     const spec = assetSpecifications.find(
@@ -80,17 +107,30 @@ const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({
         break;
       case 'number':
         const parsedValue = parseNumber(value);
-        if (parsedValue === null) return 'Must be a valid number or percentage';
+        if (parsedValue === null) return 'Must be a valid number';
         break;
       case 'date':
         if (isNaN(Date.parse(value))) return 'Must be a valid date';
         break;
-      case 'boolean':
-        if (typeof value !== 'boolean') return 'Must be a boolean';
-        break;
     }
 
     return '';
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {};
+    let hasErrors = false;
+
+    Object.entries(formData).forEach(([key, value]) => {
+      const error = validateField(key, value);
+      if (error) {
+        newErrors[key] = error;
+        hasErrors = true;
+      }
+    });
+
+    setErrors(newErrors);
+    return !hasErrors;
   };
 
   const handleInputChange = (
@@ -106,124 +146,162 @@ const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+const formatDataForApi = (data: any) => {
+  // Destructure to omit current_value
+  const { current_value, ...apiData } = data;
   
-    const newErrors: Record<string, string> = {};
-    let hasErrors = false;
-  
-    // Validate all fields
-    Object.entries(formData).forEach(([key, value]) => {
-      const error = validateField(key, value);
-      if (error) {
-        newErrors[key] = error;
-        hasErrors = true;
-      }
-    });
-  
-    setErrors(newErrors);
-  
-    if (!hasErrors) {
-      try {
-        // Format formData
-        const formattedData: AssetInterface = {
-          ...formData,
-          acquisition_cost: parseNumber(formData.acquisition_cost),
-          useful_life: parseNumber(formData.useful_life),
-          replacement_cost: parseNumber(formData.replacement_cost),
-          actual_depreciation_rate: parseNumber(formData.actual_depreciation_rate),
-        };
-  
-        // Send an array with a single AssetInterface object
-        await dispatch(updateAsset([formattedData]));
-        onUpdate(formattedData);
-      } catch (err) {
-        console.error('Update failed:', err);
-        setShowAlert(true);
-      }
-    }
-  }; 
-  
-  
+  return {
+    id: apiData.id.toString(),
+    asset_code: apiData.asset_code.toString(),
+    serial_number: apiData.serial_number.toString(),
+    asset_name: apiData.asset_name.toString(),
+    asset_description: apiData.asset_description.toString(),
+    asset_category: apiData.asset_category.toString(),
+    building_code: apiData.building_code.toString(),
+    room_code: apiData.room_code.toString(),
+    department: apiData.department.toString(),
+    source_of_fund: apiData.source_of_fund.toString(),
+    asset_acquisition_date: formatDate(apiData.asset_acquisition_date),
+    acquisition_cost: parseNumber(apiData.acquisition_cost),
+    useful_life: parseNumber(apiData.useful_life),
+    date_of_disposal: formatDate(apiData.date_of_disposal),
+    condition_status: apiData.condition_status.toString(),
+    valuation_date: formatDate(apiData.valuation_date),
+    replacement_cost: parseNumber(apiData.replacement_cost),
+    actual_depreciation_rate: parseNumber(apiData.actual_depreciation_rate),
+    remarks: apiData.remarks.toString()
+  };
+};
 
-  const handleCloseAlert = () => {
-    setShowAlert(false);
-  }; 
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+ 
+  if (!validateForm()) {
+    setAlertMessage('Please fix the form errors before submitting.');
+    setShowAlert(true);
+    return;
+  }
+ 
+  try {
+    const apiData = formatDataForApi(formData);
+    await dispatch(updateAsset([apiData as AssetInterface]));
+    
+    setAlertMessage('Asset updated successfully!');
+    setShowAlert(true);
+    setTimeout(() => {
+      onCancel(); // Close modal after alert is shown
+    }, 1500); // Delay closing modal to show success message
+ 
+    onUpdate({
+      ...asset,
+      ...apiData,
+      current_value: asset.current_value
+    });
+ 
+  } catch (error) {
+    const apiError = error as ApiError;
+    if (apiError.errors) {
+      const newErrors: Record<string, string> = {};
+      Object.entries(apiError.errors).forEach(([field, messages]) => {
+        newErrors[field] = Array.isArray(messages) ? messages[0] : messages;
+      });
+      setErrors(newErrors);
+    }
+    setAlertMessage(apiError.message || 'Failed to update asset');
+    setShowAlert(true);
+  }
+ }; 
 
   return (
-    <div className=' relative'> 
-    <form onSubmit={handleSubmit} className="p-4">
-      {assetSpecifications.map((spec: AssetSpecification) => (
-        <div key={spec.name} className="mb-4">
-          <label htmlFor={spec.name} className="block mb-2">
-            {spec.name.replace(/_/g, ' ')}
-          </label>
-          {spec.allowedValues ? (
-            <select
-              id={spec.name}
-              name={spec.name}
-              value={formData[spec.name]?.toString() || ''}
-              onChange={handleInputChange}
-              className={`px-3 py-2 border w-full ${
-                errors[spec.name] ? 'border-red-600' : 'border-my-blue'
-              } rounded-md outline-my-blue`}
-            >
-              <option value="">Select an option</option>
-              {spec.allowedValues.map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <input
-              type={spec.type === 'number' ? 'number' : 'text'}
-              id={spec.name}
-              name={spec.name}
-              value={
-                spec.type === 'number'
-                  ? parseNumber(formData[spec.name])?.toString() || ''
-                  : formData[spec.name]?.toString() || ''
-              }
-              onChange={handleInputChange}
-              className={`px-3 py-2 border w-full ${
-                errors[spec.name] ? 'border-red-600' : 'border-my-blue'
-              } rounded-md outline-my-blue`}
-            />
-          )}
-          {errors[spec.name] && (
-            <p className="text-red-600 text-sm mt-1">{errors[spec.name]}</p>
-          )}
-        </div> 
-      ))}
-      {error && (
-        // <div className="text-red-600 text-sm mt-4">{error}</div>
-        <Alert alertType={AlertType.DANGER} title={error}  timeOut={4000} close={()=>{setErrors({})}} className='bg-danger'/>   
+    <div className='relative'> 
+      <form onSubmit={handleSubmit} className="p-4">
+        <div className="grid grid-cols-2 gap-4">
+          {assetSpecifications.map((spec: AssetSpecification) => (
+            <div key={spec.name} className="mb-4">
+              <label htmlFor={spec.name} className="block mb-2 text-sm font-medium">
+                {spec.name.replace(/_/g, ' ').toUpperCase()}
+              </label>
+              {spec.allowedValues ? (
+                <select
+                  id={spec.name}
+                  name={spec.name}
+                  value={formData[spec.name]?.toString() || ''}
+                  onChange={handleInputChange}
+                  className={`px-3 py-2 border w-full ${
+                    errors[spec.name] ? 'border-red-600' : 'border-my-blue'
+                  } rounded-md outline-my-blue`}
+                >
+                  <option value="">Select an option</option>
+                  {spec.allowedValues.map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  type={spec.type === 'date' ? 'date' : spec.type === 'number' ? 'number' : 'text'}
+                  id={spec.name}
+                  name={spec.name}
+                  value={
+                    spec.type === 'date'
+                      ? formData[spec.name]?.split('T')[0] || ''
+                      : formData[spec.name]?.toString() || ''
+                  }
+                  onChange={handleInputChange}
+                  className={`px-3 py-2 border w-full ${
+                    errors[spec.name] ? 'border-red-600' : 'border-my-blue'
+                  } rounded-md outline-my-blue`}
+                />
+              )}
+              {errors[spec.name] && (
+                <p className="text-red-600 text-sm mt-1">{errors[spec.name]}</p>
+              )}
+            </div> 
+          ))}
+        </div>
 
-      )}
-      <div className="flex justify-end space-x-2 mt-6">
-        <button
-          type="button"
-          onClick={onCancel}
-          className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          disabled={loading}
-          className={`px-4 py-2 ${
-            loading ? 'bg-gray-400' : 'bg-my-blue text-white hover:text-black'
-          } rounded-md`}
-        >
-          {loading ? 'Updating...' : 'Update'}
-        </button>
-      </div>
-    </form>
-    {/* {loading && <LoadingCircle title='Updatting data'/> }   */}
+        {showAlert && (
+          <Alert 
+            alertType={AlertType.DANGER} 
+            title={alertMessage}
+            timeOut={4000} 
+            close={() => setShowAlert(false)} 
+            className='bg-danger'
+          />   
+        )}
+
+        {/* {error && (
+          <Alert 
+            alertType={AlertType.DANGER} 
+            title={error.message} 
+            timeOut={4000} 
+            close={() => setErrors({})} 
+            className='bg-danger'
+          />   
+        )} */} 
+
+        <div className="flex justify-end space-x-2 mt-6">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`px-4 py-2 ${
+              loading ? 'bg-gray-400' : 'bg-my-blue text-white hover:text-black'
+            } rounded-md`}
+          >
+            {loading ? 'Updating...' : 'Update Asset'}
+          </button>
+        </div>
+      </form>
     </div>
-    
   );
 };
 
-export default AssetUpdateForm;
+export default AssetUpdateForm; 
