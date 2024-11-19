@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { RootState } from "../../app/store";
-import { fetchAssets, Asset } from "../../actions/asset.action";
+import { fetchAssets, Asset, Building } from "../../actions/asset.action";
 import { GoDatabase } from "react-icons/go";
 import { IoMdMenu } from "react-icons/io";
 import { FaRegCheckCircle } from "react-icons/fa";
@@ -57,40 +57,57 @@ const StockDashboard: React.FC<AssetProps> = ({ assetsData, assetLoading, assetE
   }
 }, [assetsData, activeCategory]); 
 
-  useEffect(() => {
-    if (activeCategory && assetsData.length > 0) {
-      const category = assetsData.find((category) => category.category.id === activeCategory);
-      if (category) {
-        const filteredBuildings: buildingInterface[] = category.buildings.map((building) => {
-          const totalAssets = building.rooms.reduce((sum, room) => sum + room.assets.length, 0);
-          const totalValue = building.rooms.reduce((sum, room) => sum + room.assets.reduce((roomSum, asset) => roomSum + asset.current_value, 0), 0);
-  
-          return {
-            no: building.id,
-            buildingName: building.name,
-            totalRooms: building.rooms.length,
-            totalAsset: totalAssets,
-            totalValue: totalValue,
-            assets: building.rooms.flatMap(room => room.assets.map(asset => ({
-              ...asset
-            }))),
-            rooms: building.rooms.map(room => ({
-              no: room.id,
-              roomName: room.name,
-              floor: room.floor,
-              totalAssets: room.assets.length,
-              assets: room.assets.map(asset => ({
-                ...asset
-              }))
+useEffect(() => {
+  if (activeCategory && assetsData.length > 0) {
+    const category = assetsData.find((category) => category.category.id === activeCategory);
+    if (category) {
+      const filteredBuildings: buildingInterface[] = category.buildings.map((building) => {
+        const totalAssets = building.rooms.reduce((sum, room) => sum + (room.assets?.length || 0), 0);
+        const totalValue = building.rooms.reduce((sum, room) => 
+          sum + (room.assets?.reduce((roomSum, asset) => roomSum + (Number(asset?.current_value) || 0), 0) || 0), 0
+        );
+
+        return {
+          no: building?.id?.toString() || '',
+          buildingName: building?.name || '',
+          totalRooms: building?.rooms?.length || 0,
+          totalAsset: totalAssets,
+          totalValue: totalValue,
+          rooms: (building?.rooms || []).map(room => ({
+            no: room?.id?.toString() || '',
+            roomName: room?.name || '',
+            floor: room?.floor?.toString() || '',
+            totalAssets: room?.assets?.length || 0,
+            assets: (room?.assets || []).map(asset => ({
+              id: asset?.id?.toString() || '',
+              asset_code: asset?.asset_code?.toString() || '',
+              serial_number: asset?.serial_number?.toString() || '',
+              asset_name: asset?.asset_name?.toString() || '',
+              asset_description: asset?.asset_description?.toString() || '',
+              asset_category: asset?.asset_category?.toString() || '',
+              building_code: asset?.building_code?.toString() || '',
+              room_code: asset?.room_code?.toString() || '',
+              department: asset?.department?.toString() || '',
+              source_of_fund: asset?.source_of_fund?.toString() || '',
+              asset_acquisition_date: asset?.asset_acquisition_date?.toString() || '',
+              acquisition_cost: Number(asset?.acquisition_cost) || 0,
+              useful_life: Number(asset?.useful_life) || 0,
+              date_of_disposal: asset?.date_of_disposal?.toString() || '',
+              condition_status: asset?.condition_status?.toString() || '',
+              valuation_date: asset?.valuation_date?.toString() || '',
+              replacement_cost: Number(asset?.replacement_cost) || 0,
+              actual_depreciation_rate: Number(asset?.actual_depreciation_rate) || 0,
+              remarks: asset?.remarks?.toString() || '',
+              current_value: Number(asset?.current_value) || 0
             }))
-          };
-        });
-  
-        setActiveCategoryBuildingData(filteredBuildings);
-      }
+          }))
+        };
+      });
+
+      setActiveCategoryBuildingData(filteredBuildings);
     }
-  }, [activeCategory, assetsData]);
-  
+  }
+}, [activeCategory, assetsData]);
 
 
   if (assetLoading) {
@@ -169,7 +186,9 @@ const categoryData = filteredAssetsData.map((category) => {
     return total + categoryValue;
   }, 0);
 
-  const totalBuildings = activeCategoryData ? activeCategoryData.buildings.length : 0;
+  const totalBuildings = assetsData.reduce((total, category) => 
+    total + category.buildings.length, 0
+  ); 
 
   return (
     <div className="mr-4">
@@ -242,7 +261,7 @@ const categoryData = filteredAssetsData.map((category) => {
             <div className="flex flex-row items-center gap-2">
               <FaRegCheckCircle className="text-3xl font-bold text-confirm" />
               <div>
-                <h4>Total {activeCategoryName}s</h4>
+                <h4>Total {activeCategoryName} Assets </h4>
                 <h3 className="font-bold text-xl">{activeCategoryTotalAssets}</h3>
               </div>
             </div>
