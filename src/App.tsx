@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes, Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "./app/store";
+import { RootState } from "./app/store"; 
 
 // Components
 import SideNavBar from "./components/SideNavBar/SideNavBar";
 import NavBar from "./components/TopNavBar/NavBar";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import StockLoading from "./components/StockLoading/StockLoading";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer"; 
 
 // Containers
 import Login from "./containers/authantication/Login";

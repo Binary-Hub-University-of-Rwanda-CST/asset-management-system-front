@@ -1,4 +1,4 @@
-export default [
+const assets = [
     {
           "asset_id": "123456",
           "category_id": "c1",
@@ -351,3 +351,4 @@ export default [
           }
         }
       ]
+      export default assets; 

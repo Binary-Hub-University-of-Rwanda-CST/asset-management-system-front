@@ -53,7 +53,7 @@ module.exports = {
         fontFamily: {
             inter: ['Inter', 'sans-serif'],
           },
-        spacing: {
+        spacing: { 
             4.5: '18px',
         },
         boxShadow: {

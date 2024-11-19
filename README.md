@@ -1,46 +1,113 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 📦 Asset Management System
 
-## Available Scripts
+An efficient and user-friendly **Asset Management System** designed to help organizations manage their assets effectively. This system allows users to track asset locations, monitor specifications, and analyze asset values by category and location.  
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 📊 **Dashboard**  
+- Summarized view of **asset values** by category and location.  
+- Visual representation of data for quick insights.  
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 🗂️ **Asset Monitoring**  
+- Detailed tracking of asset locations (Buildings and Rooms).  
+- Complete asset specifications available for each asset.  
 
-### `npm test`
+### 📋 **Data Management**  
+- CSV Upload: Import assets in bulk via a structured CSV template.  
+- Detailed asset data, including:  
+  - Asset Code, Serial Number, Description, Category, Condition, and more.  
+  - Acquisition and Valuation details.  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🏢 **Buildings and Rooms**  
+- List all assets in a selected building or room.  
+- Modal view for room-specific asset details.  
 
-### `npm run build`
+### 🔐 **Authentication**  
+- User management with role-based access control.  
+- Change Password feature with secure token-based authentication.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📂 **Project Structure**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+📁 src
+├── 📁 components      # Reusable React components
+├── 📁 container       # Asset-specific features (dashboard, Monitoring, etc.)
+├── 📁 redux           # Redux setup for state management
+│   ├── 📄 actions     # Action creators
+│   ├── 📄 reducers    # Reducers for state updates
+│   └── 📄 store.js    # Redux store configuration
+├── 📁 utils           # Utility functions (CSV parsing, formatting, etc.)
+└── 📄 App.tsx         # Main application file
+```
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🛠️ **Technologies Used**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Frontend**: React, TypeScript, Tailwind CSS  
+- **State Management**: Redux Toolkit  
+- **Backend**: Node.js, Express  
+- **Database**: PostgreSQL  
+- **API Client**: Axios  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## 🎨 **Design Highlights**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Responsive UI**: Optimized for all devices.  
+- **Color Palette**: Blue, White, and Black for professional aesthetics.  
+- **Interactive Modals**: For enhanced user experience in asset details.  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+## 💾 **How to Run the Project**
+
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/codeWithEdison/UR-AMS.git
+   ```
+2. Install dependencies:  
+   ```bash
+   npm install
+   ```
+3. Set up environment variables (`.env` file):  
+   ```env
+   REACT_APP_API_BASE_URL=https://ur-assets-management-system-backend.onrender.com/api/v1
+   ```
+4. Start the application:  
+   ```bash
+   npm start
+   ```
+
+---
+
+## 📅 **Future Enhancements**
+
+- **Advanced Analytics**: Predictive insights and asset performance trends.  
+- **Mobile App**: Companion app for on-the-go asset management.  
+- **QR Code Integration**: Simplify asset tracking using QR codes.  
+
+---
+
+## 🤝 **Contributing**
+
+Contributions are welcome! Please follow these steps:  
+1. Fork the repository  
+2. Create a feature branch: `git checkout -b feature-name`  
+3. Commit your changes: `git commit -m 'Add some feature'`  
+4. Push to the branch: `git push origin feature-name`  
+5. Open a Pull Request  
+
+---
+
+## 📧 **Contact**
+
+For inquiries or support, please contact:  
+**Email**: [your-email@example.com](mailto:edsnkvn@gmail.com)  
+**Website**: [X-Ticket](ur-ams.vercel.app)  
