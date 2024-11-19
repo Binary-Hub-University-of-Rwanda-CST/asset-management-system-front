@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { RootState } from "../../app/store";
-import { fetchAssets, Asset, Building } from "../../actions/asset.action";
+import { fetchAssets } from "../../actions/asset.action";
 import { GoDatabase } from "react-icons/go";
 import { IoMdMenu } from "react-icons/io";
 import { FaRegCheckCircle } from "react-icons/fa";

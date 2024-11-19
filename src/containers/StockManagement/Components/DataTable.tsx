@@ -9,9 +9,8 @@ import Modal, {
 import AssetUpdateForm from "./AssetUpdateForm";
 import { fetchSpecifications } from "../../../actions/uploadpecification.action";
 import { AppDispatch } from "../../../app/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateAsset, clearUpdateError } from "../../../actions/updateAssets.action";
-import { RootState } from "../../../app/store";
 
 
 

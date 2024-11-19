@@ -6,7 +6,6 @@ import { ApiError, updateAsset } from '../../../actions/updateAssets.action';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { RootState } from '../../../app/store'; 
-import LoadingCircle from '../../../components/Loading/LoadingCircle';
 import Alert, { AlertType } from '../../../components/Alert/Alert';
 
 interface AssetUpdateFormProps {
@@ -60,7 +59,7 @@ const AssetUpdateForm: React.FC<AssetUpdateFormProps> = ({
     (state: StoreState) => state.uploadSpecificaiton.specifications
   );
 
-  const { loading, error } = useSelector(
+  const { loading } = useSelector(
     (state: RootState) => ({
       loading: state.updateAsset.loading,
       error: state.updateAsset.error
