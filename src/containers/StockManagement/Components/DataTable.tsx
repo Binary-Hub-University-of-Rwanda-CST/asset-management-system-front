@@ -2,25 +2,41 @@ import React, { useState, useEffect } from "react";
 import TableModal from "../../../components/TableModal/TableModal";
 import { FaFileExcel } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
-import Modal,{ModalMarginTop, ModalSize} from "../../../components/modal/Modal";
+import Modal, {
+  ModalMarginTop,
+  ModalSize,
+} from "../../../components/modal/Modal";
 import AssetUpdateForm from "./AssetUpdateForm";
 import { fetchSpecifications } from "../../../actions/uploadpecification.action";
 import { AppDispatch } from "../../../app/store";
-import { useDispatch } from "react-redux";
-import { updateAsset } from "../../../actions/updateAssets.action";
+import { useDispatch, useSelector } from "react-redux";
+import { updateAsset, clearUpdateError } from "../../../actions/updateAssets.action";
+import { RootState } from "../../../app/store";
 
-export interface buildingInterface {
-  no: string;
-  buildingName: string;
-  totalRooms: number;
-  totalAsset: number;
-  totalValue: number;
-  rooms: RoomInterface[];
-}
+
 
 export interface AssetInterface {
+  id: string;
+  asset_code: string;
+  serial_number: string;
+  asset_name: string;
+  asset_description: string;
+  asset_category: string;
+  building_code: string;
+  room_code: string;
+  department: string;
+  source_of_fund: string;
+  asset_acquisition_date: string;
+  acquisition_cost: number;
+  useful_life: number;
+  date_of_disposal: string;
+  condition_status: string;
+  valuation_date: string;
+  replacement_cost: number;
+  actual_depreciation_rate: number;
+  remarks: string;
+  current_value: number;
   [key: string]: any;
-  current_value: number; 
 }
 
 export interface RoomInterface {
@@ -31,27 +47,47 @@ export interface RoomInterface {
   assets: AssetInterface[];
 }
 
+export interface buildingInterface {
+  no: string;
+  buildingName: string;
+  totalRooms: number;
+  totalAsset: number;
+  totalValue: number;
+  rooms: RoomInterface[];
+}
+
 interface buildingTableProps {
   activeCategory: string;
   activeCategoryData: buildingInterface[];
 }
 
-const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activeCategory }) => {
-  const [selectedBuilding, setSelectedBuilding] = useState<buildingInterface | null>(null);
+const BuildingTable: React.FC<buildingTableProps> = ({
+  activeCategoryData,
+  activeCategory,
+}) => {
+  const [selectedBuilding, setSelectedBuilding] =
+    useState<buildingInterface | null>(null);
   const [selectedRoom, setSelectedRoom] = useState<RoomInterface | null>(null);
   const [isBuildingModalOpen, setIsBuildingModalOpen] = useState(false);
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(activeCategoryData);
-  const [selectedAsset, setSelectedAsset] = useState<AssetInterface | null>(null);
-  const [isAssetModalOpen, setIsAssetModalOpen] = useState(false);  
+  const [selectedAsset, setSelectedAsset] = useState<AssetInterface | null>(
+    null
+  );
+  const [isAssetModalOpen, setIsAssetModalOpen] = useState(false);
   const dispatch: AppDispatch = useDispatch();
 
+  // // Add selector for update status
+  // const { loading: updateLoading, error: updateError ,} = useSelector(
+  //   (state: RootState) => state.updateAsset
+  // );
+
   const handleBuildingRowClick = (building: buildingInterface) => {
-    const filteredRooms = building.rooms.filter(room => room.totalAssets > 0);
-    setSelectedBuilding({...building, rooms: filteredRooms});
+    const filteredRooms = building.rooms.filter((room) => room.totalAssets > 0);
+    setSelectedBuilding({ ...building, rooms: filteredRooms });
     setIsBuildingModalOpen(true);
-  }; 
+  };
 
   const handleRoomRowClick = (room: RoomInterface) => {
     setSelectedRoom(room);
@@ -67,13 +103,15 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
     setSelectedRoom(null);
     setIsRoomModalOpen(false);
   };
+
   useEffect(() => {
-    const filtered = activeCategoryData.filter(building =>
-      building.totalAsset > 0 && 
-      building.rooms.length > 0 &&
-      Object.values(building).some(value =>
-        String(value).toLowerCase().includes(searchTerm.toLowerCase())
-      )
+    const filtered = activeCategoryData.filter(
+      (building) =>
+        building.totalAsset > 0 &&
+        building.rooms.length > 0 &&
+        Object.values(building).some((value) =>
+          String(value).toLowerCase().includes(searchTerm.toLowerCase())
+        )
     );
     setFilteredData(filtered);
   }, [searchTerm, activeCategoryData]);
@@ -83,29 +121,31 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
   }, [dispatch]);
 
   const exportToCSV = () => {
-    const allAssets = activeCategoryData.flatMap(building => building.rooms.flatMap(room => room.assets));
+    const allAssets = activeCategoryData.flatMap((building) =>
+      building.rooms.flatMap((room) => room.assets)
+    );
 
     if (allAssets.length === 0) return;
 
     const csvData: string[] = [];
     // Add headers to CSV data
-    csvData.push(Object.keys(allAssets[0]).join(','));
+    csvData.push(Object.keys(allAssets[0]).join(","));
 
     // Add each asset data to CSV data
-    allAssets.forEach(asset => {
+    allAssets.forEach((asset) => {
       const assetValues = Object.values(asset);
-      csvData.push(assetValues.join(','));
+      csvData.push(assetValues.join(","));
     });
 
     // Create CSV file content
-    const csvContent = csvData.join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const csvContent = csvData.join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv" });
     const url = window.URL.createObjectURL(blob);
 
     // Create link for download
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.setAttribute('download', `Campus_assets.csv`); 
+    link.setAttribute("download", `${activeCategory}_assets.csv`);
     document.body.appendChild(link);
     link.click();
 
@@ -122,13 +162,50 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
   const handleCloseAssetModal = () => {
     setSelectedAsset(null);
     setIsAssetModalOpen(false);
+    dispatch(clearUpdateError()); // Clear any existing errors when closing modal
   };
 
-  const handleAssetUpdate = (updatedAsset: AssetInterface) => {
-    dispatch(updateAsset([updatedAsset]));
-    // handleCloseAssetModal();
-  }; 
+  const handleAssetUpdate = async (updatedAsset: AssetInterface) => {
+    try {
+      await dispatch(updateAsset([updatedAsset]));
+      
+      // Update the local state to reflect the changes
+      if (selectedRoom) {
+        const updatedAssets = selectedRoom.assets.map(asset => 
+          asset.id === updatedAsset.id ? updatedAsset : asset
+        );
+        
+        setSelectedRoom({
+          ...selectedRoom,
+          assets: updatedAssets
+        });
+      }
 
+      // Update the building data
+      if (selectedBuilding) {
+        const updatedRooms = selectedBuilding.rooms.map(room => {
+          if (room.no === selectedRoom?.no) {
+            return {
+              ...room,
+              assets: room.assets.map(asset => 
+                asset.id === updatedAsset.id ? updatedAsset : asset
+              )
+            };
+          }
+          return room;
+        });
+
+        setSelectedBuilding({
+          ...selectedBuilding,
+          rooms: updatedRooms
+        });
+      }
+
+      handleCloseAssetModal();
+    } catch (error) {
+      console.error('Failed to update asset:', error);
+    }
+  };
 
   return (
     <>
@@ -146,7 +223,10 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
           <span className="absolute left-4 top-4 transform -translate-y-1/2 text-gray-500">
             <FaSearch />
           </span>
-          <button className="flex items-center justify-center rounded-md px-8 bg-green-600 w-1/12 ml-4 text-white text-sm" onClick={exportToCSV}>
+          <button
+            className="flex items-center justify-center rounded-md px-8 bg-green-600 w-1/12 ml-4 text-white text-sm"
+            onClick={exportToCSV}
+          >
             <FaFileExcel className="" /> Export
           </button>
         </div>
@@ -157,21 +237,19 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
               <th className="py-2 px-4">Building Name</th>
               <th className="py-2 px-4">Total Rooms</th>
               <th className="py-2 px-4">Total {activeCategory} Assets</th>
-              {/* <th className="py-2 px-4">Total Value</th> */}
             </tr>
           </thead>
           <tbody>
             {filteredData.map((stock, index) => (
               <tr
                 key={stock.no}
-                className="min-w-full bg-white border-b border-gray-300 cursor-pointer  hover:bg-blue-white hover:text-my-blue hover:font-bold hover:rounded-lg active:bg-blue-white"
+                className="min-w-full bg-white border-b border-gray-300 cursor-pointer hover:bg-blue-white hover:text-my-blue hover:font-bold hover:rounded-lg active:bg-blue-white"
                 onClick={() => handleBuildingRowClick(stock)}
               >
                 <td className="py-2 px-4">{index + 1}</td>
                 <td className="py-2 px-4">{stock.buildingName}</td>
                 <td className="py-2 px-4">{stock.totalRooms}</td>
                 <td className="py-2 px-4">{stock.totalAsset}</td>
-                {/* <td className="py-2 px-4">{stock.totalValue}</td> */}
               </tr>
             ))}
           </tbody>
@@ -183,30 +261,42 @@ const BuildingTable: React.FC<buildingTableProps> = ({ activeCategoryData, activ
             isOpen={isBuildingModalOpen}
             onClose={handleCloseBuildingModal}
             title={`${activeCategory} Rooms for ${selectedBuilding.buildingName}`}
-            tableHeaders={['roomName', 'floor', 'totalAssets']} 
+            tableHeaders={["roomName", "floor", "totalAssets"]}
             tableData={selectedBuilding.rooms || []}
             tag={[activeCategory, selectedBuilding.buildingName]}
             onRowClick={handleRoomRowClick}
+            modalType="building"
           />
         )}
+
         {selectedRoom && (
           <TableModal
             isOpen={isRoomModalOpen}
             onClose={handleCloseRoomModal}
-            title={`${activeCategory} for Room ${selectedRoom.roomName}`} 
-            tableHeaders={selectedRoom.assets.length > 0 ? Object.keys(selectedRoom.assets[0]) : []}
+            title={`${activeCategory} for Room ${selectedRoom.roomName}`}
+            tableHeaders={
+              selectedRoom.assets.length > 0
+                ? Object.keys(selectedRoom.assets[0])
+                : []
+            }
             tableData={selectedRoom.assets || []}
-            tag={[activeCategory, selectedBuilding!!.buildingName, selectedRoom.roomName]}
+            tag={[
+              activeCategory,
+              selectedBuilding!!.buildingName,
+              selectedRoom.roomName,
+            ]}
             onRowDoubleClick={handleAssetDoubleClick}
+            modalType="room"
           />
         )}
+
         {selectedAsset && (
           <Modal
             isOpen={isAssetModalOpen}
             onClose={handleCloseAssetModal}
             title={`Update Asset`}
-            widthSizeClass={ModalSize.extraLarge}  
-            marginTop={ModalMarginTop.none} 
+            widthSizeClass={ModalSize.extraLarge}
+            marginTop={ModalMarginTop.none}
           >
             <AssetUpdateForm
               asset={selectedAsset}
