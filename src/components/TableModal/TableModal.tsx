@@ -1,18 +1,24 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { FaArrowLeft, FaSearch, FaFileExcel } from "react-icons/fa";
 import { RoomInterface, AssetInterface } from "../../containers/StockManagement/Components/DataTable";
 import { formatHeaderName } from "../../utils/functions";
 import Papa from "papaparse";
+
+interface RoomWithAssets extends RoomInterface {
+  assets: AssetInterface[];
+  [key: string]: any;
+}
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
   tableHeaders: string[];
-  tableData: Record<string, any>[];
+  tableData: (Record<string, any> | RoomWithAssets)[];
   tag?: string[];
   onRowClick?: (room: RoomInterface) => void;
-  onRowDoubleClick?: (asset: AssetInterface) => void; 
+  onRowDoubleClick?: (asset: AssetInterface) => void;
+  modalType?: 'building' | 'room' | 'asset';
 }
 
 const TableModal: React.FC<ModalProps> = ({
@@ -24,13 +30,14 @@ const TableModal: React.FC<ModalProps> = ({
   tag,
   onRowClick,
   onRowDoubleClick,
+  modalType = 'asset'
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState<Record<string, any>[]>([]);
+  const [filteredData, setFilteredData] = useState<(Record<string, any> | RoomWithAssets)[]>([]);
 
   useEffect(() => {
     if (isOpen) {
-      setFilteredData(tableData); // Initialize filtered data with tableData on modal open
+      setFilteredData(tableData);
     }
   }, [isOpen, tableData]);
 
@@ -54,33 +61,99 @@ const TableModal: React.FC<ModalProps> = ({
   }, []);
 
   useEffect(() => {
-    // Filter table data based on search term
     const filtered = tableData.filter((row) =>
       tableHeaders.some((header) => {
-        const value = row[header]; // Access nested value
+        const value = (row as Record<string, any>)[header];
         return String(value).toLowerCase().includes(searchTerm.toLowerCase());
       })
     );
     setFilteredData(filtered);
   }, [searchTerm, tableData, tableHeaders]);
 
-  const exportToCSV = () => {
-    const formattedHeaders = tableHeaders.map(formatHeaderName);
-    const csvData = [
-      formattedHeaders,
-      ...filteredData.map((row) => tableHeaders.map((header) => row[header])),
-    ];
+ const exportToCSV = () => {
+    let csvData: Record<string, any>[];
+    let fileName: string;
 
-    const csv = Papa.unparse(csvData);
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement("a");
-    const url = URL.createObjectURL(blob);
+    try {
+      switch (modalType) {
+        case 'building':
+          // Export all assets from all rooms in the building
+          csvData = (filteredData as RoomWithAssets[]).flatMap((room) => {
+            // First get all assets from the room
+            return room.assets.map(asset => {
+              // Create a new object without any room/building properties
+              const { roomName, buildingName, ...assetData } = asset;
+              // Then add our context properties
+              return {
+                buildingName: tag?.[1] || '',
+                roomName: room.roomName || '',
+                floor: room.floor || '',
+                ...assetData // Spread the cleaned asset data
+              };
+            });
+          });
+          fileName = `${tag?.[0]}_${tag?.[1]}_all_assets.csv`;
+          break;
 
-    link.setAttribute("href", url);
-    link.setAttribute("download", `${title}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+        case 'room':
+          // Export assets with building and room context
+          csvData = filteredData.map(row => {
+            // First remove any existing context properties
+            const { category, buildingName, roomName, ...rowData } = row as Record<string, any>;
+            // Then add our context properties
+            return {
+              category: tag?.[0] || '',
+              buildingName: tag?.[1] || '',
+              roomName: tag?.[2] || '',
+              ...rowData // Spread the cleaned data
+            };
+          });
+          fileName = `${tag?.[0]}_${tag?.[1]}_${tag?.[2]}_assets.csv`;
+          break;
+
+        default:
+          csvData = filteredData as Record<string, any>[];
+          fileName = `${title}.csv`;
+      }
+
+      if (csvData.length === 0) {
+        console.log('No data to export');
+        return;
+      }
+
+      // Get headers from the first row of data
+      const headers = Object.keys(csvData[0]);
+      
+      // Create CSV content
+      const csvContent = [
+        headers.map(formatHeaderName),
+        ...csvData.map(row => 
+          headers.map(header => {
+            const value = row[header];
+            return typeof value === 'string' && value.includes(',') 
+              ? `"${value}"`
+              : value;
+          })
+        )
+      ];
+
+      // Use Papa.unparse to convert to CSV
+      const csv = Papa.unparse(csvContent);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+
+      // Cleanup
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error exporting CSV:', error);
+    }
   };
 
   return (
@@ -139,13 +212,13 @@ const TableModal: React.FC<ModalProps> = ({
                     <table className="min-w-full">
                       <thead>
                         <tr>
-                          <th className="px-4 py-2 text-left text-sm font-md  text-black uppercase">
+                          <th className="px-4 py-2 text-left text-sm font-md text-black uppercase">
                             #
                           </th>
                           {tableHeaders.map((header) => (
                             <th
                               key={header}
-                              className="px-4 py-3 text-left text-sm font-md  text-black uppercase"
+                              className="px-4 py-3 text-left text-sm font-md text-black uppercase"
                             >
                               {formatHeaderName(header)}
                             </th>
@@ -156,20 +229,16 @@ const TableModal: React.FC<ModalProps> = ({
                         {filteredData.map((row, rowIndex) => (
                           <tr
                             key={rowIndex}
-                            className="border-t py-1 cursor-pointer hover:bg-blue-white "
-                            onClick={() =>
-                              onRowClick && onRowClick(row as RoomInterface)
-                            }
-                            onDoubleClick={() => 
-                              onRowDoubleClick && onRowDoubleClick(row as AssetInterface) 
-                            } // Add this line
+                            className="border-t py-1 cursor-pointer hover:bg-blue-white"
+                            onClick={() => onRowClick?.(row as RoomInterface)}
+                            onDoubleClick={() => onRowDoubleClick?.(row as AssetInterface)}
                           >
                             <td className="px-4 py-1 text-sm">
                               {rowIndex + 1}
                             </td>
                             {tableHeaders.map((header, cellIndex) => (
                               <td key={cellIndex} className="px-4 text-sm py-1">
-                                {row[header]}
+                                {(row as Record<string, any>)[header]}
                               </td>
                             ))}
                           </tr>
