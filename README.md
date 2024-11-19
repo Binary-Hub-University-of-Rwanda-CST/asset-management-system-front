@@ -110,4 +110,4 @@ Contributions are welcome! Please follow these steps:
 
 For inquiries or support, please contact:  
 **Email**: [your-email@example.com](mailto:edsnkvn@gmail.com)  
-**Website**: [X-Ticket](ur-ams.vercel.app)  
+**Website**: [UR-AMS](ur-ams.vercel.app)  
