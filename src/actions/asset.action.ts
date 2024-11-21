@@ -12,9 +12,12 @@ import { API_URL } from "../utils/api";
 export interface Identifiable {
   id: string;
   name: string;
+  
 }
 
-export interface AssetCategory extends Identifiable {}
+export interface AssetCategory extends Identifiable {
+  code?:string;
+}
 
 export interface Asset {
   current_value: number;

@@ -145,6 +145,7 @@ const categoryData = filteredAssetsData.map((category) => {
       key={category.category.id}
       id={category.category.id}
       categoryName={category.category.name}
+      categoryCode={category.category.code}
       totalAssets={totalAssets}
       handleActive={setActiveCategoryHandler}
       isActive={activeCategory === category.category.id}
