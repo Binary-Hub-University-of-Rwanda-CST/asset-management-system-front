@@ -109,5 +109,5 @@ Contributions are welcome! Please follow these steps:
 ## 📧 **Contact**
 
 For inquiries or support, please contact:  
-**Email**: [your-email@example.com](mailto:edsnkvn@gmail.com)  
+**Email**: [edsnkvn@gmail.com](mailto:edsnkvn@gmail.com)  
 **Website**: [UR-AMS](ur-ams.vercel.app)  

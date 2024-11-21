@@ -70,43 +70,59 @@ const TableModal: React.FC<ModalProps> = ({
     setFilteredData(filtered);
   }, [searchTerm, tableData, tableHeaders]);
 
- const exportToCSV = () => {
+  const exportToCSV = () => {
     let csvData: Record<string, any>[];
     let fileName: string;
 
     try {
+      // Define the fields we want in our CSV (excluding duplicates)
+      const fieldsToExport = [
+        // 'id',
+        'asset_code',
+        'serial_number',
+        'asset_name',
+        'asset_description',
+        'asset_category',
+        'building_code',
+        'room_code',
+        'department',
+        'source_of_fund',
+        'asset_acquisition_date',
+        'acquisition_cost',
+        'useful_life',
+        'date_of_disposal',
+        'condition_status',
+        'valuation_date',
+        'replacement_cost',
+        'actual_depreciation_rate',
+        'remarks',
+        // 'current_value'
+      ];
+
       switch (modalType) {
         case 'building':
           // Export all assets from all rooms in the building
-          csvData = (filteredData as RoomWithAssets[]).flatMap((room) => {
-            // First get all assets from the room
-            return room.assets.map(asset => {
-              // Create a new object without any room/building properties
-              const { roomName, buildingName, ...assetData } = asset;
-              // Then add our context properties
-              return {
-                buildingName: tag?.[1] || '',
-                roomName: room.roomName || '',
-                floor: room.floor || '',
-                ...assetData // Spread the cleaned asset data
-              };
-            });
-          });
+          csvData = (filteredData as RoomWithAssets[]).flatMap((room) => 
+            room.assets.map(asset => {
+              const formattedAsset: Record<string, any> = {};
+              fieldsToExport.forEach(field => {
+                formattedAsset[field] = asset[field];
+              });
+              return formattedAsset;
+            })
+          );
           fileName = `${tag?.[0]}_${tag?.[1]}_all_assets.csv`;
           break;
 
         case 'room':
           // Export assets with building and room context
           csvData = filteredData.map(row => {
-            // First remove any existing context properties
-            const { category, buildingName, roomName, ...rowData } = row as Record<string, any>;
-            // Then add our context properties
-            return {
-              category: tag?.[0] || '',
-              buildingName: tag?.[1] || '',
-              roomName: tag?.[2] || '',
-              ...rowData // Spread the cleaned data
-            };
+            const asset = row as Record<string, any>;
+            const formattedAsset: Record<string, any> = {};
+            fieldsToExport.forEach(field => {
+              formattedAsset[field] = asset[field];
+            });
+            return formattedAsset;
           });
           fileName = `${tag?.[0]}_${tag?.[1]}_${tag?.[2]}_assets.csv`;
           break;
@@ -121,15 +137,19 @@ const TableModal: React.FC<ModalProps> = ({
         return;
       }
 
-      // Get headers from the first row of data
-      const headers = Object.keys(csvData[0]);
+      // Create headers with proper formatting
+      const headers = fieldsToExport.map(field => 
+        field.split('_')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ')
+      );
       
       // Create CSV content
       const csvContent = [
-        headers.map(formatHeaderName),
+        headers,
         ...csvData.map(row => 
-          headers.map(header => {
-            const value = row[header];
+          fieldsToExport.map(field => {
+            const value = row[field];
             return typeof value === 'string' && value.includes(',') 
               ? `"${value}"`
               : value;

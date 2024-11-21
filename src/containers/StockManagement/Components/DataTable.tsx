@@ -10,9 +10,10 @@ import AssetUpdateForm from "./AssetUpdateForm";
 import { fetchSpecifications } from "../../../actions/uploadpecification.action";
 import { AppDispatch } from "../../../app/store";
 import { useDispatch } from "react-redux";
-import { updateAsset, clearUpdateError } from "../../../actions/updateAssets.action";
-
-
+import {
+  updateAsset,
+  clearUpdateError,
+} from "../../../actions/updateAssets.action";
 
 export interface AssetInterface {
   id: string;
@@ -126,25 +127,59 @@ const BuildingTable: React.FC<buildingTableProps> = ({
 
     if (allAssets.length === 0) return;
 
-    const csvData: string[] = [];
-    // Add headers to CSV data
-    csvData.push(Object.keys(allAssets[0]).join(","));
+    // Define the fields we want in our CSV (excluding duplicates)
+    const fieldsToExport = [
+      'asset_code',
+      'serial_number',
+      'asset_name',
+      'asset_description',
+      'asset_category',
+      'building_code',
+      'room_code',
+      'department',
+      'source_of_fund',
+      'asset_acquisition_date',
+      'acquisition_cost',
+      'useful_life',
+      'date_of_disposal',
+      'condition_status',
+      'valuation_date',
+      'replacement_cost',
+      'actual_depreciation_rate',
+      'remarks',
+      'current_value'
+    ];
 
-    // Add each asset data to CSV data
+    // Create headers with proper formatting
+    const headers = fieldsToExport.map(field => 
+      field.split('_')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+    );
+
+    const csvData: string[] = [headers.join(',')];
+
+    // Add each asset data in the specified order
     allAssets.forEach((asset) => {
-      const assetValues = Object.values(asset);
-      csvData.push(assetValues.join(","));
+      const rowData = fieldsToExport.map(field => {
+        const value = asset[field];
+        // Handle values that might contain commas
+        return typeof value === 'string' && value.includes(',') 
+          ? `"${value}"` 
+          : value;
+      });
+      csvData.push(rowData.join(','));
     });
 
     // Create CSV file content
-    const csvContent = csvData.join("\n");
-    const blob = new Blob([csvContent], { type: "text/csv" });
+    const csvContent = csvData.join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
 
     // Create link for download
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.href = url;
-    link.setAttribute("download", `${activeCategory}_assets.csv`);
+    link.setAttribute('download', `${activeCategory}_assets.csv`);
     document.body.appendChild(link);
     link.click();
 
@@ -167,28 +202,28 @@ const BuildingTable: React.FC<buildingTableProps> = ({
   const handleAssetUpdate = async (updatedAsset: AssetInterface) => {
     try {
       await dispatch(updateAsset([updatedAsset]));
-      
+
       // Update the local state to reflect the changes
       if (selectedRoom) {
-        const updatedAssets = selectedRoom.assets.map(asset => 
+        const updatedAssets = selectedRoom.assets.map((asset) =>
           asset.id === updatedAsset.id ? updatedAsset : asset
         );
-        
+
         setSelectedRoom({
           ...selectedRoom,
-          assets: updatedAssets
+          assets: updatedAssets,
         });
       }
 
       // Update the building data
       if (selectedBuilding) {
-        const updatedRooms = selectedBuilding.rooms.map(room => {
+        const updatedRooms = selectedBuilding.rooms.map((room) => {
           if (room.no === selectedRoom?.no) {
             return {
               ...room,
-              assets: room.assets.map(asset => 
+              assets: room.assets.map((asset) =>
                 asset.id === updatedAsset.id ? updatedAsset : asset
-              )
+              ),
             };
           }
           return room;
@@ -196,13 +231,13 @@ const BuildingTable: React.FC<buildingTableProps> = ({
 
         setSelectedBuilding({
           ...selectedBuilding,
-          rooms: updatedRooms
+          rooms: updatedRooms,
         });
       }
 
       handleCloseAssetModal();
     } catch (error) {
-      console.error('Failed to update asset:', error);
+      console.error("Failed to update asset:", error);
     }
   };
 
@@ -309,4 +344,4 @@ const BuildingTable: React.FC<buildingTableProps> = ({
   );
 };
 
-export default BuildingTable;
+export default BuildingTable; 
