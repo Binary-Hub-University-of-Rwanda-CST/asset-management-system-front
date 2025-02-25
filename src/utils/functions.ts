@@ -528,7 +528,7 @@ export const languageValue = (
 };
 
 export const  formatNumberWithCommas =(num: number): string =>  {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return num.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
 }
 /*
 *             FUNCTION TO PUT WORD IN CAPITALISE AND REPLACE UNDERSCORE  WITH SPACE 

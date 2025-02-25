@@ -2,7 +2,7 @@
 import logo from '../../assets/images/UR_logo.png'
 import isemupLogo from '../../assets/images/ishemapp10.png'
 
-import { AiOutlineLogin } from "react-icons/ai";
+// import { AiOutlineLogin } from "react-icons/ai";
 
 function LoginTopNav() {
 

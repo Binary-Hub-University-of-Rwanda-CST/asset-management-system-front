@@ -6,8 +6,17 @@ interface DonutChartProps {
   assetsData: Assets[];
 }
 
+const formatValue = (value: number): string => {
+  if (value >= 1000000) {
+    return `${(value / 1000000).toFixed(1)}M FRW`;
+  }
+  if (value >= 1000) {
+    return `${(value / 1000).toFixed(1)}k FRW`;
+  }
+  return `${value.toLocaleString()} FRW`;
+};
+
 const DonutChart: React.FC<DonutChartProps> = ({ assetsData }) => {
-  // Calculate the total value for each category and filter out categories with no assets
   const filteredData = assetsData.filter((category) => 
     category.buildings.reduce((catTotal, building) =>
       catTotal +
@@ -53,9 +62,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ assetsData }) => {
     tooltip: {
       enabled: true,
       y: {
-        formatter: function (value: number) {
-          return `${value.toLocaleString()} FRW`;
-        },
+        formatter: formatValue
       },
     },
     plotOptions: {
@@ -66,9 +73,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ assetsData }) => {
             total: {
               show: true,
               label: 'Total Assets Value',
-              formatter: function () {
-                return `${totalAssetsValue.toLocaleString()} FRW`;
-              },
+              formatter: () => formatValue(totalAssetsValue)
             },
           },
         },
@@ -83,4 +88,4 @@ const DonutChart: React.FC<DonutChartProps> = ({ assetsData }) => {
   );
 };
 
-export default DonutChart;
+export default DonutChart; 

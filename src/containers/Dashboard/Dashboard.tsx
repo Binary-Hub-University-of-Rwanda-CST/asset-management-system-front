@@ -64,7 +64,7 @@ const Dashboard: React.FC<AppProps> = ({ auth, assetsData, FC_SetSuccess, FC_Set
     allBuildings.concat(category.buildings), [] as Building[]
   );
 
-  if (state.loading) {
+  if (state.loading) { 
     return (
       <div className="mr-4 animate__animated animate__faster">
         <div className="flex flex-col bg-white rounded-lg p-2 md:p-4">
